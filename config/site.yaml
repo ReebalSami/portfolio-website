@@ -1,0 +1,117 @@
+# =============================================================================
+# Portfolio Website Configuration — Single Source of Truth
+# =============================================================================
+# All configurable values live here. Components read from this file via
+# src/lib/config.ts (Zod-validated, TypeScript-typed).
+# Secrets (API keys) go in .env.local, NOT here.
+# =============================================================================
+
+# --- Site Metadata ---
+site:
+  name: "Reebal Sami"
+  title: "Data Scientist & AI Engineer"
+  tagline: "Transforming data into intelligent solutions"
+  description: "Personal portfolio of Reebal Sami — Data Scientist & AI Engineer based in Hamburg, Germany"
+  url: "" # Set after domain purchase (e.g., https://reebalsami.com)
+  repo: "https://github.com/ReebalSami/portfolio-website"
+
+# --- Contact (public on website) ---
+contact:
+  email: "reebal.sami@gmail.com"
+  location: "Hamburg, Germany"
+
+# --- Social Links ---
+social:
+  linkedin: "https://linkedin.com/in/reebal-sami"
+  github: "https://github.com/ReebalSami"
+  # twitter: ""
+  # medium: ""
+
+# --- Internationalization ---
+i18n:
+  defaultLocale: "en"
+  locales:
+    - "en"
+    - "de"
+    - "es"
+    - "ar"
+  rtlLocales:
+    - "ar"
+  localeNames:
+    en: "English"
+    de: "Deutsch"
+    es: "Español"
+    ar: "العربية"
+
+# --- Feature Flags ---
+features:
+  blog: true
+  chatbot: true
+  contactForm: true
+  darkMode: true
+  analytics: false        # Enable after production deployment
+  rss: true
+  downloadCV: true
+
+# --- Photos ---
+photos:
+  hero: "start-photo.JPG"
+  heroDir: "/images/hero"
+  treatment: "bw-with-geometric-shapes"  # CSS filter + decorative shapes
+
+# --- Design Tokens (override in tailwind.config.ts) ---
+design:
+  fonts:
+    heading: "Space Grotesk"
+    body: "DM Sans"
+    mono: "JetBrains Mono"
+    arabic: "IBM Plex Sans Arabic"
+  borderRadius:
+    small: "0.5rem"
+    medium: "1rem"
+    large: "1.5rem"
+  maxWidth: "1280px"
+  contentWidth: "768px"
+
+# --- Analytics (when features.analytics is true) ---
+analytics:
+  provider: "plausible"
+  siteId: ""              # Set after Plausible setup
+  # scriptUrl: "https://plausible.io/js/script.js"
+
+# --- AI Chatbot ---
+chatbot:
+  provider: "openai"
+  model: "gpt-4o-mini"
+  apiKeyEnvVar: "CHATBOT_API_KEY"  # References .env.local variable
+  maxTokens: 500
+  rateLimit:
+    maxRequests: 10
+    windowSeconds: 3600   # 10 requests per IP per hour
+
+# --- Contact Form ---
+contactForm:
+  provider: "resend"      # "resend" for dev, "ses" for prod
+  apiKeyEnvVar: "RESEND_API_KEY"
+  recipientEmail: "reebal.sami@gmail.com"
+  honeypotField: "website" # Hidden field name for spam detection
+
+# --- SEO ---
+seo:
+  ogImage: "/images/og/og-default.png"
+  twitterCard: "summary_large_image"
+  # twitterHandle: ""
+
+# --- AWS / Deployment ---
+aws:
+  region: "eu-central-1"
+  cdkStack: "portfolio-website-stack"
+  stages:
+    preview:
+      subdomain: "preview"
+    prod:
+      customDomain: ""    # Set after domain purchase
+
+# --- Build ---
+build:
+  outputDir: "out"
