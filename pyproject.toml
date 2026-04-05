@@ -1,0 +1,13 @@
+[project]
+name = "portfolio-website-utils"
+version = "0.1.0"
+description = "Utility scripts for the portfolio website project"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pdf2image>=1.17.0",
+    "pdfplumber>=0.11.8",
+    "pillow>=12.0.0",
+    "pypdf>=6.4.0",
+    "pytesseract>=0.3.13",
+]

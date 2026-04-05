@@ -1,0 +1,1 @@
+Build an elegant NFT art gallery landing page with minimal design, curated collections, artist profiles, exhibition previews, and minting interface. Focus on art presentation.
