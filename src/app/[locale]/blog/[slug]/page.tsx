@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { getTranslations } from "next-intl/server";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -32,6 +33,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+  const t = await getTranslations("blog");
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
@@ -40,7 +42,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
       >
         <ArrowLeft className="h-4 w-4" />
-        Back to blog
+        {t("backToBlog")}
       </Link>
 
       <header className="mb-12">

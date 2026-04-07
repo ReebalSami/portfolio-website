@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Mail, MapPin } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/brand-icons";
 import { Separator } from "@/components/ui/separator";
@@ -14,6 +15,7 @@ interface FooterProps {
 }
 
 export function Footer({ siteName, email, location, social }: FooterProps) {
+  const t = useTranslations("common.footer");
   const year = new Date().getFullYear();
 
   return (
@@ -62,8 +64,8 @@ export function Footer({ siteName, email, location, social }: FooterProps) {
         <Separator className="my-8" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground sm:flex-row">
-          <p>&copy; {year} {siteName}. All rights reserved.</p>
-          <p>Built with Next.js &amp; deployed on AWS</p>
+          <p>&copy; {year} {siteName}. {t("rights")}</p>
+          <p>{t("builtWith")}</p>
         </div>
       </div>
     </footer>
