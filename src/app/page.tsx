@@ -1,36 +1,24 @@
 import { SectionHeading } from "@/components/shared/section-heading";
 import { TechBadge } from "@/components/shared/tech-badge";
-import { GeometricShapes } from "@/components/shared/geometric-shapes";
+import { HeroSection } from "@/components/sections/hero-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { getSiteConfig } from "@/lib/config";
+import { getConfig } from "@/lib/config";
 
 export default function Home() {
-  const site = getSiteConfig();
+  const config = getConfig();
+  const photoPath = `${config.photos.heroDir}/${config.photos.hero}`;
 
   return (
     <>
-      <section
-        id="home"
-        className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center px-6 py-24 md:py-32"
-      >
-        <GeometricShapes variant="hero" />
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
-            {site.title}
-          </p>
-          <h1 className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl mb-6">
-            {site.name}
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground mb-10">
-            {site.tagline}
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <Button size="lg">View Projects</Button>
-            <Button variant="outline" size="lg">Get in Touch</Button>
-          </div>
-        </div>
+      <section id="home" className="scroll-mt-20">
+        <HeroSection
+          name={config.site.name}
+          title={config.site.title}
+          tagline={config.site.tagline}
+          photoSrc={photoPath}
+        />
       </section>
 
       <Separator />
