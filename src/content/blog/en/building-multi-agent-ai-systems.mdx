@@ -1,0 +1,56 @@
+---
+title: "Building Multi-Agent AI Systems for B2B Sales"
+description: "How I built a multi-agent pipeline that reduced manual workload by 53% using LangChain, OpenAI, and Streamlit."
+date: "2026-04-01"
+tags: ["AI", "LangChain", "Multi-Agent", "Python"]
+published: true
+---
+
+## The Problem
+
+B2B sales teams spend significant time on manual lead research, data enrichment, and qualification. At Datalogue, we needed to automate this pipeline while maintaining quality.
+
+## Architecture
+
+The system uses multiple specialized LLM agents, each responsible for a specific task:
+
+1. **Research Agent** — gathers company information from public sources
+2. **Enrichment Agent** — adds financial data, tech stack, and decision-maker contacts
+3. **Qualification Agent** — scores leads based on configurable criteria
+4. **Outreach Agent** — generates personalized messaging
+
+```python
+from langchain.agents import AgentExecutor
+from langchain_openai import ChatOpenAI
+
+def create_research_agent(llm: ChatOpenAI) -> AgentExecutor:
+    """Create a specialized agent for company research."""
+    tools = [search_tool, scrape_tool, summarize_tool]
+    return AgentExecutor.from_agent_and_tools(
+        agent=create_react_agent(llm, tools, research_prompt),
+        tools=tools,
+        verbose=True,
+    )
+```
+
+## Key Results
+
+- **53% reduction** in manual workload
+- **2.5x improvement** in lead quality scores
+- Processing time from **hours to minutes** per lead batch
+
+## Lessons Learned
+
+Multi-agent systems require careful orchestration. The biggest challenge wasn't the individual agents — it was managing their interactions, handling failures gracefully, and ensuring consistency across the pipeline.
+
+### What worked well
+
+- Clear responsibility boundaries between agents
+- Structured output schemas with Pydantic
+- Comprehensive logging for debugging agent decisions
+
+### What I'd do differently
+
+- Start with simpler prompts and iterate
+- Build evaluation suites early
+- Use async processing for parallel agent tasks
