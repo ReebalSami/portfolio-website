@@ -1,6 +1,6 @@
 import { SectionHeading } from "@/components/shared/section-heading";
-import { TechBadge } from "@/components/shared/tech-badge";
 import { HeroSection } from "@/components/sections/hero-section";
+import { AboutSection } from "@/components/sections/about-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -25,34 +25,7 @@ export default function Home() {
 
       <section id="about" className="scroll-mt-20 px-6 py-20 md:py-28">
         <div className="mx-auto max-w-4xl">
-          <SectionHeading title="About" subtitle="Who I Am" />
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-4">
-              <p className="text-muted-foreground leading-relaxed">
-                Data Scientist and AI Engineer merging 5 years of corporate finance
-                experience with cutting-edge AI/ML skills. M.Sc. candidate in DS&AI
-                at FH Wedel.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Proven end-to-end delivery — multi-agent B2B sales pipeline that
-                reduced manual workload by 53%.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
-                Tech Stack
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                <TechBadge name="Python" category="language" />
-                <TechBadge name="TypeScript" category="language" />
-                <TechBadge name="PyTorch" category="ai" />
-                <TechBadge name="Next.js" category="framework" />
-                <TechBadge name="AWS" category="cloud" />
-                <TechBadge name="Docker" category="tool" />
-                <TechBadge name="PostgreSQL" category="database" />
-              </div>
-            </div>
-          </div>
+          <AboutSection downloadCvEnabled={config.features.downloadCV} />
         </div>
       </section>
 
