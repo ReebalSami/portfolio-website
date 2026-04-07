@@ -3,8 +3,10 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { AboutSection } from "@/components/sections/about-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { ContactSection } from "@/components/sections/contact-section";
+import { BlogCard } from "@/components/cards/blog-card";
 import { Separator } from "@/components/ui/separator";
 import { getConfig } from "@/lib/config";
+import { getAllPosts } from "@/lib/mdx";
 
 export default function Home() {
   const config = getConfig();
@@ -42,9 +44,23 @@ export default function Home() {
       <section id="blog" className="scroll-mt-20 px-6 py-20 md:py-28">
         <div className="mx-auto max-w-4xl">
           <SectionHeading title="Blog" subtitle="Thoughts & Tutorials" />
-          <p className="text-muted-foreground">
-            Technical articles coming soon — AI/ML, data engineering, and career transition insights.
-          </p>
+          {(() => {
+            const posts = getAllPosts();
+            if (posts.length === 0) {
+              return (
+                <p className="text-muted-foreground">
+                  Technical articles coming soon — AI/ML, data engineering, and career transition insights.
+                </p>
+              );
+            }
+            return (
+              <div className="grid gap-6 sm:grid-cols-2">
+                {posts.slice(0, 4).map((post) => (
+                  <BlogCard key={post.slug} post={post} />
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
