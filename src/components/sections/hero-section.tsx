@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 interface HeroSectionProps {
@@ -48,6 +49,8 @@ export function HeroSection({
   onViewProjects,
   onContact,
 }: HeroSectionProps) {
+  const t = useTranslations();
+
   return (
     <motion.div
       className="grid min-h-[calc(100vh-4rem)] items-center gap-8 px-6 py-16 md:grid-cols-2 md:gap-12 lg:gap-20"
@@ -101,8 +104,7 @@ export function HeroSection({
             className="text-base text-muted-foreground mb-8 max-w-lg leading-relaxed"
             variants={fadeUp}
           >
-            Merging 5 years of corporate finance experience with cutting-edge
-            AI/ML skills. Building intelligent solutions end-to-end.
+            {t("home.hero.intro")}
           </motion.p>
 
           <motion.div className="flex flex-wrap gap-4" variants={fadeUp}>
@@ -111,7 +113,7 @@ export function HeroSection({
               className="cursor-pointer"
               onClick={onViewProjects}
             >
-              View Projects
+              {t("common.buttons.viewProjects")}
             </Button>
             <Button
               variant="outline"
@@ -119,7 +121,7 @@ export function HeroSection({
               className="cursor-pointer"
               onClick={onContact}
             >
-              Get in Touch
+              {t("common.buttons.getInTouch")}
             </Button>
           </motion.div>
         </motion.div>
