@@ -76,8 +76,8 @@ design:
 # --- Analytics (when features.analytics is true) ---
 analytics:
   provider: "plausible"
-  siteId: ""              # Set after Plausible setup
-  # scriptUrl: "https://plausible.io/js/script.js"
+  siteId: "reebal-sami.com"
+  scriptUrl: "https://plausible.io/js/pa-NzWnGaW6jjf3SGk87Xkpq.js"
 
 # --- AI Chatbot ---
 chatbot:
