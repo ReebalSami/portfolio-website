@@ -73,6 +73,16 @@
     "empty": "Artículos técnicos próximamente — IA/ML, ingeniería de datos y transición profesional.",
     "backToBlog": "Volver al blog"
   },
+  "chatbot": {
+    "title": "Pregunta sobre Reebal",
+    "subtitle": "Asistente con IA",
+    "toggle": "Abrir chat",
+    "placeholder": "Pregúntame lo que sea...",
+    "welcome": "¡Hola! Pregúntame sobre la experiencia, proyectos o habilidades de Reebal.",
+    "disclaimer": "Powered by IA. Las respuestas se basan en el contenido del portafolio.",
+    "error": "Algo salió mal. Inténtalo de nuevo.",
+    "rateLimit": "Demasiadas solicitudes. Inténtalo más tarde."
+  },
   "contact": {
     "title": "Contacto",
     "subtitle": "Ponte en contacto",
