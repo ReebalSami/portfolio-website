@@ -1,8 +1,8 @@
 import { SectionHeading } from "@/components/shared/section-heading";
 import { HeroSection } from "@/components/sections/hero-section";
 import { AboutSection } from "@/components/sections/about-section";
+import { ProjectsSection } from "@/components/sections/projects-section";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getConfig } from "@/lib/config";
 
@@ -32,26 +32,8 @@ export default function Home() {
       <Separator />
 
       <section id="projects" className="scroll-mt-20 px-6 py-20 md:py-28 bg-muted/30">
-        <div className="mx-auto max-w-4xl">
-          <SectionHeading title="Projects" subtitle="Selected Work" />
-          <div className="grid gap-6 sm:grid-cols-2">
-            {[
-              { title: "B2B Sales Lead Pipeline", tech: "Python, Streamlit, Multi-LLM", metric: "53% workload reduction" },
-              { title: "Urban Farming Plant Health", tech: "PyTorch, ViT, CNN, GradCAM", metric: "Automated detection" },
-              { title: "Bankruptcy Early Warning", tech: "XGBoost, RF, Econometrics", metric: "Seminar, FH Wedel" },
-              { title: "Biotech Regulatory RAG", tech: "RAG, LLMs, Vector DB", metric: "Compliance tool" },
-            ].map((project) => (
-              <Card key={project.title} className="cursor-pointer transition-shadow hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-lg">{project.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-2">{project.tech}</p>
-                  <p className="text-sm font-medium">{project.metric}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        <div className="mx-auto max-w-5xl">
+          <ProjectsSection />
         </div>
       </section>
 
