@@ -73,6 +73,16 @@
     "empty": "Technical articles coming soon — AI/ML, data engineering, and career transition insights.",
     "backToBlog": "Back to blog"
   },
+  "chatbot": {
+    "title": "Ask about Reebal",
+    "subtitle": "AI-powered assistant",
+    "toggle": "Open chat",
+    "placeholder": "Ask me anything...",
+    "welcome": "Hi! Ask me anything about Reebal's experience, projects, or skills.",
+    "disclaimer": "Powered by AI. Responses are based on portfolio content.",
+    "error": "Something went wrong. Please try again.",
+    "rateLimit": "Too many requests. Please try again later."
+  },
   "contact": {
     "title": "Contact",
     "subtitle": "Get In Touch",

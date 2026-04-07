@@ -73,6 +73,16 @@
     "empty": "Technische Artikel erscheinen demnächst — KI/ML, Data Engineering und Einblicke in den Karrierewechsel.",
     "backToBlog": "Zurück zum Blog"
   },
+  "chatbot": {
+    "title": "Frag über Reebal",
+    "subtitle": "KI-gestützter Assistent",
+    "toggle": "Chat öffnen",
+    "placeholder": "Frag mich etwas...",
+    "welcome": "Hallo! Frag mich alles über Reebals Erfahrung, Projekte oder Fähigkeiten.",
+    "disclaimer": "Powered by KI. Antworten basieren auf Portfolio-Inhalten.",
+    "error": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "rateLimit": "Zu viele Anfragen. Bitte versuche es später erneut."
+  },
   "contact": {
     "title": "Kontakt",
     "subtitle": "Kontakt aufnehmen",
