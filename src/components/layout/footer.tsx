@@ -1,0 +1,71 @@
+import Link from "next/link";
+import { Mail, MapPin } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/shared/brand-icons";
+import { Separator } from "@/components/ui/separator";
+
+interface FooterProps {
+  siteName: string;
+  email: string;
+  location: string;
+  social: {
+    linkedin: string;
+    github: string;
+  };
+}
+
+export function Footer({ siteName, email, location, social }: FooterProps) {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="mt-auto border-t border-border">
+      <div className="mx-auto max-w-6xl px-6 py-12">
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          <div className="space-y-3">
+            <Link href="/" className="text-lg font-bold tracking-tight">
+              {siteName}
+            </Link>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <MapPin className="h-4 w-4 shrink-0" />
+              <span>{location}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <a
+              href={social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors duration-200 hover:text-foreground cursor-pointer"
+              aria-label="LinkedIn"
+            >
+              <LinkedInIcon className="h-5 w-5" />
+            </a>
+            <a
+              href={social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors duration-200 hover:text-foreground cursor-pointer"
+              aria-label="GitHub"
+            >
+              <GitHubIcon className="h-5 w-5" />
+            </a>
+            <a
+              href={`mailto:${email}`}
+              className="text-muted-foreground transition-colors duration-200 hover:text-foreground cursor-pointer"
+              aria-label="Email"
+            >
+              <Mail className="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+
+        <Separator className="my-8" />
+
+        <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground sm:flex-row">
+          <p>&copy; {year} {siteName}. All rights reserved.</p>
+          <p>Built with Next.js &amp; deployed on AWS</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
