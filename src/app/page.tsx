@@ -2,7 +2,7 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { HeroSection } from "@/components/sections/hero-section";
 import { AboutSection } from "@/components/sections/about-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
-import { Button } from "@/components/ui/button";
+import { ContactSection } from "@/components/sections/contact-section";
 import { Separator } from "@/components/ui/separator";
 import { getConfig } from "@/lib/config";
 
@@ -52,14 +52,11 @@ export default function Home() {
 
       <section id="contact" className="scroll-mt-20 px-6 py-20 md:py-28 bg-muted/30">
         <div className="mx-auto max-w-4xl">
-          <SectionHeading title="Contact" subtitle="Get In Touch" />
-          <p className="text-muted-foreground mb-6">
-            Interested in working together? Reach out via email or connect on LinkedIn.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Button size="lg">Send Email</Button>
-            <Button variant="outline" size="lg">LinkedIn</Button>
-          </div>
+          <ContactSection
+            email={config.contact.email}
+            location={config.contact.location}
+            social={config.social}
+          />
         </div>
       </section>
     </>
