@@ -1,0 +1,92 @@
+{
+  "common": {
+    "nav": {
+      "home": "Inicio",
+      "about": "Sobre mí",
+      "projects": "Proyectos",
+      "blog": "Blog",
+      "contact": "Contacto",
+      "openMenu": "Abrir menú"
+    },
+    "footer": {
+      "rights": "Todos los derechos reservados.",
+      "builtWith": "Creado con Next.js y desplegado en AWS"
+    },
+    "buttons": {
+      "viewProjects": "Ver proyectos",
+      "getInTouch": "Contactar",
+      "downloadCV": "Descargar CV",
+      "github": "GitHub",
+      "liveDemo": "Demo en vivo"
+    }
+  },
+  "home": {
+    "hero": {
+      "intro": "Combinando 5 años de experiencia en finanzas corporativas con habilidades de vanguardia en IA/ML. Construyendo soluciones inteligentes de principio a fin."
+    }
+  },
+  "about": {
+    "title": "Sobre mí",
+    "subtitle": "Quién soy",
+    "summary1": "Científico de datos e ingeniero de IA combinando 5 años de experiencia en finanzas corporativas (Otto Group) con habilidades de IA/ML de vanguardia. Candidato a M.Sc. en Data Science & IA en FH Wedel.",
+    "summary2": "Entrega probada de principio a fin — desde pipelines multi-agente para ventas B2B hasta detección de salud vegetal con deep learning. Construyo soluciones inteligentes con impacto empresarial medible.",
+    "differentiators": "Lo que me diferencia",
+    "timeline": "Trayectoria profesional",
+    "techStack": "Stack tecnológico",
+    "cards": {
+      "business": {
+        "title": "Negocio × Datos",
+        "description": "5 años en Otto Group en finanzas corporativas, ahora combinando visión empresarial con ingeniería de IA/ML."
+      },
+      "builder": {
+        "title": "Constructor integral",
+        "description": "Del concepto al MVP — pipeline multi-agente B2B con reducción del 53% de carga de trabajo."
+      },
+      "multilingual": {
+        "title": "Multilingüe",
+        "description": "Alemán (C1), inglés (fluido), árabe (nativo), español (elemental), francés (elemental)."
+      },
+      "education": {
+        "title": "Candidato a M.Sc.",
+        "description": "Data Science & IA en FH Wedel — deep learning, NLP, visión por computador, econometría."
+      }
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Trabajos seleccionados",
+    "filter": {
+      "all": "Todos",
+      "ai": "IA / ML",
+      "dataScience": "Ciencia de datos",
+      "nlp": "NLP",
+      "fullStack": "Full-Stack"
+    },
+    "details": {
+      "highlights": "Aspectos clave",
+      "technologies": "Tecnologías"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Pensamientos y tutoriales",
+    "empty": "Artículos técnicos próximamente — IA/ML, ingeniería de datos y transición profesional.",
+    "backToBlog": "Volver al blog"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Ponte en contacto",
+    "direct": "Contacto directo",
+    "social": "Redes sociales",
+    "form": {
+      "namePlaceholder": "Tu nombre",
+      "emailPlaceholder": "Tu correo electrónico",
+      "subjectPlaceholder": "Asunto",
+      "messagePlaceholder": "Tu mensaje...",
+      "send": "Enviar mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado con éxito!",
+      "error": "Error al enviar. Inténtalo de nuevo o envía un correo directamente."
+    }
+  }
+}

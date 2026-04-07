@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Mail, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { LinkedInIcon, GitHubIcon } from "@/components/shared/brand-icons";
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -35,6 +36,7 @@ export function ContactSection({
   location,
   social,
 }: ContactSectionProps) {
+  const t = useTranslations("contact");
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -97,7 +99,7 @@ export function ContactSection({
 
   return (
     <div>
-      <SectionHeading title="Contact" subtitle="Get In Touch" />
+      <SectionHeading title={t("title")} subtitle={t("subtitle")} />
 
       <div className="grid gap-12 md:grid-cols-2">
         <motion.form
@@ -111,7 +113,7 @@ export function ContactSection({
           <div>
             <Input
               name="name"
-              placeholder="Your name"
+              placeholder={t("form.namePlaceholder")}
               value={formData.name}
               onChange={handleChange}
               aria-invalid={!!errors.name}
@@ -126,7 +128,7 @@ export function ContactSection({
             <Input
               name="email"
               type="email"
-              placeholder="Your email"
+              placeholder={t("form.emailPlaceholder")}
               value={formData.email}
               onChange={handleChange}
               aria-invalid={!!errors.email}
@@ -140,7 +142,7 @@ export function ContactSection({
           <div>
             <Input
               name="subject"
-              placeholder="Subject"
+              placeholder={t("form.subjectPlaceholder")}
               value={formData.subject}
               onChange={handleChange}
               aria-invalid={!!errors.subject}
@@ -154,7 +156,7 @@ export function ContactSection({
           <div>
             <Textarea
               name="message"
-              placeholder="Your message..."
+              placeholder={t("form.messagePlaceholder")}
               rows={5}
               value={formData.message}
               onChange={handleChange}
@@ -183,11 +185,11 @@ export function ContactSection({
             disabled={status === "sending"}
           >
             {status === "sending" ? (
-              "Sending..."
+              t("form.sending")
             ) : (
               <>
                 <Send className="h-4 w-4 me-2" />
-                Send Message
+                {t("form.send")}
               </>
             )}
           </Button>
@@ -195,13 +197,13 @@ export function ContactSection({
           {status === "success" && (
             <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
               <CheckCircle className="h-4 w-4" />
-              Message sent successfully!
+              {t("form.success")}
             </div>
           )}
           {status === "error" && (
             <div className="flex items-center gap-2 text-sm text-destructive">
               <AlertCircle className="h-4 w-4" />
-              Failed to send. Please try again or email directly.
+              {t("form.error")}
             </div>
           )}
         </motion.form>
@@ -215,7 +217,7 @@ export function ContactSection({
         >
           <div>
             <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
-              Direct Contact
+              {t("direct")}
             </h3>
             <div className="space-y-3">
               <a
@@ -234,7 +236,7 @@ export function ContactSection({
 
           <div>
             <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
-              Social
+              {t("social")}
             </h3>
             <div className="flex gap-4">
               <a

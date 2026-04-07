@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { LocaleSwitcher } from "@/components/layout/locale-switcher";
 import { DesktopNav, MobileNav } from "@/components/layout/navigation";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +22,7 @@ interface HeaderProps {
 }
 
 export function Header({ siteName }: HeaderProps) {
+  const t = useTranslations("common");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -51,14 +54,7 @@ export function Header({ siteName }: HeaderProps) {
         <DesktopNav />
 
         <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hidden lg:inline-flex cursor-pointer text-xs text-muted-foreground"
-            disabled
-          >
-            EN
-          </Button>
+          <LocaleSwitcher />
 
           <ThemeToggle />
 
@@ -69,7 +65,7 @@ export function Header({ siteName }: HeaderProps) {
                   variant="ghost"
                   size="icon"
                   className="lg:hidden cursor-pointer"
-                  aria-label="Open menu"
+                  aria-label={t("nav.openMenu")}
                 />
               }
             >

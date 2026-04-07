@@ -1,0 +1,92 @@
+{
+  "common": {
+    "nav": {
+      "home": "Startseite",
+      "about": "Über mich",
+      "projects": "Projekte",
+      "blog": "Blog",
+      "contact": "Kontakt",
+      "openMenu": "Menü öffnen"
+    },
+    "footer": {
+      "rights": "Alle Rechte vorbehalten.",
+      "builtWith": "Erstellt mit Next.js & bereitgestellt auf AWS"
+    },
+    "buttons": {
+      "viewProjects": "Projekte ansehen",
+      "getInTouch": "Kontakt aufnehmen",
+      "downloadCV": "Lebenslauf herunterladen",
+      "github": "GitHub",
+      "liveDemo": "Live-Demo"
+    }
+  },
+  "home": {
+    "hero": {
+      "intro": "Verbindung von 5 Jahren Erfahrung in Corporate Finance mit modernsten KI/ML-Fähigkeiten. End-to-End-Entwicklung intelligenter Lösungen."
+    }
+  },
+  "about": {
+    "title": "Über mich",
+    "subtitle": "Wer ich bin",
+    "summary1": "Data Scientist und KI-Ingenieur mit 5 Jahren Erfahrung in Corporate Finance (Otto Group) und modernsten KI/ML-Fähigkeiten. M.Sc.-Kandidat in Data Science & KI an der FH Wedel.",
+    "summary2": "Bewiesene End-to-End-Lieferung — von Multi-Agenten-B2B-Sales-Pipelines bis hin zur Pflanzenerkennung mit Deep Learning. Ich entwickle intelligente Lösungen mit messbarem Geschäftsimpact.",
+    "differentiators": "Was mich auszeichnet",
+    "timeline": "Karriereweg",
+    "techStack": "Tech-Stack",
+    "cards": {
+      "business": {
+        "title": "Business × Daten",
+        "description": "5 Jahre bei der Otto Group in Corporate Finance, jetzt Verbindung von Business-Verständnis mit KI/ML-Engineering."
+      },
+      "builder": {
+        "title": "End-to-End-Entwickler",
+        "description": "Vom Konzept zum MVP — Multi-Agenten-B2B-Pipeline mit 53% Workload-Reduktion."
+      },
+      "multilingual": {
+        "title": "Mehrsprachig",
+        "description": "Deutsch (C1), Englisch (fließend), Arabisch (Muttersprache), Spanisch (Grundkenntnisse), Französisch (Grundkenntnisse)."
+      },
+      "education": {
+        "title": "M.Sc.-Kandidat",
+        "description": "Data Science & KI an der FH Wedel — Deep Learning, NLP, Computer Vision, Ökonometrie."
+      }
+    }
+  },
+  "projects": {
+    "title": "Projekte",
+    "subtitle": "Ausgewählte Arbeiten",
+    "filter": {
+      "all": "Alle",
+      "ai": "KI / ML",
+      "dataScience": "Data Science",
+      "nlp": "NLP",
+      "fullStack": "Full-Stack"
+    },
+    "details": {
+      "highlights": "Wichtige Highlights",
+      "technologies": "Technologien"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Gedanken & Tutorials",
+    "empty": "Technische Artikel erscheinen demnächst — KI/ML, Data Engineering und Einblicke in den Karrierewechsel.",
+    "backToBlog": "Zurück zum Blog"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Kontakt aufnehmen",
+    "direct": "Direkter Kontakt",
+    "social": "Soziale Netzwerke",
+    "form": {
+      "namePlaceholder": "Ihr Name",
+      "emailPlaceholder": "Ihre E-Mail",
+      "subjectPlaceholder": "Betreff",
+      "messagePlaceholder": "Ihre Nachricht...",
+      "send": "Nachricht senden",
+      "sending": "Wird gesendet...",
+      "success": "Nachricht erfolgreich gesendet!",
+      "error": "Senden fehlgeschlagen. Bitte versuchen Sie es erneut oder schreiben Sie direkt eine E-Mail."
+    }
+  }
+}

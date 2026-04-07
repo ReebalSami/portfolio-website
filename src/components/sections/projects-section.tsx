@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { GitHubIcon } from "@/components/shared/brand-icons";
@@ -17,15 +18,24 @@ import {
 } from "@/components/ui/dialog";
 import {
   projectsData,
-  projectCategories,
   type Project,
   type ProjectCategory,
 } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
+const filterKeys: { labelKey: string; value: ProjectCategory | "all" }[] = [
+  { labelKey: "all", value: "all" },
+  { labelKey: "ai", value: "ai" },
+  { labelKey: "dataScience", value: "data-science" },
+  { labelKey: "nlp", value: "nlp" },
+  { labelKey: "fullStack", value: "full-stack" },
+];
+
 export function ProjectsSection() {
   const [filter, setFilter] = useState<ProjectCategory | "all">("all");
   const [selected, setSelected] = useState<Project | null>(null);
+  const t = useTranslations("projects");
+  const tBtn = useTranslations("common.buttons");
 
   const filtered =
     filter === "all"
@@ -34,10 +44,10 @@ export function ProjectsSection() {
 
   return (
     <div>
-      <SectionHeading title="Projects" subtitle="Selected Work" />
+      <SectionHeading title={t("title")} subtitle={t("subtitle")} />
 
       <div className="flex flex-wrap gap-2 mb-8">
-        {projectCategories.map((cat) => (
+        {filterKeys.map((cat) => (
           <button
             key={cat.value}
             onClick={() => setFilter(cat.value)}
@@ -48,7 +58,7 @@ export function ProjectsSection() {
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             )}
           >
-            {cat.label}
+            {t(`filter.${cat.labelKey}`)}
           </button>
         ))}
       </div>
@@ -84,7 +94,7 @@ export function ProjectsSection() {
               </p>
 
               <div>
-                <h4 className="text-sm font-medium mb-2">Key Highlights</h4>
+                <h4 className="text-sm font-medium mb-2">{t("details.highlights")}</h4>
                 <ul className="space-y-1">
                   {selected.highlights.map((h) => (
                     <li
@@ -99,11 +109,11 @@ export function ProjectsSection() {
               </div>
 
               <div>
-                <h4 className="text-sm font-medium mb-2">Technologies</h4>
+                <h4 className="text-sm font-medium mb-2">{t("details.technologies")}</h4>
                 <div className="flex flex-wrap gap-1.5">
-                  {selected.tech.map((t) => (
-                    <Badge key={t} variant="secondary" className="text-xs">
-                      {t}
+                  {selected.tech.map((tech) => (
+                    <Badge key={tech} variant="secondary" className="text-xs">
+                      {tech}
                     </Badge>
                   ))}
                 </div>
@@ -125,7 +135,7 @@ export function ProjectsSection() {
                     }
                   >
                     <GitHubIcon className="h-4 w-4 me-2" />
-                    GitHub
+                    {tBtn("github")}
                   </Button>
                 )}
                 {selected.demoUrl && (
@@ -143,7 +153,7 @@ export function ProjectsSection() {
                     }
                   >
                     <ExternalLink className="h-4 w-4 me-2" />
-                    Live Demo
+                    {tBtn("liveDemo")}
                   </Button>
                 )}
               </div>

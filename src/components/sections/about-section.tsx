@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Briefcase, Brain, Globe, GraduationCap } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { TechBadge } from "@/components/shared/tech-badge";
@@ -18,32 +19,12 @@ const fadeUp = {
   },
 };
 
-const differentiators = [
-  {
-    icon: Briefcase,
-    title: "Business × Data",
-    description:
-      "5 years at Otto Group in corporate finance, now merging business acumen with AI/ML engineering.",
-  },
-  {
-    icon: Brain,
-    title: "End-to-End Builder",
-    description:
-      "From concept to MVP — multi-agent B2B pipeline that reduced manual workload by 53%.",
-  },
-  {
-    icon: Globe,
-    title: "Multilingual",
-    description:
-      "German (C1), English (fluent), Arabic (native), Spanish (elementary), French (elementary).",
-  },
-  {
-    icon: GraduationCap,
-    title: "M.Sc. Candidate",
-    description:
-      "Data Science & AI at FH Wedel — deep learning, NLP, computer vision, econometrics.",
-  },
-];
+const differentiatorKeys = [
+  { icon: Briefcase, key: "business" },
+  { icon: Brain, key: "builder" },
+  { icon: Globe, key: "multilingual" },
+  { icon: GraduationCap, key: "education" },
+] as const;
 
 const typeColors: Record<TimelineEntry["type"], string> = {
   work: "bg-primary",
@@ -56,32 +37,31 @@ interface AboutSectionProps {
 }
 
 export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
+  const t = useTranslations("about");
+  const tBtn = useTranslations("common.buttons");
+
   return (
     <div className="space-y-20">
       <div>
-        <SectionHeading title="About" subtitle="Who I Am" />
+        <SectionHeading title={t("title")} subtitle={t("subtitle")} />
         <div className="max-w-2xl space-y-4">
           <p className="text-muted-foreground leading-relaxed">
-            Data Scientist and AI Engineer merging 5 years of corporate finance
-            experience (Otto Group) with cutting-edge AI/ML skills. M.Sc.
-            candidate in Data Science & AI at FH Wedel.
+            {t("summary1")}
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Proven end-to-end delivery — from multi-agent B2B sales pipelines
-            to plant health detection with deep learning. I build intelligent
-            solutions that create measurable business impact.
+            {t("summary2")}
           </p>
         </div>
       </div>
 
       <div>
         <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-6">
-          What Sets Me Apart
+          {t("differentiators")}
         </h3>
         <div className="grid gap-4 sm:grid-cols-2">
-          {differentiators.map((item, i) => (
+          {differentiatorKeys.map((item, i) => (
             <motion.div
-              key={item.title}
+              key={item.key}
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
@@ -94,9 +74,9 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
                     <item.icon className="h-5 w-5 text-foreground" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1">{item.title}</h4>
+                    <h4 className="font-medium mb-1">{t(`cards.${item.key}.title`)}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {item.description}
+                      {t(`cards.${item.key}.description`)}
                     </p>
                   </div>
                 </CardContent>
@@ -108,7 +88,7 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
 
       <div>
         <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-6">
-          Career Journey
+          {t("timeline")}
         </h3>
         <div className="relative ms-4 border-s-2 border-border ps-8 space-y-8">
           {timelineData.map((entry, i) => (
@@ -139,7 +119,7 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
 
       <div>
         <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-6">
-          Tech Stack
+          {t("techStack")}
         </h3>
         <div className="space-y-6">
           {techStackData.map((group) => (
@@ -169,7 +149,7 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
             nativeButton={false}
             render={<a href="/cv.pdf" download />}
           >
-            Download CV
+            {tBtn("downloadCV")}
           </Button>
         </div>
       )}

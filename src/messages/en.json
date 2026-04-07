@@ -1,0 +1,92 @@
+{
+  "common": {
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "blog": "Blog",
+      "contact": "Contact",
+      "openMenu": "Open menu"
+    },
+    "footer": {
+      "rights": "All rights reserved.",
+      "builtWith": "Built with Next.js & deployed on AWS"
+    },
+    "buttons": {
+      "viewProjects": "View Projects",
+      "getInTouch": "Get in Touch",
+      "downloadCV": "Download CV",
+      "github": "GitHub",
+      "liveDemo": "Live Demo"
+    }
+  },
+  "home": {
+    "hero": {
+      "intro": "Merging 5 years of corporate finance experience with cutting-edge AI/ML skills. Building intelligent solutions end-to-end."
+    }
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "Who I Am",
+    "summary1": "Data Scientist and AI Engineer merging 5 years of corporate finance experience (Otto Group) with cutting-edge AI/ML skills. M.Sc. candidate in Data Science & AI at FH Wedel.",
+    "summary2": "Proven end-to-end delivery — from multi-agent B2B sales pipelines to plant health detection with deep learning. I build intelligent solutions that create measurable business impact.",
+    "differentiators": "What Sets Me Apart",
+    "timeline": "Career Journey",
+    "techStack": "Tech Stack",
+    "cards": {
+      "business": {
+        "title": "Business × Data",
+        "description": "5 years at Otto Group in corporate finance, now merging business acumen with AI/ML engineering."
+      },
+      "builder": {
+        "title": "End-to-End Builder",
+        "description": "From concept to MVP — multi-agent B2B pipeline that reduced manual workload by 53%."
+      },
+      "multilingual": {
+        "title": "Multilingual",
+        "description": "German (C1), English (fluent), Arabic (native), Spanish (elementary), French (elementary)."
+      },
+      "education": {
+        "title": "M.Sc. Candidate",
+        "description": "Data Science & AI at FH Wedel — deep learning, NLP, computer vision, econometrics."
+      }
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Selected Work",
+    "filter": {
+      "all": "All",
+      "ai": "AI / ML",
+      "dataScience": "Data Science",
+      "nlp": "NLP",
+      "fullStack": "Full-Stack"
+    },
+    "details": {
+      "highlights": "Key Highlights",
+      "technologies": "Technologies"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Thoughts & Tutorials",
+    "empty": "Technical articles coming soon — AI/ML, data engineering, and career transition insights.",
+    "backToBlog": "Back to blog"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get In Touch",
+    "direct": "Direct Contact",
+    "social": "Social",
+    "form": {
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "Your email",
+      "subjectPlaceholder": "Subject",
+      "messagePlaceholder": "Your message...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send. Please try again or email directly."
+    }
+  }
+}

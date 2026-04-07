@@ -1,19 +1,20 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { useActiveSection, type SectionId } from "@/hooks/use-active-section";
 
 export interface NavItem {
-  label: string;
+  labelKey: string;
   sectionId: SectionId;
 }
 
 export const navItems: NavItem[] = [
-  { label: "Home", sectionId: "home" },
-  { label: "About", sectionId: "about" },
-  { label: "Projects", sectionId: "projects" },
-  { label: "Blog", sectionId: "blog" },
-  { label: "Contact", sectionId: "contact" },
+  { labelKey: "home", sectionId: "home" },
+  { labelKey: "about", sectionId: "about" },
+  { labelKey: "projects", sectionId: "projects" },
+  { labelKey: "blog", sectionId: "blog" },
+  { labelKey: "contact", sectionId: "contact" },
 ];
 
 function scrollToSection(sectionId: string) {
@@ -29,6 +30,7 @@ interface DesktopNavProps {
 
 export function DesktopNav({ className }: DesktopNavProps) {
   const activeSection = useActiveSection();
+  const t = useTranslations("common.nav");
 
   return (
     <nav className={cn("hidden lg:flex items-center gap-1", className)}>
@@ -43,7 +45,7 @@ export function DesktopNav({ className }: DesktopNavProps) {
               : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
           )}
         >
-          {item.label}
+          {t(item.labelKey)}
         </button>
       ))}
     </nav>
@@ -56,6 +58,7 @@ interface MobileNavProps {
 
 export function MobileNav({ onNavigate }: MobileNavProps) {
   const activeSection = useActiveSection();
+  const t = useTranslations("common.nav");
 
   const handleClick = (sectionId: string) => {
     onNavigate?.();
@@ -75,7 +78,7 @@ export function MobileNav({ onNavigate }: MobileNavProps) {
               : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
           )}
         >
-          {item.label}
+          {t(item.labelKey)}
         </button>
       ))}
     </nav>
