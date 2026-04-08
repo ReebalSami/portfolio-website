@@ -33,8 +33,8 @@ fi
 # ─── Package server for Lambda ─────────────────────────────────────────
 echo "📁 Packaging server..."
 
-# Copy standalone server
-cp -r "$NEXT_DIR/standalone/." "$DEPLOY_DIR/server/"
+# Copy standalone server (rsync skips broken pnpm symlinks with --safe-links)
+rsync -a --copy-links --safe-links "$NEXT_DIR/standalone/" "$DEPLOY_DIR/server/" || true
 
 # Copy static assets into server (needed for image optimization etc.)
 if [ -d "$NEXT_DIR/static" ]; then
