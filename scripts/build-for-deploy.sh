@@ -33,8 +33,80 @@ fi
 # ─── Package server for Lambda ─────────────────────────────────────────
 echo "📁 Packaging server..."
 
-# Copy standalone server (rsync skips broken pnpm symlinks with --safe-links)
-rsync -a --copy-links --safe-links "$NEXT_DIR/standalone/" "$DEPLOY_DIR/server/" || true
+# Copy standalone server, resolving all pnpm symlinks into real files.
+# pnpm's node_modules uses symlinks that don't work on Lambda.
+# Strategy: copy everything, then resolve every symlink to a real file/dir.
+
+# 1) Copy the full standalone output (preserving symlinks initially)
+rsync -a "$NEXT_DIR/standalone/" "$DEPLOY_DIR/server/"
+
+# 2) Resolve all symlinks to real files (in-place)
+echo "  Resolving symlinks..."
+find "$DEPLOY_DIR/server/node_modules" -type l | while read link; do
+  # Resolve the link to its real target in the SOURCE tree
+  # (symlinks point relative to .next/standalone, not .deploy)
+  target=$(readlink "$link")
+  link_dir=$(dirname "$link")
+
+  # Convert deploy path back to standalone path to resolve
+  rel_path="${link#$DEPLOY_DIR/server/}"
+  source_link="$NEXT_DIR/standalone/$rel_path"
+  real=$(readlink -f "$source_link" 2>/dev/null || echo "")
+
+  if [ -n "$real" ] && [ -e "$real" ]; then
+    rm -rf "$link"
+    cp -r "$real" "$link"
+  else
+    # Broken symlink — remove it
+    rm -f "$link"
+  fi
+done
+
+# Verify critical modules exist
+if [ ! -d "$DEPLOY_DIR/server/node_modules/next" ]; then
+  echo "❌ Error: node_modules/next missing from server package"
+  exit 1
+fi
+echo "  ✓ All symlinks resolved"
+
+# 3) Promote pnpm internal hoisted packages to top-level node_modules
+#    pnpm puts transitive deps in .pnpm/node_modules/ which Node.js can't find
+if [ -d "$DEPLOY_DIR/server/node_modules/.pnpm/node_modules" ]; then
+  echo "  Promoting hoisted packages..."
+  for pkg in "$DEPLOY_DIR/server/node_modules/.pnpm/node_modules"/*; do
+    name=$(basename "$pkg")
+    target="$DEPLOY_DIR/server/node_modules/$name"
+    if [ ! -e "$target" ]; then
+      cp -r "$pkg" "$target"
+    fi
+  done
+fi
+
+# 3b) Fix incomplete packages in standalone output.
+#     Next.js standalone traces only used files, but some packages (e.g. @swc/helpers)
+#     need their full structure. Copy from project node_modules if incomplete.
+MAIN_SWC="$ROOT_DIR/node_modules/.pnpm/@swc+helpers@0.5.15/node_modules/@swc/helpers"
+DEPLOY_SWC="$DEPLOY_DIR/server/node_modules/@swc/helpers"
+if [ -d "$MAIN_SWC" ] && [ -d "$DEPLOY_SWC" ]; then
+  echo "  Fixing @swc/helpers (copying full package)..."
+  rm -rf "$DEPLOY_SWC"
+  cp -r "$MAIN_SWC" "$DEPLOY_SWC"
+fi
+
+# 4) Remove unnecessary files to reduce Lambda package size
+echo "  Trimming package..."
+rm -rf "$DEPLOY_DIR/server/infra" \
+       "$DEPLOY_DIR/server/docs" \
+       "$DEPLOY_DIR/server/design-system" \
+       "$DEPLOY_DIR/server/utility" \
+       "$DEPLOY_DIR/server/tests" \
+       "$DEPLOY_DIR/server/scripts" \
+       "$DEPLOY_DIR/server/.windsurf" \
+       "$DEPLOY_DIR/server/.github" \
+       "$DEPLOY_DIR/server/Bewerbung"
+find "$DEPLOY_DIR/server" -name "*.map" -delete 2>/dev/null
+find "$DEPLOY_DIR/server" -name "*.d.ts" -not -path "*/next/*" -delete 2>/dev/null
+find "$DEPLOY_DIR/server/node_modules" -name "README.md" -o -name "CHANGELOG.md" -o -name "LICENSE" | xargs rm -f 2>/dev/null
 
 # Copy static assets into server (needed for image optimization etc.)
 if [ -d "$NEXT_DIR/static" ]; then
