@@ -3,22 +3,29 @@
 import { useTheme } from "@/components/theme-provider";
 import { useTranslations } from "next-intl";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const t = useTranslations("common");
+  const isDark = resolvedTheme === "dark";
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+    <button
+      type="button"
+      role="switch"
+      aria-checked={isDark}
       aria-label={t("toggleTheme")}
-      className="cursor-pointer"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="relative inline-flex h-7 w-[52px] shrink-0 cursor-pointer items-center rounded-full border border-border bg-muted transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
-      <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-    </Button>
+      {/* Track icons */}
+      <Sun className="absolute left-1.5 h-3.5 w-3.5 text-gallery-warm transition-opacity duration-300 opacity-100 dark:opacity-0" />
+      <Moon className="absolute right-1.5 h-3.5 w-3.5 text-gallery-warm transition-opacity duration-300 opacity-0 dark:opacity-100" />
+
+      {/* Thumb */}
+      <span
+        className="pointer-events-none inline-block h-5 w-5 rounded-full bg-foreground shadow-sm ring-0 transition-transform duration-300 translate-x-0.5 dark:translate-x-[27px]"
+      />
+    </button>
   );
 }

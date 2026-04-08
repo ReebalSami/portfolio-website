@@ -49,7 +49,7 @@ features:
   chatbot: true
   contactForm: true
   darkMode: true
-  analytics: false        # Enable after production deployment
+  analytics: true
   rss: true
   downloadCV: true
 

@@ -94,6 +94,13 @@ export class PortfolioStack extends cdk.Stack {
         NODE_ENV: 'production',
         HOSTNAME: '127.0.0.1',
         NEXT_PUBLIC_SITE_URL: `https://${siteDomain}`,
+        // API keys — passed via process.env during cdk deploy
+        ...(process.env.CHATBOT_API_KEY && {
+          CHATBOT_API_KEY: process.env.CHATBOT_API_KEY,
+        }),
+        ...(process.env.RESEND_API_KEY && {
+          RESEND_API_KEY: process.env.RESEND_API_KEY,
+        }),
       },
       logGroup: new logs.LogGroup(this, 'SsrLogGroup', {
         logGroupName: `/aws/lambda/${stage}-portfolio-ssr`,

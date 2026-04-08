@@ -56,5 +56,8 @@ jobs:
         working-directory: infra
 
       - name: CDK Deploy (prod)
-        run: npx cdk deploy --all --context stage=prod --require-approval never
+        run: npx cdk deploy --all --context stage=prod --context hostedZoneId=Z011195418EPNPJCP44NR --require-approval never
         working-directory: infra
+        env:
+          CHATBOT_API_KEY: ${{ secrets.CHATBOT_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
