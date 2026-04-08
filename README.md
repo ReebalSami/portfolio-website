@@ -24,6 +24,7 @@ Personal portfolio website for **Reebal Sami** — Data Scientist & AI Engineer.
 ## Quick Start
 
 ```bash
+make env:setup # Sync Volta + Corepack toolchain
 make install   # Install dependencies
 make dev       # Start dev server (localhost:3000)
 make build     # Production build
