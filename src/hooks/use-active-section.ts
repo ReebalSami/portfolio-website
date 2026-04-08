@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "@/i18n/navigation";
 
 const SECTION_IDS = ["home", "about", "projects", "blog", "contact"] as const;
 export type SectionId = (typeof SECTION_IDS)[number];
 
 export function useActiveSection(): SectionId {
   const [activeSection, setActiveSection] = useState<SectionId>("home");
+  const pathname = usePathname();
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -36,7 +38,7 @@ export function useActiveSection(): SectionId {
     return () => {
       observers.forEach((observer) => observer.disconnect());
     };
-  }, []);
+  }, [pathname]);
 
   return activeSection;
 }

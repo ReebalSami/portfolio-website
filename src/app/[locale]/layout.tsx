@@ -79,15 +79,18 @@ export default async function LocaleLayout({ children, params }: Props) {
       lang={locale}
       dir={isRtl ? "rtl" : "ltr"}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${fontClasses} h-full`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark")}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className={`min-h-full flex flex-col ${isRtl ? "font-[var(--font-arabic)]" : ""}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
+        <ThemeProvider defaultTheme="light">
           <NextIntlClientProvider>
             <TooltipProvider>
               <Header siteName={config.site.name} />

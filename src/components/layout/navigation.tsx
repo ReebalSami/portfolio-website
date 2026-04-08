@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useRouter, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { useActiveSection, type SectionId } from "@/hooks/use-active-section";
 
@@ -24,6 +25,10 @@ function scrollToSection(sectionId: string) {
   }
 }
 
+function isMainPage(pathname: string): boolean {
+  return pathname === "/" || pathname === "";
+}
+
 interface DesktopNavProps {
   className?: string;
 }
@@ -31,16 +36,27 @@ interface DesktopNavProps {
 export function DesktopNav({ className }: DesktopNavProps) {
   const activeSection = useActiveSection();
   const t = useTranslations("common.nav");
+  const router = useRouter();
+  const pathname = usePathname();
+  const onMainPage = isMainPage(pathname);
+
+  const handleClick = (sectionId: string) => {
+    if (onMainPage) {
+      scrollToSection(sectionId);
+    } else {
+      router.push(`/#${sectionId}`);
+    }
+  };
 
   return (
     <nav className={cn("hidden lg:flex items-center gap-1", className)}>
       {navItems.map((item) => (
         <button
           key={item.sectionId}
-          onClick={() => scrollToSection(item.sectionId)}
+          onClick={() => handleClick(item.sectionId)}
           className={cn(
             "px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer",
-            activeSection === item.sectionId
+            onMainPage && activeSection === item.sectionId
               ? "text-foreground bg-accent"
               : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
           )}
@@ -59,10 +75,17 @@ interface MobileNavProps {
 export function MobileNav({ onNavigate }: MobileNavProps) {
   const activeSection = useActiveSection();
   const t = useTranslations("common.nav");
+  const router = useRouter();
+  const pathname = usePathname();
+  const onMainPage = isMainPage(pathname);
 
   const handleClick = (sectionId: string) => {
     onNavigate?.();
-    setTimeout(() => scrollToSection(sectionId), 150);
+    if (onMainPage) {
+      setTimeout(() => scrollToSection(sectionId), 150);
+    } else {
+      router.push(`/#${sectionId}`);
+    }
   };
 
   return (
@@ -73,7 +96,7 @@ export function MobileNav({ onNavigate }: MobileNavProps) {
           onClick={() => handleClick(item.sectionId)}
           className={cn(
             "px-4 py-3 text-left text-base font-medium rounded-lg transition-colors duration-200 cursor-pointer",
-            activeSection === item.sectionId
+            onMainPage && activeSection === item.sectionId
               ? "text-foreground bg-accent"
               : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
           )}

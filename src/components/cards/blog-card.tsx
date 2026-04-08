@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Clock, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,9 +6,10 @@ import type { BlogPostMeta } from "@/lib/mdx";
 
 interface BlogCardProps {
   post: BlogPostMeta;
+  locale?: string;
 }
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, locale = "en" }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`}>
       <Card className="h-full cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
@@ -22,7 +23,7 @@ export function BlogCard({ post }: BlogCardProps) {
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
             <span className="flex items-center gap-1">
               <Calendar className="h-3.5 w-3.5" />
-              {new Date(post.date).toLocaleDateString("en-US", {
+              {new Date(post.date).toLocaleDateString(locale, {
                 month: "short",
                 day: "numeric",
                 year: "numeric",
