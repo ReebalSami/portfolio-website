@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Mail, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { LinkedInIcon, GitHubIcon } from "@/components/shared/brand-icons";
@@ -97,6 +97,16 @@ export function ContactSection({
     }
   };
 
+  const prefersReducedMotion = useReducedMotion();
+  const inViewProps = prefersReducedMotion
+    ? {}
+    : {
+        variants: fadeUp,
+        initial: "hidden" as const,
+        whileInView: "visible" as const,
+        viewport: { once: true },
+      };
+
   return (
     <div>
       <SectionHeading title={t("title")} subtitle={t("subtitle")} />
@@ -105,10 +115,7 @@ export function ContactSection({
         <motion.form
           onSubmit={handleSubmit}
           className="space-y-4"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          {...inViewProps}
         >
           <div>
             <Input
@@ -208,13 +215,7 @@ export function ContactSection({
           )}
         </motion.form>
 
-        <motion.div
-          className="space-y-6"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        <motion.div className="space-y-6" {...inViewProps}>
           <div>
             <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
               {t("direct")}
@@ -222,7 +223,7 @@ export function ContactSection({
             <div className="space-y-3">
               <a
                 href={`mailto:${email}`}
-                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer break-all"
               >
                 <Mail className="h-4 w-4 shrink-0" />
                 {email}

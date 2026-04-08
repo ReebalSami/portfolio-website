@@ -1,5 +1,7 @@
 {
   "common": {
+    "skipToContent": "تخطي إلى المحتوى الرئيسي",
+    "toggleTheme": "تبديل الوضع الداكن",
     "nav": {
       "home": "الرئيسية",
       "about": "عني",

@@ -1,5 +1,7 @@
 {
   "common": {
+    "skipToContent": "Direkt zum Inhalt",
+    "toggleTheme": "Dunkelmodus umschalten",
     "nav": {
       "home": "Startseite",
       "about": "Über mich",
