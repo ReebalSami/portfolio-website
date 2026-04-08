@@ -7,8 +7,10 @@ import { ProjectsSection } from "@/components/sections/projects-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { BlogCard } from "@/components/cards/blog-card";
 import { Separator } from "@/components/ui/separator";
+import { JsonLd } from "@/components/seo/json-ld";
 import { getConfig } from "@/lib/config";
 import { getAllPosts } from "@/lib/mdx";
+import { buildAbsoluteUrl } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -20,9 +22,26 @@ export default async function Home({ params }: Props) {
   const config = getConfig();
   const t = await getTranslations("blog");
   const photoPath = `${config.photos.heroDir}/${config.photos.hero}`;
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: config.site.name,
+    alternateName: config.site.title,
+    jobTitle: config.site.title,
+    description: config.site.description,
+    url: config.site.url,
+    image: buildAbsoluteUrl(photoPath),
+    email: `mailto:${config.contact.email}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: config.contact.location,
+    },
+    sameAs: Object.values(config.social).filter(Boolean),
+  };
 
   return (
     <>
+      <JsonLd id="person-structured-data" data={personJsonLd} />
       <section id="home" className="scroll-mt-20">
         <AnimatedSection direction="none">
           <HeroSection

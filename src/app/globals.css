@@ -143,6 +143,27 @@
   }
 }
 
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background-color: color-mix(in lab, var(--background) 92%, white 8%);
+  color: var(--foreground);
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.15);
+  transform: translateY(-150%);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.skip-link:focus-visible,
+.skip-link:focus {
+  transform: translateY(0);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.2);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

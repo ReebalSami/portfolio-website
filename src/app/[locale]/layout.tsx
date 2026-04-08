@@ -11,6 +11,7 @@ import { PageTransition } from "@/components/layout/page-transition";
 import { ChatWidget } from "@/components/chat/chat-widget";
 import { routing } from "@/i18n/routing";
 import { getConfig } from "@/lib/config";
+import { buildLanguageAlternates, buildLocaleUrl, buildAbsoluteUrl, getMetadataBase } from "@/lib/seo";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-sans",
@@ -38,18 +39,72 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
 });
 
 const config = getConfig();
+const metadataBase = getMetadataBase();
+const twitterCardOptions = new Set(["summary_large_image", "summary", "player", "app"]);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = {
-  title: {
-    default: `${config.site.name} — ${config.site.title}`,
-    template: `%s | ${config.site.name}`,
-  },
-  description: config.site.description,
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const canonical = buildLocaleUrl(locale);
+  const languages = buildLanguageAlternates();
+  const ogImages = [
+    {
+      url: `${canonical}/opengraph-image`,
+      width: 1200,
+      height: 630,
+    },
+  ];
+
+  if (config.seo.ogImage) {
+    ogImages.push({
+      url: buildAbsoluteUrl(config.seo.ogImage),
+      width: 1200,
+      height: 630,
+    });
+  }
+
+  const defaultTitle = `${config.site.name} — ${config.site.title}`;
+  const requestedCard = config.seo.twitterCard ?? "summary_large_image";
+  const twitterCard = (twitterCardOptions.has(requestedCard)
+    ? requestedCard
+    : "summary_large_image") as "summary_large_image" | "summary" | "player" | "app";
+
+  return {
+    metadataBase,
+    title: {
+      default: defaultTitle,
+      template: `%s | ${config.site.name}`,
+    },
+    description: config.site.description,
+    alternates: {
+      canonical,
+      languages,
+    },
+    openGraph: {
+      type: "website",
+      locale,
+      url: canonical,
+      siteName: config.site.name,
+      title: defaultTitle,
+      description: config.site.description,
+      images: ogImages,
+    },
+    twitter: {
+      card: twitterCard,
+      title: defaultTitle,
+      description: config.site.description,
+      creator: config.seo.twitterHandle || undefined,
+      images: ogImages.map((image) => image.url),
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 type Props = {
   children: React.ReactNode;
@@ -96,7 +151,9 @@ export default async function LocaleLayout({ children, params }: Props) {
             <TooltipProvider>
               <Header siteName={config.site.name} />
               <PageTransition>
-                <main className="flex-1">{children}</main>
+                <main id="main-content" className="flex-1">
+                  {children}
+                </main>
               </PageTransition>
               {config.features.chatbot && <ChatWidget />}
               <Footer

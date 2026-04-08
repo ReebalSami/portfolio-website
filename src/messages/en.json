@@ -1,5 +1,6 @@
 {
   "common": {
+    "skipToContent": "Skip to main content",
     "nav": {
       "home": "Home",
       "about": "About",

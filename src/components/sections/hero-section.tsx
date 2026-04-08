@@ -72,6 +72,7 @@ export function HeroSection({
               width={600}
               height={750}
               priority
+              sizes="(max-width: 768px) 75vw, (max-width: 1280px) 45vw, 35vw"
               className="h-auto w-full object-cover grayscale contrast-[1.1]"
             />
           </div>
@@ -125,6 +126,7 @@ export function HeroSection({
             width={600}
             height={750}
             priority
+            sizes="(max-width: 768px) 75vw, (max-width: 1280px) 45vw, 35vw"
             className="h-auto w-full object-cover grayscale contrast-[1.1]"
           />
         </div>

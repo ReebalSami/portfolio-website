@@ -43,6 +43,9 @@ export function Header({ siteName }: HeaderProps) {
           : "bg-transparent"
       )}
     >
+      <a href="#main-content" className="skip-link">
+        {t("skipToContent")}
+      </a>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link
           href="/"
