@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
         method: "POST",
         headers,
         body: JSON.stringify({
-          from: "Portfolio Contact <onboarding@resend.dev>",
+          from: "Portfolio Contact <contact@reebal-sami.com>",
           to: config.recipientEmail,
           subject: `[Portfolio] ${subject}`,
           text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
         method: "POST",
         headers,
         body: JSON.stringify({
-          from: "Reebal Sami <onboarding@resend.dev>",
+          from: "Reebal Sami <noreply@reebal-sami.com>",
           to: email,
           subject: "Thanks for reaching out!",
           text: `Hi ${name},\n\nThank you for your message. I received it and will get back to you as soon as possible.\n\nBest regards,\nReebal Sami\nhttps://reebal-sami.com`,

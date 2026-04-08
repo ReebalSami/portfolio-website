@@ -137,9 +137,11 @@
   html {
     @apply font-sans antialiased;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
   body {
     overflow-x: hidden;
+    min-height: 100dvh;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);

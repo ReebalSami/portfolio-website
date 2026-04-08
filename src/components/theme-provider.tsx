@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useSyncExternalStore,
 } from "react";
@@ -57,6 +58,13 @@ export function ThemeProvider({
     document.documentElement.classList.toggle("dark", newTheme === "dark");
     emitChange();
   }, []);
+
+  // Re-apply the dark class on every render / locale change.
+  // The inline <script> only fires on full page loads; client-side navigations
+  // (e.g. locale switch) re-render the layout and may drop the class.
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
   const value = useMemo(
     () => ({ theme, resolvedTheme: theme, setTheme }),

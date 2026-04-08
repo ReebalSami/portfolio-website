@@ -175,7 +175,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       dir={isRtl ? "rtl" : "ltr"}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${fontClasses} h-full`}
+      className={fontClasses}
     >
       <head>
         <script
@@ -183,9 +183,18 @@ export default async function LocaleLayout({ children, params }: Props) {
             __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark")}catch(e){}})()`,
           }}
         />
+        {routing.locales.map((loc) => (
+          <link
+            key={`rss-${loc}`}
+            rel="alternate"
+            type="application/rss+xml"
+            title={`${config.site.name} Blog (${loc.toUpperCase()})`}
+            href={`${config.site.url}/feed/${loc}`}
+          />
+        ))}
         <PlausibleAnalytics />
       </head>
-      <body className={`min-h-full flex flex-col ${isRtl ? "font-[var(--font-arabic)]" : ""}`}>
+      <body className={`min-h-dvh flex flex-col ${isRtl ? "font-[var(--font-arabic)]" : ""}`}>
         <a href="#main-content" className="skip-link">
           {tCommon("skipToContent")}
         </a>

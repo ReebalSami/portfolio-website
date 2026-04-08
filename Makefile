@@ -1,4 +1,4 @@
-.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod env\:setup
+.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
 
 install:
 	pnpm install
@@ -51,10 +51,13 @@ diagram:
 	d2 docs/architecture.d2 docs/architecture.svg
 
 deploy\:diff:
-	cd infra && npx cdk diff --all --context stage=preview
+	cd infra && npx cdk diff --all --context stage=preview --context hostedZoneId=Z011195418EPNPJCP44NR
 
 deploy\:preview:
-	cd infra && npx cdk deploy --all --context stage=preview --require-approval broadening
+	cd infra && npx cdk deploy --all --context stage=preview --context hostedZoneId=Z011195418EPNPJCP44NR --require-approval broadening
 
 deploy\:prod:
-	cd infra && npx cdk deploy --all --context stage=prod --require-approval broadening
+	cd infra && npx cdk deploy --all --context stage=prod --context hostedZoneId=Z011195418EPNPJCP44NR --require-approval never
+
+deploy: build\:deploy deploy\:prod
+	@echo "✅ Full deploy to production complete"
