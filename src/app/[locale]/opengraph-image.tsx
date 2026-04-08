@@ -45,89 +45,60 @@ export default async function OpenGraphImage({
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "64px",
           background,
           color: "#f9f7f3",
           fontFamily: "sans-serif",
         }}
       >
-        {/* Text side */}
         <div
           style={{
-            flex: 1,
             display: "flex",
-            flexDirection: "column",
+            alignItems: "center",
             justifyContent: "space-between",
-            padding: "56px 64px 48px 64px",
+            gap: "24px",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            <span
-              style={{
-                fontSize: 22,
-                letterSpacing: 6,
-                textTransform: "uppercase",
-                color: accent,
-              }}
-            >
-              {config.site.title}
-            </span>
-            <h1 style={{ fontSize: 72, margin: 0, lineHeight: 1.05 }}>
-              {config.site.name}
-            </h1>
-            <p style={{ fontSize: 24, color: "#d1d1d6", lineHeight: 1.4, marginTop: 8 }}>
-              {t("intro")}
-            </p>
-          </div>
-
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
-              fontSize: 20,
-              borderTop: "1px solid rgba(249,247,243,0.15)",
-              paddingTop: 20,
-              color: "#a1a1a6",
+              flexDirection: "column",
+              gap: "16px",
+              maxWidth: "70%",
             }}
           >
-            <span>{config.contact.location}</span>
-            <span>{config.contact.email}</span>
+            <span style={{ fontSize: 28, letterSpacing: 8, textTransform: "uppercase", color: accent }}>
+              {config.site.title}
+            </span>
+            <h1 style={{ fontSize: 80, margin: 0 }}>{config.site.name}</h1>
+            <p style={{ fontSize: 28, color: "#d1d1d6", lineHeight: 1.4 }}>{t("intro")}</p>
           </div>
-        </div>
-
-        {/* Photo side */}
-        <div
-          style={{
-            width: 380,
-            height: "100%",
-            display: "flex",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
           <img
             src={heroSrc}
             alt=""
-            width={380}
-            height={630}
+            width={180}
+            height={180}
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
+              width: 180,
+              height: 180,
+              borderRadius: "32px",
+              border: `2px solid ${accent}`,
             }}
           />
-          {/* Gradient overlay from background into photo (rendered after img so it paints on top) */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: 120,
-              height: "100%",
-              background: `linear-gradient(to left, transparent, ${background})`,
-            }}
-          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: 24,
+            borderTop: "1px solid rgba(249,247,243,0.2)",
+            paddingTop: 24,
+          }}
+        >
+          <span>{config.contact.location}</span>
+          <span>{config.contact.email}</span>
         </div>
       </div>
     ),
