@@ -141,6 +141,14 @@
     font-family: var(--font-heading);
     letter-spacing: -0.02em;
   }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 .skip-link {

@@ -1,6 +1,7 @@
 {
   "common": {
     "skipToContent": "Skip to main content",
+    "toggleTheme": "Toggle dark mode",
     "nav": {
       "home": "Home",
       "about": "About",

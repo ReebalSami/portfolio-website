@@ -1,15 +1,16 @@
-type JsonLdProps = {
+import { safeJsonLd } from "@/lib/seo";
+
+interface JsonLdProps {
   id: string;
   data: Record<string, unknown>;
-};
+}
 
 export function JsonLd({ id, data }: JsonLdProps) {
   return (
     <script
       id={id}
       type="application/ld+json"
-      suppressHydrationWarning
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(data) }}
     />
   );
 }

@@ -12,7 +12,15 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getConfig } from "@/lib/config";
-import { buildLanguageAlternates, buildLocaleUrl, buildAbsoluteUrl, getMetadataBase } from "@/lib/seo";
+import {
+  buildLanguageAlternates,
+  buildLocaleUrl,
+  buildAbsoluteUrl,
+  getMetadataBase,
+  ogLocale,
+  resolveTwitterCard,
+  resolveTwitterHandle,
+} from "@/lib/seo";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -40,53 +48,44 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pagePath = `/blog/${slug}`;
   const canonical = buildLocaleUrl(locale, pagePath);
   const languages = buildLanguageAlternates(pagePath);
-  const defaultOgImage = buildLocaleUrl(locale, "/opengraph-image");
-  const ogImages = [
-    {
-      url: defaultOgImage,
-      width: 1200,
-      height: 630,
-    },
-  ];
-
-  if (config.seo.ogImage) {
-    ogImages.push({
-      url: buildAbsoluteUrl(config.seo.ogImage),
-      width: 1200,
-      height: 630,
-    });
-  }
-
   const description = post.description || config.site.description;
-  const twitterCardOptions = new Set(["summary_large_image", "summary", "player", "app"]);
-  const requestedCard = config.seo.twitterCard ?? "summary_large_image";
-  const twitterCard = (twitterCardOptions.has(requestedCard)
-    ? requestedCard
-    : "summary_large_image") as "summary_large_image" | "summary" | "player" | "app";
+
+  const ogImageUrl = config.seo.ogImage
+    ? buildAbsoluteUrl(config.seo.ogImage)
+    : buildLocaleUrl(locale, "/opengraph-image");
 
   return {
     metadataBase,
-    title: `${post.title} | ${config.site.name}`,
+    title: post.title,
     description,
+    keywords: post.tags,
     alternates: {
       canonical,
       languages,
     },
     openGraph: {
       type: "article",
+      locale: ogLocale(locale),
       url: canonical,
       title: post.title,
       description,
       publishedTime: post.date,
       authors: [config.site.name],
-      images: ogImages,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
-      card: twitterCard,
+      card: resolveTwitterCard(),
       title: post.title,
       description,
-      creator: config.site.name,
-      images: ogImages.map((image) => image.url),
+      creator: resolveTwitterHandle(),
+      images: [ogImageUrl],
     },
     robots: {
       index: true,
@@ -102,7 +101,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const t = await getTranslations("blog");
   const config = getConfig();
   const articleUrl = buildLocaleUrl(locale, `/blog/${post.slug}`);
-  const defaultOgImage = config.seo.ogImage
+  const ogImageUrl = config.seo.ogImage
     ? buildAbsoluteUrl(config.seo.ogImage)
     : buildLocaleUrl(locale, "/opengraph-image");
   const blogJsonLd = {
@@ -117,13 +116,19 @@ export default async function BlogPostPage({ params }: PageProps) {
       name: config.site.name,
       url: config.site.url,
     },
+    publisher: {
+      "@type": "Person",
+      name: config.site.name,
+      url: config.site.url,
+    },
     url: articleUrl,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,
     },
     inLanguage: locale,
-    image: defaultOgImage,
+    image: ogImageUrl,
+    keywords: post.tags.join(", "),
   };
 
   return (
