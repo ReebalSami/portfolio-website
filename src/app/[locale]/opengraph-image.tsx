@@ -78,11 +78,11 @@ export default async function OpenGraphImage({
           <img
             src={heroSrc}
             alt=""
-            width={180}
-            height={180}
+            width={330}
+            height={330}
             style={{
-              width: 180,
-              height: 180,
+              width: 330,
+              height: 330,
               borderRadius: "32px",
               border: `2px solid ${accent}`,
             }}

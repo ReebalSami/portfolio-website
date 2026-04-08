@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 md:py-24">
       <JsonLd id={`blogpost-structured-data-${post.slug}`} data={blogJsonLd} />
       <Link
         href="/#blog"

@@ -136,10 +136,18 @@
   }
   html {
     @apply font-sans antialiased;
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     letter-spacing: -0.02em;
+  }
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
   }
   :focus-visible {
     outline: 2px solid var(--ring);

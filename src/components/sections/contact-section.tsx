@@ -223,7 +223,7 @@ export function ContactSection({
             <div className="space-y-3">
               <a
                 href={`mailto:${email}`}
-                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer break-all"
               >
                 <Mail className="h-4 w-4 shrink-0" />
                 {email}

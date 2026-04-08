@@ -55,7 +55,7 @@ export default async function Home({ params }: Props) {
 
       <Separator />
 
-      <section id="about" className="scroll-mt-20 px-6 py-20 md:py-28">
+      <section id="about" className="scroll-mt-20 px-4 py-16 sm:px-6 md:py-28">
         <AnimatedSection className="mx-auto max-w-4xl">
           <AboutSection downloadCvEnabled={config.features.downloadCV} />
         </AnimatedSection>
@@ -63,7 +63,7 @@ export default async function Home({ params }: Props) {
 
       <Separator />
 
-      <section id="projects" className="scroll-mt-20 px-6 py-20 md:py-28 bg-muted/30">
+      <section id="projects" className="scroll-mt-20 px-4 py-16 sm:px-6 md:py-28 bg-muted/30">
         <AnimatedSection className="mx-auto max-w-5xl" direction="up">
           <ProjectsSection />
         </AnimatedSection>
@@ -71,7 +71,7 @@ export default async function Home({ params }: Props) {
 
       <Separator />
 
-      <section id="blog" className="scroll-mt-20 px-6 py-20 md:py-28">
+      <section id="blog" className="scroll-mt-20 px-4 py-16 sm:px-6 md:py-28">
         <AnimatedSection className="mx-auto max-w-4xl" direction="up">
           <SectionHeading title={t("title")} subtitle={t("subtitle")} />
           {(() => {
@@ -96,7 +96,7 @@ export default async function Home({ params }: Props) {
 
       <Separator />
 
-      <section id="contact" className="scroll-mt-20 px-6 py-20 md:py-28 bg-muted/30">
+      <section id="contact" className="scroll-mt-20 px-4 py-16 sm:px-6 md:py-28 bg-muted/30">
         <AnimatedSection className="mx-auto max-w-4xl" direction="up">
           <ContactSection
             email={config.contact.email}
