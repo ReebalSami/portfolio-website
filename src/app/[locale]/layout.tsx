@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PageTransition } from "@/components/layout/page-transition";
 import { ChatWidget } from "@/components/chat/chat-widget";
 import { routing } from "@/i18n/routing";
 import { getConfig } from "@/lib/config";
@@ -94,7 +95,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           <NextIntlClientProvider>
             <TooltipProvider>
               <Header siteName={config.site.name} />
-              <main className="flex-1">{children}</main>
+              <PageTransition>
+                <main className="flex-1">{children}</main>
+              </PageTransition>
               {config.features.chatbot && <ChatWidget />}
               <Footer
                 siteName={config.site.name}

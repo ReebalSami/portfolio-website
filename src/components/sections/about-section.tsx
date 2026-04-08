@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Briefcase, Brain, Globe, GraduationCap } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -39,6 +39,16 @@ interface AboutSectionProps {
 export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
   const t = useTranslations("about");
   const tBtn = useTranslations("common.buttons");
+  const prefersReducedMotion = useReducedMotion();
+
+  const inViewProps = prefersReducedMotion
+    ? {}
+    : {
+        variants: fadeUp,
+        initial: "hidden" as const,
+        whileInView: "visible" as const,
+        viewport: { once: true, margin: "-50px" },
+      };
 
   return (
     <div className="space-y-20">
@@ -62,10 +72,7 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
           {differentiatorKeys.map((item, i) => (
             <motion.div
               key={item.key}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              {...inViewProps}
               transition={{ delay: i * 0.1 }}
             >
               <Card className="h-full">
@@ -95,10 +102,7 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
             <motion.div
               key={entry.date + entry.title}
               className="relative"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              {...inViewProps}
               transition={{ delay: i * 0.08 }}
             >
               <div
