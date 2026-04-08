@@ -10,8 +10,6 @@ interface HeroSectionProps {
   title: string;
   tagline: string;
   photoSrc: string;
-  onViewProjects?: () => void;
-  onContact?: () => void;
 }
 
 const stagger = {
@@ -41,13 +39,18 @@ const fadeScale = {
   },
 };
 
+function scrollToSection(sectionId: string) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
 export function HeroSection({
   name,
   title,
   tagline,
   photoSrc,
-  onViewProjects,
-  onContact,
 }: HeroSectionProps) {
   const t = useTranslations();
 
@@ -111,7 +114,7 @@ export function HeroSection({
             <Button
               size="lg"
               className="cursor-pointer"
-              onClick={onViewProjects}
+              onClick={() => scrollToSection("projects")}
             >
               {t("common.buttons.viewProjects")}
             </Button>
@@ -119,7 +122,7 @@ export function HeroSection({
               variant="outline"
               size="lg"
               className="cursor-pointer"
-              onClick={onContact}
+              onClick={() => scrollToSection("contact")}
             >
               {t("common.buttons.getInTouch")}
             </Button>

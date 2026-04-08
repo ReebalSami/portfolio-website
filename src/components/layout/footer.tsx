@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { Mail, MapPin } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/brand-icons";

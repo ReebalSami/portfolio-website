@@ -8,11 +8,11 @@ import rehypeShiki from "@shikijs/rehype";
 import { getPostBySlug, getAllSlugs } from "@/lib/mdx";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Metadata } from "next";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -20,8 +20,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { locale, slug } = await params;
+  const post = getPostBySlug(slug, locale);
   if (!post) return {};
   return {
     title: post.title,
@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { locale, slug } = await params;
+  const post = getPostBySlug(slug, locale);
   if (!post) notFound();
   const t = await getTranslations("blog");
 
@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
           <span className="flex items-center gap-1.5">
             <Calendar className="h-4 w-4" />
-            {new Date(post.date).toLocaleDateString("en-US", {
+            {new Date(post.date).toLocaleDateString(locale, {
               year: "numeric",
               month: "long",
               day: "numeric",
