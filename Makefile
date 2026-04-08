@@ -1,4 +1,4 @@
-.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate diagram deploy\:diff deploy\:preview deploy\:prod env\:setup
+.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod env\:setup
 
 install:
 	pnpm install
@@ -44,14 +44,17 @@ env\:setup:
 	fi
 	corepack enable
 
+build\:deploy:
+	./scripts/build-for-deploy.sh
+
 diagram:
 	d2 docs/architecture.d2 docs/architecture.svg
 
 deploy\:diff:
-	cd infra && npx cdk diff
+	cd infra && npx cdk diff --all --context stage=preview
 
 deploy\:preview:
-	cd infra && npx cdk deploy --context stage=preview
+	cd infra && npx cdk deploy --all --context stage=preview --require-approval broadening
 
 deploy\:prod:
-	cd infra && npx cdk deploy --context stage=prod
+	cd infra && npx cdk deploy --all --context stage=prod --require-approval broadening

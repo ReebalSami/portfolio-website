@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // CDK infrastructure (separate TypeScript project)
+    "infra/**",
+    "cdk.out/**",
+    ".deploy/**",
   ]),
 ]);
 
