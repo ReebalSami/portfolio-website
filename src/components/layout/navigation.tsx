@@ -18,6 +18,12 @@ export const navItems: NavItem[] = [
   { labelKey: "contact", sectionId: "contact" },
 ];
 
+const desktopNavButtonBase =
+  "relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer after:pointer-events-none after:absolute after:left-3 after:right-3 after:bottom-1 after:h-0.5 after:rounded-full after:bg-foreground after:origin-left motion-safe:after:scale-x-0 motion-safe:after:transition-transform motion-safe:after:duration-200";
+
+const mobileNavButtonBase =
+  "relative px-4 py-3 text-left text-base font-medium rounded-lg transition-colors duration-200 cursor-pointer after:pointer-events-none after:absolute after:left-4 after:right-4 after:bottom-2 after:h-0.5 after:rounded-full after:bg-foreground after:origin-left motion-safe:after:scale-x-0 motion-safe:after:transition-transform motion-safe:after:duration-200";
+
 function scrollToSection(sectionId: string) {
   const element = document.getElementById(sectionId);
   if (element) {
@@ -55,10 +61,10 @@ export function DesktopNav({ className }: DesktopNavProps) {
           key={item.sectionId}
           onClick={() => handleClick(item.sectionId)}
           className={cn(
-            "px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer",
+            desktopNavButtonBase,
             onMainPage && activeSection === item.sectionId
-              ? "text-foreground bg-accent"
-              : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+              ? "text-foreground bg-accent motion-safe:after:scale-x-100"
+              : "text-muted-foreground hover:text-foreground hover:bg-accent/50 hover:after:scale-x-100"
           )}
         >
           {t(item.labelKey)}
@@ -95,10 +101,10 @@ export function MobileNav({ onNavigate }: MobileNavProps) {
           key={item.sectionId}
           onClick={() => handleClick(item.sectionId)}
           className={cn(
-            "px-4 py-3 text-left text-base font-medium rounded-lg transition-colors duration-200 cursor-pointer",
+            mobileNavButtonBase,
             onMainPage && activeSection === item.sectionId
-              ? "text-foreground bg-accent"
-              : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+              ? "text-foreground bg-accent motion-safe:after:scale-x-100"
+              : "text-muted-foreground hover:text-foreground hover:bg-accent/50 hover:after:scale-x-100"
           )}
         >
           {t(item.labelKey)}

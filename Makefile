@@ -1,4 +1,4 @@
-.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate diagram deploy\:diff deploy\:preview deploy\:prod
+.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate diagram deploy\:diff deploy\:preview deploy\:prod env\:setup
 
 install:
 	pnpm install
@@ -33,6 +33,16 @@ clean:
 
 config\:validate:
 	pnpm tsx src/lib/validate-config.ts
+
+env\:setup:
+	@if command -v volta >/dev/null 2>&1; then \
+		volta install node@20.11.1; \
+		volta install pnpm@9.12.1; \
+		echo "Volta toolchain synced with project pins"; \
+	else \
+		echo "Volta is not installed. Install it from https://volta.sh or use nvm/asdf with .nvmrc/.node-version."; \
+	fi
+	corepack enable
 
 diagram:
 	d2 docs/architecture.d2 docs/architecture.svg
