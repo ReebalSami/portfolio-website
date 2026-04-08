@@ -51,41 +51,6 @@ export default async function OpenGraphImage({
           fontFamily: "sans-serif",
         }}
       >
-        {/* Photo side */}
-        <div
-          style={{
-            width: 360,
-            height: "100%",
-            display: "flex",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <img
-            src={heroSrc}
-            alt=""
-            width={360}
-            height={630}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              filter: "grayscale(100%) contrast(1.1)",
-            }}
-          />
-          {/* Gradient overlay */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              width: 120,
-              height: "100%",
-              background: `linear-gradient(to right, transparent, ${background})`,
-            }}
-          />
-        </div>
-
         {/* Text side */}
         <div
           style={{
@@ -93,7 +58,7 @@ export default async function OpenGraphImage({
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            padding: "56px 56px 48px 40px",
+            padding: "56px 64px 48px 64px",
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -128,6 +93,41 @@ export default async function OpenGraphImage({
             <span>{config.contact.location}</span>
             <span>{config.contact.email}</span>
           </div>
+        </div>
+
+        {/* Photo side */}
+        <div
+          style={{
+            width: 380,
+            height: "100%",
+            display: "flex",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <img
+            src={heroSrc}
+            alt=""
+            width={380}
+            height={630}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+            }}
+          />
+          {/* Gradient overlay from background into photo (rendered after img so it paints on top) */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: 120,
+              height: "100%",
+              background: `linear-gradient(to left, transparent, ${background})`,
+            }}
+          />
         </div>
       </div>
     ),
