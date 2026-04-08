@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { hasLocale } from "next-intl";
@@ -14,6 +16,12 @@ export const contentType = "image/png";
 const background = "#09090f";
 const accent = "#f6c89f";
 
+function getHeroImageBase64(): string {
+  const photoPath = path.join(process.cwd(), "public", "images", "og", "hero-og.jpg");
+  const buffer = fs.readFileSync(photoPath);
+  return `data:image/jpeg;base64,${buffer.toString("base64")}`;
+}
+
 export default async function OpenGraphImage({
   params,
 }: {
@@ -28,6 +36,7 @@ export default async function OpenGraphImage({
   setRequestLocale(locale);
   const t = await getTranslations("home.hero");
   const config = getConfig();
+  const heroSrc = getHeroImageBase64();
 
   return new ImageResponse(
     (
@@ -36,62 +45,92 @@ export default async function OpenGraphImage({
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "64px",
+          flexDirection: "row",
           background,
           color: "#f9f7f3",
-          fontFamily: "Space Grotesk, Archivo, sans-serif",
+          fontFamily: "sans-serif",
         }}
       >
+        {/* Photo side */}
         <div
           style={{
+            width: 360,
+            height: "100%",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "24px",
+            position: "relative",
+            overflow: "hidden",
           }}
         >
-          <div
+          <img
+            src={heroSrc}
+            alt=""
+            width={360}
+            height={630}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "16px",
-              maxWidth: "70%",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              filter: "grayscale(100%) contrast(1.1)",
             }}
-          >
-            <span style={{ fontSize: 28, letterSpacing: 8, textTransform: "uppercase", color: accent }}>
-              {config.site.title}
-            </span>
-            <h1 style={{ fontSize: 80, margin: 0 }}>{config.site.name}</h1>
-            <p style={{ fontSize: 28, color: "#d1d1d6", lineHeight: 1.4 }}>{t("intro")}</p>
-          </div>
+          />
+          {/* Gradient overlay */}
           <div
             style={{
-              width: 180,
-              height: 180,
-              borderRadius: "32px",
-              background: "linear-gradient(135deg, rgba(246,200,159,0.25), rgba(246,200,159,0))",
-              border: `2px solid ${accent}`,
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: 120,
+              height: "100%",
+              background: `linear-gradient(to right, transparent, ${background})`,
             }}
           />
         </div>
+
+        {/* Text side */}
         <div
           style={{
+            flex: 1,
             display: "flex",
+            flexDirection: "column",
             justifyContent: "space-between",
-            fontSize: 24,
-            borderTop: "1px solid rgba(249,247,243,0.2)",
-            paddingTop: 24,
+            padding: "56px 56px 48px 40px",
           }}
         >
-          <span>{config.contact.location}</span>
-          <span>{config.contact.email}</span>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <span
+              style={{
+                fontSize: 22,
+                letterSpacing: 6,
+                textTransform: "uppercase",
+                color: accent,
+              }}
+            >
+              {config.site.title}
+            </span>
+            <h1 style={{ fontSize: 72, margin: 0, lineHeight: 1.05 }}>
+              {config.site.name}
+            </h1>
+            <p style={{ fontSize: 24, color: "#d1d1d6", lineHeight: 1.4, marginTop: 8 }}>
+              {t("intro")}
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              fontSize: 20,
+              borderTop: "1px solid rgba(249,247,243,0.15)",
+              paddingTop: 20,
+              color: "#a1a1a6",
+            }}
+          >
+            <span>{config.contact.location}</span>
+            <span>{config.contact.email}</span>
+          </div>
         </div>
       </div>
     ),
-    {
-      ...size,
-    }
+    { ...size }
   );
 }

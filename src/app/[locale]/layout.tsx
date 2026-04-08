@@ -10,6 +10,7 @@ import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/layout/page-transition";
 import { ChatWidget } from "@/components/chat/chat-widget";
 import { JsonLd } from "@/components/seo/json-ld";
+import { PlausibleAnalytics } from "@/components/analytics/plausible";
 import { routing } from "@/i18n/routing";
 import { getConfig } from "@/lib/config";
 import {
@@ -182,6 +183,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark")}catch(e){}})()`,
           }}
         />
+        <PlausibleAnalytics />
       </head>
       <body className={`min-h-full flex flex-col ${isRtl ? "font-[var(--font-arabic)]" : ""}`}>
         <a href="#main-content" className="skip-link">
