@@ -84,7 +84,7 @@ chatbot:
   provider: "openai"
   model: "gpt-4o-mini"
   apiKeyEnvVar: "CHATBOT_API_KEY"  # References .env.local variable
-  maxTokens: 500
+  maxTokens: 1000
   rateLimit:
     maxRequests: 10
     windowSeconds: 3600   # 10 requests per IP per hour

@@ -53,7 +53,7 @@ export default async function Home({ params }: Props) {
         <div className="mx-auto max-w-4xl">
           <SectionHeading title={t("title")} subtitle={t("subtitle")} />
           {(() => {
-            const posts = getAllPosts();
+            const posts = getAllPosts(locale);
             if (posts.length === 0) {
               return (
                 <p className="text-muted-foreground">
@@ -64,7 +64,7 @@ export default async function Home({ params }: Props) {
             return (
               <div className="grid gap-6 sm:grid-cols-2">
                 {posts.slice(0, 4).map((post) => (
-                  <BlogCard key={post.slug} post={post} />
+                  <BlogCard key={post.slug} post={post} locale={locale} />
                 ))}
               </div>
             );

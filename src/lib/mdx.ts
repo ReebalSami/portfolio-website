@@ -3,7 +3,15 @@ import path from "node:path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-const BLOG_DIR = path.resolve(process.cwd(), "src/content/blog/en");
+const BLOG_BASE = path.resolve(process.cwd(), "src/content/blog");
+
+function getBlogDir(locale: string): string {
+  const localeDir = path.join(BLOG_BASE, locale);
+  if (fs.existsSync(localeDir) && fs.readdirSync(localeDir).some((f) => f.endsWith(".mdx"))) {
+    return localeDir;
+  }
+  return path.join(BLOG_BASE, "en");
+}
 
 export interface BlogPostMeta {
   slug: string;
@@ -19,17 +27,18 @@ export interface BlogPost extends BlogPostMeta {
   content: string;
 }
 
-export function getAllPosts(): BlogPostMeta[] {
-  if (!fs.existsSync(BLOG_DIR)) {
+export function getAllPosts(locale = "en"): BlogPostMeta[] {
+  const blogDir = getBlogDir(locale);
+  if (!fs.existsSync(blogDir)) {
     return [];
   }
 
-  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".mdx"));
+  const files = fs.readdirSync(blogDir).filter((f) => f.endsWith(".mdx"));
 
   return files
     .map((filename) => {
       const slug = filename.replace(/\.mdx$/, "");
-      const filePath = path.join(BLOG_DIR, filename);
+      const filePath = path.join(blogDir, filename);
       const raw = fs.readFileSync(filePath, "utf-8");
       const { data, content } = matter(raw);
       const stats = readingTime(content);
@@ -48,8 +57,9 @@ export function getAllPosts(): BlogPostMeta[] {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export function getPostBySlug(slug: string): BlogPost | null {
-  const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
+export function getPostBySlug(slug: string, locale = "en"): BlogPost | null {
+  const blogDir = getBlogDir(locale);
+  const filePath = path.join(blogDir, `${slug}.mdx`);
 
   if (!fs.existsSync(filePath)) {
     return null;
@@ -71,13 +81,14 @@ export function getPostBySlug(slug: string): BlogPost | null {
   };
 }
 
-export function getAllSlugs(): string[] {
-  if (!fs.existsSync(BLOG_DIR)) {
+export function getAllSlugs(locale = "en"): string[] {
+  const blogDir = getBlogDir(locale);
+  if (!fs.existsSync(blogDir)) {
     return [];
   }
 
   return fs
-    .readdirSync(BLOG_DIR)
+    .readdirSync(blogDir)
     .filter((f) => f.endsWith(".mdx"))
     .map((f) => f.replace(/\.mdx$/, ""));
 }
