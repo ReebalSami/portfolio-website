@@ -1,0 +1,165 @@
+# =============================================================================
+# Portfolio Website — Architecture Diagram
+# Render: d2 docs/architecture.d2 docs/architecture.svg
+# =============================================================================
+
+direction: right
+
+# ─── Actors ──────────────────────────────────────────────────────────────
+
+visitor: {
+  label: "Visitor"
+  shape: person
+  style.fill: "#f5f5f4"
+}
+
+developer: {
+  label: "Developer"
+  shape: person
+  style.fill: "#f5f5f4"
+}
+
+# ─── DNS + CDN Layer ────────────────────────────────────────────────────
+
+route53: {
+  label: "Route 53\n(DNS)"
+  shape: cloud
+  style.fill: "#dbeafe"
+}
+
+acm: {
+  label: "ACM\n(TLS Certificate)"
+  shape: hexagon
+  style.fill: "#dbeafe"
+}
+
+cloudfront: {
+  label: "CloudFront\n(CDN + SSL)"
+  shape: hexagon
+  style.fill: "#dbeafe"
+  style.font-size: 16
+}
+
+# ─── Compute + Storage ──────────────────────────────────────────────────
+
+aws: {
+  label: "AWS (eu-central-1)"
+  style.fill: "#fef3c7"
+  style.stroke: "#d97706"
+
+  s3: {
+    label: "S3\n(Static Assets)"
+    shape: cylinder
+    style.fill: "#dcfce7"
+  }
+
+  lambda: {
+    label: "Lambda\n(Next.js SSR)"
+    shape: rectangle
+    style.fill: "#e0e7ff"
+  }
+
+  lwa: {
+    label: "Lambda Web\nAdapter"
+    shape: rectangle
+    style.fill: "#e0e7ff"
+    style.font-size: 12
+  }
+
+  cloudwatch: {
+    label: "CloudWatch\n(Alarms)"
+    shape: rectangle
+    style.fill: "#fee2e2"
+  }
+}
+
+# ─── External Services ──────────────────────────────────────────────────
+
+external: {
+  label: "External APIs"
+  style.fill: "#f3e8ff"
+
+  openai: {
+    label: "OpenAI\n(gpt-4o-mini)"
+    shape: rectangle
+  }
+
+  resend: {
+    label: "Resend\n(Email)"
+    shape: rectangle
+  }
+}
+
+# ─── CI/CD ───────────────────────────────────────────────────────────────
+
+cicd: {
+  label: "CI/CD"
+  style.fill: "#f0fdf4"
+
+  github: {
+    label: "GitHub\n(Repository)"
+    shape: rectangle
+  }
+
+  actions: {
+    label: "GitHub Actions\n(CI + CD)"
+    shape: rectangle
+  }
+
+  cdk: {
+    label: "AWS CDK\n(IaC)"
+    shape: rectangle
+  }
+}
+
+# ─── Next.js App ────────────────────────────────────────────────────────
+
+nextjs: {
+  label: "Next.js App"
+  style.fill: "#faf5ff"
+  style.stroke: "#7c3aed"
+
+  middleware: {
+    label: "Middleware\n(i18n routing)"
+    shape: rectangle
+  }
+
+  pages: {
+    label: "[locale]/ Pages\n(EN/DE/ES/AR)"
+    shape: rectangle
+  }
+
+  api_chat: {
+    label: "API /chat\n(Streaming)"
+    shape: rectangle
+  }
+
+  api_contact: {
+    label: "API /contact\n(Form)"
+    shape: rectangle
+  }
+}
+
+# ─── Connections ─────────────────────────────────────────────────────────
+
+visitor -> route53: "reebal-sami.com"
+route53 -> cloudfront: "DNS resolution"
+acm -> cloudfront: "TLS cert"
+
+cloudfront -> aws.s3: "/_next/static/*\n/images/*"
+cloudfront -> aws.lambda: "SSR requests"
+
+aws.lambda -> aws.lwa: "HTTP adapter"
+aws.lwa -> nextjs.middleware: "HTTP proxy"
+
+nextjs.middleware -> nextjs.pages: "locale routing"
+nextjs.api_chat -> external.openai: "streaming"
+nextjs.api_contact -> external.resend: "email"
+
+aws.cloudwatch -> aws.lambda: "monitors"
+aws.cloudwatch -> cloudfront: "5xx / latency"
+
+developer -> cicd.github: "git push"
+cicd.github -> cicd.actions: "triggers"
+cicd.actions -> cicd.cdk: "deploy"
+cicd.cdk -> aws: "provisions"
