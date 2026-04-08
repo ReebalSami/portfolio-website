@@ -108,7 +108,7 @@ export class PortfolioStack extends cdk.Stack {
     // Lambda Function URL (simpler than API Gateway for Next.js)
     const functionUrl = ssrFunction.addFunctionUrl({
       authType: lambda.FunctionUrlAuthType.NONE,
-      invokeMode: lambda.InvokeMode.RESPONSE_STREAM,
+      invokeMode: lambda.InvokeMode.BUFFERED,
     });
 
     // ─── CloudFront Origin Access Identity (S3) ───────────────────────
