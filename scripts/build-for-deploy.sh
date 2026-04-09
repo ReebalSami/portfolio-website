@@ -93,7 +93,11 @@ if [ -d "$MAIN_SWC" ] && [ -d "$DEPLOY_SWC" ]; then
   cp -r "$MAIN_SWC" "$DEPLOY_SWC"
 fi
 
-# 4) Remove unnecessary files to reduce Lambda package size
+# 4) Remove .pnpm internal directory (all packages already resolved to top-level)
+echo "  Removing .pnpm internals..."
+rm -rf "$DEPLOY_DIR/server/node_modules/.pnpm"
+
+# 5) Remove unnecessary files to reduce Lambda package size
 echo "  Trimming package..."
 rm -rf "$DEPLOY_DIR/server/infra" \
        "$DEPLOY_DIR/server/docs" \
