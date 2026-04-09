@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "@/i18n/navigation";
 
 const SECTION_IDS = ["home", "about", "projects", "blog", "contact"] as const;
@@ -10,7 +10,23 @@ export function useActiveSection(): SectionId {
   const [activeSection, setActiveSection] = useState<SectionId>("home");
   const pathname = usePathname();
 
+  const detectCurrentSection = useCallback(() => {
+    const scrollY = window.scrollY + window.innerHeight * 0.3;
+    for (let i = SECTION_IDS.length - 1; i >= 0; i--) {
+      const el = document.getElementById(SECTION_IDS[i]);
+      if (el && el.offsetTop <= scrollY) {
+        setActiveSection(SECTION_IDS[i]);
+        return;
+      }
+    }
+    setActiveSection("home");
+  }, []);
+
   useEffect(() => {
+    // On pathname change (e.g. returning from blog), do an immediate check
+    // because IntersectionObserver won't re-fire for already-visible elements.
+    detectCurrentSection();
+
     const observers: IntersectionObserver[] = [];
 
     SECTION_IDS.forEach((id) => {
@@ -38,7 +54,7 @@ export function useActiveSection(): SectionId {
     return () => {
       observers.forEach((observer) => observer.disconnect());
     };
-  }, [pathname]);
+  }, [pathname, detectCurrentSection]);
 
   return activeSection;
 }
