@@ -23,37 +23,31 @@ export function useActiveSection(): SectionId {
   }, []);
 
   useEffect(() => {
-    // On pathname change (e.g. returning from blog), do an immediate check
-    // because IntersectionObserver won't re-fire for already-visible elements.
-    const raf = requestAnimationFrame(detectCurrentSection);
+    // Throttled scroll listener — always detects the correct section
+    // regardless of AnimatePresence timing or navigation method.
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          detectCurrentSection();
+          ticking = false;
+        });
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    const observers: IntersectionObserver[] = [];
-
-    SECTION_IDS.forEach((id) => {
-      const element = document.getElementById(id);
-      if (!element) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(id);
-            }
-          });
-        },
-        {
-          rootMargin: "-20% 0px -60% 0px",
-          threshold: 0,
-        }
-      );
-
-      observer.observe(element);
-      observers.push(observer);
-    });
+    // Delayed detection: AnimatePresence mode="wait" takes ~0.7s
+    // (0.35s exit + 0.35s enter). Retry to catch when sections appear.
+    const t1 = setTimeout(detectCurrentSection, 100);
+    const t2 = setTimeout(detectCurrentSection, 500);
+    const t3 = setTimeout(detectCurrentSection, 900);
 
     return () => {
-      cancelAnimationFrame(raf);
-      observers.forEach((observer) => observer.disconnect());
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, [pathname, detectCurrentSection]);
 
