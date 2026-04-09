@@ -15,13 +15,16 @@ env:
 permissions:
   contents: read
   id-token: write
+  deployments: write
 
 jobs:
   deploy:
     name: Build & Deploy to AWS
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment: production
+    environment:
+      name: production
+      url: https://reebal-sami.com
     steps:
       - uses: actions/checkout@v4
 
