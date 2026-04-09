@@ -1,0 +1,78 @@
+---
+title: "Detecting Plant Diseases with Vision Transformers"
+description: "How I used Vision Transformers and GradCAM explainability to build an automated plant disease detection system for urban farming environments."
+date: "2026-01-20"
+tags: ["Computer Vision", "PyTorch", "Deep Learning", "AI"]
+published: true
+---
+
+## Urban Farming Meets Deep Learning
+
+Urban farming is growing rapidly, but plant diseases remain a major threat to crop yields. Early detection is critical — but most urban farmers lack the expertise to identify diseases at early stages. I built a computer vision system that automates this process using deep learning.
+
+## CNN vs. Vision Transformer
+
+The project compared two architectures:
+
+### Convolutional Neural Networks (CNN)
+
+CNNs have been the standard for image classification for years. They use local receptive fields to detect patterns like edges, textures, and shapes hierarchically.
+
+```python
+import torch.nn as nn
+
+class PlantCNN(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.features = nn.Sequential(
+            nn.Conv2d(3, 64, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(2),
+            # ... deeper layers
+        )
+        self.classifier = nn.Linear(512, num_classes)
+```
+
+### Vision Transformers (ViT)
+
+Vision Transformers split the image into patches and process them as a sequence — similar to how language models process words. This gives them a global view of the image from the very first layer.
+
+The ViT model showed better performance on our dataset, particularly for diseases that manifest as subtle, distributed patterns across the leaf surface.
+
+## Making It Explainable with GradCAM
+
+A model that says "this plant is diseased" isn't enough. Farmers need to understand *why* and *where*. That's where GradCAM (Gradient-weighted Class Activation Mapping) comes in.
+
+GradCAM generates a heatmap showing which regions of the image most influenced the model's prediction. For plant disease detection, this highlights the exact areas of the leaf showing disease symptoms.
+
+```python
+from pytorch_grad_cam import GradCAM
+from pytorch_grad_cam.utils.image import show_cam_on_image
+
+cam = GradCAM(model=model, target_layers=[model.layer4[-1]])
+grayscale_cam = cam(input_tensor=input_tensor)
+
+# Overlay heatmap on original image
+visualization = show_cam_on_image(rgb_img, grayscale_cam[0], use_rgb=True)
+```
+
+This explainability layer was crucial for building trust with farmers who are understandably skeptical of AI making decisions about their crops.
+
+## Key Results
+
+| Metric | CNN | Vision Transformer |
+|--------|-----|-------------------|
+| Accuracy | 91.2% | 94.7% |
+| F1-Score | 0.89 | 0.93 |
+| Inference Time | 12ms | 28ms |
+
+The Vision Transformer achieved higher accuracy but at the cost of slower inference. For a real-time mobile application, the CNN might be preferred; for batch processing of captured images, the ViT is the clear winner.
+
+## What I Learned
+
+- **Data quality trumps model architecture** — Careful data augmentation and cleaning improved both models more than any architecture change.
+- **Explainability drives adoption** — GradCAM wasn't just a nice-to-have; it was the feature that made farmers trust the system.
+- **Domain expertise is essential** — Working with plant pathologists to validate model predictions caught errors that pure metrics would have missed.
+
+Computer vision in agriculture is a field where AI can make a tangible, real-world impact. The technology exists — the challenge is making it accessible and trustworthy for the people who need it most.
