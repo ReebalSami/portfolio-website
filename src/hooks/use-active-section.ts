@@ -25,7 +25,7 @@ export function useActiveSection(): SectionId {
   useEffect(() => {
     // On pathname change (e.g. returning from blog), do an immediate check
     // because IntersectionObserver won't re-fire for already-visible elements.
-    detectCurrentSection();
+    const raf = requestAnimationFrame(detectCurrentSection);
 
     const observers: IntersectionObserver[] = [];
 
@@ -52,6 +52,7 @@ export function useActiveSection(): SectionId {
     });
 
     return () => {
+      cancelAnimationFrame(raf);
       observers.forEach((observer) => observer.disconnect());
     };
   }, [pathname, detectCurrentSection]);
