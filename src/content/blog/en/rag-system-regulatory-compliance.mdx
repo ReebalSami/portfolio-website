@@ -1,0 +1,77 @@
+---
+title: "Building a RAG System for Biotech Regulatory Compliance"
+description: "A deep dive into how I built a Retrieval-Augmented Generation system to help biotech professionals navigate complex regulatory documents using LangChain and vector embeddings."
+date: "2026-02-10"
+tags: ["RAG", "LangChain", "NLP", "AI", "Python"]
+published: true
+---
+
+## The Challenge
+
+Biotech regulatory documents are dense, interconnected, and constantly evolving. Compliance teams spend hours searching through thousands of pages to answer specific questions. A single missed clause can mean failed audits or delayed product launches.
+
+I built a RAG (Retrieval-Augmented Generation) system that lets professionals ask natural language questions and get accurate, source-cited answers in seconds.
+
+## What is RAG?
+
+RAG combines two powerful ideas:
+
+1. **Retrieval** — Find the most relevant document chunks using semantic search
+2. **Generation** — Use an LLM to synthesize a coherent answer from those chunks
+
+This approach solves the LLM hallucination problem by grounding responses in actual source documents.
+
+## Architecture
+
+The system has three main components:
+
+### 1. Document Ingestion Pipeline
+
+```python
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200,
+    separators=["\n\n", "\n", ". ", " "],
+)
+
+# Split documents into overlapping chunks
+chunks = splitter.split_documents(regulatory_docs)
+
+# Generate embeddings and store in vector database
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+vectorstore = Pinecone.from_documents(chunks, embeddings, index_name="regulations")
+```
+
+### 2. Retrieval with Semantic Search
+
+Instead of keyword matching, the system uses vector embeddings to find semantically similar content. A query like "What are the labeling requirements for Class II devices?" retrieves relevant chunks even if they don't contain those exact words.
+
+### 3. Answer Generation with Source Citations
+
+The LLM receives the retrieved chunks as context and generates an answer with specific references to source documents, sections, and page numbers.
+
+## Key Design Decisions
+
+- **Chunk size of 1000 tokens** — Large enough for context, small enough for precision
+- **200-token overlap** — Prevents losing information at chunk boundaries
+- **Hybrid search** — Combined dense (embedding) and sparse (BM25) retrieval for better recall
+- **Source tracking** — Every chunk carries metadata (document name, section, page) for citations
+
+## Results
+
+The system handles questions across multiple regulatory frameworks with high accuracy. Compliance teams reported:
+
+- **80% faster** document research compared to manual search
+- **Source citations** in every answer build trust and enable verification
+- **Consistent answers** — no more conflicting interpretations from different team members
+
+## Lessons Learned
+
+- **Chunk quality matters more than model quality** — Bad chunking leads to bad retrieval, which no amount of LLM power can fix.
+- **Evaluation is essential** — Build a test set of question-answer pairs early. Without it, you're optimizing blindly.
+- **Users need transparency** — Showing source documents alongside answers was the feature that drove adoption.
+
+RAG systems are not just a trend — they're a practical solution for knowledge-intensive domains where accuracy and traceability are non-negotiable.

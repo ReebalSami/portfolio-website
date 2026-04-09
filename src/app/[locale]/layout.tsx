@@ -192,9 +192,9 @@ export default async function LocaleLayout({ children, params }: Props) {
             href={`${config.site.url}/feed/${loc}`}
           />
         ))}
-        <PlausibleAnalytics />
       </head>
       <body className={`min-h-dvh flex flex-col ${isRtl ? "font-[var(--font-arabic)]" : ""}`}>
+        <PlausibleAnalytics />
         <a href="#main-content" className="skip-link">
           {tCommon("skipToContent")}
         </a>

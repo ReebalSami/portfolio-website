@@ -59,5 +59,16 @@ deploy\:preview:
 deploy\:prod:
 	cd infra && npx cdk deploy --all --context stage=prod --context hostedZoneId=Z011195418EPNPJCP44NR --require-approval never
 
-deploy: build\:deploy deploy\:prod
-	@echo "✅ Full deploy to production complete"
+deploy:
+	@if [ -f .env.local ]; then \
+		echo "📦 Loading .env.local..."; \
+		set -a; . ./.env.local; set +a; \
+		echo "🔨 Building for deployment..."; \
+		./scripts/build-for-deploy.sh; \
+		echo "🚀 Deploying to production..."; \
+		cd infra && npx cdk deploy --all --context stage=prod --context hostedZoneId=Z011195418EPNPJCP44NR --require-approval never; \
+		echo "✅ Full deploy to production complete"; \
+	else \
+		echo "❌ .env.local not found. Create it from .env.example first."; \
+		exit 1; \
+	fi

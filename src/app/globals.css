@@ -136,11 +136,11 @@
   }
   html {
     @apply font-sans antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
     scroll-behavior: smooth;
   }
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
     min-height: 100dvh;
   }
   h1, h2, h3, h4, h5, h6 {

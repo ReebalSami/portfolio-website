@@ -98,7 +98,7 @@ contactForm:
 
 # --- SEO ---
 seo:
-  ogImage: "/images/og/og-default.png"
+  ogImage: ""   # Empty = uses dynamic OG image from opengraph-image.tsx (includes real hero photo)
   twitterCard: "summary_large_image"
   # twitterHandle: ""
 
