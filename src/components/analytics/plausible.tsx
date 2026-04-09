@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { getConfig } from "@/lib/config";
 
 export function PlausibleAnalytics() {
@@ -9,11 +8,10 @@ export function PlausibleAnalytics() {
   }
 
   return (
-    <Script
+    <script
       defer
       data-domain={config.analytics.siteId}
       src={config.analytics.scriptUrl}
-      strategy="afterInteractive"
     />
   );
 }
