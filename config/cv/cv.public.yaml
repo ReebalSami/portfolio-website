@@ -1,0 +1,522 @@
+# =============================================================================
+# CV Public Data — Deployed to reebal-sami.com/cv
+# =============================================================================
+# Single source of truth for all public career data.
+# NO phone numbers, NO street addresses, NO reference contacts.
+# EN + DE complete. ES + AR placeholders.
+# =============================================================================
+
+meta:
+  version: "1.0.0"
+  lastUpdated: "2026-04-11"
+  defaultLocale: "en"
+
+# --- Basics ---
+basics:
+  name: "Reebal Sami"
+  title:
+    en: "Data Scientist & AI Engineer"
+    de: "Data Scientist & KI-Ingenieur"
+    es: "[TODO]"
+    ar: "[TODO]"
+  email: "contact@reebal-sami.com"
+  url: "https://reebal-sami.com"
+  location:
+    city:
+      en: "Hamburg"
+      de: "Hamburg"
+      es: "Hamburgo"
+      ar: "[TODO]"
+    country:
+      en: "Germany"
+      de: "Deutschland"
+      es: "Alemania"
+      ar: "[TODO]"
+  profiles:
+    - network: "LinkedIn"
+      url: "https://linkedin.com/in/reebal-sami"
+      username: "reebal-sami"
+    - network: "GitHub"
+      url: "https://github.com/ReebalSami"
+      username: "ReebalSami"
+
+# --- Profile / Summary ---
+profile:
+  summary:
+    en: >-
+      Data Scientist & AI Engineer bridging business strategy and cutting-edge AI.
+      Five years at Otto Group built deep expertise in corporate data flows, financial systems, and cross-functional stakeholder communication.
+      Now orchestrating end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated news-crawler pipelines
+      to deep learning models for computer vision, deployed on modern cloud infrastructure (AWS CDK).
+      Equally comfortable with AI-assisted rapid prototyping using the latest tools and navigating legacy enterprise systems.
+      Pursuing an M.Sc. in Data Science & AI at FH Wedel while actively shipping production code.
+    de: >-
+      Data Scientist & KI-Ingenieur an der Schnittstelle von Geschäftsstrategie und modernster KI.
+      Fünf Jahre bei der Otto Group haben tiefes Know-how in Unternehmensdatenflüssen, Finanzsystemen und bereichsübergreifender Stakeholder-Kommunikation aufgebaut.
+      Heute werden End-to-End-KI-Lösungen über mehrere Schichten orchestriert — von Multi-Agenten-LLM-Systemen und automatisierten News-Crawler-Pipelines
+      bis hin zu Deep-Learning-Modellen für Computer Vision, deployed auf moderner Cloud-Infrastruktur (AWS CDK).
+      Gleichermaßen versiert im KI-gestützten Rapid Prototyping mit neuesten Tools und in der Navigation durch Legacy-Enterprise-Systeme.
+      Parallel dazu M.Sc. in Data Science & AI an der FH Wedel mit Fokus auf produktionsreifen Code.
+    es: "[TODO]"
+    ar: "[TODO]"
+
+# --- Experience ---
+experience:
+  - company: "Datalogue"
+    position:
+      en: "AI & Data Science Working Student"
+      de: "Werkstudent KI & Data Science"
+      es: "[TODO]"
+      ar: "[TODO]"
+    location: "Hamburg"
+    startDate: "2025-06"
+    endDate: "2025-12"
+    description:
+      en: "20h/week on a B2B Sales Lead project from concept to MVP — reduced manual sales research workload by 53%."
+      de: "20h/Woche an einem B2B-Sales-Lead-Projekt vom Konzept bis zum MVP — manuelle Recherchearbeit um 53 % reduziert."
+      es: "[TODO]"
+      ar: "[TODO]"
+    highlights:
+      - en: "Co-designed the system architecture combining a multi-agent app with a generic news-crawler pipeline for company & contact research; defined data flow, validation points, and human-in-the-loop feedback loops"
+        de: "Systemarchitektur mitgestaltet: Multi-Agenten-App kombiniert mit generischer News-Crawler-Pipeline für Unternehmens- und Kontaktrecherche; Datenfluss, Validierungspunkte und Human-in-the-Loop-Feedback definiert"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Built a Streamlit MVP running multi-LLM agents for company targeting, contact discovery, insight generation, and automated outreach email drafting with domain/contact verification"
+        de: "Streamlit-MVP entwickelt mit Multi-LLM-Agenten für Unternehmens-Targeting, Kontaktsuche, Insight-Generierung und automatisiertes Outreach-E-Mail-Drafting mit Domain-/Kontaktverifizierung"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Implemented a generic crawler pipeline to automatically crawl news sites, extract content, and analyze articles with LLMs to surface actionable company insights"
+        de: "Generische Crawler-Pipeline implementiert zum automatischen Crawlen von Nachrichtenseiten, Inhaltsextraktion und LLM-gestützter Artikelanalyse für verwertbare Unternehmenseinblicke"
+        es: "[TODO]"
+        ar: "[TODO]"
+    tags: ["ai", "llm", "agents", "python", "streamlit", "nlp"]
+
+  - company: "Future Founder Program"
+    position:
+      en: "Junior Entrepreneur / Mentee"
+      de: "Jungunternehmer / Mentee"
+      es: "[TODO]"
+      ar: "[TODO]"
+    location: "Hamburg"
+    startDate: "2024-11"
+    endDate: "2025-01"
+    highlights:
+      - en: "Entrepreneurial program with workshops, coaching sessions, and pitch events to develop a startup mindset"
+        de: "Gründerprogramm mit Workshops, Coaching-Sessions und Pitch-Events zur Entwicklung eines Startup-Mindsets"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Built an AI-powered regulatory compliance tool for biotech within a team of four, streamlining processes to accelerate life-saving products to market"
+        de: "KI-gestütztes Regulierungs-Compliance-Tool für Biotech im Viererteam entwickelt, um lebensrettende Produkte schneller auf den Markt zu bringen"
+        es: "[TODO]"
+        ar: "[TODO]"
+    tags: ["entrepreneurship", "ai", "biotech"]
+
+  - company: "neuefische GmbH"
+    position:
+      en: "Trainee Full Stack Java Development"
+      de: "Trainee Full-Stack-Java-Entwicklung"
+      es: "[TODO]"
+      ar: "[TODO]"
+    location: "Hamburg"
+    startDate: "2024-01"
+    endDate: "2024-04"
+    highlights:
+      - en: "Intensive full-stack bootcamp: Java (Spring Boot, OOP, MongoDB, OAuth, Docker), TypeScript, and advanced React"
+        de: "Intensives Full-Stack-Bootcamp: Java (Spring Boot, OOP, MongoDB, OAuth, Docker), TypeScript und fortgeschrittenes React"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Built and deployed MyRecipes — an AI-powered web app suggesting recipes from available ingredients using Java, REST APIs, MongoDB, and TDD"
+        de: "MyRecipes entwickelt und deployt — KI-gestützte Web-App zur Rezeptvorschlägen aus vorhandenen Zutaten mit Java, REST-APIs, MongoDB und TDD"
+        es: "[TODO]"
+        ar: "[TODO]"
+    tags: ["java", "react", "fullstack"]
+
+  - company: "neuefische GmbH"
+    position:
+      en: "Trainee Data Science & AI"
+      de: "Trainee Data Science & KI"
+      es: "[TODO]"
+      ar: "[TODO]"
+    location: "Hamburg"
+    startDate: "2022-11"
+    endDate: "2023-02"
+    highlights:
+      - en: "Intensive data science bootcamp covering statistics, machine learning, data visualization, and big data analysis"
+        de: "Intensives Data-Science-Bootcamp zu Statistik, Machine Learning, Datenvisualisierung und Big-Data-Analyse"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Capstone project: multi-objective recommender system using Python, SQL, GCP, Word2Vec, and Co-Visitation Matrix"
+        de: "Abschlussprojekt: Multi-Objective-Empfehlungssystem mit Python, SQL, GCP, Word2Vec und Co-Visitation-Matrix"
+        es: "[TODO]"
+        ar: "[TODO]"
+    tags: ["python", "ml", "data-science"]
+
+  - company: "Otto Group"
+    position:
+      en: "Financial Accountant"
+      de: "Bilanzbuchhalter"
+      es: "[TODO]"
+      ar: "[TODO]"
+    location: "Hamburg"
+    startDate: "2017-04"
+    endDate: "2022-07"
+    highlights:
+      - en: "Led robotics initiatives: automated booking of vacation accruals and interest schedules via UiPath, optimized booking processes and analytical workflows using Excel & SAP"
+        de: "Robotik-Initiativen geleitet: Automatisierung der Urlaubsrückstellungs- und Zinsplanbuchungen via UiPath, Optimierung von Buchungsprozessen und analytischen Workflows mit Excel & SAP"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Independently managed financial accounting for multiple Otto Group subsidiaries (shopping24, OG data.works, Lieferfactory, MTI) using SAP FI-CO"
+        de: "Eigenständige Finanzbuchhaltung für mehrere Otto-Tochtergesellschaften (shopping24, OG data.works, Lieferfactory, MTI) mit SAP FI-CO"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Prepared monthly, quarterly & annual financial statements (HGB & IFRS); managed consolidation reporting in SAP BPC; main contact for external auditors"
+        de: "Monats-, Quartals- und Jahresabschlüsse (HGB & IFRS) erstellt; Konsolidierungsberichterstattung in SAP BPC; Hauptansprechpartner für externe Prüfer"
+        es: "[TODO]"
+        ar: "[TODO]"
+    tags: ["finance", "automation", "sap"]
+
+  - company: "Otto Group"
+    position:
+      en: "Intern in Group Financial Reporting"
+      de: "Praktikant in der Konzernrechnungslegung"
+      es: "[TODO]"
+      ar: "[TODO]"
+    location: "Hamburg"
+    startDate: "2016-11"
+    endDate: "2017-04"
+    highlights:
+      - en: "Supported IFRS implementation, options evaluation & financial statement review; gained knowledge of group consolidation working with consulting firms"
+        de: "IFRS-Implementierung unterstützt, Optionsbewertung & Jahresabschlussprüfung; Kenntnisse in Konzernkonsolidierung durch Zusammenarbeit mit Beratungsfirmen"
+        es: "[TODO]"
+        ar: "[TODO]"
+    tags: ["finance", "ifrs"]
+
+  - company: "Private German Family"
+    position:
+      en: "Au-Pair"
+      de: "Au-Pair"
+      es: "[TODO]"
+      ar: "[TODO]"
+    location: "Hamburg"
+    startDate: "2015-09"
+    endDate: "2016-11"
+    highlights:
+      - en: "Relocated to Germany; achieved German language proficiency and cultural integration while supporting a family of four"
+        de: "Nach Deutschland umgezogen; deutsche Sprachkompetenz und kulturelle Integration erreicht"
+        es: "[TODO]"
+        ar: "[TODO]"
+    tags: ["language", "cultural"]
+
+  - company: "alBaraka Bank Syria s.a."
+    position:
+      en: "Business Relations Specialist"
+      de: "Spezialist für Geschäftsbeziehungen"
+      es: "[TODO]"
+      ar: "[TODO]"
+    location: "Damascus"
+    startDate: "2014-04"
+    endDate: "2015-08"
+    highlights:
+      - en: "Delivered customer services to private and corporate clients; processed document collections, letters of credit, and managed VIP client relationships"
+        de: "Kundenservice für Privat- und Firmenkunden; Bearbeitung von Dokumenteninkassi, Akkreditiven und Betreuung von VIP-Kundenbeziehungen"
+        es: "[TODO]"
+        ar: "[TODO]"
+    tags: ["finance", "banking"]
+
+# --- Education ---
+education:
+  - institution: "FH Wedel"
+    area:
+      en: "Data Science & Artificial Intelligence"
+      de: "Data Science & Künstliche Intelligenz"
+      es: "[TODO]"
+      ar: "[TODO]"
+    studyType:
+      en: "M.Sc."
+      de: "M.Sc."
+      es: "M.Sc."
+      ar: "M.Sc."
+    location: "Wedel, Germany"
+    startDate: "2024-04"
+    highlights:
+      - en: "Deep Learning project: Urban Farming Automated Plant Health Monitoring (ViT/CNNs, Explainable AI, IoT concepts)"
+        de: "Deep-Learning-Projekt: Automatisierte Pflanzengesundheitsüberwachung für Urban Farming (ViT/CNNs, Explainable AI, IoT-Konzepte)"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Coursework: Deep Learning, Econometrics, Symbolic AI, Digital Transformation, Agile PM & Change Management"
+        de: "Kurse: Deep Learning, Ökonometrie, Symbolische KI, Digitale Transformation, Agiles PM & Change Management"
+        es: "[TODO]"
+        ar: "[TODO]"
+
+  - institution: "GFS Steuerfachschule"
+    area:
+      en: "Financial Accounting (Bilanzbuchhalter)"
+      de: "Bilanzbuchhalter (IHK)"
+      es: "[TODO]"
+      ar: "[TODO]"
+    studyType:
+      en: "Professional Certification"
+      de: "Weiterbildung"
+      es: "[TODO]"
+      ar: "[TODO]"
+    startDate: "2018"
+    endDate: "2020"
+
+  - institution: "Yarmouk Private University"
+    area:
+      en: "Business Administration, Financial Management & Banking"
+      de: "Betriebswirtschaftslehre, Finanzmanagement & Bankwesen"
+      es: "[TODO]"
+      ar: "[TODO]"
+    studyType:
+      en: "B.Sc."
+      de: "B.Sc."
+      es: "B.Sc."
+      ar: "B.Sc."
+    location: "Damascus, Syria"
+    startDate: "2009"
+    endDate: "2013"
+    highlights:
+      - en: "Thesis: Testing the Capital Asset Pricing Model (CAPM) in the Syrian Stock Market"
+        de: "Abschlussarbeit: Überprüfung des Capital Asset Pricing Model (CAPM) am syrischen Aktienmarkt"
+        es: "[TODO]"
+        ar: "[TODO]"
+
+# --- Selected Projects ---
+projects:
+  - name: "B2B Sales Lead Pipeline"
+    description:
+      en: "Multi-agent LLM system for automated B2B company research, contact discovery, and outreach email generation — reduced manual sales research by 53%"
+      de: "Multi-Agenten-LLM-System für automatisierte B2B-Unternehmensrecherche, Kontaktsuche und Outreach-E-Mail-Generierung — manuelle Recherchearbeit um 53 % reduziert"
+      es: "[TODO]"
+      ar: "[TODO]"
+    tags: ["python", "llm", "agents", "streamlit", "rag"]
+
+  - name: "Urban Farming Plant Health Monitor"
+    description:
+      en: "Deep learning system for automated plant disease detection using Vision Transformers and CNNs with Explainable AI (GradCAM) and IoT sensor integration"
+      de: "Deep-Learning-System zur automatisierten Pflanzenkrankheitserkennung mit Vision Transformers und CNNs, Explainable AI (GradCAM) und IoT-Sensorintegration"
+      es: "[TODO]"
+      ar: "[TODO]"
+    tags: ["python", "deep-learning", "computer-vision", "pytorch"]
+
+  - name: "Portfolio Website"
+    description:
+      en: "Full-stack portfolio with AI chatbot, blog, i18n (4 locales incl. Arabic RTL), and automated AWS deployment via CDK"
+      de: "Full-Stack-Portfolio mit KI-Chatbot, Blog, i18n (4 Sprachen inkl. Arabisch RTL) und automatisiertem AWS-Deployment via CDK"
+      es: "[TODO]"
+      ar: "[TODO]"
+    url: "https://reebal-sami.com"
+    tags: ["nextjs", "react", "typescript", "aws", "cdk"]
+
+  - name: "MyRecipes"
+    description:
+      en: "AI-powered recipe suggestion web app built with Java Spring Boot, React, MongoDB, and test-driven development"
+      de: "KI-gestützte Rezeptvorschlags-Web-App mit Java Spring Boot, React, MongoDB und testgetriebener Entwicklung"
+      es: "[TODO]"
+      ar: "[TODO]"
+    url: "https://fullstack-recipies-app.onrender.com/"
+    tags: ["java", "spring-boot", "react", "mongodb"]
+
+  - name: "Multi-Objective Recommender System"
+    description:
+      en: "E-commerce recommender system using collaborative filtering with Word2Vec embeddings and Co-Visitation Matrix on GCP"
+      de: "E-Commerce-Empfehlungssystem mit kollaborativem Filtern, Word2Vec-Embeddings und Co-Visitation-Matrix auf GCP"
+      es: "[TODO]"
+      ar: "[TODO]"
+    tags: ["python", "ml", "gcp", "nlp"]
+
+# --- Technical Skills ---
+skills:
+  - category:
+      en: "Programming Languages"
+      de: "Programmiersprachen"
+      es: "[TODO]"
+      ar: "[TODO]"
+    skills:
+      - name: "Python"
+      - name: "TypeScript"
+      - name: "JavaScript"
+      - name: "Java"
+      - name: "SQL"
+      - name: "HTML/CSS"
+      - name: "VBA"
+
+  - category:
+      en: "AI / Machine Learning"
+      de: "KI / Machine Learning"
+      es: "[TODO]"
+      ar: "[TODO]"
+    skills:
+      - name: "PyTorch"
+      - name: "TensorFlow"
+      - name: "scikit-learn"
+      - name: "Hugging Face"
+      - name: "OpenCV"
+      - name: "XGBoost/LightGBM"
+      - name: "RAG"
+      - name: "LLM Agents (Multi-Agent Orchestration)"
+      - name: "Prompt Engineering"
+      - name: "Explainable AI (GradCAM)"
+      - name: "AI-Assisted Development (Vibe Coding)"
+
+  - category:
+      en: "Frameworks & Libraries"
+      de: "Frameworks & Bibliotheken"
+      es: "[TODO]"
+      ar: "[TODO]"
+    skills:
+      - name: "Next.js"
+      - name: "React"
+      - name: "Spring Boot"
+      - name: "FastAPI"
+      - name: "Streamlit"
+      - name: "Pydantic"
+      - name: "Tailwind CSS"
+
+  - category:
+      en: "Data & Databases"
+      de: "Daten & Datenbanken"
+      es: "[TODO]"
+      ar: "[TODO]"
+    skills:
+      - name: "PostgreSQL"
+      - name: "MongoDB"
+      - name: "Pandas/Polars"
+      - name: "NumPy"
+      - name: "Plotly"
+      - name: "Matplotlib/Seaborn"
+
+  - category:
+      en: "Cloud & DevOps"
+      de: "Cloud & DevOps"
+      es: "[TODO]"
+      ar: "[TODO]"
+    skills:
+      - name: "AWS (S3, CloudFront, Lambda, CDK, Route 53)"
+      - name: "Docker"
+      - name: "GitHub Actions"
+      - name: "Playwright"
+      - name: "Makefile"
+
+  - category:
+      en: "Tools & Platforms"
+      de: "Tools & Plattformen"
+      es: "[TODO]"
+      ar: "[TODO]"
+    skills:
+      - name: "Git (GitHub, Bitbucket)"
+      - name: "VS Code"
+      - name: "IntelliJ IDEA"
+      - name: "SAP FI-CO / BPC"
+      - name: "Postman"
+
+# --- Languages ---
+languages:
+  - language:
+      en: "German"
+      de: "Deutsch"
+      es: "Alemán"
+      ar: "[TODO]"
+    fluency:
+      en: "Full professional"
+      de: "Verhandlungssicher"
+      es: "[TODO]"
+      ar: "[TODO]"
+  - language:
+      en: "English"
+      de: "Englisch"
+      es: "Inglés"
+      ar: "[TODO]"
+    fluency:
+      en: "Full professional"
+      de: "Verhandlungssicher"
+      es: "[TODO]"
+      ar: "[TODO]"
+  - language:
+      en: "Arabic"
+      de: "Arabisch"
+      es: "Árabe"
+      ar: "[TODO]"
+    fluency:
+      en: "Native"
+      de: "Muttersprache"
+      es: "[TODO]"
+      ar: "[TODO]"
+  - language:
+      en: "Spanish"
+      de: "Spanisch"
+      es: "Español"
+      ar: "[TODO]"
+    fluency:
+      en: "Elementary (ongoing)"
+      de: "Grundkenntnisse (lernend)"
+      es: "[TODO]"
+      ar: "[TODO]"
+  - language:
+      en: "French"
+      de: "Französisch"
+      es: "Francés"
+      ar: "[TODO]"
+    fluency:
+      en: "Elementary"
+      de: "Grundkenntnisse"
+      es: "[TODO]"
+      ar: "[TODO]"
+
+# --- Soft Skills ---
+softSkills:
+  en:
+    - "Multi-layer orchestration — bridging AI, business logic, and infrastructure"
+    - "Strong business understanding from 5 years in corporate finance"
+    - "AI-assisted rapid development with latest tools & frameworks"
+    - "Comfortable with both modern AI stacks and legacy enterprise systems"
+    - "Strategic & entrepreneurial thinking"
+    - "Cross-functional collaboration and stakeholder communication"
+  de:
+    - "Multi-Layer-Orchestrierung — KI, Business-Logik und Infrastruktur verbinden"
+    - "Starkes Geschäftsverständnis aus 5 Jahren Corporate Finance"
+    - "KI-gestützte Rapid Development mit neuesten Tools & Frameworks"
+    - "Versiert in modernen KI-Stacks und Legacy-Enterprise-Systemen"
+    - "Strategisches & unternehmerisches Denken"
+    - "Bereichsübergreifende Zusammenarbeit und Stakeholder-Kommunikation"
+
+# --- Interests ---
+interests:
+  - name:
+      en: "Music Lover"
+      de: "Musikliebhaber"
+      es: "[TODO]"
+      ar: "[TODO]"
+    keywords:
+      - en: "Guitar"
+        de: "Gitarre"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Dabbles in piano when life allows"
+        de: "Klavier, wenn die Zeit es erlaubt"
+        es: "[TODO]"
+        ar: "[TODO]"
+  - name:
+      en: "Pushing Limits"
+      de: "Grenzen austesten"
+      es: "[TODO]"
+      ar: "[TODO]"
+    keywords:
+      - en: "Marathon runner"
+        de: "Marathonläufer"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Bouldering"
+        de: "Bouldern"
+        es: "[TODO]"
+        ar: "[TODO]"
+      - en: "Swimming"
+        de: "Schwimmen"
+        es: "[TODO]"
+        ar: "[TODO]"
+  - name:
+      en: "Passion for cooking & sailing"
+      de: "Leidenschaft für Kochen & Segeln"
+      es: "[TODO]"
+      ar: "[TODO]"

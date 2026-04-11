@@ -76,6 +76,10 @@ export function getAwsConfig() {
   return getConfig().aws;
 }
 
+export function getCvConfig() {
+  return getConfig().cv;
+}
+
 export function getBuildConfig() {
   return getConfig().build;
 }
