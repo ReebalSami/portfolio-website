@@ -85,6 +85,23 @@
     "error": "Algo salió mal. Inténtalo de nuevo.",
     "rateLimit": "Demasiadas solicitudes. Inténtalo más tarde."
   },
+  "cv": {
+    "title": "Currículum Vitae",
+    "experience": "Experiencia",
+    "education": "Educación",
+    "skills": "Habilidades técnicas",
+    "languages": "Idiomas",
+    "certifications": "Certificaciones",
+    "references": "Referencias",
+    "profile": "Perfil",
+    "contact": "Contacto",
+    "softSkills": "Competencias clave",
+    "interests": "Intereses",
+    "downloadPdf": "Descargar PDF",
+    "switchTheme": "Diseño",
+    "printVersion": "Imprimir",
+    "present": "Actual"
+  },
   "contact": {
     "title": "Contacto",
     "subtitle": "Ponte en contacto",

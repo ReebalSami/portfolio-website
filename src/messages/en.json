@@ -85,6 +85,23 @@
     "error": "Something went wrong. Please try again.",
     "rateLimit": "Too many requests. Please try again later."
   },
+  "cv": {
+    "title": "Curriculum Vitae",
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "Technical Skills",
+    "languages": "Languages",
+    "certifications": "Certifications",
+    "references": "References",
+    "profile": "Profile",
+    "contact": "Contact",
+    "softSkills": "Key Strengths",
+    "interests": "Interests",
+    "downloadPdf": "Download PDF",
+    "switchTheme": "Theme",
+    "printVersion": "Print",
+    "present": "Present"
+  },
   "contact": {
     "title": "Contact",
     "subtitle": "Get In Touch",

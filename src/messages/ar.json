@@ -85,6 +85,23 @@
     "error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
     "rateLimit": "طلبات كثيرة جداً. يرجى المحاولة لاحقاً."
   },
+  "cv": {
+    "title": "السيرة الذاتية",
+    "experience": "الخبرة المهنية",
+    "education": "التعليم",
+    "skills": "المهارات التقنية",
+    "languages": "اللغات",
+    "certifications": "الشهادات",
+    "references": "المراجع",
+    "profile": "الملف الشخصي",
+    "contact": "معلومات الاتصال",
+    "softSkills": "الكفاءات الرئيسية",
+    "interests": "الاهتمامات",
+    "downloadPdf": "تحميل PDF",
+    "switchTheme": "التصميم",
+    "printVersion": "طباعة",
+    "present": "حتى الآن"
+  },
   "contact": {
     "title": "تواصل",
     "subtitle": "تواصل معي",
