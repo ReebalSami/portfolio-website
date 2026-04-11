@@ -5,6 +5,10 @@ Bewerbung/
 photo/
 .env.local
 .env.*.local
+config/cv/cv.private.yaml
+config/cv/cover-letters/
+generated/
+BRAINSTORMING_CV_SYSTEM.md
 
 # =============================================================================
 # AI / Build tooling (not for public repo)
@@ -14,6 +18,7 @@ CLAUDE.md
 AGENTS.md
 .windsurf/
 design-system/
+.ignore
 
 # =============================================================================
 # Dependencies

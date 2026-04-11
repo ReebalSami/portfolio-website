@@ -36,6 +36,7 @@ export const FeaturesConfigSchema = z.object({
   analytics: z.boolean(),
   rss: z.boolean(),
   downloadCV: z.boolean(),
+  cv: z.boolean(),
 });
 
 export const PhotosConfigSchema = z.object({
@@ -103,6 +104,26 @@ export const AwsConfigSchema = z.object({
   }),
 });
 
+export const CvThemeConfigSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+export const CvPhotosConfigSchema = z.object({
+  canvaElegant: z.string(),
+  portfolioGallery: z.string(),
+  hybridBlend: z.string(),
+});
+
+export const CvConfigSchema = z.object({
+  defaultTheme: z.string(),
+  themes: z.array(CvThemeConfigSchema),
+  defaultVariant: z.string(),
+  showThemeSwitcher: z.boolean(),
+  showLanguageSwitcher: z.boolean(),
+  photos: CvPhotosConfigSchema,
+});
+
 export const BuildConfigSchema = z.object({
   outputDir: z.string(),
 });
@@ -119,6 +140,7 @@ export const PortfolioConfigSchema = z.object({
   chatbot: ChatbotConfigSchema,
   contactForm: ContactFormConfigSchema,
   seo: SeoConfigSchema,
+  cv: CvConfigSchema,
   aws: AwsConfigSchema,
   build: BuildConfigSchema,
 });
@@ -134,6 +156,9 @@ export type AnalyticsConfig = z.infer<typeof AnalyticsConfigSchema>;
 export type ChatbotConfig = z.infer<typeof ChatbotConfigSchema>;
 export type ContactFormConfig = z.infer<typeof ContactFormConfigSchema>;
 export type SeoConfig = z.infer<typeof SeoConfigSchema>;
+export type CvThemeConfig = z.infer<typeof CvThemeConfigSchema>;
+export type CvPhotosConfig = z.infer<typeof CvPhotosConfigSchema>;
+export type CvConfig = z.infer<typeof CvConfigSchema>;
 export type AwsConfig = z.infer<typeof AwsConfigSchema>;
 export type BuildConfig = z.infer<typeof BuildConfigSchema>;
 export type PortfolioConfig = z.infer<typeof PortfolioConfigSchema>;

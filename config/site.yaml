@@ -52,6 +52,7 @@ features:
   analytics: true
   rss: true
   downloadCV: true
+  cv: true
 
 # --- Photos ---
 photos:
@@ -111,6 +112,26 @@ aws:
       subdomain: "preview"
     prod:
       customDomain: "reebal-sami.com"
+
+# --- CV System ---
+cv:
+  defaultTheme: "canva-elegant"
+  themes:
+    - id: "canva-elegant"
+      name: "Canva Elegant"
+    - id: "portfolio-gallery"
+      name: "Portfolio Gallery"
+    - id: "hybrid-blend"
+      name: "Hybrid Blend"
+    - id: "soulful"
+      name: "Soulful"
+  defaultVariant: "public"       # "public" or "full"
+  showThemeSwitcher: true
+  showLanguageSwitcher: true
+  photos:
+    canvaElegant: "DAA5F644-7790-4DC2-BC39-A0F5084B65B7_1_105_c.jpeg"
+    portfolioGallery: "6491EE3B-821F-40E3-94C0-C1E1859E710B.JPG"
+    hybridBlend: "7ED068AA-6A06-4DDF-9CC8-474EB6B73BA1_1_105_c.jpeg"
 
 # --- Build ---
 build:

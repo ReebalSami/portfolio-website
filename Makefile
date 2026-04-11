@@ -1,4 +1,4 @@
-.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
+.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate cv\:validate build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
 
 install:
 	pnpm install
@@ -33,6 +33,9 @@ clean:
 
 config\:validate:
 	pnpm tsx src/lib/validate-config.ts
+
+cv\:validate:
+	pnpm tsx src/lib/cv/validate.ts
 
 env\:setup:
 	@if command -v volta >/dev/null 2>&1; then \
