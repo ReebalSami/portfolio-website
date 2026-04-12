@@ -68,6 +68,8 @@ export function CvDownloadFab({ themes }: CvDownloadFabProps) {
                 href={theme.pdfUrl}
                 download
                 className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors text-start cursor-pointer"
+                data-plausible-event="cv:download"
+                data-plausible-event-theme={theme.id}
               >
                 <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span>{theme.name}</span>
@@ -81,6 +83,7 @@ export function CvDownloadFab({ themes }: CvDownloadFabProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors cursor-pointer"
+              data-plausible-event="cv:print"
             >
               <Printer className="h-4 w-4 text-muted-foreground" />
               <span>{t("printVersion")}</span>

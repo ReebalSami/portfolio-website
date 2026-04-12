@@ -100,7 +100,9 @@
     "downloadPdf": "PDF herunterladen",
     "switchTheme": "Design",
     "printVersion": "Drucken",
-    "present": "Heute"
+    "present": "Heute",
+    "metaTitle": "Lebenslauf — Reebal Sami | Data Scientist & KI-Ingenieur",
+    "metaDescription": "Lebenslauf von Reebal Sami — Data Scientist & KI-Ingenieur aus Hamburg, Deutschland."
   },
   "contact": {
     "title": "Kontakt",
