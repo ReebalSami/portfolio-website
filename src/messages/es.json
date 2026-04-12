@@ -100,7 +100,9 @@
     "downloadPdf": "Descargar PDF",
     "switchTheme": "Diseño",
     "printVersion": "Imprimir",
-    "present": "Actual"
+    "present": "Actual",
+    "metaTitle": "CV — Reebal Sami | Científico de Datos e Ingeniero de IA",
+    "metaDescription": "Currículum Vitae de Reebal Sami — Científico de Datos e Ingeniero de IA en Hamburgo, Alemania."
   },
   "contact": {
     "title": "Contacto",
