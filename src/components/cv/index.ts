@@ -13,3 +13,14 @@ export { CvSoftSkills } from "./cv-soft-skills";
 export { CvInterests } from "./cv-interests";
 export { CvReferences } from "./cv-references";
 export { CvSection } from "./cv-section";
+export { CvDownloadFab } from "./cv-download-fab";
+
+export {
+  ThemeWrapper,
+  CanvaElegantTheme,
+  PortfolioGalleryTheme,
+  HybridBlendTheme,
+  SoulfulTheme,
+  getThemeComponent,
+  renderCvTheme,
+} from "./themes";

@@ -1,4 +1,4 @@
-.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate cv\:validate build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
+.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate cv\:validate cv\:pdf cv\:pdf-quick build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
 
 install:
 	pnpm install
@@ -36,6 +36,16 @@ config\:validate:
 
 cv\:validate:
 	pnpm tsx src/lib/cv/validate.ts
+
+cv\:pdf:
+	@echo "📄 Generating CV PDFs (auto-builds + starts server)..."
+	pnpm tsx scripts/generate-cv-pdfs.ts
+	@echo "✅ PDFs saved to public/cv/{theme}/resume_reebal_sami.pdf"
+
+cv\:pdf-quick:
+	@echo "📄 Generating CV PDFs using running dev server..."
+	CV_BASE_URL=http://localhost:3000 pnpm tsx scripts/generate-cv-pdfs.ts
+	@echo "✅ PDFs saved to public/cv/{theme}/resume_reebal_sami.pdf"
 
 env\:setup:
 	@if command -v volta >/dev/null 2>&1; then \

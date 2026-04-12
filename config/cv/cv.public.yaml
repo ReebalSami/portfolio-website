@@ -20,6 +20,7 @@ basics:
     es: "[TODO]"
     ar: "[TODO]"
   email: "contact@reebal-sami.com"
+  photo: "/images/hero/start-photo.JPG"
   url: "https://reebal-sami.com"
   location:
     city:

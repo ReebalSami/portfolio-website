@@ -115,7 +115,7 @@ aws:
 
 # --- CV System ---
 cv:
-  defaultTheme: "canva-elegant"
+  defaultTheme: "hybrid-blend"
   themes:
     - id: "canva-elegant"
       name: "Canva Elegant"

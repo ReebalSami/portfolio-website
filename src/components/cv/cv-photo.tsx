@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 interface CvPhotoProps {
   src: string;
   name: string;
-  shape?: "round" | "square" | "rounded";
+  shape?: "round" | "square" | "rounded" | "oval";
   className?: string;
 }
 
@@ -16,6 +16,7 @@ export function CvPhoto({ src, name, shape = "round", className }: CvPhotoProps)
         shape === "round" && "rounded-full w-[120px] h-[120px] print:w-[100px] print:h-[100px]",
         shape === "rounded" && "rounded-xl",
         shape === "square" && "rounded-none",
+        shape === "oval" && "rounded-[50%]",
         className,
       )}
     >
