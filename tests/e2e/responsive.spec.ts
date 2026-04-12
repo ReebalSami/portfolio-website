@@ -1,4 +1,4 @@
-import { test, expect, devices } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
 test.describe("Responsive design", () => {
   test("mobile: hamburger menu is visible", async ({ page }) => {
