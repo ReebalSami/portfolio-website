@@ -1,0 +1,247 @@
+Reebal Sami
+DATA SCIENTIST & AI ENGINEER
+contact@reebal-sami.com
+Hamburg, Germany
+reebal-sami.com
+
+linkedin.com/in/reebal-sami
+github.com/ReebalSami
+
+PROFILE
+Data Scientist & AI Engineer bridging business strategy and cutting-edge AI. Five years at Otto Group built
+deep expertise in corporate data flows, financial systems, and cross-functional stakeholder communication. Now
+orchestrating end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated
+news-crawler pipelines to deep learning models for computer vision, deployed on modern cloud infrastructure
+(AWS CDK). Equally comfortable with AI-assisted rapid prototyping using the latest tools and navigating legacy
+enterprise systems. Pursuing an M.Sc. in Data Science & AI at FH Wedel while actively shipping production code.
+
+EXPERIENCE
+AI & Data Science Working Student
+Datalogue · Hamburg
+
+2025-06 — 2025-12
+
+20h/week on a B2B Sales Lead project from concept to MVP — reduced manual sales research workload by 53%.
+• Co-designed the system architecture combining a multi-agent app with a generic news-crawler pipeline for com­
+pany & contact research; defined data flow, validation points, and human-in-the-loop feedback loops
+• Built a Streamlit MVP running multi-LLM agents for company targeting, contact discovery, insight generation, and
+automated outreach email drafting with domain/contact verification
+• Implemented a generic crawler pipeline to automatically crawl news sites, extract content, and analyze articles with
+LLMs to surface actionable company insights
+
+Junior Entrepreneur / Mentee
+
+Future Founder Program · Hamburg
+
+2024-11 — 2025-01
+
+• Entrepreneurial program with workshops, coaching sessions, and pitch events to develop a startup mindset
+• Built an AI-powered regulatory compliance tool for biotech within a team of four, streamlining processes to accel­
+erate life-saving products to market
+
+Trainee Full Stack Java Development
+neuefische GmbH · Hamburg
+
+2024-01 — 2024-04
+
+• Intensive full-stack bootcamp: Java (Spring Boot, OOP, MongoDB, OAuth, Docker), TypeScript, and advanced React
+• Built and deployed MyRecipes — an AI-powered web app suggesting recipes from available ingredients using Java,
+REST APIs, MongoDB, and TDD
+
+Trainee Data Science & AI
+
+neuefische GmbH · Hamburg
+
+2022-11 — 2023-02
+
+• Intensive data science bootcamp covering statistics, machine learning, data visualization, and big data analysis
+• Capstone project: multi-objective recommender system using Python, SQL, GCP, Word2Vec, and Co-Visitation Matrix
+
+Financial Accountant
+
+Otto Group · Hamburg
+
+2017-04 — 2022-07
+
+• Led robotics initiatives: automated booking of vacation accruals and interest schedules via UiPath, optimized booking
+processes and analytical workflows using Excel & SAP
+• Independently managed financial accounting for multiple Otto Group subsidiaries (shopping24, OG data.works,
+Lieferfactory, MTI) using SAP FI-CO
+• Prepared monthly, quarterly & annual financial statements (HGB & IFRS); managed consolidation reporting in SAP BPC;
+main contact for external auditors
+
+Intern in Group Financial Reporting
+Otto Group · Hamburg
+
+2016-11 — 2017-04
+
+• Supported IFRS implementation, options evaluation & financial statement review; gained knowledge of group consol­
+idation working with consulting firms
+
+2015-09 — 2016-11
+
+Au-Pair
+
+Private German Family · Hamburg
+
+• Relocated to Germany; achieved German language proficiency and cultural integration while supporting a family
+of four
+
+2014-04 — 2015-08
+
+Business Relations Specialist
+
+alBaraka Bank Syria s.a. · Damascus
+
+• Delivered customer services to private and corporate clients; processed document collections, letters of credit, and
+managed VIP client relationships
+
+EDUCATION
+2024-04 — Present
+
+M.Sc. Data Science & Artificial Intelligence
+FH Wedel, Wedel, Germany
+
+• Deep Learning project: Urban Farming Automated Plant Health Monitoring (ViT/CNNs, Explainable AI, IoT concepts)
+• Coursework: Deep Learning, Econometrics, Symbolic AI, Digital Transformation, Agile PM & Change Management
+
+Professional Certification Financial Accounting (Bilanzbuchhalter)
+
+2018 — 2020
+
+B.Sc. Business Administration, Financial Management & Banking
+
+2009 — 2013
+
+GFS Steuerfachschule
+
+Yarmouk Private University, Damascus, Syria
+
+• Thesis: Testing the Capital Asset Pricing Model (CAPM) in the Syrian Stock Market
+
+TECHNICAL SKILLS
+Programming Languages
+Python
+
+TypeScript
+
+JavaScript
+
+Java
+
+SQL
+
+HTML/CSS
+
+VBA
+
+AI / Machine Learning
+PyTorch
+
+TensorFlow
+
+scikit-learn
+
+Multi-Agent Orchestration
+
+Hugging Face
+
+Prompt Engineering
+
+OpenCV
+
+XGBoost/LightGBM
+
+Explainable AI (GradCAM)
+
+RAG
+
+LLM Agents
+
+AI-Assisted Development (Vibe Coding)
+
+Frameworks & Libraries
+Next.js
+
+React
+
+Spring Boot
+
+FastAPI
+
+Streamlit
+
+Pydantic
+
+Tailwind CSS
+
+Data & Databases
+PostgreSQL
+
+MongoDB
+
+Pandas/Polars
+
+NumPy
+
+Plotly
+
+Matplotlib/Seaborn
+
+Cloud & DevOps
+AWS (S3, CloudFront, Lambda, CDK, Route 53)
+
+Docker
+
+GitHub Actions
+
+Playwright
+
+Makefile
+
+Tools & Platforms
+Git (GitHub, Bitbucket)
+
+VS Code
+
+IntelliJ IDEA
+
+SAP FI-CO / BPC
+
+Postman
+
+KEY STRENGTHS
+• Multi-layer orchestration — bridging AI, business logic,
+and infrastructure
+
+• Strong business understanding from 5 years in corpo­
+rate finance
+
+• AI-assisted rapid development with latest tools & frame­ • Comfortable with both modern AI stacks and legacy en­
+works
+terprise systems
+• Strategic & entrepreneurial thinking
+
+• Cross-functional collaboration and stakeholder commu­
+nication
+
+LANGUAGES
+German Full professional · English Full professional · Arabic Native · Spanish Elementary (ongoing) · French
+Elementary
+
+HOBBIES & INTERESTS
+Music Lover:
+
+Guitar / Dabbles in piano when life allows
+
+Pushing Limits:
+
+Marathon runner / Bouldering / Swimming
+
+Passion for cooking & sailing
+
+REFERENCES
+
+Available upon request
+
+

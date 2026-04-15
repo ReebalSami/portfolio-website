@@ -85,6 +85,25 @@
     "error": "Algo salió mal. Inténtalo de nuevo.",
     "rateLimit": "Demasiadas solicitudes. Inténtalo más tarde."
   },
+  "cv": {
+    "title": "Currículum Vitae",
+    "experience": "Experiencia",
+    "education": "Educación",
+    "skills": "Habilidades técnicas",
+    "languages": "Idiomas",
+    "certifications": "Certificaciones",
+    "references": "Referencias",
+    "profile": "Perfil",
+    "contact": "Contacto",
+    "softSkills": "Competencias clave",
+    "interests": "Intereses",
+    "downloadPdf": "Descargar PDF",
+    "switchTheme": "Diseño",
+    "printVersion": "Imprimir",
+    "present": "Actual",
+    "metaTitle": "CV — Reebal Sami | Científico de Datos e Ingeniero de IA",
+    "metaDescription": "Currículum Vitae de Reebal Sami — Científico de Datos e Ingeniero de IA en Hamburgo, Alemania."
+  },
   "contact": {
     "title": "Contacto",
     "subtitle": "Ponte en contacto",

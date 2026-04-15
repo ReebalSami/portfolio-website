@@ -41,7 +41,8 @@ describe("contactFormSchema", () => {
   });
 
   it("accepts missing website field (optional honeypot)", () => {
-    const { website: _, ...noWebsite } = validData;
+    const { website: _website, ...noWebsite } = validData;
+    void _website;
     const result = contactFormSchema.safeParse(noWebsite);
     expect(result.success).toBe(true);
   });

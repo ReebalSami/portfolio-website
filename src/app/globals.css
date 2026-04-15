@@ -182,6 +182,87 @@
   box-shadow: 0 12px 32px rgb(0 0 0 / 0.2);
 }
 
+/* =============================================================================
+   CV Theme Styles
+   ============================================================================= */
+
+.cv-theme-wrapper [data-cv-theme] .cv-section h2,
+.cv-theme-wrapper .cv-section h2 {
+  font-family: var(--cv-font-heading);
+  color: var(--cv-heading);
+  border-color: var(--cv-border);
+}
+
+.cv-theme-wrapper .cv-sidebar-section h2 {
+  font-size: 0.75rem;
+  border-bottom-width: 0;
+  padding-bottom: 0;
+  margin-bottom: 0.5rem;
+}
+
+.dark .cv-theme-wrapper .cv-section span {
+  color: oklch(0.92 0.005 90);
+  background-color: oklch(0.22 0.01 260);
+  border: 1px solid oklch(1 0 0 / 10%);
+}
+
+/* =============================================================================
+   CV Print Styles
+   ============================================================================= */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+
+  .cv-theme-wrapper {
+    * {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+  }
+
+  .cv-print-mode,
+  .cv-theme-wrapper {
+    .print\:hidden,
+    [class*="print:hidden"] {
+      display: none !important;
+    }
+  }
+
+  .cv-layout {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cv-entry {
+    break-inside: avoid;
+  }
+
+  .cv-section {
+    break-inside: avoid;
+  }
+
+  p, li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .cv-theme-wrapper a[href^="http"]::after,
+  .cv-theme-wrapper a[href^="mailto"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.7em;
+    color: var(--cv-muted);
+    word-break: break-all;
+  }
+
+  .cv-theme-wrapper a[href^="tel"]::after {
+    content: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

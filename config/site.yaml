@@ -52,6 +52,7 @@ features:
   analytics: true
   rss: true
   downloadCV: true
+  cv: true
 
 # --- Photos ---
 photos:
@@ -111,6 +112,17 @@ aws:
       subdomain: "preview"
     prod:
       customDomain: "reebal-sami.com"
+
+# --- CV System ---
+cv:
+  variants:
+    - id: "ats"
+      name: "ATS-Friendly"
+      pdfPath: "/cv/ats/resume_reebal_sami.pdf"
+    - id: "visual"
+      name: "Visual"
+      pdfPath: "/cv/visual/resume_reebal_sami.pdf"
+  defaultVariant: "public"       # "public" or "full" (data source)
 
 # --- Build ---
 build:
