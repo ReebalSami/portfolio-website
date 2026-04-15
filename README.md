@@ -76,6 +76,11 @@ make deploy:preview # Deploy preview stage
 make deploy:prod   # Deploy production
 make diagram       # Render D2 architecture diagram
 make config:validate # Validate config/site.yaml
+make cv:all        # Generate ATS + Visual CV PDFs (Typst)
+make cv:ats        # Generate ATS CV only + verify
+make cv:visual     # Generate Visual CV only
+make cv:verify     # Verify ATS text extraction
+make cv:validate   # Validate CV YAML data
 ```
 
 ## Configuration
@@ -119,8 +124,10 @@ portfolio-website/
 │   ├── bin/app.ts         # CDK app entry point
 │   ├── lib/               # CertificateStack + PortfolioStack
 │   └── test/              # CDK assertion tests
-├── public/                # Static assets (images, CV, icons)
-├── scripts/               # Build & deployment scripts
+├── config/cv/             # CV data (YAML) + design tokens
+├── public/cv/             # Generated CV PDFs (ats/ + visual/)
+├── scripts/typst/         # Typst CV templates (ats/ + visual/)
+├── scripts/generate-cv.ts # Typst PDF generation pipeline
 ├── src/
 │   ├── app/[locale]/      # Next.js pages (i18n routing)
 │   ├── components/        # React components
@@ -167,6 +174,33 @@ tags: ["ai", "python"]
 ```
 
 Features: Shiki syntax highlighting, reading time, table of contents, RSS feed.
+
+## CV System
+
+Two CV PDF variants generated via **Typst** (typesetting engine):
+
+| Variant | Layout | Purpose | Output |
+|---------|--------|---------|--------|
+| **ATS** | Single-column | Machine parsing & ATS systems | `public/cv/ats/resume_reebal_sami.pdf` |
+| **Visual** | Two-column sidebar | Human reading & sharing | `public/cv/visual/resume_reebal_sami.pdf` |
+
+### Architecture
+
+```
+config/cv/cv.public.yaml    → CV content data (YAML, i18n-ready)
+config/cv/cv-design.yaml    → Design tokens (colors, fonts, spacing)
+scripts/typst/ats/cv-ats.typ    → ATS Typst template
+scripts/typst/visual/cv-visual.typ → Visual Typst template
+scripts/generate-cv.ts      → Build pipeline (compile + verify)
+```
+
+### Key Design Decisions
+
+- **All spacing controlled by YAML tokens** — `par(spacing: 0pt)` and `block(above: 0pt, below: 0pt)` kill Typst defaults; every gap is explicit
+- **ATS verification** — `pdftotext` extraction checked for correct section order, key content presence
+- **Meta lines** styled with accent color (`#D4A574`) and max font weight
+- **Justified text** in both templates
+- **Content changes**: edit `config/cv/cv.public.yaml`, run `make cv:all`, then `make deploy`
 
 ## Deployment
 
