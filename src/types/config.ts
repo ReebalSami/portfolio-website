@@ -36,6 +36,7 @@ export const FeaturesConfigSchema = z.object({
   analytics: z.boolean(),
   rss: z.boolean(),
   downloadCV: z.boolean(),
+  cv: z.boolean(),
 });
 
 export const PhotosConfigSchema = z.object({
@@ -103,6 +104,17 @@ export const AwsConfigSchema = z.object({
   }),
 });
 
+export const CvVariantConfigSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  pdfPath: z.string(),
+});
+
+export const CvConfigSchema = z.object({
+  variants: z.array(CvVariantConfigSchema),
+  defaultVariant: z.string(),
+});
+
 export const BuildConfigSchema = z.object({
   outputDir: z.string(),
 });
@@ -119,6 +131,7 @@ export const PortfolioConfigSchema = z.object({
   chatbot: ChatbotConfigSchema,
   contactForm: ContactFormConfigSchema,
   seo: SeoConfigSchema,
+  cv: CvConfigSchema,
   aws: AwsConfigSchema,
   build: BuildConfigSchema,
 });
@@ -134,6 +147,8 @@ export type AnalyticsConfig = z.infer<typeof AnalyticsConfigSchema>;
 export type ChatbotConfig = z.infer<typeof ChatbotConfigSchema>;
 export type ContactFormConfig = z.infer<typeof ContactFormConfigSchema>;
 export type SeoConfig = z.infer<typeof SeoConfigSchema>;
+export type CvVariantConfig = z.infer<typeof CvVariantConfigSchema>;
+export type CvConfig = z.infer<typeof CvConfigSchema>;
 export type AwsConfig = z.infer<typeof AwsConfigSchema>;
 export type BuildConfig = z.infer<typeof BuildConfigSchema>;
 export type PortfolioConfig = z.infer<typeof PortfolioConfigSchema>;

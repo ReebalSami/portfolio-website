@@ -1,4 +1,4 @@
-.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
+.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate cv\:validate cv\:pdf cv\:pdf-quick cv\:all cv\:ats cv\:visual cv\:verify build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
 
 install:
 	pnpm install
@@ -33,6 +33,39 @@ clean:
 
 config\:validate:
 	pnpm tsx src/lib/validate-config.ts
+
+cv\:validate:
+	pnpm tsx src/lib/cv/validate.ts
+
+cv\:pdf:
+	@echo "📄 Generating CV PDFs (auto-builds + starts server)..."
+	pnpm tsx scripts/generate-cv-pdfs.ts
+	@echo "✅ PDFs saved to public/cv/{theme}/resume_reebal_sami.pdf"
+
+cv\:pdf-quick:
+	@echo "📄 Generating CV PDFs using running dev server..."
+	CV_BASE_URL=http://localhost:3000 pnpm tsx scripts/generate-cv-pdfs.ts
+	@echo "✅ PDFs saved to public/cv/{theme}/resume_reebal_sami.pdf"
+
+cv\:all:
+	@echo "📄 Generating both ATS + Visual CV PDFs..."
+	pnpm tsx scripts/generate-cv.ts
+	@echo "✅ Both CVs generated"
+
+cv\:ats:
+	@echo "📄 Generating ATS CV PDF..."
+	pnpm tsx scripts/generate-cv.ts --variant ats
+	@echo "✅ ATS CV + verification complete"
+
+cv\:visual:
+	@echo "📄 Generating Visual CV PDF..."
+	pnpm tsx scripts/generate-cv.ts --variant visual
+	@echo "✅ Visual CV complete"
+
+cv\:verify:
+	@echo "🔍 Verifying ATS CV text extraction..."
+	pnpm tsx scripts/generate-cv.ts --variant ats --verify
+	@echo "✅ Verification complete"
 
 env\:setup:
 	@if command -v volta >/dev/null 2>&1; then \

@@ -85,6 +85,25 @@
     "error": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
     "rateLimit": "Zu viele Anfragen. Bitte versuche es später erneut."
   },
+  "cv": {
+    "title": "Lebenslauf",
+    "experience": "Berufserfahrung",
+    "education": "Ausbildung",
+    "skills": "Technische Fähigkeiten",
+    "languages": "Sprachen",
+    "certifications": "Zertifizierungen",
+    "references": "Referenzen",
+    "profile": "Profil",
+    "contact": "Kontakt",
+    "softSkills": "Kernkompetenzen",
+    "interests": "Interessen",
+    "downloadPdf": "PDF herunterladen",
+    "switchTheme": "Design",
+    "printVersion": "Drucken",
+    "present": "Heute",
+    "metaTitle": "Lebenslauf — Reebal Sami | Data Scientist & KI-Ingenieur",
+    "metaDescription": "Lebenslauf von Reebal Sami — Data Scientist & KI-Ingenieur aus Hamburg, Deutschland."
+  },
   "contact": {
     "title": "Kontakt",
     "subtitle": "Kontakt aufnehmen",
