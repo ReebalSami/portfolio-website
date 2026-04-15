@@ -115,23 +115,14 @@ aws:
 
 # --- CV System ---
 cv:
-  defaultTheme: "hybrid-blend"
-  themes:
-    - id: "canva-elegant"
-      name: "Canva Elegant"
-    - id: "portfolio-gallery"
-      name: "Portfolio Gallery"
-    - id: "hybrid-blend"
-      name: "Hybrid Blend"
-    - id: "soulful"
-      name: "Soulful"
-  defaultVariant: "public"       # "public" or "full"
-  showThemeSwitcher: true
-  showLanguageSwitcher: true
-  photos:
-    canvaElegant: "DAA5F644-7790-4DC2-BC39-A0F5084B65B7_1_105_c.jpeg"
-    portfolioGallery: "6491EE3B-821F-40E3-94C0-C1E1859E710B.JPG"
-    hybridBlend: "7ED068AA-6A06-4DDF-9CC8-474EB6B73BA1_1_105_c.jpeg"
+  variants:
+    - id: "ats"
+      name: "ATS-Friendly"
+      pdfPath: "/cv/ats/resume_reebal_sami.pdf"
+    - id: "visual"
+      name: "Visual"
+      pdfPath: "/cv/visual/resume_reebal_sami.pdf"
+  defaultVariant: "public"       # "public" or "full" (data source)
 
 # --- Build ---
 build:

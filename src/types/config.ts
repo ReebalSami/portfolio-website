@@ -104,24 +104,15 @@ export const AwsConfigSchema = z.object({
   }),
 });
 
-export const CvThemeConfigSchema = z.object({
+export const CvVariantConfigSchema = z.object({
   id: z.string(),
   name: z.string(),
-});
-
-export const CvPhotosConfigSchema = z.object({
-  canvaElegant: z.string(),
-  portfolioGallery: z.string(),
-  hybridBlend: z.string(),
+  pdfPath: z.string(),
 });
 
 export const CvConfigSchema = z.object({
-  defaultTheme: z.string(),
-  themes: z.array(CvThemeConfigSchema),
+  variants: z.array(CvVariantConfigSchema),
   defaultVariant: z.string(),
-  showThemeSwitcher: z.boolean(),
-  showLanguageSwitcher: z.boolean(),
-  photos: CvPhotosConfigSchema,
 });
 
 export const BuildConfigSchema = z.object({
@@ -156,8 +147,7 @@ export type AnalyticsConfig = z.infer<typeof AnalyticsConfigSchema>;
 export type ChatbotConfig = z.infer<typeof ChatbotConfigSchema>;
 export type ContactFormConfig = z.infer<typeof ContactFormConfigSchema>;
 export type SeoConfig = z.infer<typeof SeoConfigSchema>;
-export type CvThemeConfig = z.infer<typeof CvThemeConfigSchema>;
-export type CvPhotosConfig = z.infer<typeof CvPhotosConfigSchema>;
+export type CvVariantConfig = z.infer<typeof CvVariantConfigSchema>;
 export type CvConfig = z.infer<typeof CvConfigSchema>;
 export type AwsConfig = z.infer<typeof AwsConfigSchema>;
 export type BuildConfig = z.infer<typeof BuildConfigSchema>;

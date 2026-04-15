@@ -17,10 +17,5 @@ export { CvDownloadFab } from "./cv-download-fab";
 
 export {
   ThemeWrapper,
-  CanvaElegantTheme,
   PortfolioGalleryTheme,
-  HybridBlendTheme,
-  SoulfulTheme,
-  getThemeComponent,
-  renderCvTheme,
 } from "./themes";

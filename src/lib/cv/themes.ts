@@ -332,11 +332,10 @@ export function getTheme(id: string): CvTheme {
 }
 
 /**
- * Get the default theme as configured in site.yaml.
+ * Get the default theme (first registered theme).
  */
 export function getDefaultTheme(): CvTheme {
-  const config = getConfig();
-  return getTheme(config.cv.defaultTheme);
+  return Object.values(themes)[0];
 }
 
 /**
@@ -347,9 +346,9 @@ export function getAllThemes(): CvTheme[] {
 }
 
 /**
- * Get theme IDs registered in site.yaml config.
+ * Get CV variant IDs from site.yaml config.
  */
-export function getConfiguredThemeIds(): string[] {
+export function getConfiguredVariantIds(): string[] {
   const config = getConfig();
-  return config.cv.themes.map((t) => t.id);
+  return config.cv.variants.map((v) => v.id);
 }
