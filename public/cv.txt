@@ -1,0 +1,299 @@
+Reebal
+sami
+DATA
+
+SCIENTIST
+
+PROFILE
+I'm a data scientist merging a finance & business background
+with a passion for AI to transform insights into innovative
+solutions.
+
+EXPERIENCE
+AI & Data Science Working Student
+DATALOGUE | Hamburg | Jun 25 - Dec 25
+20h/week on a B2B Sales Lead project from concept to
+MVP. Concept & design: Co-shaped the overall approach
+combining an agents app with a generic news‑crawler
+pipeline for company & contact research; defined data flow,
+validation points, DB connection & human‑in‑the‑loop
+Feedback to refine vectorization/prediction quality.
+MVP agents app: Built a Streamlit app running multi‑LLM
+agents for targeting company, contact, insights, and drafting
+outreach emails with domain/contact verification.
+Generic crawler: Implemented a pipeline to crawl news sites,
+extract content & analyze articles with LLMs to surface
+company insights.
+
+Junior Entrepreneur / Mentee
+Future Founder Program | Hamburg | Nov 24 - Jan 25
+
+CONTACT
+
+Transformative
+
+entrepreneurial
+
+program,
+
+immersing
+
+in
+
+workshops, coaching sessions, and pitch events to develop a
+startup mindset and bring innovative ideas to life.
+
+reebal-sami.com
+placeholder@GMAIL.COM
+linkedin.com/in/reebal-sami
+
+Within a team of four, we tackled the challenge of complex
+biotech regulations with an AI-powered tool, streamlining
+compliance processes to help life-saving products reach the
+market faster.
+
+github.com/ReebalSami
+codewars.com/users/Reebal
+
+SKILLS
+Dynamic, cross-functional collaboration
+Strategic & entrepreneurial thinking
+Solution-oriented, even under stress
+Creative thinker with a focus on innovation
+Flexible, responsible, and agile
+Strong communicator, team player, negotiator
+
+Trainee Java Development
+neuefische GmbH - School and Pool for Digital Talent |
+Hamburg |Jan 24 - Apr 24
+Intensive
+
+full-time
+
+Full
+
+Stack
+
+Java
+
+Development
+
+Bootcamp, focusing on full-stack web development. Gained
+expertise in Java (Spring Boot, OOP, MongoDB, OAuth,
+Docker), TypeScript, and advanced React.
+Built and deployed the capstone project: MyRecipes, a web
+app leveraging AI to suggest recipes based on available
+ingredients, showcasing skills in Java, REST APIs, MongoDB,
+and TDD.
+
+Reebal
+sami
+
+Trainee Data Science & Artificial Intelligence
+neuefische GmbH - School and Pool for Digital Talent |
+Hamburg |Nov 22 - Feb 23
+Intensive full-time Data Science Bootcamp where I
+developed hands-on skills in statistics, machine learning, data
+visualization, big data analysis.
+
+TECHNICAL SKILLS
+
+Worked on a challenging capstone project using tools like
+
+Programming Languages
+
+Python, GitHub, SQL, GCP, Numpy, Pandas, Polars,
+
+Python (Numpy, Pandas, Polars), Java, JavaScript,
+
+Parquet, Matplotlib, Seaborn, Word2Vec, Co-Visitation
+
+TypeScript, HTML, CSS, SQL, VBA
+
+Matrix to develop a multi-objective recommender system.
+
+Frameworks & Libraries
+
+This program advanced my career in data science, giving me
+
+Spring Boot, TensorFlow, PyTorch, OpenCV,
+
+a well-rounded understanding & portfolio to showcase my
+
+timm,
+
+abilities.
+
+YOLO,
+
+Scikit-learn,
+
+React,
+
+Next.js,
+
+FastAPI, Hugging Face, Streamlit, Pydantic,
+SQLAlchemy, BeautifulSoup, Agno, AutoGen,
+
+Financial Accountant
+
+Z3-Solver, Prisma, Tailwind CSS
+
+Otto Group |Hamburg |Apr 17 - Jul 22
+
+Machine Learning & Data Science
+
+Prepare financial statements using IFRS & HGB, provide
+
+Classical ML: EDA, Regression, Time Series,
+
+expert advice, be main point of contact for auditors.
+
+Statistical Modeling, XGBoost/LightGBM, RF,
+Optimization
+Deep Learning: ANN, CNN, ViT, RNN, GNN,
+RL, Agents, Explainable AI (GradCAM)
+NLP & LLMs: Transformers, RAG, Word2Vec,
+Embeddings,
+
+Prompt
+
+Engineering,
+
+Function
+
+Calling, Local Inference (llama.cpp), Structured
+
+Onboard new team members, reconcile balances, file VAT
+returns & annual statements. Assist with automation,
+robotics & improve financial processes.
+
+Intern in Group Financial Reporting
+Otto Group |Hamburg| Nov 16 - Apr17
+
+Outputs, Neuro-Symbolic AI
+
+Support IFRS implementation, options evaluation & financial
+
+Data Visualization
+
+with consulting firms. Develop ability to read, understand &
+
+statement review. Gain knowledge of consolidation & work
+analyse financial statements in a corporate environment.
+
+Plotly, Matplotlib, Seaborn
+
+Deployment & MLOps
+Docker,
+
+Continuous
+
+Integration
+
+(GitHub
+
+Actions), Test-Driven Development, Makefile
+
+EDUCATION
+
+Tools & Platforms
+
+M.Sc. Data Science & Artificial Intelligence
+
+Git (GitHub, Bitbucket), Postman, PostgreSQL,
+
+FH-Wedel Apr 24 - Now
+
+MongoDB, VS Code, IntelliJ IDEA, Render,
+
+Relv. Coursework: Deep Learning, Econometrics, Symbolic
+
+Cloudinary, Oxylabs, LLM APIs, Sanity CMS,
+
+AI, Digital Transformation, Agile PM & Change Mgmt., Org.
+
+Stripe, Playwright
+
+Theory & Strategic Mgmt.
+
+Everyday Gear
+macOS, Windows, WSL, Obsidian, Notion, Slack,
+Canva, MS-365
+
+Focus: E-Commerce (Category Mgmt., E-Com BMs)
+Additional Coursework: ML, Unix, Data Engineering, VBA
+Deep-Learning-Project: Urban Farming Automated Plant
+Health
+
+Monitoring
+
+Concepts, Streamlit)
+
+(ViT/CNNs,
+
+Explainable
+
+AI,
+
+IoT-
+
+Reebal
+sami
+
+EDUCATION CONTINUED
+
+Part-time further Education in Financial
+Accountant (Bilanzbuchhalter)
+GFS Steuerfachschule 2018 - 2020
+
+B.Sc. Business Administration, Financial
+Management & Banking
+
+HOBBIES &
+INTERESTS
+
+Yarmouk Private University 2009 - 2013
+
+Bachelor’s Thesis: Testing the Capital Asset Pricing Model
+(CAPM) in the Syrian Stock Market.
+
+Music Lover
+I play Guitar
+dabble in piano when life allows
+
+Pushing Limits
+Marathon runner
+Bouldering
+
+LANGUAGES
+German | Full professional
+
+Swimming
+
+English | Full professional
+
+Passion for cooking & sailing
+
+Arabic | Native
+Spanish | Intermediat (on going)
+French | Elementary
+
+REFERENCES
+
+References
+Available upon request
+Contact for further details
+regarding Telephone & Email
+
+THANK YOU
+... for taking the time to explore my journey into data science
+& AI. While some of my technical skills come from hands-on
+projects and ongoing learning, I am excited to bring my
+enthusiasm, adaptability, and problem-solving mindset to realworld challenges with dedication and a strong commitment. I
+look forward to discussing how I can contribute to your team.
+
+Reebal Sami
+Hamburg — March 17, 2026
+
+

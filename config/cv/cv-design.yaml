@@ -1,0 +1,309 @@
+# =============================================================================
+# CV Design Tokens — Controls appearance of both ATS + Visual CV variants
+# =============================================================================
+# Edit colors, fonts, sizes, shapes here — no need to touch .typ files.
+# Typst templates load this via yaml("../../config/cv/cv-design.yaml")
+# =============================================================================
+
+ats:
+  colors:
+    bg: "#FAFAFA"
+    header-bg: "#F5F0EB"           # match visual.sidebar-bg
+    text: "#09090B"
+    body: "#3A3A4E"
+    heading: "#18181B"
+    muted: "#71717A"
+    subsection-title: "#1E1E2E"    # position/degree line
+    subsection-meta: "#D4A574"     # company/school/location line — accent color (Rule 4)
+    subsection-date: "#6B6B80"     # start-end date line
+    header-name: "#1E1E2E"         # match visual name color
+    header-title: "#6B6B80"        # match visual title color
+    header-contact: "#3A3A4E"      # match visual contact color
+    accent: "#D4A574"
+    accent-light: "#EDE3D6"
+    white: "#FFFFFF"
+    dark: "#27272A"
+    separator: "#D4A574"
+
+  fonts:
+    heading:
+      family: "Archivo"
+      name-size: 28                # pt
+      title-size: 12               # pt
+      section-size: 11             # pt
+      subsection-size: 10          # pt
+      weight: "bold"
+      tracking: 0.06               # em
+    body:
+      family: "Space Grotesk"
+      size: 9.5                    # pt
+      weight: "regular"
+    meta:
+      size: 9.5                    # pt
+      weight: "black"               # maximum thickness for highlighted meta
+    badge:
+      size: 7.5                    # pt
+      weight: "medium"
+      bg: "#EDE3D6"
+      border-color: "#D4A574"
+
+  typography:
+    leading: 0.58                 # em — global line spacing
+    par-spacing: 0.0              # em — suppress default paragraph spacing (ROOT FIX: gives full control)
+
+  spacing:
+    profile: "balanced"           # "compact" | "balanced" | "airy" (master ATS spacing control)
+    multiplier: 1.0               # global ATS spacing multiplier; keep 1.0 unless fine-tuning
+
+  photo:
+    enabled: true
+    column-width-percent: 25      # % of ATS header row reserved for photo column
+    width-percent: 100             # % of photo column width
+    gap-right-cm: 0.1             # cm — distance between photo and right-side header content
+    offset-x-pt: -50               # pt — move photo right (+) / left (-)
+    offset-y-pt: -15             # pt — move photo down (+) / up (-)
+    fit: "contain"                 # "contain" = full uncropped, "cover" = cropped fill
+    clip: true
+    border: false
+    radius: 4                      # pt
+
+  header:
+    padding-top: 0.2               # cm
+    padding-bottom: 0.2            # cm
+    name-title-gap: 2.00           # em — gap between name and title (compensated for par-spacing: 0)
+    title-contact-gap: 2.80        # em — gap between title and contact grid
+    contact-row-gap: 0.80          # em — row spacing inside contact grid
+    after-gap: 0.60                # em — gap between header block and first section
+    top-left-orb:
+      enabled: true
+      color: "#cc9874"            # gallery-warm
+      opacity: 0.45
+      size-pt: 240
+      offset-x-pt: -60
+      offset-y-pt: -60
+
+  shapes:
+    enabled: true
+    color: "#F56B22"               # even warmer orange tone
+    seed-mode: "random-per-build"  # "random-per-build" or "fixed"
+    type-distribution: "equal"     # "equal" (balanced mix) or "random"
+    count: 12                      # total shapes scattered across all pages
+    opacity: 0.08                  # 0.0-1.0
+    types:
+      - kind: "circle"
+        min-size: 30               # pt
+        max-size: 120               # pt
+      - kind: "rounded-rect"      # rounded-square variant
+        min-width: 40              # pt
+        max-width: 96              # pt
+        min-height: 40             # pt
+        max-height: 96             # pt
+        force-square: true         # keep width == height so this stays a square
+        rotation: [-45, 45]        # degrees, random per shape
+        radius: 12                 # pt
+      - kind: "rounded-rect"      # rounded-rectangle variant
+        min-width: 78              # pt
+        max-width: 180             # pt
+        min-height: 24             # pt
+        max-height: 56             # pt
+        rotation: [-22, 22]        # degrees, random per shape
+        radius: 12                 # pt
+    seed: 42                       # deterministic for reproducible builds
+
+  page:
+    margin-x: 1.8                  # cm
+    margin-bottom: 1.2             # cm
+    margin-top-continuation: 1.5   # cm — top margin for page 2+
+
+  section:
+    spacing-above: 1.8             # em — base transition gap before each section heading (BIGGEST gap)
+    spacing-below: 0.80            # em — heading-to-content gap inside each section
+    title-separator-gap: 0.40      # em — title to separator (small but visible)
+    separator-height: 1.0          # pt
+    languages-bullet-gap: 0.30     # em — horizontal spacing around language separator bullet
+    languages-next-spacing: 1.0    # em — transition override from Languages to Hobbies & Interests
+    key-strengths-extra-above: 1.0 # em — extra spacing before Key Strengths section
+    references-extra-above: 1.0    # em — extra spacing before References section
+
+  technical-skills:
+    category-above: 0.25           # em — spacing before first technical skill category
+    title-badges-gap: 0.40         # em — spacing between category title and badges row
+    badges-after-gap: 0.00         # em — no trailing padding inside category block
+    category-below: 1.10           # em — spacing between technical skill categories
+
+  subsection:
+    job-above: 0.25                # em — space before first experience item
+    job-below: 1.15                # em — space between experience items (< section gap)
+    education-above: 0.25          # em — space before first education item
+    education-below: 1.15          # em — space between education items
+    title-meta-gap: 0.50           # em — title row to meta line (small but visible)
+    description-gap: 0.80          # em — meta to description paragraph
+    highlights-gap: 0.50           # em — before bullet list
+    bullet-between-gap: 0.65       # em — space between separate bullet points
+    key-strengths-row-gutter: 1.00 # em — Key Strengths grid row spacing
+    interests-item-above: 0.25     # em — spacing before first hobbies/interests item
+    interests-item-below: 1.05     # em — spacing between hobbies/interests items (big)
+    interests-keywords-gap: 0.40   # em — hobby title to keywords (small)
+    interests-description-after: 0.0 # em — no trailing padding inside interest block
+
+  interests:
+    style: "full"                  # "full" = structured section, "inline" = compact
+
+visual:
+  colors:
+    bg: "#FAFAF8"
+    sidebar-bg: "#F5F0EB"
+    text: "#1E1E2E"
+    heading: "#1E1E2E"
+    muted: "#6B6B80"
+    subsection-title: "#1E1E2E"   # position/degree line
+    subsection-meta: "#D4A574"    # company/school/location line — accent color
+    subsection-date: "#6B6B80"    # start-end date line
+    body: "#3A3A4E"
+    accent: "#D4A574"
+    accent-light: "#EDE3D6"
+    white: "#FFFFFF"
+    separator: "#D4A574"
+
+  fonts:
+    heading:
+      family: "Archivo"
+      name-size: 24                # pt
+      title-size: 9.4               # pt
+      section-size: 12             # pt
+      sidebar-section-size: 11     # pt
+      weight: "bold"
+      tracking: 0.02               # em
+    body:
+      family: "Space Grotesk"
+      size: 10.5                   # pt
+      weight: "regular"
+    meta:
+      size: 10.5                  # pt
+      weight: "black"              # maximum thickness
+    sidebar:
+      size: 9.5                    # pt
+      weight: "regular"
+    badge:
+      size: 8.0                    # pt
+      weight: "medium"
+      bg: "#EDE3D6"
+      border-color: "#D4A574"
+
+  typography:
+    leading: 0.55                 # em — global line spacing
+    par-spacing: 0.0              # em — suppress default paragraph spacing (ROOT FIX)
+
+  photo:
+    enabled: true
+    width-percent: 60             # % of sidebar width
+    gap-right-cm: 0               # cm — distance between left column and right column
+    offset-x-pt: 0                # pt — move photo right (+) / left (-)
+    offset-y-pt: 0                # pt — move photo down (+) / up (-)
+    clip: false                   # frame off (no clipping)
+    fit: "contain"
+    border: false
+    radius: 50                     # % — 50 = circular
+
+  layout:
+    sidebar-width-percent: 33
+    left-sections:                 # controls section order/content on left column
+      - "contact"
+      - "technical-skills"
+      - "key-strengths"
+      - "languages"
+      - "interests"
+      - "references"
+      - "ats-link"
+    right-sections:                # controls section order/content on right column
+      - "profile"
+      - "experience"
+      - "education"
+      # - "selected-projects"
+
+  header:
+    padding-top: 0.8               # cm
+    padding-bottom: 0.5            # cm
+    photo-name-gap: 1           # em — gap between photo and name
+    name-title-gap: 2           # em — gap between name and title
+    title-divider-gap: 0.80        # em — gap between title and divider line
+    divider-sections-gap: 0.40     # em — gap between divider line and first sidebar section
+    contact-line-gap: 0.80         # em — gap between each contact info line
+    top-left-orb:
+      enabled: true
+      color: "#cc9874"            # gallery-warm
+      opacity: 0.45
+      size-pt: 240
+      offset-x-pt: -60
+      offset-y-pt: -60
+
+  shapes:
+    enabled: true
+    color: "#F56B22"
+    seed-mode: "random-per-build"  # "random-per-build" or "fixed"
+    type-distribution: "equal"     # "equal" (balanced mix) or "random"
+    count: 8
+    opacity: 0.06
+    types:
+      - kind: "circle"
+        min-size: 40               # pt
+        max-size: 80               # pt
+      - kind: "rounded-rect"      # rounded-square variant
+        min-width: 38              # pt
+        max-width: 84              # pt
+        min-height: 38             # pt
+        max-height: 84             # pt
+        force-square: true         # keep width == height so this stays a square
+        rotation: [-18, 18]        # degrees, random per shape
+        radius: 12                 # pt
+      - kind: "rounded-rect"      # rounded-rectangle variant
+        min-width: 72              # pt
+        max-width: 142             # pt
+        min-height: 20             # pt
+        max-height: 44             # pt
+        rotation: [-20, 20]        # degrees, random per shape
+        radius: 12                 # pt
+    seed: 7
+
+  page:
+    margin-top-continuation: 1.2   # cm
+
+  section:
+    spacing-above: 2.20            # em — section transition gap (BIGGEST)
+    spacing-below: 1.00            # em — separator to content
+    title-separator-gap: 1.00      # em — title to separator line (matching ATS)
+    separator-height: 0.4          # pt
+    sidebar-spacing-above: 1.60    # em — sidebar section transition gap
+    sidebar-spacing-below: 0.70    # em — sidebar separator to content
+    sidebar-title-separator-gap: 1.00 # em — sidebar title to separator line
+    sidebar-separator-height: 0.4  # pt
+    sidebar-languages-item-below: 0.55 # em — spacing between language rows in sidebar
+    sidebar-languages-next-spacing: 0.70 # em — extra spacing after Languages
+    sidebar-key-strengths-extra-above: 0.80 # em — extra spacing before sidebar Key Strengths
+    sidebar-references-extra-above: 0.80 # em — extra spacing before sidebar References
+    main-key-strengths-extra-above: 1.00 # em — extra spacing before main Key Strengths
+
+  technical-skills:
+    category-above: 0.30           # em — spacing before first technical skill category
+    title-badges-gap: 0.50         # em — spacing between category title and badges row
+    badges-after-gap: 0.00         # em — no trailing padding inside category block
+    category-below: 1.30           # em — spacing between technical skill categories
+
+  subsection:
+    job-above: 0.30                # em — space before first experience item
+    job-below: 1.80                # em — space between experience items
+    education-above: 0.30          # em — space before first education item
+    education-below: 1.80          # em — space between education items
+    title-meta-gap: 0.50           # em — title to meta line (matching ATS)
+    description-gap: 0.80          # em — meta to description paragraph (matching ATS)
+    highlights-gap: 0.60           # em — before bullet list
+    bullet-between-gap: 0.80       # em — space between separate bullet points
+    interests-item-above: 0.30     # em — spacing before first hobbies/interests item
+    interests-item-below: 1.30     # em — spacing between hobbies/interests items
+    interests-keywords-gap: 0.40   # em — hobby title to keywords (matching ATS)
+    interests-description-after: 0.0 # em — no trailing padding inside interest block
+
+  ats-link:
+    enabled: true
+    url: "https://reebal-sami.com/cv/ats/resume_reebal_sami.pdf"
+    label: "ATS-optimized version: reebal-sami.com/cv/ats/resume_reebal_sami.pdf"
