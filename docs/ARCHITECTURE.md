@@ -211,6 +211,22 @@ In-memory rate limiting: 10 requests per IP per hour. Reset on Lambda cold start
 - **HTTP/2 + HTTP/3** via CloudFront
 - **Security headers** — CSP, HSTS, X-Frame-Options, X-Content-Type-Options
 
+### CV System
+
+Two PDF variants generated via **Typst** (modern typesetting engine, not Playwright/React):
+
+```
+config/cv/cv.public.yaml  ──→  scripts/typst/ats/cv-ats.typ     ──→  public/cv/ats/*.pdf
+config/cv/cv-design.yaml  ──→  scripts/typst/visual/cv-visual.typ ──→  public/cv/visual/*.pdf
+                           ──→  scripts/generate-cv.ts (pipeline + ATS verification)
+```
+
+- **ATS variant**: Single-column, justified, pdftotext-verified section order
+- **Visual variant**: Two-column sidebar, photo, warm design tokens
+- **Root fix**: `par(spacing: 0pt)` + `block(above: 0pt, below: 0pt)` globally — all spacing from YAML tokens
+- **Web view**: `/[locale]/cv` renders `PortfolioGalleryTheme` (React) + `CvDownloadFab` with both PDF links
+- **Content updates**: edit YAML → `make cv:all` → `make deploy`
+
 ### SEO
 
 - Structured data (JSON-LD) for Person, WebSite
