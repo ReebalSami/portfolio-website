@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface CvDownloadFabProps {
-  themes: { id: string; name: string; pdfUrl: string }[];
+  themes: { id: string; name: string; description: string; pdfUrl: string }[];
 }
 
 export function CvDownloadFab({ themes }: CvDownloadFabProps) {
@@ -71,15 +71,18 @@ export function CvDownloadFab({ themes }: CvDownloadFabProps) {
                 data-plausible-event="cv:download"
                 data-plausible-event-theme={theme.id}
               >
-                <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
-                <span>{theme.name}</span>
+                <FileText className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-medium">{theme.name}</span>
+                  <p className="text-xs text-muted-foreground">{theme.description}</p>
+                </div>
               </a>
             ))}
           </div>
 
           <div className="mt-3 pt-3 border-t border-border">
             <a
-              href="/cv/portfolio/resume_reebal_sami.pdf"
+              href="/cv/ats/resume_reebal_sami.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors cursor-pointer"

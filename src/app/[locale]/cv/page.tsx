@@ -3,7 +3,6 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { loadCvData, resolveCvLocaleString } from "@/lib/cv/data";
 import { PortfolioGalleryTheme } from "@/components/cv/themes/portfolio-gallery";
 import { CvDownloadFab } from "@/components/cv/cv-download-fab";
-import { renderCvTheme } from "@/components/cv/themes";
 import { JsonLd } from "@/components/seo/json-ld";
 import { routing } from "@/i18n/routing";
 import { getConfig } from "@/lib/config";
@@ -24,12 +23,9 @@ type Props = {
 };
 
 const downloadThemes = [
-  { id: "portfolio-gallery", name: "Portfolio", pdfUrl: "/cv/portfolio/resume_reebal_sami.pdf" },
-  { id: "canva-elegant", name: "Elegant", pdfUrl: "/cv/elegant/resume_reebal_sami.pdf" },
-  { id: "soulful", name: "Soulful", pdfUrl: "/cv/soulful/resume_reebal_sami.pdf" },
+  { id: "ats", name: "ATS-Friendly", description: "Single-column \u00b7 Best for parsing & ATS systems", pdfUrl: "/cv/ats/resume_reebal_sami.pdf" },
+  { id: "visual", name: "Visual", description: "Two-column \u00b7 Best for reading & sharing", pdfUrl: "/cv/visual/resume_reebal_sami.pdf" },
 ];
-
-const validPdfThemes = new Set(["canva-elegant", "soulful", "portfolio-gallery"]);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -71,22 +67,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CvPage({ params, searchParams }: Props) {
+export default async function CvPage({ params }: Props) {
   const { locale } = await params;
-  const { theme: themeParam, print: printParam } = await searchParams;
   setRequestLocale(locale);
 
   const data = loadCvData("public");
   const cvLocale = locale as Locale;
-
-  if (themeParam && validPdfThemes.has(themeParam) && printParam === "true") {
-    return renderCvTheme(themeParam, {
-      data,
-      locale: cvLocale,
-      printMode: true,
-    });
-  }
-
   const config = getConfig();
   const profileSummary = resolveCvLocaleString(data.profile.summary, cvLocale);
   const profileUrls = data.basics.profiles.map((p) => p.url);
