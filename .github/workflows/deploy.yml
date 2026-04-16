@@ -11,9 +11,6 @@ concurrency:
 env:
   NODE_VERSION: '20'
   AWS_REGION: eu-central-1
-  # Opt in to Node 24 runtime for JS actions ahead of GitHub's 2026-06-02 default switch.
-  # Silences the "Node.js 20 actions are deprecated" workflow warning.
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 permissions:
   contents: read
@@ -29,11 +26,11 @@ jobs:
       name: production
       url: https://reebal-sami.com
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
@@ -48,7 +45,7 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
