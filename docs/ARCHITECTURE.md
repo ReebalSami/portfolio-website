@@ -93,6 +93,10 @@ Benefits:
 - Supports response streaming via Lambda Function URL
 - Same server.js locally and in Lambda
 
+**Current versions** (see `infra/README.md#runtime` for the full table):
+- Lambda runtime: `nodejs24.x`
+- Web Adapter layer: `LambdaAdapterLayerX86:27`
+
 ### Build Pipeline
 
 ```
