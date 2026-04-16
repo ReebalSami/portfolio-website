@@ -45,7 +45,7 @@ describe('PortfolioStack', () => {
 
   test('creates Lambda function for SSR', () => {
     template.hasResourceProperties('AWS::Lambda::Function', {
-      Runtime: 'nodejs20.x',
+      Runtime: 'nodejs24.x',
       MemorySize: 512,
       Timeout: 30,
     });

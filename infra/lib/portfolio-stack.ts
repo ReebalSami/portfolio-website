@@ -76,12 +76,12 @@ export class PortfolioStack extends cdk.Stack {
     const webAdapterLayer = lambda.LayerVersion.fromLayerVersionArn(
       this,
       'WebAdapterLayer',
-      `arn:aws:lambda:${this.region}:753240598075:layer:LambdaAdapterLayerX86:24`,
+      `arn:aws:lambda:${this.region}:753240598075:layer:LambdaAdapterLayerX86:27`,
     );
 
     const ssrFunction = new lambda.Function(this, 'SsrFunction', {
       functionName: `${stage}-portfolio-ssr`,
-      runtime: lambda.Runtime.NODEJS_20_X,
+      runtime: lambda.Runtime.NODEJS_24_X,
       handler: 'run.sh',
       code: lambda.Code.fromAsset(serverDir),
       layers: [webAdapterLayer],
