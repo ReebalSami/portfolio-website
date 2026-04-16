@@ -149,10 +149,17 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
         <div className="pt-2">
           <a
             href={`/${locale}/cv`}
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground underline underline-offset-4 decoration-muted-foreground/40 hover:text-foreground hover:decoration-foreground/60 transition-colors"
+            className="group inline-flex items-baseline gap-2 text-base sm:text-lg font-black tracking-tight text-foreground transition-colors hover:text-foreground"
           >
-            {tBtn("viewCV")}
-            <span aria-hidden="true" className="text-xs">&rarr;</span>
+            <span className="underline underline-offset-[6px] decoration-2 decoration-gallery-warm group-hover:decoration-[3px] group-hover:decoration-gallery-warm/90 transition-all">
+              {tBtn("viewCV")}
+            </span>
+            <span
+              aria-hidden="true"
+              className="text-gallery-warm text-sm transition-transform duration-300 ease-out group-hover:translate-x-1.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+            >
+              &rarr;
+            </span>
           </a>
         </div>
       )}

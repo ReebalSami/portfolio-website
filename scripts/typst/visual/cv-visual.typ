@@ -407,7 +407,7 @@
             radius: if photo.radius >= 50 { 50% } else { photo.radius * 1pt },
             width: photo.width-percent * 1%,
             stroke: if photo.border == true { 0.6pt + c.accent } else { none },
-          )[#image("../../../public/images/cv/profile-photo.png", width: 100%, fit: photo.fit)]
+          )[#image("../assets/profile-photo.png", width: 100%, fit: photo.fit)]
         ]
       ]
       #v(header-photo-name-gap)
