@@ -21,6 +21,19 @@ CloudWatch → Alarms (5xx rate, latency, Lambda errors)
 
 Stages: `preview` (default) and `prod`.
 
+## Runtime
+
+| Component | Version | Notes |
+|-----------|---------|-------|
+| Lambda runtime | `nodejs24.x` | Upgrade from `nodejs20.x` on 2026-04-16 (AWS EOL 2026-04-30). See `CHANGELOG.md`. |
+| Lambda Web Adapter layer | `LambdaAdapterLayerX86:27` | `arn:aws:lambda:<region>:753240598075:layer:LambdaAdapterLayerX86:27` |
+| AWS CDK CLI | `aws-cdk@2.1118.1` | Pinned exact in `infra/package.json` |
+| CDK library | `aws-cdk-lib@^2.250.0` | |
+| Node (local dev) | `24.15.0` | Pinned via Volta in root `package.json` |
+| GitHub Actions runtime | `Node 24` | `NODE_VERSION: '24'` in `.github/workflows/*.yml` |
+
+Single source of truth for the Lambda runtime + layer is `lib/portfolio-stack.ts`. Test assertion lives in `test/portfolio-stack.test.ts`.
+
 ## AWS Prerequisites
 
 Before deploying, you need:

@@ -48,7 +48,7 @@ graph LR
 
 ### Prerequisites
 
-- **Node.js** 20.x (pinned via Volta / `.nvmrc`)
+- **Node.js** 24.x LTS (pinned via Volta in `package.json`)
 - **pnpm** 9.x (`corepack enable`)
 - [Volta](https://volta.sh) recommended (or nvm/asdf)
 
@@ -214,7 +214,7 @@ The site deploys to AWS via CDK:
 - **ACM** — TLS certificate (us-east-1)
 - **CloudWatch** — 5xx rate, latency, Lambda error alarms
 
-See [`infra/README.md`](infra/README.md) for full AWS prerequisites and deployment guide.
+See [`infra/README.md`](infra/README.md) for full AWS prerequisites, current runtime versions, and deployment guide. Change history for runtime/infra upgrades lives in [`CHANGELOG.md`](CHANGELOG.md).
 
 ### CI/CD Pipeline
 
