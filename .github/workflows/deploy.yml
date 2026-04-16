@@ -11,6 +11,9 @@ concurrency:
 env:
   NODE_VERSION: '20'
   AWS_REGION: eu-central-1
+  # Opt in to Node 24 runtime for JS actions ahead of GitHub's 2026-06-02 default switch.
+  # Silences the "Node.js 20 actions are deprecated" workflow warning.
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 permissions:
   contents: read
