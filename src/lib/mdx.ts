@@ -3,14 +3,38 @@ import path from "node:path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-const BLOG_BASE = path.resolve(process.cwd(), "src/content/blog");
+// Every fs operation uses `path.join(process.cwd(), "src/content/blog", ...)`
+// inline so Turbopack's NFT tracer can statically scope reads to this
+// subfolder. Passing around a computed `blogDir` variable breaks the static
+// trace and causes Turbopack to mark the whole project as traced
+// ("Encountered unexpected file in NFT list"), bloating the standalone bundle.
+// The `/*turbopackIgnore: true*/` hint on `process.cwd()` is the officially
+// recommended escape hatch per the warning text itself.
 
-function getBlogDir(locale: string): string {
-  const localeDir = path.join(BLOG_BASE, locale);
-  if (fs.existsSync(localeDir) && fs.readdirSync(localeDir).some((f) => f.endsWith(".mdx"))) {
-    return localeDir;
-  }
-  return path.join(BLOG_BASE, "en");
+function listMdxFiles(locale: string): string[] | null {
+  const dir = path.join(
+    /*turbopackIgnore: true*/ process.cwd(),
+    "src/content/blog",
+    locale,
+  );
+  if (!fs.existsSync(dir)) return null;
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
+  return files.length > 0 ? files : null;
+}
+
+function resolveLocale(locale: string): string {
+  return listMdxFiles(locale) ? locale : "en";
+}
+
+function readMdxFile(locale: string, filename: string): string | null {
+  const filePath = path.join(
+    /*turbopackIgnore: true*/ process.cwd(),
+    "src/content/blog",
+    locale,
+    filename,
+  );
+  if (!fs.existsSync(filePath)) return null;
+  return fs.readFileSync(filePath, "utf-8");
 }
 
 export interface BlogPostMeta {
@@ -28,18 +52,15 @@ export interface BlogPost extends BlogPostMeta {
 }
 
 export function getAllPosts(locale = "en"): BlogPostMeta[] {
-  const blogDir = getBlogDir(locale);
-  if (!fs.existsSync(blogDir)) {
-    return [];
-  }
-
-  const files = fs.readdirSync(blogDir).filter((f) => f.endsWith(".mdx"));
+  const effectiveLocale = resolveLocale(locale);
+  const files = listMdxFiles(effectiveLocale);
+  if (!files) return [];
 
   return files
     .map((filename) => {
       const slug = filename.replace(/\.mdx$/, "");
-      const filePath = path.join(blogDir, filename);
-      const raw = fs.readFileSync(filePath, "utf-8");
+      const raw = readMdxFile(effectiveLocale, filename);
+      if (!raw) return null;
       const { data, content } = matter(raw);
       const stats = readingTime(content);
 
@@ -51,21 +72,17 @@ export function getAllPosts(locale = "en"): BlogPostMeta[] {
         tags: data.tags ?? [],
         published: data.published !== false,
         readingTime: stats.text,
-      };
+      } satisfies BlogPostMeta;
     })
-    .filter((post) => post.published)
+    .filter((post): post is BlogPostMeta => post !== null && post.published)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export function getPostBySlug(slug: string, locale = "en"): BlogPost | null {
-  const blogDir = getBlogDir(locale);
-  const filePath = path.join(blogDir, `${slug}.mdx`);
+  const effectiveLocale = resolveLocale(locale);
+  const raw = readMdxFile(effectiveLocale, `${slug}.mdx`);
+  if (!raw) return null;
 
-  if (!fs.existsSync(filePath)) {
-    return null;
-  }
-
-  const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
   const stats = readingTime(content);
 
@@ -82,13 +99,8 @@ export function getPostBySlug(slug: string, locale = "en"): BlogPost | null {
 }
 
 export function getAllSlugs(locale = "en"): string[] {
-  const blogDir = getBlogDir(locale);
-  if (!fs.existsSync(blogDir)) {
-    return [];
-  }
-
-  return fs
-    .readdirSync(blogDir)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((f) => f.replace(/\.mdx$/, ""));
+  const effectiveLocale = resolveLocale(locale);
+  const files = listMdxFiles(effectiveLocale);
+  if (!files) return [];
+  return files.map((f) => f.replace(/\.mdx$/, ""));
 }
