@@ -46,7 +46,7 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
     resolveCvLocaleString(s, locale);
 
   return (
-    <div className="relative">
+    <div className="relative overflow-x-hidden">
       {/* ========== HERO — photo left, name/title/summary right ========== */}
       <section className="relative px-4 py-12 sm:px-6 md:py-20 overflow-hidden">
         {/* Geometric shapes — identical to hero section */}

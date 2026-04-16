@@ -2,11 +2,10 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
-import { Briefcase, Brain, Globe, GraduationCap, FileText } from "lucide-react";
+import { Briefcase, Brain, Globe, GraduationCap } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { TechBadge } from "@/components/shared/tech-badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { timelineData, type TimelineEntry } from "@/content/timeline";
 import { techStackData } from "@/content/tech-stack";
 
@@ -147,16 +146,14 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
       </div>
 
       {downloadCvEnabled && (
-        <div>
-          <Button
-            size="lg"
-            className="cursor-pointer"
-            nativeButton={false}
-            render={<a href={`/${locale}/cv`} />}
+        <div className="pt-2">
+          <a
+            href={`/${locale}/cv`}
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground underline underline-offset-4 decoration-muted-foreground/40 hover:text-foreground hover:decoration-foreground/60 transition-colors"
           >
-            <FileText className="h-4 w-4 me-2" aria-hidden="true" />
-            {tBtn("downloadCV")}
-          </Button>
+            {tBtn("viewCV")}
+            <span aria-hidden="true" className="text-xs">&rarr;</span>
+          </a>
         </div>
       )}
     </div>
