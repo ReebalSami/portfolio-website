@@ -130,6 +130,9 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
+          # infra/ uses npm (not pnpm). Disable v5's new default package-manager
+          # auto-cache so it doesn't try to invoke pnpm via the root package.json.
+          package-manager-cache: false
 
       - name: Install CDK dependencies
         run: npm ci
