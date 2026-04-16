@@ -46,7 +46,7 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
     resolveCvLocaleString(s, locale);
 
   return (
-    <div className="relative overflow-x-hidden">
+    <div className="relative overflow-x-clip">
       {/* ========== HERO — photo left, name/title/summary right ========== */}
       <section className="relative px-4 py-12 sm:px-6 md:py-20 overflow-hidden">
         {/* Geometric shapes — identical to hero section */}
@@ -130,10 +130,10 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
           <div className="absolute bottom-[15%] end-1/3 h-20 w-20 rounded-[1.5rem] bg-gallery-warm-light/25 -rotate-12" />
         </div>
 
-        <div className="relative grid gap-12 md:grid-cols-[1fr_300px] lg:grid-cols-[1fr_340px] py-16 md:py-24">
+        <div className="relative grid gap-12 md:grid-cols-[minmax(0,1fr)_300px] lg:grid-cols-[minmax(0,1fr)_340px] py-16 md:py-24">
 
           {/* === LEFT: main content sections === */}
-          <div className="space-y-16">
+          <div className="min-w-0 space-y-16">
             {/* Experience */}
             <section>
               <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-8">
@@ -232,7 +232,7 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
           </div>
 
           {/* === RIGHT: sidebar content === */}
-          <aside className="space-y-10 md:sticky md:top-24 md:self-start">
+          <aside className="min-w-0 space-y-10 md:sticky md:top-24 md:self-start">
             {/* Skills */}
             <section>
               <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
@@ -277,7 +277,7 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
                 </h2>
                 <div className="flex flex-wrap gap-1.5">
                   {(data.softSkills[locale as keyof typeof data.softSkills] as string[] || data.softSkills.en).map((skill: string) => (
-                    <Badge key={skill} variant="outline" className="rounded-full text-xs">
+                    <Badge key={skill} variant="outline" className="rounded-2xl text-xs h-auto max-w-full whitespace-normal break-words py-1 leading-snug">
                       {skill}
                     </Badge>
                   ))}
