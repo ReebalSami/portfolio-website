@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: '24'
   AWS_REGION: eu-central-1
 
 permissions:
