@@ -45,21 +45,23 @@ basics:
 profile:
   summary:
     en: >-
-      Data Scientist & AI Engineer bridging business strategy and cutting-edge AI.
-      Five years at Otto Group built deep expertise in corporate data flows, financial systems, and cross-functional stakeholder communication.
-      Now orchestrating end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated news-crawler pipelines
-      to deep learning models for computer vision, deployed on modern cloud infrastructure (AWS CDK).
-      Delivered a B2B sales lead pipeline that reduced manual research workload by 53%.
-      Equally comfortable with AI-assisted rapid prototyping using the latest tools and navigating legacy enterprise systems.
-      Pursuing an M.Sc. in Data Science & AI at FH Wedel while actively shipping production code.
+      Data Scientist and AI Engineer working at the intersection of business and modern AI.
+      Over five years at Otto Group built deep fluency in corporate data flows, financial systems, and cross-functional stakeholder work.
+      Today I orchestrate end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated news-crawler pipelines
+      to deep-learning models for computer vision.
+      At Datalogue I shipped a B2B sales lead pipeline from concept to MVP that cut manual research workload by roughly half.
+      I built and deploy this portfolio on AWS CDK.
+      Comfortable navigating modern AI-assisted development with the latest tools and the legacy enterprise systems many companies still run on.
+      Currently writing my M.Sc. thesis in Data Science & AI at FH Wedel on Document Intelligence and Knowledge Graphs, while shipping production code on the side.
     de: >-
-      Data Scientist & KI-Ingenieur an der Schnittstelle von Geschäftsstrategie und modernster KI.
-      Fünf Jahre bei der Otto Group haben tiefes Know-how in Unternehmensdatenflüssen, Finanzsystemen und bereichsübergreifender Stakeholder-Kommunikation aufgebaut.
-      Heute werden End-to-End-KI-Lösungen über mehrere Schichten orchestriert — von Multi-Agenten-LLM-Systemen und automatisierten News-Crawler-Pipelines
-      bis hin zu Deep-Learning-Modellen für Computer Vision, deployed auf moderner Cloud-Infrastruktur (AWS CDK).
-      B2B-Sales-Lead-Pipeline geliefert, die den manuellen Rechercheaufwand um 53 % reduziert hat.
-      Gleichermaßen versiert im KI-gestützten Rapid Prototyping mit neuesten Tools und in der Navigation durch Legacy-Enterprise-Systeme.
-      Parallel dazu M.Sc. in Data Science & AI an der FH Wedel mit Fokus auf produktionsreifen Code.
+      Data Scientist und KI-Ingenieur an der Schnittstelle von Business und moderner KI.
+      Über fünf Jahre bei der Otto Group haben tiefes Verständnis für Unternehmensdatenflüsse, Finanzsysteme und bereichsübergreifende Stakeholder-Arbeit aufgebaut.
+      Heute orchestriere ich End-to-End-KI-Lösungen über mehrere Schichten — von Multi-Agenten-LLM-Systemen und automatisierten News-Crawler-Pipelines
+      bis hin zu Deep-Learning-Modellen für Computer Vision.
+      Bei Datalogue habe ich eine B2B-Sales-Lead-Pipeline vom Konzept bis zum MVP geliefert, die den manuellen Rechercheaufwand etwa halbiert hat.
+      Diese Portfolio-Website habe ich selbst gebaut und deploye sie via AWS CDK.
+      Gleichermaßen zuhause in moderner KI-gestützter Entwicklung mit den neuesten Tools und in den Legacy-Enterprise-Systemen, auf denen viele Unternehmen immer noch laufen.
+      Aktuell am Schreiben der Masterarbeit in Data Science & KI an der FH Wedel zum Thema Document Intelligence und Knowledge Graphs, parallel dazu produktionsreifer Code.
     es: "[TODO]"
     ar: "[TODO]"
 
@@ -172,8 +174,8 @@ experience:
         de: "Neue Teammitglieder und Werkstudenten eingearbeitet; für die Übernahme von Verantwortung über die Kernrolle hinaus anerkannt"
         es: "[TODO]"
         ar: "[TODO]"
-      - en: "Independently managed financial accounting for multiple Otto Group subsidiaries (shopping24, OG data.works, Lieferfactory, MTI) using SAP FI-CO"
-        de: "Eigenständige Finanzbuchhaltung für mehrere Otto-Tochtergesellschaften (shopping24, OG data.works, Lieferfactory, MTI) mit SAP FI-CO"
+      - en: "Independently managed financial accounting for multiple Otto Group subsidiaries using SAP FI-CO"
+        de: "Eigenständige Finanzbuchhaltung für mehrere Otto-Tochtergesellschaften mit SAP FI-CO"
         es: "[TODO]"
         ar: "[TODO]"
       - en: "Prepared monthly, quarterly & annual financial statements (HGB & IFRS); managed consolidation reporting in SAP BPC; main contact for external auditors and internal audit teams"
@@ -212,7 +214,7 @@ experience:
     startDate: "2015-09"
     endDate: "2016-11"
     highlights:
-      - en: "Relocated to Germany; achieved German language proficiency and cultural integration while supporting a family of four"
+      - en: "Relocated to Germany; achieved German language proficiency and cultural integration while supporting a family"
         de: "Nach Deutschland umgezogen; deutsche Sprachkompetenz und kulturelle Integration erreicht"
         es: "[TODO]"
         ar: "[TODO]"
@@ -220,8 +222,8 @@ experience:
 
   - company: "alBaraka Bank Syria s.a."
     position:
-      en: "Business Relations Specialist"
-      de: "Spezialist für Geschäftsbeziehungen"
+      en: "Trade Relations Specialist"
+      de: "Trade Relations Specialist"
       es: "[TODO]"
       ar: "[TODO]"
     location: "Damascus"
@@ -263,14 +265,15 @@ education:
         de: "Deep-Learning-Projekt: Automatisierte Pflanzengesundheitsüberwachung für Urban Farming (ViT/CNNs, Explainable AI, IoT-Konzepte, Streamlit)"
         es: "[TODO]"
         ar: "[TODO]"
-      - en: "Coursework: Deep Learning, Econometrics, Symbolic AI, Digital Transformation, Agile PM & Change Management, Org. Theory & Strategic Management"
-        de: "Kurse: Deep Learning, Ökonometrie, Symbolische KI, Digitale Transformation, Agiles PM & Change Management, Org.-Theorie & Strategisches Management"
+      - en: "Coursework: Deep Learning, Computer Vision, Machine Learning, Symbolic AI, Econometrics, Empirical Research Methods, Category Management, E-Commerce Business Models, Digital Transformation, Strategic Management, Organizational Theory, Agile PM & Change Management, Data Engineering, Unix & Shell Programming"
+        de: "Kurse: Deep Learning, Computer Vision, Machine Learning, Symbolische KI, Ökonometrie, Empirische Forschungsmethoden, Category Management, E-Commerce-Geschäftsmodelle, Digitale Transformation, Strategisches Management, Organisationslehre, Agiles PM & Change Management, Data Engineering, Unix & Shell"
         es: "[TODO]"
         ar: "[TODO]"
-      - en: "Additional coursework: ML, Unix, Data Engineering, VBA"
-        de: "Zusätzliche Kurse: ML, Unix, Data Engineering, VBA"
+      - en: "Thesis in progress: Document Intelligence and Knowledge Graph Construction — OCR-free extraction with Donut and LayoutLMv3, knowledge graph construction, GraphRAG reasoning with local LLMs, zero cloud dependency"
+        de: "Laufende Masterarbeit: Document Intelligence und Knowledge Graph Construction — OCR-freie Extraktion mit Donut und LayoutLMv3, Knowledge-Graph-Aufbau, GraphRAG-Reasoning mit lokalen LLMs, ohne Cloud-Abhängigkeit"
         es: "[TODO]"
         ar: "[TODO]"
+
 
   - institution: "GFS Steuerfachschule"
     area:
@@ -309,52 +312,110 @@ education:
 # --- Selected Projects ---
 projects:
   - name: "B2B Sales Lead Pipeline"
-    description:
-      en: "Multi-agent LLM system for automated B2B company research, contact discovery, and outreach email generation — reduced manual sales research by 53%"
-      de: "Multi-Agenten-LLM-System für automatisierte B2B-Unternehmensrecherche, Kontaktsuche und Outreach-E-Mail-Generierung — manuelle Recherchearbeit um 53 % reduziert"
+    date: "2025"
+    context:
+      en: "Datalogue"
+      de: "Datalogue"
       es: "[TODO]"
       ar: "[TODO]"
-    tags: ["python", "llm", "agents", "streamlit", "rag"]
+    description:
+      en: "Multi-agent LLM system automating B2B sales research. Four agents (Targeting, Insights, Contact Discovery, Outreach) share state via a PostgreSQL 3NF schema; async fan-out cut latency ~10×. Reduced manual research workload by ~53%."
+      de: "Multi-Agenten-LLM-System für B2B-Vertriebsrecherche. Vier Agenten (Targeting, Insights, Kontaktsuche, Outreach) teilen Zustand über ein PostgreSQL-3NF-Schema; asynchrone Parallelisierung senkt die Latenz um ~10×. Manueller Recherche-Aufwand um ~53 % reduziert."
+      es: "[TODO]"
+      ar: "[TODO]"
+    tags: ["Python", "Agno", "OpenAI", "PostgreSQL", "Vector Search", "Streamlit"]
 
-  - name: "Urban Farming Plant Health Monitor"
-    description:
-      en: "Deep learning system for automated plant disease detection using Vision Transformers and CNNs with Explainable AI (GradCAM) and IoT sensor integration"
-      de: "Deep-Learning-System zur automatisierten Pflanzenkrankheitserkennung mit Vision Transformers und CNNs, Explainable AI (GradCAM) und IoT-Sensorintegration"
+  - name: "Urban Farming Plant Health"
+    date: "2025"
+    context:
+      en: "M.Sc. Deep Learning · FH Wedel"
+      de: "M.Sc. Deep Learning · FH Wedel"
       es: "[TODO]"
       ar: "[TODO]"
-    tags: ["python", "deep-learning", "computer-vision", "pytorch"]
+    description:
+      en: "Hierarchical 3-stage pipeline (PlantID → Health → Disease) across 8+ ViT/CNN architectures on 31k+ images — 99.9 / 99.7 / 99.1 % per stage. Key finding: significant train-deploy domain gap on whole-plant scenes. Grad-CAM + Attention Rollout dashboard."
+      de: "Hierarchische 3-stufige Pipeline (PlantID → Gesundheit → Krankheit), 8+ ViT/CNN-Architekturen, 31k+ Bilder — 99,9 / 99,7 / 99,1 % je Stufe. Kernerkenntnis: deutlicher Train-Deploy-Domain-Gap auf ganzen Pflanzen. Grad-CAM + Attention Rollout Dashboard."
+      es: "[TODO]"
+      ar: "[TODO]"
+    tags: ["PyTorch", "timm", "ViT", "DINOv2", "Grad-CAM", "Streamlit"]
+
+  - name: "Bankruptcy Early Warning"
+    date: "2024"
+    context:
+      en: "M.Sc. Seminar · FH Wedel"
+      de: "M.Sc. Seminar · FH Wedel"
+      es: "[TODO]"
+      ar: "[TODO]"
+    description:
+      en: "Multi-horizon ML early-warning for corporate bankruptcy (1–5 years) on Polish Companies — 43k observations, 64 ratios, 4.84 % positive class. Consensus feature selection with EPV guardrails; AUC 0.80 → 0.86 via 5-fold stratified CV."
+      de: "Multi-Horizont-Frühwarnsystem für Unternehmensinsolvenzen (1–5 Jahre) auf Polish-Companies — 43k Beobachtungen, 64 Kennzahlen, 4,84 % Positivklasse. Konsens-Feature-Selection mit EPV-Schwellen; AUC 0,80 → 0,86 via 5-facher stratifizierter CV."
+      es: "[TODO]"
+      ar: "[TODO]"
+    tags: ["Python", "scikit-learn", "XGBoost", "Random Forest", "Econometrics"]
+
+  - name: "Biotech Regulatory RAG"
+    date: "2024/25"
+    context:
+      en: "Future Founder Program"
+      de: "Future Founder Program"
+      es: "[TODO]"
+      ar: "[TODO]"
+    description:
+      en: "RAG compliance tool for biotech teams. Semantic vector search, GPT-4 grounded Q&A with citations, interactive compliance questionnaire. Team of four."
+      de: "RAG-Compliance-Tool für Biotech-Teams. Semantische Vektorsuche, GPT-4 für belegte Q&A mit Quellenangaben, interaktiver Compliance-Fragebogen. Viererteam."
+      es: "[TODO]"
+      ar: "[TODO]"
+    tags: ["Python", "FastAPI", "React", "GPT-4", "RAG", "Vector DB"]
+
+  - name: "HafenHut"
+    date: "2025"
+    context:
+      en: "E-Commerce"
+      de: "E-Commerce"
+      es: "[TODO]"
+      ar: "[TODO]"
+    description:
+      en: "Full-stack e-commerce app with AI Q&A assistant grounded in product and store content. Next.js App Router, Stripe, Resend — production-deployed."
+      de: "Full-Stack-E-Commerce-App mit KI-Q&A-Assistent auf Produkt- und Shop-Inhalten. Next.js App Router, Stripe, Resend — produktiv im Einsatz."
+      es: "[TODO]"
+      ar: "[TODO]"
+    url: "https://github.com/ReebalSami/hafenhut-web"
+    tags: ["Next.js", "TypeScript", "Stripe", "Resend", "AI"]
 
   - name: "Portfolio Website"
+    date: "2026"
+    context:
+      en: "Personal"
+      de: "Persönlich"
+      es: "[TODO]"
+      ar: "[TODO]"
     description:
-      en: "Full-stack portfolio with AI chatbot, blog, i18n (4 locales incl. Arabic RTL), and automated AWS deployment via CDK"
-      de: "Full-Stack-Portfolio mit KI-Chatbot, Blog, i18n (4 Sprachen inkl. Arabisch RTL) und automatisiertem AWS-Deployment via CDK"
+      en: "Full-stack portfolio with AI RAG chatbot, MDX blog, four locales incl. Arabic RTL, AWS CDK deployment. Lighthouse 90+, dual-pipeline CV PDF generator."
+      de: "Full-Stack-Portfolio mit KI-RAG-Chatbot, MDX-Blog, vier Sprachen inkl. Arabisch RTL, AWS-CDK-Deployment. Lighthouse 90+, Dual-Pipeline-CV-PDF-Generator."
       es: "[TODO]"
       ar: "[TODO]"
     url: "https://reebal-sami.com"
-    tags: ["nextjs", "react", "typescript", "aws", "cdk"]
+    tags: ["Next.js", "TypeScript", "AWS CDK", "MDX", "i18n"]
 
-  - name: "MyRecipes"
-    description:
-      en: "AI-powered recipe suggestion web app built with Java Spring Boot, React, MongoDB, and test-driven development"
-      de: "KI-gestützte Rezeptvorschlags-Web-App mit Java Spring Boot, React, MongoDB und testgetriebener Entwicklung"
+  - name: "OTTO Multi-Objective Recommender"
+    date: "2023"
+    context:
+      en: "neuefische DS Capstone"
+      de: "neuefische DS Capstone"
       es: "[TODO]"
       ar: "[TODO]"
-    url: "https://fullstack-recipies-app.onrender.com/"
-    tags: ["java", "spring-boot", "react", "mongodb"]
-
-  - name: "Multi-Objective Recommender System"
     description:
-      en: "E-commerce recommender system using collaborative filtering with Word2Vec embeddings and Co-Visitation Matrix on GCP"
-      de: "E-Commerce-Empfehlungssystem mit kollaborativem Filtern, Word2Vec-Embeddings und Co-Visitation-Matrix auf GCP"
+      en: "E-commerce recommender for OTTO Kaggle — clicks, carts, orders jointly. Word2Vec embeddings + co-visitation matrices for session-based filtering; scaled on GCP with Polars/Parquet."
+      de: "E-Commerce-Empfehlungssystem für OTTO-Kaggle — Klicks, Warenkörbe, Bestellungen gemeinsam. Word2Vec-Embeddings + Co-Visitation-Matrizen für sessionbasiertes Filtern; skaliert auf GCP mit Polars/Parquet."
       es: "[TODO]"
       ar: "[TODO]"
-    tags: ["python", "ml", "gcp", "nlp"]
+    tags: ["Python", "Polars", "Word2Vec", "Co-Visitation", "GCP"]
 
 # --- Technical Skills ---
 skills:
   - category:
-      en: "Programming Languages"
-      de: "Programmiersprachen"
+      en: "Languages"
+      de: "Sprachen"
       es: "[TODO]"
       ar: "[TODO]"
     skills:
@@ -363,69 +424,41 @@ skills:
       - name: "JavaScript"
       - name: "Java"
       - name: "SQL"
-      - name: "HTML/CSS"
       - name: "VBA"
 
   - category:
-      en: "AI / Machine Learning"
-      de: "KI / Machine Learning"
+      en: "AI / ML"
+      de: "KI / ML"
       es: "[TODO]"
       ar: "[TODO]"
     skills:
       - name: "PyTorch"
-      - name: "TensorFlow"
-      - name: "scikit-learn"
       - name: "Hugging Face"
-      - name: "OpenCV"
-      - name: "XGBoost/LightGBM"
+      - name: "scikit-learn"
+      - name: "OpenAI API"
+      - name: "LangChain"
+      - name: "Agno (Agents)"
+      - name: "LLM Agents"
       - name: "RAG"
-      - name: "LLM Agents (Multi-Agent Orchestration)"
       - name: "Prompt Engineering"
-      - name: "Explainable AI (GradCAM)"
-      - name: "AI-Assisted Development (Vibe Coding)"
-      - name: "Neuro-Symbolic AI"
+      - name: "Vision Transformers"
+      - name: "CNNs"
+      - name: "Grad-CAM"
+      - name: "Word2Vec"
 
   - category:
-      en: "NLP & LLMs"
-      de: "NLP & LLMs"
-      es: "[TODO]"
-      ar: "[TODO]"
-    skills:
-      - name: "Transformers"
-      - name: "RAG"
-      - name: "Word2Vec/Embeddings"
-      - name: "Function Calling"
-      - name: "Structured Outputs"
-      - name: "Local Inference (llama.cpp)"
-
-  - category:
-      en: "Frameworks & Libraries"
-      de: "Frameworks & Bibliotheken"
+      en: "Frameworks"
+      de: "Frameworks"
       es: "[TODO]"
       ar: "[TODO]"
     skills:
       - name: "Next.js"
       - name: "React"
-      - name: "Spring Boot"
       - name: "FastAPI"
       - name: "Streamlit"
+      - name: "Spring Boot"
       - name: "Pydantic"
       - name: "SQLAlchemy"
-      - name: "BeautifulSoup"
-      - name: "Tailwind CSS"
-
-  - category:
-      en: "Data & Databases"
-      de: "Daten & Datenbanken"
-      es: "[TODO]"
-      ar: "[TODO]"
-    skills:
-      - name: "PostgreSQL"
-      - name: "MongoDB"
-      - name: "Pandas/Polars"
-      - name: "NumPy"
-      - name: "Plotly"
-      - name: "Matplotlib/Seaborn"
 
   - category:
       en: "Cloud & DevOps"
@@ -433,25 +466,35 @@ skills:
       es: "[TODO]"
       ar: "[TODO]"
     skills:
-      - name: "AWS (S3, CloudFront, Lambda, CDK, Route 53)"
+      - name: "AWS (CDK, Lambda, S3, CloudFront)"
+      - name: "GCP"
       - name: "Docker"
       - name: "GitHub Actions"
-      - name: "MLflow"
       - name: "Playwright"
-      - name: "Makefile"
 
   - category:
-      en: "Tools & Platforms"
-      de: "Tools & Plattformen"
+      en: "Databases"
+      de: "Datenbanken"
       es: "[TODO]"
       ar: "[TODO]"
     skills:
-      - name: "Git (GitHub, Bitbucket)"
-      - name: "VS Code"
-      - name: "IntelliJ IDEA"
+      - name: "PostgreSQL (3NF)"
+      - name: "MongoDB"
+      - name: "Vector DB (FAISS, Pinecone)"
       - name: "SAP FI-CO / BPC"
-      - name: "Postman"
-      - name: "Oxylabs"
+
+  - category:
+      en: "Tools"
+      de: "Werkzeuge"
+      es: "[TODO]"
+      ar: "[TODO]"
+    skills:
+      - name: "Git"
+      - name: "Jupyter"
+      - name: "Pandas / Polars / NumPy"
+      - name: "BeautifulSoup"
+      - name: "Tailwind CSS"
+      - name: "UiPath (RPA)"
 
 # --- Languages ---
 languages:
@@ -461,8 +504,8 @@ languages:
       es: "Alemán"
       ar: "[TODO]"
     fluency:
-      en: "Full professional"
-      de: "Verhandlungssicher"
+      en: "C2"
+      de: "C2"
       es: "[TODO]"
       ar: "[TODO]"
   - language:
@@ -491,7 +534,7 @@ languages:
       es: "Español"
       ar: "[TODO]"
     fluency:
-      en: "Elementary (ongoing)"
+      en: "toward B1"
       de: "Grundkenntnisse (lernend)"
       es: "[TODO]"
       ar: "[TODO]"
@@ -509,19 +552,21 @@ languages:
 # --- Soft Skills ---
 softSkills:
   en:
-    - "Multi-layer orchestration — bridging AI, business logic, and infrastructure"
-    - "Strong business understanding from 5 years in corporate finance"
-    - "AI-assisted rapid development with latest tools & frameworks"
-    - "Comfortable with both modern AI stacks and legacy enterprise systems"
+    - "End-to-end AI delivery"
+    - "AI × business × infrastructure"
+    - "Modern AI & legacy systems"
     - "Strategic & entrepreneurial thinking"
-    - "Cross-functional collaboration and stakeholder communication"
+    - "Cross-functional collaboration"
+    - "Multilingual (DE / EN / AR)"
   de:
-    - "Multi-Layer-Orchestrierung — KI, Business-Logik und Infrastruktur verbinden"
-    - "Starkes Geschäftsverständnis aus 5 Jahren Corporate Finance"
-    - "KI-gestützte Rapid Development mit neuesten Tools & Frameworks"
-    - "Versiert in modernen KI-Stacks und Legacy-Enterprise-Systemen"
+    - "End-to-End-KI-Lieferung"
+    - "5 Jahre Corporate Finance"
+    - "KI × Business × Infrastruktur"
+    - "Moderne KI & Legacy-Systeme"
+    - "KI-gestützte Rapid Development"
     - "Strategisches & unternehmerisches Denken"
-    - "Bereichsübergreifende Zusammenarbeit und Stakeholder-Kommunikation"
+    - "Bereichsübergreifende Zusammenarbeit"
+    - "Mehrsprachig (DE / EN / AR)"
 
 # --- Interests ---
 interests:

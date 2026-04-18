@@ -7,6 +7,7 @@
       "about": "Sobre mí",
       "projects": "Proyectos",
       "blog": "Blog",
+      "cv": "Resumé",
       "contact": "Contacto",
       "openMenu": "Abrir menú"
     },
@@ -25,33 +26,64 @@
   },
   "home": {
     "hero": {
-      "intro": "Combinando 5 años de experiencia en finanzas corporativas con habilidades de vanguardia en IA/ML. Construyendo soluciones inteligentes de principio a fin."
+      "intro": "Más de cinco años de experiencia en finanzas corporativas combinados con habilidades de vanguardia en IA/ML. Construyendo soluciones inteligentes de principio a fin."
     }
   },
   "about": {
     "title": "Sobre mí",
     "subtitle": "Quién soy",
-    "summary1": "Científico de datos e ingeniero de IA combinando 5 años de experiencia en finanzas corporativas (Otto Group) con habilidades de IA/ML de vanguardia. Candidato a M.Sc. en Data Science & IA en FH Wedel.",
-    "summary2": "Entrega probada de principio a fin — desde pipelines multi-agente para ventas B2B hasta detección de salud vegetal con deep learning. Construyo soluciones inteligentes con impacto empresarial medible.",
+    "summary1": "Científico de datos e ingeniero de IA con más de cinco años de experiencia en finanzas corporativas en Otto Group, combinados con habilidades de IA/ML de vanguardia. Actualmente escribiendo mi tesis de máster sobre GraphRAG Document Intelligence como parte del M.Sc. Data Science & IA en FH Wedel.",
+    "summary2": "Entrega probada de principio a fin, desde pipelines multi-agente para ventas B2B hasta detección de salud vegetal con deep learning. Construyo soluciones inteligentes con impacto empresarial medible.",
+    "cardExpand": "Saber más",
+    "cardDetails": "Detalles",
     "differentiators": "Lo que me diferencia",
     "timeline": "Trayectoria profesional",
     "techStack": "Stack tecnológico",
     "cards": {
       "business": {
         "title": "Negocio × Datos",
-        "description": "5 años en Otto Group en finanzas corporativas, ahora combinando visión empresarial con ingeniería de IA/ML."
+        "description": "5 años en Otto Group en finanzas corporativas, ahora combinándolo con ingeniería de IA/ML.",
+        "expanded": [
+          "Informes de grupo bajo HGB e IFRS para múltiples filiales de Otto Group",
+          "SAP FI-CO y consolidación BPC, cierres mensuales, trimestrales y anuales",
+          "Lideré automatizaciones RPA con UiPath para provisiones de vacaciones e intereses",
+          "Proyectos de implementación de IFRS (7, 9, 13) y valoración de opciones",
+          "Contacto principal para auditores externos y consultoras",
+          "Programa Avanzado de Contabilidad y Fiscalidad ‘Bilanzbuchhalter’ en GFS Steuerfachschule (2018 – 2020)"
+        ]
       },
       "builder": {
         "title": "Constructor integral",
-        "description": "Del concepto al MVP — pipeline multi-agente B2B con reducción del 53% de carga de trabajo."
+        "description": "Del concepto al MVP: pipeline multi-agente B2B que redujo la investigación manual a aproximadamente la mitad.",
+        "expanded": [
+          "Pipeline multi-agente B2B en Datalogue: 4 agentes LLM más human-in-the-loop",
+          "Pipeline genérico de news-crawler con esquema PostgreSQL 3NF y búsqueda semántica vectorial",
+          "Detección de enfermedades de plantas en urban farming: pipeline jerárquico de 3 etapas, ViT y CNN, Grad-CAM y Attention Rollout",
+          "Este sitio portfolio: Next.js 16, AWS CDK, i18n completo en 4 idiomas incluido árabe RTL",
+          "App full-stack MyRecipes: Java Spring Boot, React, MongoDB, sugerencias con IA"
+        ]
       },
       "multilingual": {
         "title": "Multilingüe",
-        "description": "Alemán (C1), inglés (fluido), árabe (nativo), español (elemental), francés (elemental)."
+        "description": "Alemán (C2, diario), inglés (profesional pleno, diario), árabe (nativo), español (elemental, aprendiendo), francés (elemental).",
+        "expanded": [
+          "Alemán: nivel actual C2, uso diario profesional, última certificación Telc C1 Negocios",
+          "Inglés: nivel profesional pleno, uso diario en tech y negocios. B.Sc. cursado íntegramente en inglés.",
+          "Árabe: nativo, de Damasco, Siria",
+          "Español: elemental, aprendiendo activamente hacia B1",
+          "Francés: elemental, de la escuela"
+        ]
       },
       "education": {
-        "title": "Candidato a M.Sc.",
-        "description": "Data Science & IA en FH Wedel — deep learning, NLP, visión por computador, econometría."
+        "title": "M.Sc. Data Science & IA",
+        "description": "FH Wedel: deep learning, NLP, visión por computador, econometría, e-commerce, gestión estratégica.",
+        "expanded": [
+          "Núcleo: Deep Learning, Visión por Computador, Machine Learning, IA Simbólica, Econometría",
+          "Itinerario de negocio: Category Management, Modelos de Negocio E-Commerce, Transformación Digital",
+          "Procesos: Gestión Ágil, Change Management, Gestión Estratégica, Teoría Organizacional",
+          "Técnico: Unix y programación shell, Data Engineering, Métodos de Investigación Empírica",
+          "Tesis en curso: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
+        ]
       }
     }
   },

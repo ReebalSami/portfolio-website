@@ -8,12 +8,13 @@ linkedin.com/in/reebal-sami
 github.com/ReebalSami
 
 PROFILE
-Data Scientist & AI Engineer bridging business strategy and cutting-edge AI. Five years at Otto Group built
-deep expertise in corporate data flows, financial systems, and cross-functional stakeholder communication. Now
-orchestrating end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated
-news-crawler pipelines to deep learning models for computer vision, deployed on modern cloud infrastructure
-(AWS CDK). Equally comfortable with AI-assisted rapid prototyping using the latest tools and navigating legacy
-enterprise systems. Pursuing an M.Sc. in Data Science & AI at FH Wedel while actively shipping production code.
+Data Scientist and AI Engineer working at the intersection of business and modern AI. Over five years at Otto
+Group built deep fluency in corporate data flows, financial systems, and cross-functional stakeholder work. Today
+I orchestrate end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated
+news-crawler pipelines to deep-learning models for computer vision. I built and deploy this portfolio on AWS CDK.
+Comfortable navigating modern AI-assisted development with the latest tools and the legacy enterprise systems
+many companies still run on. Currently writing my M.Sc. thesis in Data Science & AI at FH Wedel on Document
+Intelligence and Knowledge Graphs, while shipping production code on the side.
 
 EXPERIENCE
 AI & Data Science Working Student
@@ -21,13 +22,11 @@ Datalogue · Hamburg
 
 2025-06 — 2025-12
 
-20h/week on a B2B Sales Lead project from concept to MVP — reduced manual sales research workload by 53%.
-• Co-designed the system architecture combining a multi-agent app with a generic news-crawler pipeline for com­
-pany & contact research; defined data flow, validation points, and human-in-the-loop feedback loops
-• Built a Streamlit MVP running multi-LLM agents for company targeting, contact discovery, insight generation, and
-automated outreach email drafting with domain/contact verification
-• Implemented a generic crawler pipeline to automatically crawl news sites, extract content, and analyze articles with
-LLMs to surface actionable company insights
+20h/week on a B2B Sales Lead project from concept to MVP — reduced manual sales research workload by ~53%.
+• Designed multi-agent architecture: LLM agents for company targeting, contact discovery, insight generation, and
+outreach drafting with human-in-the-loop feedback
+• Built generic news-crawler pipeline with PostgreSQL 3NF + vector search; reduced sequential latency ~70× via async
+fan-out
 
 Junior Entrepreneur / Mentee
 
@@ -65,8 +64,7 @@ Otto Group · Hamburg
 
 • Led robotics initiatives: automated booking of vacation accruals and interest schedules via UiPath, optimized booking
 processes and analytical workflows using Excel & SAP
-• Independently managed financial accounting for multiple Otto Group subsidiaries (shopping24, OG data.works,
-Lieferfactory, MTI) using SAP FI-CO
+• Independently managed financial accounting for multiple Otto Group subsidiaries using SAP FI-CO
 • Prepared monthly, quarterly & annual financial statements (HGB & IFRS); managed consolidation reporting in SAP BPC;
 main contact for external auditors
 
@@ -78,32 +76,20 @@ Otto Group · Hamburg
 • Supported IFRS implementation, options evaluation & financial statement review; gained knowledge of group consol­
 idation working with consulting firms
 
-2015-09 — 2016-11
-
-Au-Pair
-
-Private German Family · Hamburg
-
-• Relocated to Germany; achieved German language proficiency and cultural integration while supporting a family
-of four
-
-2014-04 — 2015-08
-
-Business Relations Specialist
-
-alBaraka Bank Syria s.a. · Damascus
-
-• Delivered customer services to private and corporate clients; processed document collections, letters of credit, and
-managed VIP client relationships
-
 EDUCATION
-2024-04 — Present
+
+2024-04 — Present
 
 M.Sc. Data Science & Artificial Intelligence
 FH Wedel, Wedel, Germany
 
-• Deep Learning project: Urban Farming Automated Plant Health Monitoring (ViT/CNNs, Explainable AI, IoT concepts)
-• Coursework: Deep Learning, Econometrics, Symbolic AI, Digital Transformation, Agile PM & Change Management
+• Thesis in progress: Document Intelligence and Knowledge Graph Construction — OCR-free extraction with Donut and
+LayoutLMv3, knowledge graph construction, GraphRAG reasoning with local LLMs, zero cloud dependency
+• Deep Learning project: Urban Farming Plant Health — hierarchical 3-stage pipeline across ViT/CNN architectures with
+Grad-CAM and Attention Rollout explainability
+• Coursework: Deep Learning, Computer Vision, Machine Learning, Symbolic AI, Econometrics, Empirical Research
+Methods, Category Management, E-Commerce Business Models, Digital Transformation, Strategic Management, Agile
+PM & Change Management, Data Engineering, Unix & Shell Programming
 
 Professional Certification Financial Accounting (Bilanzbuchhalter)
 
@@ -131,103 +117,96 @@ Java
 
 SQL
 
-HTML/CSS
-
 VBA
 
 AI / Machine Learning
 PyTorch
 
-TensorFlow
+Hugging Face
+
+Vision Transformers
 
 scikit-learn
 
-Multi-Agent Orchestration
+CNNs
 
-Hugging Face
+Grad-CAM
 
-Prompt Engineering
+OpenAI API
 
-OpenCV
+LangChain
 
-XGBoost/LightGBM
-
-Explainable AI (GradCAM)
-
-RAG
-
-LLM Agents
-
-AI-Assisted Development (Vibe Coding)
-
-Frameworks & Libraries
-Next.js
-
-React
+Agno (Agents)
 
 Spring Boot
 
-FastAPI
-
-Streamlit
-
 Pydantic
 
-Tailwind CSS
-
-Data & Databases
-PostgreSQL
-
-MongoDB
-
-Pandas/Polars
-
-NumPy
-
-Plotly
-
-Matplotlib/Seaborn
-
-Cloud & DevOps
-AWS (S3, CloudFront, Lambda, CDK, Route 53)
+SQLAlchemy
 
 Docker
 
 GitHub Actions
 
+LLM Agents
+
+RAG
+
+Word2Vec
+
+Frameworks
+Next.js
+
+React
+
+FastAPI
+
+Streamlit
+
+Cloud & DevOps
+AWS (CDK, Lambda, S3, CloudFront)
+
+GCP
+
 Playwright
 
-Makefile
+Databases
+PostgreSQL (3NF)
 
-Tools & Platforms
-Git (GitHub, Bitbucket)
+MongoDB
 
-VS Code
-
-IntelliJ IDEA
+Vector DB (FAISS, Pinecone)
 
 SAP FI-CO / BPC
 
-Postman
+Tools
+Git
+
+Jupyter
+
+Pandas / Polars / NumPy
+
+BeautifulSoup
+
+Tailwind CSS
+
+UiPath (RPA)
 
 KEY STRENGTHS
-• Multi-layer orchestration — bridging AI, business logic,
-and infrastructure
+• End-to-end AI delivery
 
-• Strong business understanding from 5 years in corpo­
-rate finance
+• AI × business × infrastructure
 
-• AI-assisted rapid development with latest tools & frame­ • Comfortable with both modern AI stacks and legacy en­
-works
-terprise systems
+• Modern AI & legacy systems
+
 • Strategic & entrepreneurial thinking
 
-• Cross-functional collaboration and stakeholder commu­
-nication
+• Cross-functional collaboration
+
+• Multilingual (DE / EN / AR)
 
 LANGUAGES
-German Full professional · English Full professional · Arabic Native · Spanish Elementary (ongoing) · French
-Elementary
+German C2 · English Full professional · Arabic Native · Spanish toward B1 · French Elementary
 
 HOBBIES & INTERESTS
 Music Lover:
@@ -241,7 +220,8 @@ Marathon runner / Bouldering / Swimming
 Passion for cooking & sailing
 
 REFERENCES
+Available upon request
 
-Available upon request
+Prompt Engineering
 
 

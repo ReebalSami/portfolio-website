@@ -1,35 +1,20 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { Briefcase, Brain, Globe, GraduationCap } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { TechBadge } from "@/components/shared/tech-badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { timelineData, type TimelineEntry } from "@/content/timeline";
+import { DifferentiatorCard } from "@/components/cards/differentiator-card";
+import { TimelineEntryCard } from "@/components/cards/timeline-entry";
+import { timelineData } from "@/content/timeline";
 import { techStackData } from "@/content/tech-stack";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
 const differentiatorKeys = [
-  { icon: Briefcase, key: "business" },
-  { icon: Brain, key: "builder" },
-  { icon: Globe, key: "multilingual" },
-  { icon: GraduationCap, key: "education" },
-] as const;
-
-const typeColors: Record<TimelineEntry["type"], string> = {
-  work: "bg-primary",
-  education: "bg-gallery-warm",
-  transition: "bg-gallery-warm-muted",
-};
+  { icon: Briefcase, key: "business" as const },
+  { icon: Brain, key: "builder" as const },
+  { icon: Globe, key: "multilingual" as const },
+  { icon: GraduationCap, key: "education" as const },
+];
 
 interface AboutSectionProps {
   downloadCvEnabled: boolean;
@@ -39,16 +24,6 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
   const t = useTranslations("about");
   const tBtn = useTranslations("common.buttons");
   const locale = useLocale();
-  const prefersReducedMotion = useReducedMotion();
-
-  const inViewProps = prefersReducedMotion
-    ? {}
-    : {
-        variants: fadeUp,
-        initial: "hidden" as const,
-        whileInView: "visible" as const,
-        viewport: { once: true, margin: "-50px" },
-      };
 
   return (
     <div className="space-y-20">
@@ -70,25 +45,12 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
         </h3>
         <div className="grid gap-4 sm:grid-cols-2">
           {differentiatorKeys.map((item, i) => (
-            <motion.div
+            <DifferentiatorCard
               key={item.key}
-              {...inViewProps}
-              transition={{ delay: i * 0.1 }}
-            >
-              <Card className="h-full">
-                <CardContent className="flex gap-4 pt-6">
-                  <div className="shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-gallery-warm/20">
-                    <item.icon className="h-5 w-5 text-foreground" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-1">{t(`cards.${item.key}.title`)}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {t(`cards.${item.key}.description`)}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+              cardKey={item.key}
+              icon={item.icon}
+              index={i}
+            />
           ))}
         </div>
       </div>
@@ -99,24 +61,11 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
         </h3>
         <div className="relative ms-4 border-s-2 border-border ps-8 space-y-8">
           {timelineData.map((entry, i) => (
-            <motion.div
+            <TimelineEntryCard
               key={entry.date + entry.title}
-              className="relative"
-              {...inViewProps}
-              transition={{ delay: i * 0.08 }}
-            >
-              <div
-                className={`absolute -start-[2.6rem] top-1 h-3 w-3 rounded-full ${typeColors[entry.type]}`}
-              />
-              <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-1">
-                {entry.date}
-              </p>
-              <h4 className="font-medium">{entry.title}</h4>
-              <p className="text-sm text-muted-foreground">{entry.company}</p>
-              <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                {entry.description}
-              </p>
-            </motion.div>
+              entry={entry}
+              index={i}
+            />
           ))}
         </div>
       </div>

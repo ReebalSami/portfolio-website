@@ -23,35 +23,19 @@ This approach solves the LLM hallucination problem by grounding responses in act
 
 ## Architecture
 
-The system has three main components:
+The system has three main components.
 
 ### 1. Document Ingestion Pipeline
 
-```python
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
-
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-    chunk_overlap=200,
-    separators=["\n\n", "\n", ". ", " "],
-)
-
-# Split documents into overlapping chunks
-chunks = splitter.split_documents(regulatory_docs)
-
-# Generate embeddings and store in vector database
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
-vectorstore = Pinecone.from_documents(chunks, embeddings, index_name="regulations")
-```
+Regulatory documents come in as PDFs, Word files, and HTML scrapes. They go through a recursive text splitter that breaks them into overlapping chunks of roughly 1,000 tokens each, with a 200-token overlap so ideas that straddle chunk boundaries don't get cut in half. Every chunk carries metadata forward: source document name, section, page number, and a stable chunk ID. Each chunk is embedded using OpenAI's `text-embedding-3-small` and stored in a vector database (Pinecone in production, Chroma locally during development).
 
 ### 2. Retrieval with Semantic Search
 
-Instead of keyword matching, the system uses vector embeddings to find semantically similar content. A query like "What are the labeling requirements for Class II devices?" retrieves relevant chunks even if they don't contain those exact words.
+Instead of keyword matching, the system retrieves by meaning. A query like *"What are the labeling requirements for Class II devices?"* pulls back chunks that talk about labeling obligations for medium-risk medical devices even if the words "Class II" never appear. The retrieval step combines dense embedding search with sparse BM25 over the same chunks — hybrid retrieval was a clear win over dense-only for recall on short, specific queries.
 
 ### 3. Answer Generation with Source Citations
 
-The LLM receives the retrieved chunks as context and generates an answer with specific references to source documents, sections, and page numbers.
+The retrieved chunks get passed to GPT-4 as grounded context, along with a strict instruction: answer only from the provided text, and cite every claim by document, section, and page. If the retrieved context doesn't contain the answer, the model is allowed to say so explicitly rather than guess. Every answer the user sees comes with clickable source references they can open and verify.
 
 ## Key Design Decisions
 

@@ -31,4 +31,33 @@ test.describe("Blog", () => {
     await expect(page.locator("h1")).toBeVisible();
     await expect(page.locator("article")).toBeVisible();
   });
+
+  test("blog photo opens and closes lightbox", async ({ page }) => {
+    await page.goto("/en/blog/building-multi-agent-ai-systems");
+
+    const photoTrigger = page.getByRole("button", { name: /Open photo:/i }).first();
+    await expect(photoTrigger).toBeVisible();
+
+    await photoTrigger.click();
+    const lightboxPortal = page.locator(".yarl__portal_open");
+    await expect(lightboxPortal).toBeVisible();
+
+    const closeButton = page.getByRole("button", { name: "Close" });
+    await expect(closeButton).toBeVisible();
+    await closeButton.click();
+
+    await expect(lightboxPortal).toBeHidden();
+  });
+
+  test("single-image blog gallery hides next/prev controls", async ({ page }) => {
+    await page.goto("/en/blog/building-multi-agent-ai-systems");
+
+    const photoTrigger = page.getByRole("button", { name: /Open photo:/i }).first();
+    await expect(photoTrigger).toBeVisible();
+    await photoTrigger.click();
+
+    await expect(page.locator(".yarl__portal_open")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Previous photo" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Next photo" })).toHaveCount(0);
+  });
 });

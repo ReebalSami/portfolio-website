@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Archivo, JetBrains_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Space_Grotesk, Archivo, JetBrains_Mono, IBM_Plex_Sans_Arabic, Caveat } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -46,6 +46,13 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   variable: "--font-arabic",
   subsets: ["arabic"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const caveat = Caveat({
+  variable: "--font-handwritten",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -164,6 +171,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     spaceGrotesk.variable,
     archivo.variable,
     jetbrainsMono.variable,
+    caveat.variable,
     isRtl ? ibmPlexArabic.variable : "",
   ]
     .filter(Boolean)

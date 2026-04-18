@@ -1,21 +1,32 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
+import { useRouter, usePathname, Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { useActiveSection, type SectionId } from "@/hooks/use-active-section";
 
-export interface NavItem {
+type SectionNavItem = {
   labelKey: string;
   sectionId: SectionId;
-}
+  type: "section";
+};
+
+type RouteNavItem = {
+  labelKey: string;
+  href: string;
+  matchPrefix: string;
+  type: "route";
+};
+
+export type NavItem = SectionNavItem | RouteNavItem;
 
 export const navItems: NavItem[] = [
-  { labelKey: "home", sectionId: "home" },
-  { labelKey: "about", sectionId: "about" },
-  { labelKey: "projects", sectionId: "projects" },
-  { labelKey: "blog", sectionId: "blog" },
-  { labelKey: "contact", sectionId: "contact" },
+  { labelKey: "home", sectionId: "home", type: "section" },
+  { labelKey: "about", sectionId: "about", type: "section" },
+  { labelKey: "projects", sectionId: "projects", type: "section" },
+  { labelKey: "blog", sectionId: "blog", type: "section" },
+  { labelKey: "cv", href: "/cv", matchPrefix: "/cv", type: "route" },
+  { labelKey: "contact", sectionId: "contact", type: "section" },
 ];
 
 const desktopNavButtonBase =
@@ -35,6 +46,10 @@ function isMainPage(pathname: string): boolean {
   return pathname === "/" || pathname === "";
 }
 
+function isRouteActive(pathname: string, prefix: string): boolean {
+  return pathname === prefix || pathname.startsWith(`${prefix}/`);
+}
+
 interface DesktopNavProps {
   className?: string;
 }
@@ -46,7 +61,7 @@ export function DesktopNav({ className }: DesktopNavProps) {
   const pathname = usePathname();
   const onMainPage = isMainPage(pathname);
 
-  const handleClick = (sectionId: string) => {
+  const handleSectionClick = (sectionId: string) => {
     if (onMainPage) {
       scrollToSection(sectionId);
     } else {
@@ -56,20 +71,37 @@ export function DesktopNav({ className }: DesktopNavProps) {
 
   return (
     <nav className={cn("hidden lg:flex items-center gap-1", className)}>
-      {navItems.map((item) => (
-        <button
-          key={item.sectionId}
-          onClick={() => handleClick(item.sectionId)}
-          className={cn(
-            desktopNavButtonBase,
-            onMainPage && activeSection === item.sectionId
-              ? "text-foreground bg-accent motion-safe:after:scale-x-100"
-              : "text-muted-foreground hover:text-foreground hover:bg-accent/50 hover:after:scale-x-100"
-          )}
-        >
-          {t(item.labelKey)}
-        </button>
-      ))}
+      {navItems.map((item) => {
+        const isActive =
+          item.type === "section"
+            ? onMainPage && activeSection === item.sectionId
+            : isRouteActive(pathname, item.matchPrefix);
+        const activeClass = isActive
+          ? "text-foreground bg-accent motion-safe:after:scale-x-100"
+          : "text-muted-foreground hover:text-foreground hover:bg-accent/50 hover:after:scale-x-100";
+
+        if (item.type === "route") {
+          return (
+            <Link
+              key={item.labelKey}
+              href={item.href}
+              className={cn(desktopNavButtonBase, activeClass)}
+            >
+              {t(item.labelKey)}
+            </Link>
+          );
+        }
+
+        return (
+          <button
+            key={item.sectionId}
+            onClick={() => handleSectionClick(item.sectionId)}
+            className={cn(desktopNavButtonBase, activeClass)}
+          >
+            {t(item.labelKey)}
+          </button>
+        );
+      })}
     </nav>
   );
 }
@@ -85,7 +117,7 @@ export function MobileNav({ onNavigate }: MobileNavProps) {
   const pathname = usePathname();
   const onMainPage = isMainPage(pathname);
 
-  const handleClick = (sectionId: string) => {
+  const handleSectionClick = (sectionId: string) => {
     onNavigate?.();
     if (onMainPage) {
       setTimeout(() => scrollToSection(sectionId), 150);
@@ -94,22 +126,44 @@ export function MobileNav({ onNavigate }: MobileNavProps) {
     }
   };
 
+  const handleRouteClick = () => {
+    onNavigate?.();
+  };
+
   return (
     <nav className="flex flex-col gap-1 py-4">
-      {navItems.map((item) => (
-        <button
-          key={item.sectionId}
-          onClick={() => handleClick(item.sectionId)}
-          className={cn(
-            mobileNavButtonBase,
-            onMainPage && activeSection === item.sectionId
-              ? "text-foreground bg-accent motion-safe:after:scale-x-100"
-              : "text-muted-foreground hover:text-foreground hover:bg-accent/50 hover:after:scale-x-100"
-          )}
-        >
-          {t(item.labelKey)}
-        </button>
-      ))}
+      {navItems.map((item) => {
+        const isActive =
+          item.type === "section"
+            ? onMainPage && activeSection === item.sectionId
+            : isRouteActive(pathname, item.matchPrefix);
+        const activeClass = isActive
+          ? "text-foreground bg-accent motion-safe:after:scale-x-100"
+          : "text-muted-foreground hover:text-foreground hover:bg-accent/50 hover:after:scale-x-100";
+
+        if (item.type === "route") {
+          return (
+            <Link
+              key={item.labelKey}
+              href={item.href}
+              onClick={handleRouteClick}
+              className={cn(mobileNavButtonBase, activeClass)}
+            >
+              {t(item.labelKey)}
+            </Link>
+          );
+        }
+
+        return (
+          <button
+            key={item.sectionId}
+            onClick={() => handleSectionClick(item.sectionId)}
+            className={cn(mobileNavButtonBase, activeClass)}
+          >
+            {t(item.labelKey)}
+          </button>
+        );
+      })}
     </nav>
   );
 }

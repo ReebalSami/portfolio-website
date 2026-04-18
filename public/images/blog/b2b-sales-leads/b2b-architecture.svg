@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520" role="img" aria-labelledby="b2b-arch-title b2b-arch-desc">
+  <title id="b2b-arch-title">B2B sales lead pipeline architecture</title>
+  <desc id="b2b-arch-desc">Hand-drawn diagram showing news sources feeding a crawler, a PostgreSQL store, four LLM agents (Targeting, Insights, Contact Discovery, Outreach Drafting) with human-in-the-loop feedback producing personalized outreach.</desc>
+  <defs>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      .bg { fill: transparent; }
+      .ink { stroke: #18181b; stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink-thick { stroke: #18181b; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .warm-fill { fill: #cc9874; fill-opacity: 0.18; }
+      .warm-fill-strong { fill: #cc9874; fill-opacity: 0.32; }
+      .warm-fill-light { fill: #cc9874; fill-opacity: 0.08; }
+      .warm-stroke { stroke: #cc9874; stroke-width: 1.6; fill: none; stroke-linecap: round; }
+      .label {
+        font-family: "Caveat", "Kalam", "Comic Sans MS", "Patrick Hand", ui-sans-serif, system-ui, sans-serif;
+        font-size: 17px;
+        fill: #18181b;
+      }
+      .label-small {
+        font-family: "Caveat", "Kalam", "Comic Sans MS", "Patrick Hand", ui-sans-serif, system-ui, sans-serif;
+        font-size: 13px;
+        fill: #3f3f46;
+      }
+      .label-title {
+        font-family: "Caveat", "Kalam", "Comic Sans MS", "Patrick Hand", ui-sans-serif, system-ui, sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        fill: #18181b;
+      }
+      @media (prefers-color-scheme: dark) {
+        .ink { stroke: #f5f5f5; }
+        .ink-thick { stroke: #f5f5f5; }
+        .label { fill: #f5f5f5; }
+        .label-small { fill: #a3a3a3; }
+        .label-title { fill: #f5f5f5; }
+        .warm-fill { fill: #cc9874; fill-opacity: 0.22; }
+        .warm-fill-strong { fill: #cc9874; fill-opacity: 0.42; }
+        .warm-fill-light { fill: #cc9874; fill-opacity: 0.12; }
+      }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="960" height="520" />
+
+  <!-- Decorative soft shapes, matching gallery warm shapes -->
+  <circle class="warm-fill-light" cx="120" cy="80" r="70" />
+  <circle class="warm-fill-light" cx="880" cy="440" r="90" />
+  <rect class="warm-fill-light" x="620" y="40" width="80" height="80" rx="20" transform="rotate(12 660 80)" />
+
+  <!-- Title -->
+  <text x="40" y="44" class="label-title">B2B Sales Lead Pipeline</text>
+  <text x="40" y="64" class="label-small">Four agents, one news-crawler, and a human in the loop.</text>
+
+  <!-- News sources cloud -->
+  <g transform="translate(60, 130)">
+    <path class="ink-thick" d="M 12 22 q -8 -18 8 -22 q 6 -10 20 -6 q 8 -10 22 -4 q 12 -8 24 2 q 14 -2 16 14 q 10 4 4 18 q 6 12 -8 16 q -4 12 -20 8 q -10 8 -22 0 q -14 6 -22 -4 q -14 -2 -16 -14 q -12 -2 -6 -8 Z" />
+    <path class="warm-fill" d="M 12 22 q -8 -18 8 -22 q 6 -10 20 -6 q 8 -10 22 -4 q 12 -8 24 2 q 14 -2 16 14 q 10 4 4 18 q 6 12 -8 16 q -4 12 -20 8 q -10 8 -22 0 q -14 6 -22 -4 q -14 -2 -16 -14 q -12 -2 -6 -8 Z" />
+    <text x="16" y="28" class="label-small">News sites</text>
+    <text x="22" y="46" class="label-small">PE Insights,</text>
+    <text x="28" y="62" class="label-small">TechCrunch…</text>
+  </g>
+
+  <!-- Arrow: news → crawler -->
+  <path class="ink-thick" d="M 180 170 q 20 -6 42 0" marker-end="url(#arrow)" style="color:#18181b" />
+  <text x="192" y="158" class="label-small">crawl</text>
+
+  <!-- Crawler box -->
+  <g transform="translate(230, 130)">
+    <rect class="warm-fill" x="0" y="0" width="150" height="80" rx="12" />
+    <rect class="ink-thick" x="0" y="0" width="150" height="80" rx="12" />
+    <text x="75" y="28" text-anchor="middle" class="label">Crawler</text>
+    <text x="75" y="48" text-anchor="middle" class="label-small">BeautifulSoup</text>
+    <text x="75" y="64" text-anchor="middle" class="label-small">+ Oxylabs</text>
+  </g>
+
+  <!-- Arrow: crawler → DB -->
+  <path class="ink-thick" d="M 380 170 q 24 0 48 0" marker-end="url(#arrow)" style="color:#18181b" />
+  <text x="392" y="158" class="label-small">extract + LLM</text>
+
+  <!-- DB cylinder -->
+  <g transform="translate(428, 130)">
+    <ellipse class="warm-fill-strong" cx="70" cy="12" rx="60" ry="10" />
+    <path class="warm-fill-strong" d="M 10 12 L 10 72 Q 70 92 130 72 L 130 12 Q 70 32 10 12 Z" />
+    <path class="ink-thick" d="M 10 12 L 10 72 Q 70 92 130 72 L 130 12" />
+    <ellipse class="ink-thick" cx="70" cy="12" rx="60" ry="10" />
+    <path class="ink" d="M 10 32 Q 70 52 130 32" />
+    <text x="70" y="58" text-anchor="middle" class="label">PostgreSQL</text>
+    <text x="70" y="74" text-anchor="middle" class="label-small">3NF schema</text>
+  </g>
+
+  <!-- Agents group frame -->
+  <g transform="translate(40, 260)">
+    <rect class="warm-fill-light" x="0" y="0" width="880" height="220" rx="20" />
+    <path class="warm-stroke" d="M 4 4 L 876 4 L 876 216 L 4 216 Z" stroke-dasharray="4 4" />
+    <text x="18" y="22" class="label-small">Multi-agent research app · Streamlit · shared state</text>
+  </g>
+
+  <!-- Agent 1: Company Targeting -->
+  <g transform="translate(80, 310)">
+    <rect class="warm-fill" x="0" y="0" width="170" height="70" rx="14" />
+    <rect class="ink-thick" x="0" y="0" width="170" height="70" rx="14" />
+    <text x="85" y="28" text-anchor="middle" class="label">Company Targeting</text>
+    <text x="85" y="50" text-anchor="middle" class="label-small">finds fit companies</text>
+  </g>
+
+  <!-- Agent 2: Insights -->
+  <g transform="translate(280, 310)">
+    <rect class="warm-fill" x="0" y="0" width="150" height="70" rx="14" />
+    <rect class="ink-thick" x="0" y="0" width="150" height="70" rx="14" />
+    <text x="75" y="28" text-anchor="middle" class="label">Insights</text>
+    <text x="75" y="50" text-anchor="middle" class="label-small">synthesizes signals</text>
+  </g>
+
+  <!-- Agent 3: Contact Discovery -->
+  <g transform="translate(460, 310)">
+    <rect class="warm-fill" x="0" y="0" width="180" height="70" rx="14" />
+    <rect class="ink-thick" x="0" y="0" width="180" height="70" rx="14" />
+    <text x="90" y="28" text-anchor="middle" class="label">Contact Discovery</text>
+    <text x="90" y="50" text-anchor="middle" class="label-small">decision-makers + verify</text>
+  </g>
+
+  <!-- Agent 4: Outreach Drafting -->
+  <g transform="translate(670, 310)">
+    <rect class="warm-fill-strong" x="0" y="0" width="210" height="70" rx="14" />
+    <rect class="ink-thick" x="0" y="0" width="210" height="70" rx="14" />
+    <text x="105" y="28" text-anchor="middle" class="label">Outreach Drafting</text>
+    <text x="105" y="50" text-anchor="middle" class="label-small">personalized email draft</text>
+  </g>
+
+  <!-- Flow arrows between agents -->
+  <path class="ink-thick" d="M 250 345 q 15 0 30 0" marker-end="url(#arrow)" style="color:#18181b" />
+  <path class="ink-thick" d="M 430 345 q 15 0 30 0" marker-end="url(#arrow)" style="color:#18181b" />
+  <path class="ink-thick" d="M 640 345 q 15 0 30 0" marker-end="url(#arrow)" style="color:#18181b" />
+
+  <!-- DB feeds agents -->
+  <path class="ink" d="M 498 220 q 0 40 -330 90" marker-end="url(#arrow)" style="color:#18181b" />
+  <path class="ink" d="M 498 220 q 0 40 -130 90" marker-end="url(#arrow)" style="color:#18181b" />
+  <text x="260" y="258" class="label-small">data flows in</text>
+
+  <!-- Human in the loop -->
+  <g transform="translate(780, 420)">
+    <circle class="warm-fill-strong" cx="30" cy="30" r="30" />
+    <circle class="ink-thick" cx="30" cy="30" r="30" />
+    <circle class="ink" cx="30" cy="22" r="7" />
+    <path class="ink" d="M 14 44 q 16 -14 32 0" />
+    <text x="30" y="82" text-anchor="middle" class="label-small">Human review</text>
+  </g>
+
+  <!-- Feedback loop arrow -->
+  <path class="ink-thick" d="M 810 420 q 0 -40 -30 -60" style="color:#18181b" />
+  <path class="ink-thick" d="M 780 420 q -260 30 -280 -180" marker-end="url(#arrow)" style="color:#18181b" stroke-dasharray="5 5" />
+  <text x="520" y="418" class="label-small">feedback refines vectors</text>
+
+  <!-- Output arrow -->
+  <path class="ink-thick" d="M 880 360 q 30 10 30 60" marker-end="url(#arrow)" style="color:#18181b" />
+  <text x="880" y="430" class="label-small">send</text>
+</svg>
