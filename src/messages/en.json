@@ -7,6 +7,7 @@
       "about": "About",
       "projects": "Projects",
       "blog": "Blog",
+      "cv": "Resumé",
       "contact": "Contact",
       "openMenu": "Open menu"
     },
@@ -25,33 +26,64 @@
   },
   "home": {
     "hero": {
-      "intro": "Merging 5 years of corporate finance experience with cutting-edge AI/ML skills. Building intelligent solutions end-to-end."
+      "intro": "Merging over five years of corporate finance experience with cutting-edge AI/ML skills. Building intelligent solutions end-to-end."
     }
   },
   "about": {
     "title": "About",
     "subtitle": "Who I Am",
-    "summary1": "Data Scientist and AI Engineer merging 5 years of corporate finance experience (Otto Group) with cutting-edge AI/ML skills. M.Sc. candidate in Data Science & AI at FH Wedel.",
-    "summary2": "Proven end-to-end delivery — from multi-agent B2B sales pipelines to plant health detection with deep learning. I build intelligent solutions that create measurable business impact.",
+    "summary1": "Data Scientist and AI Engineer merging over five years of corporate finance experience at Otto Group with cutting-edge AI/ML skills. Currently writing my Master's thesis on GraphRAG Document Intelligence as part of my M.Sc. Data Science & AI at FH Wedel.",
+    "summary2": "Proven end-to-end delivery, from multi-agent B2B sales pipelines to plant health detection with deep learning. I build intelligent solutions that create measurable business impact.",
+    "cardExpand": "Learn more",
+    "cardDetails": "Details",
     "differentiators": "What Sets Me Apart",
     "timeline": "Career Journey",
     "techStack": "Tech Stack",
     "cards": {
       "business": {
         "title": "Business × Data",
-        "description": "5 years at Otto Group in corporate finance, now merging business acumen with AI/ML engineering."
+        "description": "5 years at Otto Group in corporate finance, now merging business acumen with AI/ML engineering.",
+        "expanded": [
+          "HGB and IFRS group reporting for multiple Otto Group subsidiaries",
+          "SAP FI-CO and BPC consolidation, monthly/quarterly/annual closes",
+          "Led RPA automations with UiPath for vacation accruals and interest schedules",
+          "IFRS implementation projects (IFRS 7, 9, 13) and options valuation",
+          "Main contact for external auditors and consulting firms",
+          "Advanced Accounting & Taxation Program ‘Bilanzbuchhalter’ at GFS Steuerfachschule (2018 – 2020)"
+        ]
       },
       "builder": {
         "title": "End-to-End Builder",
-        "description": "From concept to MVP — multi-agent B2B pipeline that reduced manual workload by 53%."
+        "description": "From concept to MVP: multi-agent B2B sales pipeline that cut manual research by roughly half.",
+        "expanded": [
+          "B2B multi-agent sales pipeline at Datalogue: 4 LLM agents plus human-in-the-loop feedback",
+          "Generic news-crawler pipeline with PostgreSQL 3NF schema and vector semantic search",
+          "Urban farming plant disease detection: hierarchical 3-stage pipeline, ViT and CNN, Grad-CAM plus Attention Rollout",
+          "This portfolio site: Next.js 16, AWS CDK, full i18n across 4 locales including Arabic RTL",
+          "Full-stack MyRecipes app: Java Spring Boot, React, MongoDB, AI-powered suggestions"
+        ]
       },
       "multilingual": {
         "title": "Multilingual",
-        "description": "German (C1), English (fluent), Arabic (native), Spanish (elementary), French (elementary)."
+        "description": "German (C2, daily), English (full professional, daily), Arabic (native), Spanish (elementary, learning), French (elementary).",
+        "expanded": [
+          "German: current level C2, working daily at full professional level, last certified Telc C1 for business",
+          "English: full professional proficiency, daily use in tech and business contexts. B.Sc. was taught fully in English.",
+          "Arabic: native speaker from Damascus, Syria",
+          "Spanish: elementary, actively learning toward B1",
+          "French: elementary from school"
+        ]
       },
       "education": {
-        "title": "M.Sc. Candidate",
-        "description": "Data Science & AI at FH Wedel — deep learning, NLP, computer vision, econometrics."
+        "title": "M.Sc. Data Science & AI",
+        "description": "FH Wedel: deep learning, NLP, computer vision, econometrics, e-commerce, strategic management.",
+        "expanded": [
+          "Core: Deep Learning, Computer Vision, Machine Learning, Symbolic AI, Econometrics",
+          "Business track: Category Management, E-Commerce Business Models, Digital Transformation",
+          "Process: Agile Project Management, Change Management, Strategic Management, Organizational Theory",
+          "Technical: Unix and Shell Programming, Data Engineering, Empirical Research Methods",
+          "Thesis in progress: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
+        ]
       }
     }
   },

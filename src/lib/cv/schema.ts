@@ -90,6 +90,8 @@ export const CvEducationSchema = z.object({
 
 export const CvProjectSchema = z.object({
   name: z.string(),
+  context: CvLocaleStringSchema.optional(),
+  date: z.string().optional(),
   description: CvLocaleStringSchema,
   url: z.url().optional(),
   highlights: z.array(CvLocaleStringSchema).optional(),

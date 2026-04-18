@@ -57,7 +57,7 @@ ats:
 
   photo:
     enabled: true
-    column-width-percent: 25      # % of ATS header row reserved for photo column
+    column-width-percent: 23        # % of ATS header row reserved for photo column
     width-percent: 100             # % of photo column width
     gap-right-cm: 0.1             # cm — distance between photo and right-side header content
     offset-x-pt: -50               # pt — move photo right (+) / left (-)
@@ -68,8 +68,8 @@ ats:
     radius: 4                      # pt
 
   header:
-    padding-top: 0.2               # cm
-    padding-bottom: 0.2            # cm
+    padding-top: 0.08               # cm
+    padding-bottom: 0.08            # cm
     name-title-gap: 2.00           # em — gap between name and title (compensated for par-spacing: 0)
     title-contact-gap: 2.80        # em — gap between title and contact grid
     contact-row-gap: 0.80          # em — row spacing inside contact grid
@@ -219,7 +219,7 @@ visual:
       - "profile"
       - "experience"
       - "education"
-      # - "selected-projects"
+      - "selected-projects"
 
   header:
     padding-top: 0.8               # cm
@@ -269,8 +269,8 @@ visual:
     margin-top-continuation: 1.2   # cm
 
   section:
-    spacing-above: 2.20            # em — section transition gap (BIGGEST)
-    spacing-below: 1.00            # em — separator to content
+    spacing-above: 1.80            # em — section transition gap (BIGGEST)
+    spacing-below: 0.80            # em — separator to content
     title-separator-gap: 1.00      # em — title to separator line (matching ATS)
     separator-height: 0.4          # pt
     sidebar-spacing-above: 1.60    # em — sidebar section transition gap

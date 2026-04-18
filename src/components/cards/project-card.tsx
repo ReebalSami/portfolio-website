@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Plus } from "lucide-react";
 import { GitHubIcon } from "@/components/shared/brand-icons";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,13 +24,37 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
       transition={{ duration: 0.3 }}
     >
       <Card
-        className="h-full cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+        className="group h-full cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 flex flex-col"
         onClick={() => onSelect(project)}
       >
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
             <CardTitle className="text-lg leading-snug">{project.title}</CardTitle>
-            <div className="flex shrink-0 gap-1.5">
+            <Plus
+              className="h-4 w-4 shrink-0 text-foreground opacity-0 scale-75 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:scale-100 motion-reduce:opacity-100 motion-reduce:scale-100 motion-reduce:transition-none"
+              aria-hidden="true"
+            />
+          </div>
+        </CardHeader>
+        <CardContent className="flex flex-1 flex-col space-y-3">
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {project.shortDescription}
+          </p>
+          <p className="text-sm font-medium">{project.metric}</p>
+          <div className="flex flex-wrap gap-1.5">
+            {project.tech.slice(0, 4).map((t) => (
+              <Badge key={t} variant="secondary" className="text-xs">
+                {t}
+              </Badge>
+            ))}
+            {project.tech.length > 4 && (
+              <Badge variant="secondary" className="text-xs">
+                +{project.tech.length - 4}
+              </Badge>
+            )}
+          </div>
+          {(project.githubUrl || project.demoUrl) && (
+            <div className="flex flex-1 items-end justify-end gap-2 pt-2">
               {project.githubUrl && (
                 <a
                   href={project.githubUrl}
@@ -56,25 +80,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
                 </a>
               )}
             </div>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {project.shortDescription}
-          </p>
-          <p className="text-sm font-medium">{project.metric}</p>
-          <div className="flex flex-wrap gap-1.5">
-            {project.tech.slice(0, 4).map((t) => (
-              <Badge key={t} variant="secondary" className="text-xs">
-                {t}
-              </Badge>
-            ))}
-            {project.tech.length > 4 && (
-              <Badge variant="secondary" className="text-xs">
-                +{project.tech.length - 4}
-              </Badge>
-            )}
-          </div>
+          )}
         </CardContent>
       </Card>
     </motion.div>

@@ -159,39 +159,53 @@
 // =============================================================================
 
 // Section heading — sidebar style (smaller, no underline)
+// Uses block-based above/below so margins COLLAPSE with preceding item's
+// `below` — producing a uniform gap regardless of what came before.
 #let sidebar-section(title) = {
-  v(design.section.at("sidebar-spacing-above", default: 0.5) * 1em)
-  text(
-    font: heading-family,
-    size: f.heading.sidebar-section-size * 1pt,
-    weight: "semibold",
-    fill: c.heading,
-    tracking: f.heading.tracking * 1em,
-    upper(title),
-  )
-  v(sidebar-title-separator-gap)
-  box(
+  block(
+    above: design.section.at("sidebar-spacing-above", default: 0.5) * 1em,
+    below: design.section.at("sidebar-spacing-below", default: 0.25) * 1em,
     width: 100%,
-    height: design.section.at("sidebar-separator-height", default: 0.4) * 1pt,
-    fill: c.accent.lighten(30%),
-  )
-  v(design.section.at("sidebar-spacing-below", default: 0.25) * 1em)
+    breakable: false,
+  )[
+    #text(
+      font: heading-family,
+      size: f.heading.sidebar-section-size * 1pt,
+      weight: "semibold",
+      fill: c.heading,
+      tracking: f.heading.tracking * 1em,
+      upper(title),
+    )
+    #v(sidebar-title-separator-gap)
+    #box(
+      width: 100%,
+      height: design.section.at("sidebar-separator-height", default: 0.4) * 1pt,
+      fill: c.accent.lighten(30%),
+    )
+  ]
 }
 
 // Section heading — main area style (larger, accent underline)
+// Uses block-based above/below so margins COLLAPSE with preceding subsection's
+// `below` — producing a uniform gap regardless of what came before.
 #let main-section(title) = {
-  v(design.section.spacing-above * 1em)
-  text(
-    font: heading-family,
-    size: f.heading.section-size * 1pt,
-    weight: "semibold",
-    fill: c.heading,
-    tracking: f.heading.tracking * 1em,
-    upper(title),
-  )
-  v(section-title-separator-gap)
-  box(width: 100%, height: design.section.separator-height * 1pt, fill: c.separator.lighten(20%))
-  v(design.section.spacing-below * 1em)
+  block(
+    above: design.section.spacing-above * 1em,
+    below: design.section.spacing-below * 1em,
+    width: 100%,
+    breakable: false,
+  )[
+    #text(
+      font: heading-family,
+      size: f.heading.section-size * 1pt,
+      weight: "semibold",
+      fill: c.heading,
+      tracking: f.heading.tracking * 1em,
+      upper(title),
+    )
+    #v(section-title-separator-gap)
+    #box(width: 100%, height: design.section.separator-height * 1pt, fill: c.separator.lighten(20%))
+  ]
 }
 
 // Job entry
@@ -240,6 +254,32 @@
   ]
 }
 
+// Project entry — mirrors edu() structure exactly:
+// title row (name + date), meta line (context, accent color), description.
+#let project(name, context_label: none, date: none, description: none) = {
+  block(
+    breakable: false,
+    above: subsection.education-above * 1em,
+    below: subsection.education-below * 1em,
+  )[
+    #grid(
+      columns: (1fr, auto),
+      text(font: heading-family, weight: "semibold", size: 10pt, fill: c.subsection-title)[#name],
+      if date != none {
+        text(size: 9pt, fill: c.subsection-date, weight: "medium")[#date]
+      },
+    )
+    #if context_label != none {
+      v(subsection-title-meta-gap)
+      text(size: 9pt, fill: c.subsection-meta, weight: f.meta.weight)[#context_label]
+    }
+    #if description != none {
+      v(subsection.description-gap * 1em)
+      text(size: 9.5pt, fill: c.body)[#description]
+    }
+  ]
+}
+
 // Skill badge
 #let badge(label) = {
   box(
@@ -284,7 +324,6 @@
       ]
     ]
   ] else if id == "key-strengths" [
-    #v(sidebar-key-strengths-extra-above)
     #sidebar-section("Key Strengths")
     #set text(size: f.sidebar.size * 0.95 * 1pt, fill: c.body)
     #set list(spacing: bullet-between-gap)
@@ -300,7 +339,6 @@
         #text(size: 8.5pt, fill: c.muted)[#r(lang.fluency)]
       ]
     ]
-    #v(sidebar-languages-next-spacing)
   ] else if id == "interests" [
     #sidebar-section("Hobbies & Interests")
     #for interest in data.interests [
@@ -363,14 +401,14 @@
   ] else if id == "selected-projects" [
     #main-section("Selected Projects")
     #for proj in data.projects [
-      #block(breakable: false, above: 0.1em, below: 0.08em)[
-        #text(font: heading-family, weight: "semibold", size: 7.5pt, fill: c.heading)[#proj.name]
-        #v(0.02em)
-        #text(size: 7pt, fill: c.body)[#r(proj.description)]
-      ]
+      #project(
+        proj.name,
+        context_label: if "context" in proj { r(proj.context) },
+        date: proj.at("date", default: none),
+        description: r(proj.description),
+      )
     ]
   ] else if id == "key-strengths" [
-    #v(main-key-strengths-extra-above)
     #main-section("Key Strengths")
     #set text(size: 9pt, fill: c.body)
     #set list(spacing: bullet-between-gap)

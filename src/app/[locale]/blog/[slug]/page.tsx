@@ -6,6 +6,9 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeShiki from "@shikijs/rehype";
 import { getPostBySlug, getAllSlugs } from "@/lib/mdx";
+import { remarkMermaid } from "@/lib/mdx/remark-mermaid";
+import { mdxComponents } from "@/components/blog/mdx-components";
+import { GalleryProvider } from "@/components/blog/gallery-provider";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -170,20 +173,38 @@ export default async function BlogPostPage({ params }: PageProps) {
       </header>
 
       <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-heading prose-headings:tracking-tight prose-a:text-primary prose-code:before:content-none prose-code:after:content-none">
-        <MDXRemote
-          source={post.content}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [
-                rehypeSlug,
-                [rehypeAutolinkHeadings, { behavior: "wrap" }],
-                [rehypeShiki, { themes: { light: "github-light", dark: "github-dark" } }],
-              ],
-            },
-          }}
-        />
+        <GalleryProvider>
+          <MDXRemote
+            source={post.content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkMermaid, remarkGfm],
+                rehypePlugins: [
+                  rehypeSlug,
+                  [rehypeAutolinkHeadings, { behavior: "wrap" }],
+                  [
+                    rehypeShiki,
+                    {
+                      themes: { light: "github-light", dark: "github-dark" },
+                    },
+                  ],
+                ],
+              },
+            }}
+          />
+        </GalleryProvider>
       </article>
+
+      <div className="mt-16 pt-8 border-t border-border">
+        <Link
+          href="/#blog"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          {t("backToBlog")}
+        </Link>
+      </div>
     </div>
   );
 }

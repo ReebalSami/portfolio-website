@@ -1,78 +1,79 @@
 ---
-title: "Detecting Plant Diseases with Vision Transformers"
-description: "How I used Vision Transformers and GradCAM explainability to build an automated plant disease detection system for urban farming environments."
+title: "Detecting Plant Diseases at Scale — Hierarchical Vision Models and the Domain Gap That Broke Them"
+description: "A hierarchical deep-learning pipeline for automated plant health monitoring, the data-quality work nobody talks about, and the uncomfortable finding that reshaped the project."
 date: "2026-01-20"
 tags: ["Computer Vision", "PyTorch", "Deep Learning", "AI"]
 published: true
 ---
 
-## Urban Farming Meets Deep Learning
+## The Project
 
-Urban farming is growing rapidly, but plant diseases remain a major threat to crop yields. Early detection is critical — but most urban farmers lack the expertise to identify diseases at early stages. I built a computer vision system that automates this process using deep learning.
+FH Wedel Deep Learning course, summer semester 2025. Two people, 12 weeks, 200 combined person-hours. The goal: an automated plant health monitoring system good enough to sit on a real urban farming installation. Given a photo of a leaf, the system should tell you which plant it is, whether it's sick, and if so, what it has.
 
-## CNN vs. Vision Transformer
+We built it. It hit 99%+ on isolated leaf images across three plant species and sixteen disease classes. And then the bottom fell out the moment we tested on whole plants. That gap — between the controlled eval set and the real deployment conditions — ended up being the most important thing I learned on this project.
 
-The project compared two architectures:
+## The Dataset Nobody Wants to Talk About
 
-### Convolutional Neural Networks (CNN)
+Before any modelling, there's data quality. We compiled **31,616 images across 3 species (lettuce, tomato, strawberry) and 16 classes** from multiple public sources. The initial look at the raw data was ugly:
 
-CNNs have been the standard for image classification for years. They use local receptive fields to detect patterns like edges, textures, and shapes hierarchically.
+- Roughly 30% of the raw dataset was irrelevant — stock photos, prepared salads, non-plant images. Removed via manual review plus embedding-based clustering.
+- Duplicate and augmented images were leaking across train, val, and test splits. Left unfixed, every accuracy number would have been lying. We eliminated them with perceptual hashing and cross-split deduplication.
+- Labels were inconsistent across sources and needed harmonization.
+- The class distribution was heavily skewed — healthy lettuce vastly outnumbered diseased specimens. We addressed this with strategic class merging, inverse-frequency weighting, and focal loss.
 
-```python
-import torch.nn as nn
+The punchline of the data section is the same one every dataset paper ends with and everyone learns the hard way: **data quality beats data quantity.** Targeted curation moved our numbers more than any model swap.
 
-class PlantCNN(nn.Module):
-    def __init__(self, num_classes):
-        super().__init__()
-        self.features = nn.Sequential(
-            nn.Conv2d(3, 64, kernel_size=3, padding=1),
-            nn.BatchNorm2d(64),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2),
-            # ... deeper layers
-        )
-        self.classifier = nn.Linear(512, num_classes)
-```
+## Hierarchical Classification, Not One Big Model
 
-### Vision Transformers (ViT)
+The obvious first attempt is a single 16-class classifier. The obvious first attempt is also wrong, for two reasons. First, the classes are structurally hierarchical — a tomato disease is not the same kind of thing as a lettuce disease. Second, more than half the real traffic is healthy plants, and routing all of them through a 16-way classifier is wasteful.
 
-Vision Transformers split the image into patches and process them as a sequence — similar to how language models process words. This gives them a global view of the image from the very first layer.
+We built a three-stage pipeline instead:
 
-The ViT model showed better performance on our dataset, particularly for diseases that manifest as subtle, distributed patterns across the leaf surface.
+1. **PlantID (Stage i)** — ResNet50 routes the image to one of three species. 99.9% accuracy.
+2. **Binary Health (Stage ii)** — Per-plant models classify healthy vs. diseased. Healthy samples exit early, which was 55–65% of traffic. Focal loss handled the residual imbalance. 99.7% accuracy.
+3. **Disease Classification (Stage iii)** — Per-plant disease models, only trained where a plant had multiple disease classes. Plant-specific routing beat a single global disease classifier by roughly 6 percentage points. 99.1% accuracy.
 
-## Making It Explainable with GradCAM
+## The Architecture Comparison
 
-A model that says "this plant is diseased" isn't enough. Farmers need to understand *why* and *where*. That's where GradCAM (Gradient-weighted Class Activation Mapping) comes in.
+We compared 8+ architectures across three tiers:
 
-GradCAM generates a heatmap showing which regions of the image most influenced the model's prediction. For plant disease detection, this highlights the exact areas of the leaf showing disease symptoms.
+- **Transformer tier** — ViT-Base, ViT-Small, DINOv2 (all 86M params)
+- **Balanced tier** — ConvNeXt-Base, ConvNeXt-Tiny, ResNet-50
+- **Fast tier** — EfficientNet-B0, MobileNetV3 (around 5M params)
 
-```python
-from pytorch_grad_cam import GradCAM
-from pytorch_grad_cam.utils.image import show_cam_on_image
+In controlled evaluation the top of every tier landed between 99.1% and 99.9%. Strong augmentation (color jitter + perspective transforms) cut the generalization gap by roughly 92% versus no augmentation at all.
 
-cam = GradCAM(model=model, target_layers=[model.layer4[-1]])
-grayscale_cam = cam(input_tensor=input_tensor)
+The surprising bit: **the fast models were perfectly competitive** on this dataset. EfficientNet-B0 was within a percentage point of ViT-Base at 6% of the parameter count. For a deployed system on an edge device, the choice becomes obvious.
 
-# Overlay heatmap on original image
-visualization = show_cam_on_image(rgb_img, grayscale_cam[0], use_rgb=True)
-```
+## Explainability: Grad-CAM and Attention Rollout
 
-This explainability layer was crucial for building trust with farmers who are understandably skeptical of AI making decisions about their crops.
+A model that shouts "diseased" is not useful on a farm. A model that highlights the exact patch of leaf that made it say "diseased" is. We integrated two complementary techniques into the Streamlit dashboard:
 
-## Key Results
+- **Grad-CAM** for the CNNs. Gradient-weighted class activation mapping highlights the image regions that pushed the prediction. We auto-detected the correct target layer per architecture so the user didn't have to know.
+- **Attention Rollout** for the ViTs. Aggregates attention weights across all transformer layers to trace information flow from patches to the prediction. Shows global context understanding, which matters for diseases distributed across the leaf rather than localized in a spot.
 
-| Metric | CNN | Vision Transformer |
-|--------|-----|-------------------|
-| Accuracy | 91.2% | 94.7% |
-| F1-Score | 0.89 | 0.93 |
-| Inference Time | 12ms | 28ms |
+Both overlays got adjustable opacity sliders. Agricultural professionals could toggle and tune until they understood why the model decided what it did. Explainability wasn't a side feature, it was the feature that made domain experts willing to trust the thing at all.
 
-The Vision Transformer achieved higher accuracy but at the cost of slower inference. For a real-time mobile application, the CNN might be preferred; for batch processing of captured images, the ViT is the clear winner.
+## The Uncomfortable Finding
 
-## What I Learned
+Week 8. We finally started testing on whole-plant scenes — actual photos of tomato plants in context, with overlapping leaves, variable lighting, soil in the background, different camera angles. The numbers dropped hard.
 
-- **Data quality trumps model architecture** — Careful data augmentation and cleaning improved both models more than any architecture change.
-- **Explainability drives adoption** — GradCAM wasn't just a nice-to-have; it was the feature that made farmers trust the system.
-- **Domain expertise is essential** — Working with plant pathologists to validate model predictions caught errors that pure metrics would have missed.
+Models that had scored 99.7% on isolated leaves were degrading significantly outside the lab. That's the **domain gap**, and it's the real bottleneck for agricultural AI deployment — not accuracy on clean benchmarks, not architecture choice, not a slightly better loss function. It's the mismatch between training distribution and deployment distribution.
 
-Computer vision in agriculture is a field where AI can make a tangible, real-world impact. The technology exists — the challenge is making it accessible and trustworthy for the people who need it most.
+Our recommendations for future work follow directly from this:
+
+- **Spatial localization first.** A YOLO detector to isolate individual leaves from whole-plant scenes before classification.
+- **Training data that looks like deployment.** Whole-plant photos, not only leaf close-ups. Different lighting. Different backgrounds. Different cameras.
+- **Test real conditions early.** If we'd run whole-plant trials in week 2 instead of week 8, the entire project would have been shaped differently.
+
+## What I Actually Learned
+
+- **Data quality beats data quantity** — said above, worth saying twice.
+- **Hierarchical routing pays off** — +6pp over a global classifier and cleaner downstream models.
+- **Transformer vs. CNN is the wrong fight** — for this problem, a 5M-parameter EfficientNet is perfectly competitive with a 86M-parameter ViT.
+- **Explainability drives adoption** — Grad-CAM and Attention Rollout did more to build trust with agriculture people than any metric we quoted.
+- **Test in real conditions early** — the domain gap was invisible in eval and only surfaced during whole-plant trials. Not accidentally. Systematically.
+
+---
+
+Full details in the [public showcase repo](https://github.com/ReebalSami/urban-farming-plant-health-showcase), which captures the architecture, the dataset pipeline, and the ablation tables. The source code itself stays on FH Wedel's GitLab. Joint work with Jack Abajian, who led Streamlit development and Grad-CAM integration.

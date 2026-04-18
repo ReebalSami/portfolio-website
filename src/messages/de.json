@@ -7,6 +7,7 @@
       "about": "Über mich",
       "projects": "Projekte",
       "blog": "Blog",
+      "cv": "Resumé",
       "contact": "Kontakt",
       "openMenu": "Menü öffnen"
     },
@@ -25,33 +26,64 @@
   },
   "home": {
     "hero": {
-      "intro": "Verbindung von 5 Jahren Erfahrung in Corporate Finance mit modernsten KI/ML-Fähigkeiten. End-to-End-Entwicklung intelligenter Lösungen."
+      "intro": "Über fünf Jahre Erfahrung in Corporate Finance, verbunden mit modernsten KI/ML-Fähigkeiten. End-to-End-Entwicklung intelligenter Lösungen."
     }
   },
   "about": {
     "title": "Über mich",
     "subtitle": "Wer ich bin",
-    "summary1": "Data Scientist und KI-Ingenieur mit 5 Jahren Erfahrung in Corporate Finance (Otto Group) und modernsten KI/ML-Fähigkeiten. M.Sc.-Kandidat in Data Science & KI an der FH Wedel.",
-    "summary2": "Bewiesene End-to-End-Lieferung — von Multi-Agenten-B2B-Sales-Pipelines bis hin zur Pflanzenerkennung mit Deep Learning. Ich entwickle intelligente Lösungen mit messbarem Geschäftsimpact.",
+    "summary1": "Data Scientist und KI-Ingenieur mit über fünf Jahren Erfahrung in Corporate Finance bei der Otto Group, kombiniert mit modernsten KI/ML-Fähigkeiten. Aktuell am Schreiben der Masterarbeit zum Thema GraphRAG Document Intelligence im Rahmen des M.Sc. Data Science & KI an der FH Wedel.",
+    "summary2": "Bewiesene End-to-End-Lieferung, von Multi-Agenten-B2B-Sales-Pipelines bis zur Pflanzengesundheitserkennung mit Deep Learning. Ich entwickle intelligente Lösungen mit messbarem Geschäftsimpact.",
+    "cardExpand": "Mehr erfahren",
+    "cardDetails": "Details",
     "differentiators": "Was mich auszeichnet",
     "timeline": "Karriereweg",
     "techStack": "Tech-Stack",
     "cards": {
       "business": {
         "title": "Business × Daten",
-        "description": "5 Jahre bei der Otto Group in Corporate Finance, jetzt Verbindung von Business-Verständnis mit KI/ML-Engineering."
+        "description": "5 Jahre bei der Otto Group in Corporate Finance, heute verbunden mit KI/ML-Engineering.",
+        "expanded": [
+          "HGB- und IFRS-Konzernrechnungslegung für mehrere Otto-Group-Tochtergesellschaften",
+          "SAP FI-CO und BPC-Konsolidierung, Monats-, Quartals- und Jahresabschlüsse",
+          "RPA-Automatisierungen mit UiPath für Urlaubsrückstellungen und Zinspläne geleitet",
+          "IFRS-Implementierungsprojekte (IFRS 7, 9, 13) und Optionsbewertung",
+          "Hauptansprechpartner für externe Prüfer und Beratungsfirmen",
+          "Advanced Accounting & Taxation Program ‘Bilanzbuchhalter’ an der GFS Steuerfachschule (2018 – 2020)"
+        ]
       },
       "builder": {
         "title": "End-to-End-Entwickler",
-        "description": "Vom Konzept zum MVP — Multi-Agenten-B2B-Pipeline mit 53% Workload-Reduktion."
+        "description": "Vom Konzept zum MVP: Multi-Agenten-B2B-Sales-Pipeline, die manuelle Recherche etwa halbiert hat.",
+        "expanded": [
+          "B2B-Multi-Agenten-Sales-Pipeline bei Datalogue: 4 LLM-Agenten plus Human-in-the-Loop-Feedback",
+          "Generische News-Crawler-Pipeline mit PostgreSQL 3NF-Schema und Vector Semantic Search",
+          "Pflanzenkrankheitserkennung im Urban Farming: hierarchische 3-stufige Pipeline, ViT und CNN, Grad-CAM plus Attention Rollout",
+          "Diese Portfolio-Website: Next.js 16, AWS CDK, vollständige i18n in 4 Sprachen inklusive Arabisch RTL",
+          "Full-Stack MyRecipes-App: Java Spring Boot, React, MongoDB, KI-gestützte Vorschläge"
+        ]
       },
       "multilingual": {
         "title": "Mehrsprachig",
-        "description": "Deutsch (C1), Englisch (fließend), Arabisch (Muttersprache), Spanisch (Grundkenntnisse), Französisch (Grundkenntnisse)."
+        "description": "Deutsch (C2, täglich), Englisch (verhandlungssicher, täglich), Arabisch (Muttersprache), Spanisch (Grundkenntnisse, lernend), Französisch (Grundkenntnisse).",
+        "expanded": [
+          "Deutsch: aktuelles Niveau C2, tägliche Arbeit auf verhandlungssicherem Niveau, zuletzt zertifiziert Telc C1 Beruf",
+          "Englisch: verhandlungssicher, täglich im Tech- und Business-Kontext. B.Sc. komplett auf Englisch absolviert.",
+          "Arabisch: Muttersprache aus Damaskus, Syrien",
+          "Spanisch: Grundkenntnisse, aktiv lernend Richtung B1",
+          "Französisch: Grundkenntnisse aus der Schulzeit"
+        ]
       },
       "education": {
-        "title": "M.Sc.-Kandidat",
-        "description": "Data Science & KI an der FH Wedel — Deep Learning, NLP, Computer Vision, Ökonometrie."
+        "title": "M.Sc. Data Science & KI",
+        "description": "FH Wedel: Deep Learning, NLP, Computer Vision, Ökonometrie, E-Commerce, Strategisches Management.",
+        "expanded": [
+          "Kern: Deep Learning, Computer Vision, Machine Learning, Symbolische KI, Ökonometrie",
+          "Business-Schiene: Category Management, E-Commerce-Geschäftsmodelle, Digitale Transformation",
+          "Prozess: Agiles Projektmanagement, Change Management, Strategisches Management, Organisationslehre",
+          "Technisch: Unix und Shell-Programmierung, Data Engineering, Empirische Forschungsmethoden",
+          "Laufende Masterarbeit: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
+        ]
       }
     }
   },

@@ -1,5 +1,5 @@
 import { Link } from "@/i18n/navigation";
-import { Clock, Calendar } from "lucide-react";
+import { Clock, Calendar, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { BlogPostMeta } from "@/lib/mdx";
@@ -12,9 +12,15 @@ interface BlogCardProps {
 export function BlogCard({ post, locale = "en" }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`}>
-      <Card className="h-full cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+      <Card className="group h-full cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
         <CardHeader>
-          <CardTitle className="text-lg leading-snug">{post.title}</CardTitle>
+          <div className="flex items-start justify-between gap-2">
+            <CardTitle className="text-lg leading-snug">{post.title}</CardTitle>
+            <ExternalLink
+              className="h-4 w-4 shrink-0 text-muted-foreground transition-colors duration-200 ease-out group-hover:text-foreground"
+              aria-hidden="true"
+            />
+          </div>
         </CardHeader>
         <CardContent className="space-y-3">
           <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
