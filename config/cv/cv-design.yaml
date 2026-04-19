@@ -125,6 +125,9 @@ ats:
     key-strengths-extra-above: 1.0 # em — extra spacing before Key Strengths section
     references-extra-above: 1.0    # em — extra spacing before References section
 
+  education:
+    force-next-page: true          # true = start Education on a new page in ATS
+
   technical-skills:
     category-above: 0.25           # em — spacing before first technical skill category
     title-badges-gap: 0.40         # em — spacing between category title and badges row
@@ -144,6 +147,7 @@ ats:
     interests-item-above: 0.25     # em — spacing before first hobbies/interests item
     interests-item-below: 1.05     # em — spacing between hobbies/interests items (big)
     interests-keywords-gap: 0.40   # em — hobby title to keywords (small)
+    interests-keywords-separator: " | " # separator for hobbies keywords in ATS
     interests-description-after: 0.0 # em — no trailing padding inside interest block
 
   interests:
@@ -301,9 +305,15 @@ visual:
     interests-item-above: 0.30     # em — spacing before first hobbies/interests item
     interests-item-below: 1.30     # em — spacing between hobbies/interests items
     interests-keywords-gap: 0.40   # em — hobby title to keywords (matching ATS)
+    interests-keywords-layout: "stacked" # "stacked" = one keyword per line
     interests-description-after: 0.0 # em — no trailing padding inside interest block
+
+  education:
+    force-next-page: true          # true = start Education on a new page in Visual (right column flow)
 
   ats-link:
     enabled: true
     url: "https://reebal-sami.com/cv/ats/resume_reebal_sami.pdf"
-    label: "ATS-optimized version: reebal-sami.com/cv/ats/resume_reebal_sami.pdf"
+    label: "ATS-optimized version: https://reebal-sami.com/cv/ats/resume_reebal_sami.pdf"
+    justify: false
+    spacing-above: 1.6

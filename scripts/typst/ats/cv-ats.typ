@@ -13,7 +13,7 @@
 #let locale = if sys.inputs.at("locale", default: none) != none { sys.inputs.locale } else { "en" }
 
 // --- Shared imports ---
-#import "../shared/locale.typ": resolve
+#import "../shared/locale.typ": resolve, is-pdf-visible
 #import "../shared/shapes.typ": scatter-shapes
 
 #let r(val) = resolve(val, locale)
@@ -146,6 +146,7 @@
 #let technical-badges-after-gap = scaled-space(technical.badges-after-gap) * 1em
 #let interests-item-below = scaled-space(subsection.at("interests-item-below", default: 0.25)) * 1em
 #let interests-keywords-gap = scaled-space(subsection.at("interests-keywords-gap", default: 0.04)) * 1em
+#let interests-keywords-separator = subsection.at("interests-keywords-separator", default: " / ")
 #let interests-item-above = scaled-space(subsection.at("interests-item-above", default: 0)) * 1em
 #let interests-description-after = scaled-space(subsection.at("interests-description-after", default: 0)) * 1em
 #let bullet-between-gap = scaled-space(subsection.at("bullet-between-gap", default: 0.12)) * 1em
@@ -158,6 +159,7 @@
 #let header-title-contact-gap = scaled-space(design.header.at("title-contact-gap", default: 0.4)) * 1em
 #let header-contact-row-gap = scaled-space(design.header.at("contact-row-gap", default: 0.2)) * 1em
 #let header-after-gap = scaled-space(design.header.at("after-gap", default: 0.15)) * 1em
+#let education-force-next-page = design.at("education", default: (:)).at("force-next-page", default: false)
 
 // =============================================================================
 // PAGE SETUP — margin-top applies to page 2+; header outset covers page 1 top
@@ -341,8 +343,9 @@
 #section-start("Experience")
 
 #let job-between-gap = calc.max(job-above-gap, job-below-gap)
+#let visible-experience = data.experience.filter(j => is-pdf-visible(j))
 
-#for (idx, j) in data.experience.enumerate() [
+#for (idx, j) in visible-experience.enumerate() [
   #job(
     r(j.position), j.company, j.location,
     j.startDate, j.at("endDate", default: "Present"),
@@ -356,6 +359,9 @@
 // =============================================================================
 // EDUCATION
 // =============================================================================
+#if education-force-next-page [
+  #pagebreak()
+]
 #section-start("Education")
 
 #let education-between-gap = calc.max(education-above-gap, education-below-gap)
@@ -445,7 +451,7 @@
     #if "keywords" in interest [
       #v(interests-keywords-gap)
       #text(size: f.body.size * 0.92 * 1pt, fill: c.dark)[
-        #interest.keywords.map(k => r(k)).join(" / ")
+        #interest.keywords.map(k => r(k)).join(interests-keywords-separator)
       ]
       #v(interests-description-after)
     ]

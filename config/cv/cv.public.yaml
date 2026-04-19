@@ -3,7 +3,7 @@
 # =============================================================================
 # Single source of truth for all public career data.
 # NO phone numbers, NO street addresses, NO reference contacts.
-# EN + DE complete. ES + AR placeholders.
+# EN + DE + ES + AR complete.
 # =============================================================================
 
 meta:
@@ -17,8 +17,8 @@ basics:
   title:
     en: "Data Scientist & AI Engineer"
     de: "Data Scientist & KI-Ingenieur"
-    es: "[TODO]"
-    ar: "[TODO]"
+    es: "Científico de datos e ingeniero de inteligencia artificial"
+    ar: "عالم بيانات ومهندس ذكاء اصطناعي"
   email: "contact@reebal-sami.com"
   photo: "/images/hero/start-photo.JPG"
   url: "https://reebal-sami.com"
@@ -27,12 +27,12 @@ basics:
       en: "Hamburg"
       de: "Hamburg"
       es: "Hamburgo"
-      ar: "[TODO]"
+      ar: "هامبورغ"
     country:
       en: "Germany"
       de: "Deutschland"
       es: "Alemania"
-      ar: "[TODO]"
+      ar: "ألمانيا"
   profiles:
     - network: "LinkedIn"
       url: "https://linkedin.com/in/reebal-sami"
@@ -51,7 +51,7 @@ profile:
       to deep-learning models for computer vision.
       I built and deploy this portfolio on AWS CDK.
       Comfortable navigating modern AI-assisted development with the latest tools and the legacy enterprise systems many companies still run on.
-      Currently writing my M.Sc. thesis in Data Science & AI at FH Wedel on Document Intelligence and Knowledge Graphs, while shipping production code on the side.
+      Currently writing my Master's thesis on GraphRAG Document Intelligence as part of my M.Sc. Data Science & AI at FH Wedel, while shipping production code on the side.
     de: >-
       Data Scientist und KI-Ingenieur an der Schnittstelle von Business und moderner KI.
       Über fünf Jahre bei der Otto Group haben tiefes Verständnis für Unternehmensdatenflüsse, Finanzsysteme und bereichsübergreifende Stakeholder-Arbeit aufgebaut.
@@ -59,9 +59,23 @@ profile:
       bis hin zu Deep-Learning-Modellen für Computer Vision.
       Diese Portfolio-Website habe ich selbst gebaut und deploye sie via AWS CDK.
       Gleichermaßen zuhause in moderner KI-gestützter Entwicklung mit den neuesten Tools und in den Legacy-Enterprise-Systemen, auf denen viele Unternehmen immer noch laufen.
-      Aktuell am Schreiben der Masterarbeit in Data Science & KI an der FH Wedel zum Thema Document Intelligence und Knowledge Graphs, parallel dazu produktionsreifer Code.
-    es: "[TODO]"
-    ar: "[TODO]"
+      Aktuell am Schreiben der Masterarbeit in Data Science & KI an der FH Wedel zum Thema GraphRAG Document Intelligence, parallel dazu produktionsreifer Code.
+    es: >-
+      Científico de datos e ingeniero de IA que trabaja en la intersección entre negocio e IA moderna.
+      Más de cinco años en Otto Group me dieron una comprensión profunda de flujos de datos corporativos, sistemas financieros y trabajo transversal con stakeholders.
+      Hoy orquesto soluciones de IA de extremo a extremo en múltiples capas: desde sistemas LLM multiagente y pipelines automatizados de rastreo de noticias
+      hasta modelos de deep learning para visión por computador.
+      Construí y despliego este portfolio con AWS CDK.
+      Me muevo con soltura tanto en desarrollo moderno asistido por IA con las últimas herramientas como en sistemas legacy empresariales que muchas compañías aún utilizan.
+      Actualmente escribo mi tesis de máster sobre GraphRAG Document Intelligence como parte del M.Sc. Data Science & AI en FH Wedel, mientras sigo entregando código en producción.
+    ar: >-
+      عالم بيانات ومهندس ذكاء اصطناعي يعمل عند تقاطع الأعمال والذكاء الاصطناعي الحديث.
+      على مدار أكثر من خمس سنوات في Otto Group اكتسبت فهماً عميقاً لتدفقات بيانات الشركات والأنظمة المالية والعمل متعدد التخصصات مع أصحاب المصلحة.
+      اليوم أقود حلول ذكاء اصطناعي شاملة عبر عدة طبقات: من أنظمة LLM متعددة الوكلاء وخطوط زحف الأخبار المؤتمتة
+      إلى نماذج التعلم العميق لرؤية الحاسوب.
+      قمت ببناء هذا الموقع ونشره باستخدام AWS CDK.
+      أتنقل بثقة بين التطوير الحديث المدعوم بالذكاء الاصطناعي باستخدام أحدث الأدوات وبين أنظمة المؤسسات القديمة التي لا تزال كثير من الشركات تعتمد عليها.
+      أكتب حالياً رسالة الماجستير حول GraphRAG Document Intelligence ضمن برنامج M.Sc. Data Science & AI في FH Wedel، بالتوازي مع تسليم كود إنتاجي.
 
 # --- Experience ---
 experience:
@@ -69,167 +83,169 @@ experience:
     position:
       en: "AI & Data Science Working Student"
       de: "Werkstudent KI & Data Science"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Estudiante trabajador de IA y ciencia de datos"
+      ar: "طالب عامل في مجال الذكاء الاصطناعي وعلوم البيانات"
     location: "Hamburg"
     startDate: "2025-06"
     endDate: "2025-12"
     description:
       en: "20h/week on a B2B Sales Lead project from concept to MVP — reduced manual sales research workload by ~53%."
       de: "20h/Woche an einem B2B-Sales-Lead-Projekt vom Konzept bis zum MVP — manuelle Recherchearbeit um ~53% reduziert."
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "20 horas a la semana en un proyecto de líder de ventas B2B desde el concepto hasta el MVP: redujo la carga de trabajo de investigación de ventas manual en aproximadamente un 53 %."
+      ar: "20 ساعة في الأسبوع في مشروع قائد مبيعات B2B بدءًا من المفهوم وحتى MVP - تقليل عبء عمل أبحاث المبيعات اليدوية بنسبة 53% تقريبًا."
     highlights:
       - en: "Designed multi-agent architecture: LLM agents for company targeting, contact discovery, insight generation, and outreach drafting with human-in-the-loop feedback"
         de: "Multi-Agenten-Architektur entworfen: LLM-Agenten für Unternehmens-Targeting, Kontaktsuche, Insight-Generierung und Outreach-Drafting mit Human-in-the-Loop-Feedback"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Arquitectura de múltiples agentes diseñada: agentes de LLM para la orientación de empresas, descubrimiento de contactos, generación de información y redacción de divulgación con comentarios humanos integrados."
+        ar: "تصميم معماري متعدد الوكلاء: وكلاء LLM لاستهداف الشركة، واكتشاف جهات الاتصال، وتوليد الرؤية، وصياغة التوعية باستخدام تعليقات الإنسان في الحلقة"
       - en: "Built generic news-crawler pipeline with PostgreSQL 3NF + vector search; reduced sequential latency ~70× via async fan-out"
         de: "Generische News-Crawler-Pipeline mit PostgreSQL 3NF + Vector Search; sequenzielle Latenz ~70× reduziert durch asynchrone Parallelisierung"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Construyó un canal genérico de rastreador de noticias con PostgreSQL 3NF + búsqueda vectorial; latencia secuencial reducida ~70× mediante distribución asíncrona"
+        ar: "إنشاء خط أنابيب عام لتتبع الأخبار باستخدام PostgreSQL 3NF + بحث المتجهات؛ تقليل زمن الوصول المتسلسل ~ 70 × عبر التوزيع غير المتزامن"
     tags: ["ai", "llm", "agents", "python", "streamlit", "nlp"]
 
   - company: "Future Founder Program"
     position:
       en: "Junior Entrepreneur / Mentee"
       de: "Jungunternehmer / Mentee"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Emprendedor Junior / Aprendiz"
+      ar: "رجل أعمال مبتدئ/متدرب"
     location: "Hamburg"
     startDate: "2024-11"
     endDate: "2025-01"
     highlights:
       - en: "Entrepreneurial program with workshops, coaching sessions, and pitch events to develop a startup mindset"
         de: "Gründerprogramm mit Workshops, Coaching-Sessions und Pitch-Events zur Entwicklung eines Startup-Mindsets"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Programa emprendedor con talleres, sesiones de coaching y eventos de presentación para desarrollar una mentalidad emprendedora."
+        ar: "برنامج ريادة الأعمال يتضمن ورش عمل وجلسات تدريبية وفعاليات لتطوير عقلية الشركات الناشئة"
       - en: "Built an AI-powered regulatory compliance tool for biotech within a team of four, streamlining processes to accelerate life-saving products to market"
         de: "KI-gestütztes Regulierungs-Compliance-Tool für Biotech im Viererteam entwickelt, um lebensrettende Produkte schneller auf den Markt zu bringen"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Construyó una herramienta de cumplimiento normativo impulsada por IA para biotecnología dentro de un equipo de cuatro personas, optimizando los procesos para acelerar la comercialización de productos que salvan vidas."
+        ar: "تم إنشاء أداة امتثال تنظيمية مدعومة بالذكاء الاصطناعي للتكنولوجيا الحيوية ضمن فريق مكون من أربعة أشخاص، مما أدى إلى تبسيط العمليات لتسريع طرح المنتجات المنقذة للحياة في السوق"
     tags: ["entrepreneurship", "ai", "biotech"]
 
   - company: "neuefische GmbH"
     position:
       en: "Trainee Full Stack Java Development"
       de: "Trainee Full-Stack-Java-Entwicklung"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Aprendiz de Desarrollo Java Full Stack"
+      ar: "متدرب في تطوير جافا Full Stack"
     location: "Hamburg"
     startDate: "2024-01"
     endDate: "2024-04"
     highlights:
       - en: "Intensive full-stack bootcamp: Java (Spring Boot, OOP, MongoDB, OAuth, Docker), TypeScript, and advanced React"
         de: "Intensives Full-Stack-Bootcamp: Java (Spring Boot, OOP, MongoDB, OAuth, Docker), TypeScript und fortgeschrittenes React"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Bootcamp intensivo de pila completa: Java (Spring Boot, OOP, MongoDB, OAuth, Docker), TypeScript y React avanzado"
+        ar: "معسكر تدريبي مكثف وكامل: Java (Spring Boot، OOP، MongoDB، OAuth، Docker)، TypeScript، وReact المتقدم"
       - en: "Built and deployed MyRecipes — an AI-powered web app suggesting recipes from available ingredients using Java, REST APIs, MongoDB, and TDD"
-        de: "MyRecipes entwickelt und deployt — KI-gestützte Web-App zur Rezeptvorschlägen aus vorhandenen Zutaten mit Java, REST-APIs, MongoDB und TDD"
-        es: "[TODO]"
-        ar: "[TODO]"
+        de: "MyRecipes entwickelt und deployt — KI-gestützte Web-App für Rezeptvorschläge aus vorhandenen Zutaten mit Java, REST-APIs, MongoDB und TDD"
+        es: "MyRecipes se creó e implementó: una aplicación web basada en IA que sugiere recetas a partir de ingredientes disponibles utilizando Java, API REST, MongoDB y TDD."
+        ar: "إنشاء ونشر MyRecipes - تطبيق ويب مدعوم بالذكاء الاصطناعي يقترح وصفات من المكونات المتاحة باستخدام Java وREST APIs وMongoDB وTDD"
     tags: ["java", "react", "fullstack"]
 
   - company: "neuefische GmbH"
     position:
       en: "Trainee Data Science & AI"
       de: "Trainee Data Science & KI"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Aprendiz de ciencia de datos e inteligencia artificial"
+      ar: "متدرب علوم البيانات والذكاء الاصطناعي"
     location: "Hamburg"
     startDate: "2022-11"
     endDate: "2023-02"
     highlights:
       - en: "Intensive data science bootcamp covering statistics, machine learning, data visualization, and big data analysis"
         de: "Intensives Data-Science-Bootcamp zu Statistik, Machine Learning, Datenvisualisierung und Big-Data-Analyse"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Bootcamp intensivo de ciencia de datos que cubre estadísticas, aprendizaje automático, visualización de datos y análisis de big data."
+        ar: "معسكر تدريبي مكثف لعلوم البيانات يغطي الإحصائيات والتعلم الآلي وتصور البيانات وتحليل البيانات الضخمة"
       - en: "Capstone project: multi-objective recommender system using Python, SQL, GCP, Word2Vec, and Co-Visitation Matrix"
         de: "Abschlussprojekt: Multi-Objective-Empfehlungssystem mit Python, SQL, GCP, Word2Vec und Co-Visitation-Matrix"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Proyecto Capstone: sistema de recomendación multiobjetivo que utiliza Python, SQL, GCP, Word2Vec y Co-Visitation Matrix"
+        ar: "مشروع Capstone: نظام توصية متعدد الأهداف باستخدام Python وSQL وGCP وWord2Vec ومصفوفة الزيارة المشتركة"
     tags: ["python", "ml", "data-science"]
 
   - company: "Otto Group"
     position:
       en: "Financial Accountant"
       de: "Bilanzbuchhalter"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Contador Financiero"
+      ar: "محاسب مالي"
     location: "Hamburg"
     startDate: "2017-04"
     endDate: "2022-07"
     highlights:
       - en: "Led robotics initiatives: automated booking of vacation accruals and interest schedules via UiPath, optimized booking processes and analytical workflows using Excel & SAP"
         de: "Robotik-Initiativen geleitet: Automatisierung der Urlaubsrückstellungs- und Zinsplanbuchungen via UiPath, Optimierung von Buchungsprozessen und analytischen Workflows mit Excel & SAP"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Iniciativas de robótica lideradas: reserva automatizada de acumulaciones de vacaciones y cronogramas de intereses a través de UiPath, procesos de reserva optimizados y flujos de trabajo analíticos usando Excel y SAP."
+        ar: "مبادرات الروبوتات الرائدة: الحجز الآلي لاستحقاقات الإجازات وجداول الفوائد عبر UiPath وعمليات الحجز المحسنة وسير العمل التحليلي باستخدام Excel وSAP"
       - en: "Independently managed financial accounting for multiple Otto Group subsidiaries using SAP FI-CO"
         de: "Eigenständige Finanzbuchhaltung für mehrere Otto-Tochtergesellschaften mit SAP FI-CO"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Contabilidad financiera gestionada de forma independiente para varias filiales del Grupo Otto utilizando SAP FI-CO"
+        ar: "المحاسبة المالية المُدارة بشكل مستقل للعديد من الشركات التابعة لمجموعة Otto Group باستخدام SAP FI-CO"
       - en: "Prepared monthly, quarterly & annual financial statements (HGB & IFRS); managed consolidation reporting in SAP BPC; main contact for external auditors"
         de: "Monats-, Quartals- und Jahresabschlüsse (HGB & IFRS) erstellt; Konsolidierungsberichterstattung in SAP BPC; Hauptansprechpartner für externe Prüfer"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Preparación de estados financieros mensuales, trimestrales y anuales (HGB e IFRS); gestión de informes de consolidación en SAP BPC; contacto principal para auditores externos"
+        ar: "إعداد البيانات المالية الشهرية والفصلية والسنوية (HGB والمعايير الدولية لإعداد التقارير المالية) ؛ إعداد تقارير الدمج المُدارة في SAP BPC؛ جهة الاتصال الرئيسية للمدققين الخارجيين"
     tags: ["finance", "automation", "sap"]
 
   - company: "Otto Group"
     position:
       en: "Intern in Group Financial Reporting"
       de: "Praktikant in der Konzernrechnungslegung"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Pasante en Reporting Financiero del Grupo"
+      ar: "متدرب في التقارير المالية للمجموعة"
     location: "Hamburg"
     startDate: "2016-11"
     endDate: "2017-04"
     highlights:
       - en: "Supported IFRS implementation, options evaluation & financial statement review; gained knowledge of group consolidation working with consulting firms"
         de: "IFRS-Implementierung unterstützt, Optionsbewertung & Jahresabschlussprüfung; Kenntnisse in Konzernkonsolidierung durch Zusammenarbeit mit Beratungsfirmen"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Apoyé la implementación de NIIF, evaluación de opciones y revisión de estados financieros; Adquirió conocimientos sobre consolidación de grupos trabajando con empresas de consultoría."
+        ar: "دعم تنفيذ المعايير الدولية لإعداد التقارير المالية وتقييم الخيارات ومراجعة البيانات المالية؛ اكتسبت المعرفة بتوحيد المجموعة من خلال العمل مع الشركات الاستشارية"
     tags: ["finance", "ifrs"]
-experience_disabled:   
+
   - company: "Private German Family"
     position:
       en: "Au-Pair"
       de: "Au-Pair"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Au pair"
+      ar: "Au-Pair"
     location: "Hamburg"
     startDate: "2015-09"
     endDate: "2016-11"
+    visibility: "extended"
     highlights:
       - en: "Relocated to Germany; achieved German language proficiency and cultural integration while supporting a family"
         de: "Nach Deutschland umgezogen; deutsche Sprachkompetenz und kulturelle Integration erreicht"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Reubicado en Alemania; logró el dominio del idioma alemán y la integración cultural mientras mantenía a una familia"
+        ar: "انتقل إلى ألمانيا؛ حققت إتقان اللغة الألمانية والتكامل الثقافي مع دعم الأسرة"
     tags: ["language", "cultural"]
 
   - company: "alBaraka Bank Syria s.a."
     position:
       en: "Trade Relations Specialist"
       de: "Trade Relations Specialist"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Especialista en Relaciones Comerciales"
+      ar: "أخصائي العلاقات التجارية"
     location: "Damascus"
     startDate: "2014-04"
     endDate: "2015-08"
+    visibility: "extended"
     highlights:
       - en: "Served corporate and VIP clients across private and corporate banking; international trade with letters of credit and document collections"
         de: "Firmen- und VIP-Kunden im Privat- und Firmenkundenbankgeschäft betreut; internationales Geschäft mit Akkreditiven und Dokumenteninkassi"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Atendió a clientes corporativos y VIP en banca privada y corporativa; comercio internacional con cartas de crédito y colecciones de documentos"
+        ar: "خدمة العملاء من الشركات وكبار الشخصيات عبر الخدمات المصرفية الخاصة والشركات؛ التجارة الدولية مع خطابات الاعتماد وتحصيل المستندات"
     tags: ["finance", "banking"]
-#pagebreak()
+
 # --- Education ---
 education:
   - institution: "FH Wedel"
     area:
       en: "Data Science & Artificial Intelligence"
       de: "Data Science & Künstliche Intelligenz"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Ciencia de datos e inteligencia artificial"
+      ar: "علوم البيانات والذكاء الاصطناعي"
     studyType:
       en: "M.Sc."
       de: "M.Sc."
@@ -240,28 +256,28 @@ education:
     highlights:
       - en: "Thesis in progress: Document Intelligence and Knowledge Graph Construction — OCR-free extraction with Donut and LayoutLMv3, knowledge graph construction, GraphRAG reasoning with local LLMs, zero cloud dependency"
         de: "Laufende Masterarbeit: Document Intelligence und Knowledge Graph Construction — OCR-freie Extraktion mit Donut und LayoutLMv3, Knowledge-Graph-Aufbau, GraphRAG-Reasoning mit lokalen LLMs, ohne Cloud-Abhängigkeit"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Tesis en curso: Inteligencia de documentos y construcción de gráficos de conocimiento: extracción sin OCR con Donut y LayoutLMv3, construcción de gráficos de conocimiento, razonamiento GraphRAG con LLM locales, dependencia cero de la nube"
+        ar: "الأطروحة قيد التقدم: ذكاء المستندات وإنشاء الرسم البياني المعرفي — الاستخراج بدون التعرف الضوئي على الحروف باستخدام Donut وLayoutLMv3، وإنشاء الرسم البياني المعرفي، واستدلال GraphRAG باستخدام LLMs المحليين، والاعتماد على السحابة صفر"
       - en: "Deep Learning project: Urban Farming Plant Health — hierarchical 3-stage pipeline across ViT/CNN architectures with Grad-CAM and Attention Rollout explainability"
         de: "Deep-Learning-Projekt: Urban Farming Plant Health — hierarchische 3-stufige Pipeline über ViT/CNN-Architekturen mit Grad-CAM und Attention-Rollout-Erklärbarkeit"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Proyecto de aprendizaje profundo: Salud vegetal en agricultura urbana: proceso jerárquico de 3 etapas en arquitecturas ViT/CNN con explicabilidad Grad-CAM y Attention Rollout"
+        ar: "مشروع التعلم العميق: صحة نباتات الزراعة الحضرية - خط أنابيب هرمي ثلاثي المراحل عبر بنيات ViT/CNN مع إمكانية شرح Grad-CAM وAttention Rollout"
       - en: "Coursework: Deep Learning, Computer Vision, Machine Learning, Symbolic AI, Econometrics, Empirical Research Methods, Category Management, E-Commerce Business Models, Digital Transformation, Strategic Management, Agile PM & Change Management, Data Engineering, Unix & Shell Programming"
         de: "Kurse: Deep Learning, Computer Vision, Machine Learning, Symbolische KI, Ökonometrie, Empirische Forschungsmethoden, Category Management, E-Commerce-Geschäftsmodelle, Digitale Transformation, Strategisches Management, Agiles PM & Change Management, Data Engineering, Unix & Shell"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Trabajo del curso: aprendizaje profundo, visión por computadora, aprendizaje automático, IA simbólica, econometría, métodos de investigación empíricos, gestión de categorías, modelos de negocio de comercio electrónico, transformación digital, gestión estratégica, PM ágil y gestión de cambios, ingeniería de datos, programación Unix y Shell"
+        ar: "الدورات الدراسية: التعلم العميق، رؤية الكمبيوتر، التعلم الآلي، الذكاء الاصطناعي الرمزي، الاقتصاد القياسي، طرق البحث التجريبية، إدارة الفئات، نماذج أعمال التجارة الإلكترونية، التحول الرقمي، الإدارة الإستراتيجية، إدارة المشاريع والتغيير الرشيقة، هندسة البيانات، برمجة Unix & Shell"
 
   - institution: "GFS Steuerfachschule"
     area:
       en: "Financial Accounting (Bilanzbuchhalter)"
       de: "Bilanzbuchhalter (IHK)"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Contabilidad financiera (Bilanzbuchhalter)"
+      ar: "المحاسبة المالية (Bilanzbuchhalter)"
     studyType:
       en: "Professional Certification"
       de: "Weiterbildung"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Certificación Profesional"
+      ar: "الشهادة المهنية"
     startDate: "2018"
     endDate: "2020"
 
@@ -269,8 +285,8 @@ education:
     area:
       en: "Business Administration, Financial Management & Banking"
       de: "Betriebswirtschaftslehre, Finanzmanagement & Bankwesen"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Administración de Empresas, Gestión Financiera y Banca"
+      ar: "إدارة الأعمال، الإدارة المالية والمصرفية"
     studyType:
       en: "B.Sc."
       de: "B.Sc."
@@ -282,8 +298,8 @@ education:
     highlights:
       - en: "Thesis: Testing the Capital Asset Pricing Model (CAPM) in the Syrian Stock Market"
         de: "Abschlussarbeit: Überprüfung des Capital Asset Pricing Model (CAPM) am syrischen Aktienmarkt"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Tesis: Prueba del modelo de valoración de activos de capital (CAPM) en el mercado de valores sirio"
+        ar: "الأطروحة: اختبار نموذج تسعير الأصول الرأسمالية (CAPM) في سوق الأوراق المالية السورية"
 
 # --- Selected Projects ---
 projects:
@@ -292,13 +308,13 @@ projects:
     context:
       en: "Datalogue"
       de: "Datalogue"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Registro de datos"
+      ar: "سجل البيانات"
     description:
-      en: "Multi-agent LLM system automating B2B sales research. Four agents (Targeting, Insights, Contact Discovery, Outreach) share state via a PostgreSQL 3NF schema; async fan-out cut latency ~10×. Reduced manual research workload by ~53%."
-      de: "Multi-Agenten-LLM-System für B2B-Vertriebsrecherche. Vier Agenten (Targeting, Insights, Kontaktsuche, Outreach) teilen Zustand über ein PostgreSQL-3NF-Schema; asynchrone Parallelisierung senkt die Latenz um ~10×. Manueller Recherche-Aufwand um ~53 % reduziert."
-      es: "[TODO]"
-      ar: "[TODO]"
+      en: "Multi-agent LLM system automating B2B sales research. Four agents (Targeting, Insights, Contact Discovery, Outreach) share state via a PostgreSQL 3NF schema; async fan-out cut latency ~10×. Reduced manual research workload by 53%."
+      de: "Multi-Agenten-LLM-System für B2B-Vertriebsrecherche. Vier Agenten (Targeting, Insights, Kontaktsuche, Outreach) teilen Zustand über ein PostgreSQL-3NF-Schema; asynchrone Parallelisierung senkt die Latenz um ~10×. Manueller Recherche-Aufwand um 53 % reduziert."
+      es: "Sistema LLM multiagente que automatiza la investigación de ventas B2B. Cuatro agentes (Targeting, Insights, Contact Discovery, Outreach) comparten el estado a través de un esquema PostgreSQL 3NF; Latencia de corte de distribución asíncrona ~10×. Reducción de la carga de trabajo de investigación manual en un 53%."
+      ar: "نظام LLM متعدد الوكلاء لأتمتة أبحاث مبيعات B2B. أربعة وكلاء (الاستهداف، والرؤى، واكتشاف جهات الاتصال، والتواصل) يتشاركون الحالة عبر مخطط PostgreSQL 3NF؛ زمن وصول قطع المروحة غير المتزامن ~ 10 ×. تقليل عبء العمل البحثي اليدوي بنسبة 53%."
     tags: ["Python", "Agno", "OpenAI", "PostgreSQL", "Vector Search", "Streamlit"]
 
   - name: "Urban Farming Plant Health"
@@ -306,13 +322,13 @@ projects:
     context:
       en: "M.Sc. Deep Learning · FH Wedel"
       de: "M.Sc. Deep Learning · FH Wedel"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Maestría en Ciencias Aprendizaje profundo · FH Wedel"
+      ar: "ماجستير التعلم العميق · FH Wedel"
     description:
       en: "Hierarchical 3-stage pipeline (PlantID → Health → Disease) across 8+ ViT/CNN architectures on 31k+ images — 99.9 / 99.7 / 99.1 % per stage. Key finding: significant train-deploy domain gap on whole-plant scenes. Grad-CAM + Attention Rollout dashboard."
       de: "Hierarchische 3-stufige Pipeline (PlantID → Gesundheit → Krankheit), 8+ ViT/CNN-Architekturen, 31k+ Bilder — 99,9 / 99,7 / 99,1 % je Stufe. Kernerkenntnis: deutlicher Train-Deploy-Domain-Gap auf ganzen Pflanzen. Grad-CAM + Attention Rollout Dashboard."
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Canalización jerárquica de 3 etapas (PlantID → Salud → Enfermedad) en más de 8 arquitecturas ViT/CNN en más de 31.000 imágenes: 99,9/99,7/99,1 % por etapa. Hallazgo clave: brecha significativa en el dominio de implementación de trenes en escenas de toda la planta. Panel de implementación de Grad-CAM + Atención."
+      ar: "خط أنابيب هرمي ثلاثي المراحل (PlantID → Health → Disease) عبر أكثر من 8 بنيات ViT/CNN على أكثر من 31 ألف صورة - 99.9 / 99.7 / 99.1٪ لكل مرحلة. النتيجة الرئيسية: وجود فجوة كبيرة في مجال التدريب والنشر في مشاهد المصنع بالكامل. Grad-CAM + لوحة معلومات بدء الانتباه."
     tags: ["PyTorch", "timm", "ViT", "DINOv2", "Grad-CAM", "Streamlit"]
 
   - name: "Bankruptcy Early Warning"
@@ -320,13 +336,13 @@ projects:
     context:
       en: "M.Sc. Seminar · FH Wedel"
       de: "M.Sc. Seminar · FH Wedel"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Maestría en Ciencias Seminario · FH Wedel"
+      ar: "ماجستير ندوة · FH Wedel"
     description:
       en: "Multi-horizon ML early-warning for corporate bankruptcy (1–5 years) on Polish Companies — 43k observations, 64 ratios, 4.84 % positive class. Consensus feature selection with EPV guardrails; AUC 0.80 → 0.86 via 5-fold stratified CV."
       de: "Multi-Horizont-Frühwarnsystem für Unternehmensinsolvenzen (1–5 Jahre) auf Polish-Companies — 43k Beobachtungen, 64 Kennzahlen, 4,84 % Positivklasse. Konsens-Feature-Selection mit EPV-Schwellen; AUC 0,80 → 0,86 via 5-facher stratifizierter CV."
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Alerta temprana de ML multihorizonte para quiebras corporativas (1 a 5 años) en empresas polacas: 43.000 observaciones, 64 ratios, 4,84 % de clase positiva. Selección de características por consenso con barandillas EPV; AUC 0,80 → 0,86 mediante CV estratificado quíntuple."
+      ar: "إنذار مبكر لتعلم الآلة متعدد الآفاق بشأن إفلاس الشركات (1-5 سنوات) على الشركات البولندية - 43 ألف ملاحظة، 64 نسبة، 4.84% فئة إيجابية. اختيار ميزة الإجماع مع حواجز حماية EPV؛ AUC 0.80 → 0.86 عبر السيرة الذاتية الطبقية 5 أضعاف."
     tags: ["Python", "scikit-learn", "XGBoost", "Random Forest", "Econometrics"]
 
   - name: "Biotech Regulatory RAG"
@@ -334,13 +350,13 @@ projects:
     context:
       en: "Future Founder Program"
       de: "Future Founder Program"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Programa de futuro fundador"
+      ar: "برنامج مؤسس المستقبل"
     description:
       en: "RAG compliance tool for biotech teams. Semantic vector search, GPT-4 grounded Q&A with citations, interactive compliance questionnaire. Team of four."
       de: "RAG-Compliance-Tool für Biotech-Teams. Semantische Vektorsuche, GPT-4 für belegte Q&A mit Quellenangaben, interaktiver Compliance-Fragebogen. Viererteam."
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Herramienta de cumplimiento RAG para equipos de biotecnología. Búsqueda de vectores semánticos, preguntas y respuestas basadas en GPT-4 con citas, cuestionario de cumplimiento interactivo. Equipo de cuatro."
+      ar: "أداة الامتثال RAG لفرق التكنولوجيا الحيوية. بحث المتجهات الدلالية، أسئلة وأجوبة GPT-4 مع الاستشهادات، استبيان الامتثال التفاعلي. فريق من أربعة."
     tags: ["Python", "FastAPI", "React", "GPT-4", "RAG", "Vector DB"]
 
   - name: "HafenHut"
@@ -348,13 +364,13 @@ projects:
     context:
       en: "E-Commerce"
       de: "E-Commerce"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Comercio electrónico"
+      ar: "التجارة الإلكترونية"
     description:
       en: "Full-stack e-commerce app with AI Q&A assistant grounded in product and store content. Next.js App Router, Stripe, Resend — production-deployed."
       de: "Full-Stack-E-Commerce-App mit KI-Q&A-Assistent auf Produkt- und Shop-Inhalten. Next.js App Router, Stripe, Resend — produktiv im Einsatz."
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Aplicación de comercio electrónico completa con asistente de preguntas y respuestas de IA basado en el contenido de productos y tiendas. Next.js App Router, Stripe, Resend: implementado en producción."
+      ar: "تطبيق تجارة إلكترونية متكامل مع مساعد الذكاء الاصطناعي للأسئلة والأجوبة والمرتكز على محتوى المنتج والمتجر. جهاز توجيه التطبيقات Next.js، والشريط، وإعادة الإرسال - تم نشره في مرحلة الإنتاج."
     url: "https://github.com/ReebalSami/hafenhut-web"
     tags: ["Next.js", "TypeScript", "Stripe", "Resend", "AI"]
 
@@ -363,13 +379,13 @@ projects:
     context:
       en: "Personal"
       de: "Persönlich"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Personal"
+      ar: "شخصي"
     description:
       en: "Full-stack portfolio with AI RAG chatbot, MDX blog, four locales incl. Arabic RTL, AWS CDK deployment. Lighthouse 90+, dual-pipeline CV PDF generator."
       de: "Full-Stack-Portfolio mit KI-RAG-Chatbot, MDX-Blog, vier Sprachen inkl. Arabisch RTL, AWS-CDK-Deployment. Lighthouse 90+, Dual-Pipeline-CV-PDF-Generator."
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Portafolio completo con chatbot AI RAG, blog MDX, cuatro locales incl. RTL árabe, implementación de AWS CDK. Lighthouse 90+, generador de PDF de CV de doble canal."
+      ar: "محفظة متكاملة مع روبوت الدردشة AI RAG ومدونة MDX وأربعة لغات متضمنة. نشر RTL باللغة العربية وAWS CDK. Lighthouse 90+، مولد CV PDF ثنائي الأنابيب."
     url: "https://reebal-sami.com"
     tags: ["Next.js", "TypeScript", "AWS CDK", "MDX", "i18n"]
 
@@ -378,13 +394,13 @@ projects:
     context:
       en: "neuefische DS Capstone"
       de: "neuefische DS Capstone"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Nuevo DS Capstone"
+      ar: "جديد DS كابستون"
     description:
       en: "E-commerce recommender for OTTO Kaggle — clicks, carts, orders jointly. Word2Vec embeddings + co-visitation matrices for session-based filtering; scaled on GCP with Polars/Parquet."
       de: "E-Commerce-Empfehlungssystem für OTTO-Kaggle — Klicks, Warenkörbe, Bestellungen gemeinsam. Word2Vec-Embeddings + Co-Visitation-Matrizen für sessionbasiertes Filtern; skaliert auf GCP mit Polars/Parquet."
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Recomendador de comercio electrónico para OTTO Kaggle: clics, carritos, pedidos conjuntos. Incorporaciones de Word2Vec + matrices de co-visita para filtrado basado en sesiones; Escalado en GCP con Polars/Parquet."
+      ar: "مُوصي التجارة الإلكترونية لـ OTTO Kaggle - النقرات وعربات التسوق والطلبات بشكل مشترك. تضمينات Word2Vec + مصفوفات الزيارة المشتركة للتصفية المستندة إلى الجلسة؛ تم تحجيمها على GCP مع Polars/Parquet."
     tags: ["Python", "Polars", "Word2Vec", "Co-Visitation", "GCP"]
 
 # --- Technical Skills ---
@@ -392,8 +408,8 @@ skills:
   - category:
       en: "Programming Languages"
       de: "Programmiersprachen"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Lenguajes de programación"
+      ar: "لغات البرمجة"
     skills:
       - name: "Python"
       - name: "TypeScript"
@@ -401,33 +417,52 @@ skills:
       - name: "Java"
       - name: "SQL"
       - name: "VBA"
+      - name: "HTML"
+      - name: "CSS"
 
   - category:
       en: "AI / Machine Learning"
       de: "KI / Machine Learning"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "IA/aprendizaje automático"
+      ar: "الذكاء الاصطناعي / التعلم الآلي"
     skills:
-      - name: "PyTorch"
-      - name: "Hugging Face"
-      - name: "scikit-learn"
-      - name: "OpenAI API"
-      - name: "LangChain"
-      - name: "Agno (Agents)"
       - name: "LLM Agents"
+      - name: "Multi-Agent Orchestration"
       - name: "RAG"
       - name: "Prompt Engineering"
+      - name: "Context Engineering"
+      - name: "Function Calling"
+      - name: "Structured Outputs"
+      - name: "Local Inference (llama.cpp)"
+      - name: "LLM APIs"
       - name: "Vision Transformers"
       - name: "CNNs"
+      - name: "YOLO"
       - name: "Grad-CAM"
+      - name: "Attention Rollout"
       - name: "Word2Vec"
+      - name: "Embeddings"
+      - name: "XGBoost / LightGBM"
+      - name: "EDA"
+      - name: "Regression"
+      - name: "Time Series"
+      - name: "Statistical Modeling"
 
   - category:
-      en: "Frameworks"
-      de: "Frameworks"
-      es: "[TODO]"
-      ar: "[TODO]"
+      en: "Frameworks & Libraries"
+      de: "Frameworks & Bibliotheken"
+      es: "Marcos y bibliotecas"
+      ar: "الأطر والمكتبات"
     skills:
+      - name: "PyTorch"
+      - name: "TensorFlow"
+      - name: "Hugging Face"
+      - name: "timm"
+      - name: "scikit-learn"
+      - name: "OpenCV"
+      - name: "LangChain"
+      - name: "Agno"
+      - name: "AutoGen"
       - name: "Next.js"
       - name: "React"
       - name: "FastAPI"
@@ -435,24 +470,36 @@ skills:
       - name: "Spring Boot"
       - name: "Pydantic"
       - name: "SQLAlchemy"
+      - name: "BeautifulSoup"
+      - name: "Tailwind CSS"
+      - name: "MDX"
+      - name: "Pandas"
+      - name: "Polars"
+      - name: "NumPy"
+      - name: "Plotly"
+      - name: "Matplotlib"
+      - name: "Seaborn"
 
   - category:
       en: "Cloud & DevOps"
       de: "Cloud & DevOps"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Nube y DevOps"
+      ar: "السحابة و DevOps"
     skills:
       - name: "AWS (CDK, Lambda, S3, CloudFront)"
       - name: "GCP"
       - name: "Docker"
       - name: "GitHub Actions"
+      - name: "Render"
+      - name: "MLflow"
+      - name: "Makefile"
       - name: "Playwright"
 
   - category:
       en: "Databases"
       de: "Datenbanken"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Bases de datos"
+      ar: "قواعد البيانات"
     skills:
       - name: "PostgreSQL (3NF)"
       - name: "MongoDB"
@@ -462,15 +509,15 @@ skills:
   - category:
       en: "Tools"
       de: "Werkzeuge"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Herramientas"
+      ar: "أدوات"
     skills:
       - name: "Git"
       - name: "Jupyter"
-      - name: "Pandas / Polars / NumPy"
-      - name: "BeautifulSoup"
-      - name: "Tailwind CSS"
       - name: "UiPath (RPA)"
+      - name: "Oxylabs"
+      - name: "Sanity CMS"
+      - name: "Stripe"
 
 # --- Languages ---
 languages:
@@ -478,108 +525,129 @@ languages:
       en: "German"
       de: "Deutsch"
       es: "Alemán"
-      ar: "[TODO]"
+      ar: "الألمانية"
     fluency:
       en: "C2"
       de: "C2"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "C2"
+      ar: "C2"
   - language:
       en: "English"
       de: "Englisch"
       es: "Inglés"
-      ar: "[TODO]"
+      ar: "الإنجليزية"
     fluency:
       en: "Full professional"
       de: "Verhandlungssicher"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Competencia profesional plena"
+      ar: "إتقان مهني كامل"
   - language:
       en: "Arabic"
       de: "Arabisch"
       es: "Árabe"
-      ar: "[TODO]"
+      ar: "العربية"
     fluency:
       en: "Native"
       de: "Muttersprache"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Nativo"
+      ar: "لغة أم"
   - language:
       en: "Spanish"
       de: "Spanisch"
       es: "Español"
-      ar: "[TODO]"
+      ar: "الإسبانية"
     fluency:
       en: "toward B1"
       de: "Grundkenntnisse (lernend)"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "hacia B1"
+      ar: "نحو B1"
   - language:
       en: "French"
       de: "Französisch"
       es: "Francés"
-      ar: "[TODO]"
+      ar: "الفرنسية"
     fluency:
       en: "Elementary"
       de: "Grundkenntnisse"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Elemental"
+      ar: "مستوى ابتدائي"
 
 # --- Soft Skills ---
 softSkills:
   en:
-    - "End-to-end AI delivery"
-    - "AI × business × infrastructure"
-    - "Modern AI & legacy systems"
-    - "Strategic & entrepreneurial thinking"
-    - "Cross-functional collaboration"
-    - "Multilingual (DE / EN / AR)"
+    - "Translates business problems into AI-powered products"
+    - "Strong business understanding"
+    - "Strategic, entrepreneurial, creative -  innovation driven"
+    - "End-to-end ownership- ideation & product management"
+    - "Bridges AI, business logic, and infrastructure"
+    - "Fluent in both modern AI and legacy enterprise systems"
+    - "Rapid AI-assisted development with the latest tools"
+    - "Communicative, collaborative, & calm under pressure"
   de:
-    - "End-to-End-KI-Lieferung"
-    - "5 Jahre Corporate Finance"
-    - "KI × Business × Infrastruktur"
-    - "Moderne KI & Legacy-Systeme"
-    - "KI-gestützte Rapid Development"
-    - "Strategisches & unternehmerisches Denken"
-    - "Bereichsübergreifende Zusammenarbeit"
-    - "Mehrsprachig (DE / EN / AR)"
+    - "Übersetzt Business-Probleme in KI-gestützte Produkte"
+    - "Starkes Business-Verständnis"
+    - "Strategisch, unternehmerisch und kreativ - getrieben von Innovation"
+    - "End-to-End-Ownership - von Ideation und Product Thinking bis zur Umsetzung"
+    - "Verbindet KI, Business-Logik und Infrastruktur"
+    - "Sicher im Umgang mit moderner KI und Legacy-Enterprise-Systemen"
+    - "Schnelle KI-gestützte Entwicklung mit den neuesten Tools"
+    - "Kommunikativ, kollaborativ und ruhig unter Druck"
+
+  es:
+    - "Traduce problemas de negocio en productos impulsados por IA"
+    - "Sólida comprensión del negocio"
+    - "Estratégico, emprendedor y creativo, con foco en la innovación"
+    - "Ownership end-to-end: ideación y gestión de producto"
+    - "Conecta IA, lógica de negocio e infraestructura"
+    - "Se mueve con soltura entre IA moderna y sistemas empresariales legacy"
+    - "Desarrollo rápido asistido por IA con las herramientas más recientes"
+    - "Comunicativo, colaborativo y sereno bajo presión"
+  ar:
+    - "يحوّل تحديات الأعمال إلى منتجات مدعومة بالذكاء الاصطناعي"
+    - "فهم قوي لاحتياجات الأعمال"
+    - "تفكير استراتيجي وريادي وإبداعي يقوده الابتكار"
+    - "ملكية شاملة من الفكرة حتى إدارة المنتج"
+    - "يربط بين الذكاء الاصطناعي ومنطق الأعمال والبنية التحتية"
+    - "مرن في التعامل مع كل من الذكاء الاصطناعي الحديث وأنظمة المؤسسات القديمة"
+    - "تطوير سريع بمساعدة الذكاء الاصطناعي باستخدام أحدث الأدوات"
+    - "تواصل فعال وتعاون وهدوء تحت الضغط"
 
 # --- Interests ---
 interests:
   - name:
       en: "Music Lover"
       de: "Musikliebhaber"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Amante de la música"
+      ar: "عاشق الموسيقى"
     keywords:
       - en: "Guitar"
         de: "Gitarre"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Guitarra"
+        ar: "غيتار"
       - en: "Dabbles in piano when life allows"
         de: "Klavier, wenn die Zeit es erlaubt"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Incursiona en el piano cuando la vida lo permite."
+        ar: "يشتغل بالبيانو عندما تسمح الحياة بذلك"
   - name:
       en: "Pushing Limits"
       de: "Grenzen austesten"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Superando los límites"
+      ar: "دفع الحدود"
     keywords:
       - en: "Marathon runner"
         de: "Marathonläufer"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "corredor de maratón"
+        ar: "عداء الماراثون"
       - en: "Bouldering"
         de: "Bouldern"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Búlder"
+        ar: "بولدرينغ"
       - en: "Swimming"
         de: "Schwimmen"
-        es: "[TODO]"
-        ar: "[TODO]"
+        es: "Nadar"
+        ar: "سباحة"
   - name:
       en: "Passion for cooking & sailing"
       de: "Leidenschaft für Kochen & Segeln"
-      es: "[TODO]"
-      ar: "[TODO]"
+      es: "Pasión por la cocina y la navegación"
+      ar: "شغف الطبخ والإبحار"

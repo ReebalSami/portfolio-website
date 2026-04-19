@@ -13,8 +13,8 @@ Group built deep fluency in corporate data flows, financial systems, and cross-f
 I orchestrate end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated
 news-crawler pipelines to deep-learning models for computer vision. I built and deploy this portfolio on AWS CDK.
 Comfortable navigating modern AI-assisted development with the latest tools and the legacy enterprise systems
-many companies still run on. Currently writing my M.Sc. thesis in Data Science & AI at FH Wedel on Document
-Intelligence and Knowledge Graphs, while shipping production code on the side.
+many companies still run on. Currently writing my Master's thesis on GraphRAG Document Intelligence as part of
+my M.Sc. Data Science & AI at FH Wedel, while shipping production code on the side.
 
 EXPERIENCE
 AI & Data Science Working Student
@@ -76,9 +76,8 @@ Otto Group · Hamburg
 • Supported IFRS implementation, options evaluation & financial statement review; gained knowledge of group consol­
 idation working with consulting firms
 
-EDUCATION
-
-2024-04 — Present
+EDUCATION
+2024-04 — Present
 
 M.Sc. Data Science & Artificial Intelligence
 FH Wedel, Wedel, Germany
@@ -119,54 +118,115 @@ SQL
 
 VBA
 
+HTML
+
+CSS
+
 AI / Machine Learning
-PyTorch
-
-Hugging Face
-
-Vision Transformers
-
-scikit-learn
-
-CNNs
-
-Grad-CAM
-
-OpenAI API
-
-LangChain
-
-Agno (Agents)
-
-Spring Boot
-
-Pydantic
-
-SQLAlchemy
-
-Docker
-
-GitHub Actions
-
 LLM Agents
+
+Multi-Agent Orchestration
 
 RAG
 
+Prompt Engineering
+
+Context Engineering
+
+Vision Transformers
+
+CNNs
+
+Regression
+
+Time Series
+
+YOLO
+
+Function Calling
+
+Grad-CAM
+
+Structured Outputs
+
+Attention Rollout
+
 Word2Vec
 
-Frameworks
-Next.js
+Local Inference (llama.cpp)
+Embeddings
 
-React
+LLM APIs
+
+XGBoost / LightGBM
+
+EDA
+
+Statistical Modeling
+
+Frameworks & Libraries
+PyTorch
+
+TensorFlow
 
 FastAPI
 
 Streamlit
 
+NumPy
+
+Plotly
+
+Hugging Face
+Spring Boot
+
+Matplotlib
+
+timm
+
+scikit-learn
+
+OpenCV
+
+LangChain
+
+Pydantic
+
+SQLAlchemy
+
+BeautifulSoup
+
+Agno
+
+Tailwind CSS
+
+AutoGen
+MDX
+
+Next.js
+
+Pandas
+
+React
+
+Polars
+
+Seaborn
+
 Cloud & DevOps
 AWS (CDK, Lambda, S3, CloudFront)
 
 GCP
+
+Docker
+
+GitHub Actions
+
+Render
+
+MLflow
+
+Makefile
 
 Playwright
 
@@ -184,26 +244,27 @@ Git
 
 Jupyter
 
-Pandas / Polars / NumPy
-
-BeautifulSoup
-
-Tailwind CSS
-
 UiPath (RPA)
 
+Oxylabs
+
+Sanity CMS
+
+Stripe
+
 KEY STRENGTHS
-• End-to-end AI delivery
+• Translates business problems into AI-powered products • Strong business understanding
+• Strategic, entrepreneurial, creative - innovation driven
 
-• AI × business × infrastructure
+• End-to-end ownership- ideation & product management
 
-• Modern AI & legacy systems
+• Bridges AI, business logic, and infrastructure
 
-• Strategic & entrepreneurial thinking
+• Fluent in both modern AI and legacy enterprise systems
 
-• Cross-functional collaboration
+• Rapid AI-assisted development with the latest tools
 
-• Multilingual (DE / EN / AR)
+• Communicative, collaborative, & calm under pressure
 
 LANGUAGES
 German C2 · English Full professional · Arabic Native · Spanish toward B1 · French Elementary
@@ -211,17 +272,15 @@ German C2 · English Full professional · Arabic Native · Spanish toward B1 · 
 HOBBIES & INTERESTS
 Music Lover:
 
-Guitar / Dabbles in piano when life allows
+Guitar | Dabbles in piano when life allows
 
 Pushing Limits:
 
-Marathon runner / Bouldering / Swimming
+Marathon runner | Bouldering | Swimming
 
 Passion for cooking & sailing
 
 REFERENCES
 Available upon request
-
-Prompt Engineering
 
 

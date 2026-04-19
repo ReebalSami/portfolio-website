@@ -87,7 +87,7 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl mb-4">
               {data.basics.name}
             </h1>
-            <p className="text-base text-muted-foreground leading-relaxed sm:text-lg max-w-lg">
+            <p className="cv-copy-balance text-base text-muted-foreground leading-relaxed sm:text-lg max-w-lg">
               {r(data.profile.summary)}
             </p>
 
@@ -151,14 +151,14 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
                       {entry.company}{entry.location ? ` · ${entry.location}` : ""}
                     </p>
                     {entry.description && (
-                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      <p className="cv-copy-balance mt-2 text-sm text-muted-foreground leading-relaxed">
                         {r(entry.description)}
                       </p>
                     )}
                     {entry.highlights && entry.highlights.length > 0 && (
                       <ul className="mt-2 space-y-1">
                         {entry.highlights.map((h, j) => (
-                          <li key={j} className="text-sm text-muted-foreground leading-relaxed">
+                          <li key={j} className="cv-copy-balance text-sm text-muted-foreground leading-relaxed">
                             <span className="text-gallery-warm me-2">▸</span>{r(h)}
                           </li>
                         ))}
@@ -200,7 +200,7 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
                     {entry.highlights && entry.highlights.length > 0 && (
                       <ul className="mt-2 space-y-1">
                         {entry.highlights.map((h, j) => (
-                          <li key={j} className="text-sm text-muted-foreground leading-relaxed">
+                          <li key={j} className="cv-copy-balance text-sm text-muted-foreground leading-relaxed">
                             <span className="text-gallery-warm me-2">▸</span>{r(h)}
                           </li>
                         ))}

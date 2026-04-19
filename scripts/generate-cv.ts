@@ -15,6 +15,7 @@
 import { execSync } from "node:child_process";
 import path from "node:path";
 import fs from "node:fs";
+import { parse as parseYaml } from "yaml";
 
 const ROOT = path.resolve(new URL(".", import.meta.url).pathname, "..");
 const FONT_PATH = path.join(ROOT, "scripts/typst/fonts");
@@ -49,6 +50,31 @@ const EXPECTED_SECTIONS = [
   "EXPERIENCE",
   "EDUCATION",
 ];
+
+function getExpectedPdfCompanies(): string[] {
+  const fallback = ["Datalogue", "Future Founder", "neuefische", "Otto Group"];
+
+  try {
+    const yamlPath = path.join(ROOT, "config/cv/cv.public.yaml");
+    const raw = fs.readFileSync(yamlPath, "utf-8");
+    const parsed = parseYaml(raw) as {
+      experience?: Array<{ company?: string; visibility?: string }>;
+    };
+
+    const companies = (parsed.experience ?? [])
+      .filter((entry) => {
+        const visibility = entry.visibility ?? "public";
+        return visibility !== "extended" && visibility !== "private";
+      })
+      .map((entry) => entry.company)
+      .filter((company): company is string => Boolean(company));
+
+    const deduped = Array.from(new Set(companies));
+    return deduped.length > 0 ? deduped : fallback;
+  } catch {
+    return fallback;
+  }
+}
 
 // --- Parse CLI args ---
 const args = process.argv.slice(2);
@@ -140,7 +166,7 @@ function verifyAts(pdfPath: string): boolean {
   if (!skillsOk) allPassed = false;
 
   // Check 6: All companies present
-  const companies = ["Datalogue", "Future Founder", "neuefische", "Otto Group", "alBaraka"];
+  const companies = getExpectedPdfCompanies();
   const missingCompanies = companies.filter((c) => !text.includes(c));
   const companiesOk = missingCompanies.length === 0;
   log(

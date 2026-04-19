@@ -13,7 +13,7 @@
 #let locale = if sys.inputs.at("locale", default: none) != none { sys.inputs.locale } else { "en" }
 
 // --- Shared imports ---
-#import "../shared/locale.typ": resolve
+#import "../shared/locale.typ": resolve, is-pdf-visible, sort-projects-newest
 #import "../shared/shapes.typ": scatter-shapes
 
 #let r(val) = resolve(val, locale)
@@ -87,6 +87,7 @@
 #let subsection-title-meta-gap = subsection.at("title-meta-gap", default: 0) * 1em
 #let interests-item-below = subsection.at("interests-item-below", default: 0.12) * 1em
 #let interests-keywords-gap = subsection.at("interests-keywords-gap", default: 0.02) * 1em
+#let interests-keywords-layout = subsection.at("interests-keywords-layout", default: "inline")
 #let sidebar-languages-item-below = design.section.at("sidebar-languages-item-below", default: 0.08) * 1em
 #let sidebar-languages-next-spacing = design.section.at("sidebar-languages-next-spacing", default: 0) * 1em
 #let interests-item-above = subsection.at("interests-item-above", default: 0) * 1em
@@ -94,6 +95,9 @@
 #let sidebar-key-strengths-extra-above = design.section.at("sidebar-key-strengths-extra-above", default: 0) * 1em
 #let sidebar-references-extra-above = design.section.at("sidebar-references-extra-above", default: 0) * 1em
 #let main-key-strengths-extra-above = design.section.at("main-key-strengths-extra-above", default: 0) * 1em
+#let education-force-next-page = design.at("education", default: (:)).at("force-next-page", default: false)
+#let ats-link-spacing-above = design.ats-link.at("spacing-above", default: design.section.at("sidebar-spacing-above", default: 1.6)) * 1em
+#let ats-link-justify = design.ats-link.at("justify", default: false)
 #let header-photo-name-gap = design.header.at("photo-name-gap", default: 0.4) * 1em
 #let header-name-title-gap = design.header.at("name-title-gap", default: 0.4) * 1em
 #let header-title-divider-gap = design.header.at("title-divider-gap", default: 0.2) * 1em
@@ -346,7 +350,16 @@
         #text(font: heading-family, weight: "semibold", size: f.sidebar.size * 1pt, fill: c.heading)[#r(interest.name)]
         #if "keywords" in interest [
           #v(interests-keywords-gap)
-          #text(size: 8.5pt, fill: c.muted)[#interest.keywords.map(k => r(k)).join(" · ")]
+          #if interests-keywords-layout == "stacked" [
+            #text(size: 8.5pt, fill: c.muted)[
+              #for (idx, kw) in interest.keywords.enumerate() [
+                #r(kw)
+                #if idx < interest.keywords.len() - 1 [#linebreak()]
+              ]
+            ]
+          ] else [
+            #text(size: 8.5pt, fill: c.muted)[#interest.keywords.map(k => r(k)).join(" · ")]
+          ]
           #v(interests-description-after)
         ]
       ]
@@ -357,15 +370,16 @@
     #text(size: f.sidebar.size * 1pt, fill: c.muted)[Available upon request]
   ] else if id == "ats-link" [
     #if design.ats-link.enabled [
-      #v(0.5em)
+      #v(ats-link-spacing-above)
       #box(
         width: 100%,
         inset: (x: 4pt, y: 3pt),
         radius: 3pt,
         fill: c.accent-light,
       )[
+        #set par(justify: ats-link-justify)
         #text(size: 5.5pt, fill: c.muted)[
-          #design.ats-link.label
+          #link(design.ats-link.url)[#design.ats-link.label]
         ]
       ]
     ]
@@ -378,7 +392,8 @@
     #text(size: 9.5pt, fill: c.body)[#r(data.profile.summary)]
   ] else if id == "experience" [
     #main-section("Experience")
-    #for j in data.experience [
+    #let visible-experience = data.experience.filter(j => is-pdf-visible(j))
+    #for j in visible-experience [
       #job(
         r(j.position), j.company, j.location,
         j.startDate, j.at("endDate", default: "Present"),
@@ -387,6 +402,9 @@
       )
     ]
   ] else if id == "education" [
+    #if education-force-next-page [
+      #colbreak()
+    ]
     #main-section("Education")
     #for e in data.education [
       #edu(
@@ -400,7 +418,7 @@
     ]
   ] else if id == "selected-projects" [
     #main-section("Selected Projects")
-    #for proj in data.projects [
+    #for proj in sort-projects-newest(data.projects) [
       #project(
         proj.name,
         context_label: if "context" in proj { r(proj.context) },

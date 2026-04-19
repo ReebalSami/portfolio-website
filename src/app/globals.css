@@ -206,6 +206,24 @@
   border: 1px solid oklch(1 0 0 / 10%);
 }
 
+.cv-copy-balance {
+  text-wrap: pretty;
+  hyphens: auto;
+  text-align: start;
+}
+
+@media (min-width: 768px) {
+  .cv-copy-balance {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+}
+
+[dir="rtl"] .cv-copy-balance {
+  text-align: start;
+  text-justify: auto;
+}
+
 /* =============================================================================
    CV Print Styles
    ============================================================================= */
