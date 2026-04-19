@@ -27,16 +27,16 @@ export async function CvSkills({ skills, locale, className }: CvSkillsProps) {
               <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1 print:text-[9pt]">
                 {categoryName}
               </h3>
-              <div className="flex flex-wrap gap-1.5">
+              <ul className="flex flex-wrap gap-1.5 list-none p-0 m-0">
                 {category.skills.map((skill) => (
-                  <span
+                  <li
                     key={skill.name}
                     className="inline-block px-2 py-0.5 text-xs rounded-md bg-muted text-foreground print:text-[8pt] print:bg-transparent print:border print:border-border print:px-1"
                   >
                     {skill.name}
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           );
         })}

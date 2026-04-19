@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { Briefcase, Brain, Globe, GraduationCap } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { TechBadge } from "@/components/shared/tech-badge";
+import { TechMarquee } from "@/components/shared/tech-marquee";
 import { DifferentiatorCard } from "@/components/cards/differentiator-card";
 import { TimelineEntryCard } from "@/components/cards/timeline-entry";
 import { timelineData } from "@/content/timeline";
@@ -70,26 +70,18 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
         </div>
       </div>
 
-      <div>
+      <div data-section="tech-stack">
         <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-6">
           {t("techStack")}
         </h3>
         <div className="space-y-6">
-          {techStackData.map((group) => (
-            <div key={group.label}>
-              <p className="text-xs font-medium text-muted-foreground mb-2">
-                {group.label}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <TechBadge
-                    key={skill.name}
-                    name={skill.name}
-                    category={skill.category}
-                  />
-                ))}
-              </div>
-            </div>
+          {techStackData.map((group, i) => (
+            <TechMarquee
+              key={group.label}
+              group={group}
+              index={i}
+              isRtl={locale === "ar"}
+            />
           ))}
         </div>
       </div>
