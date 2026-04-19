@@ -165,13 +165,15 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
                       </ul>
                     )}
                     {entry.tags && entry.tags.length > 0 && (
-                      <div className="mt-2 flex flex-wrap gap-1.5">
+                      <ul className="mt-2 flex flex-wrap gap-1.5 list-none p-0">
                         {entry.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-[0.65rem] px-2 py-0 bg-gallery-warm/10 text-foreground hover:bg-gallery-warm/20">
-                            {tag}
-                          </Badge>
+                          <li key={tag}>
+                            <Badge variant="secondary" className="text-[0.65rem] px-2 py-0 bg-gallery-warm/10 text-foreground hover:bg-gallery-warm/20">
+                              {tag}
+                            </Badge>
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     )}
                   </article>
                 ))}
@@ -242,13 +244,15 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
                 {data.skills.map((group) => (
                   <div key={r(group.category)}>
                     <p className="text-xs font-medium text-muted-foreground mb-2">{r(group.category)}</p>
-                    <div className="flex flex-wrap gap-1.5">
+                    <ul className="flex flex-wrap gap-1.5 list-none p-0 m-0">
                       {group.skills.map((skill) => (
-                        <Badge key={skill.name} variant="secondary" className="rounded-full px-2.5 py-0.5 text-xs font-medium bg-gallery-warm/15 text-foreground hover:bg-gallery-warm/25 dark:bg-gallery-warm/10 dark:text-foreground dark:hover:bg-gallery-warm/20 transition-colors">
-                          {skill.name}
-                        </Badge>
+                        <li key={skill.name}>
+                          <Badge variant="secondary" className="rounded-full px-2.5 py-0.5 text-xs font-medium bg-gallery-warm/15 text-foreground hover:bg-gallery-warm/25 dark:bg-gallery-warm/10 dark:text-foreground dark:hover:bg-gallery-warm/20 transition-colors">
+                            {skill.name}
+                          </Badge>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
                 ))}
               </div>
@@ -275,13 +279,15 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
                 <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
                   <Puzzle className="h-4 w-4" /> {t("softSkills")}
                 </h2>
-                <div className="flex flex-wrap gap-1.5">
+                <ul className="flex flex-wrap gap-1.5 list-none p-0 m-0">
                   {(data.softSkills[locale as keyof typeof data.softSkills] as string[] || data.softSkills.en).map((skill: string) => (
-                    <Badge key={skill} variant="outline" className="rounded-2xl text-xs h-auto max-w-full whitespace-normal break-words py-1 leading-snug">
-                      {skill}
-                    </Badge>
+                    <li key={skill}>
+                      <Badge variant="outline" className="rounded-2xl text-xs h-auto max-w-full whitespace-normal break-words py-1 leading-snug">
+                        {skill}
+                      </Badge>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </section>
             )}
 
