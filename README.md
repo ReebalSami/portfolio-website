@@ -151,7 +151,7 @@ portfolio-website/
 
 ## Internationalization (i18n)
 
-Supports 4 locales: **English** (default), **German**, **Spanish**, **Arabic** (RTL).
+Supports 4 locales: **English** (default), **German**, **Spanish**, **Arabic** (RTL). All four are now fully populated across app strings and CV content.
 
 Translation files: `src/messages/{en,de,es,ar}.json`
 
@@ -159,6 +159,8 @@ To add a translation key:
 1. Add the key to all 4 JSON files
 2. Use `useTranslations('namespace')` in components
 3. See `.windsurf/workflows/add-translation.md` for the full workflow
+
+**Next up** — audience-tuned transcreation for AR (Gulf-first) and ES (Andalusia-focused) with section-level tone routing. Baseline translations are machine-assisted; see [`CHANGELOG.md`](CHANGELOG.md) for status.
 
 ## Blog
 
@@ -174,6 +176,20 @@ tags: ["ai", "python"]
 ```
 
 Features: Shiki syntax highlighting, reading time, table of contents, RSS feed.
+
+### Editorial MDX primitives
+
+Blog posts compose three typed components from `src/components/blog/`:
+
+| Component | Purpose |
+|-----------|---------|
+| `BlogPhoto` | Standard bordered blog image with caption |
+| `Polaroid` | Tilted instant-photo aesthetic with handwritten caption |
+| `SplitRow` | Magazine-style photo-floats-in-text layout |
+
+All three register into a shared `GalleryProvider` via the `useBlogGalleryItem` hook and open a custom lightbox built on [yet-another-react-lightbox](https://github.com/igordanchenko/yet-another-react-lightbox) (Zoom plugin, gesture-first — zoom UI hidden, custom chrome for counter / caption / arrows / thumbnail strip).
+
+**MDX gotcha** — `next-mdx-remote/rsc` silently drops numeric JSX expression props. MDX-facing components that accept numbers (e.g. `SplitRow.rotate`) declare their prop as `number | string` and coerce internally; MDX call sites pass strings (`rotate="-3"`).
 
 ## CV System
 
@@ -200,6 +216,7 @@ scripts/generate-cv.ts      → Build pipeline (compile + verify)
 - **ATS verification** — `pdftotext` extraction checked for correct section order, key content presence
 - **Meta lines** styled with accent color (`#D4A574`) and max font weight
 - **Justified text** in both templates
+- **Locale routing** — shared helpers in `scripts/typst/shared/locale.typ`; all four locales (EN / DE / ES / AR) fully populated in both `cv.public.yaml` and `cv.full.yaml`
 - **Content changes**: edit `config/cv/cv.public.yaml`, run `make cv:all`, then `make deploy`
 
 ## Deployment

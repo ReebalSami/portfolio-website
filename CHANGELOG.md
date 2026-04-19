@@ -9,6 +9,88 @@ it describes (e.g. `infra/README.md#runtime`, `docs/ARCHITECTURE.md`).
 
 ---
 
+## 2026-04-19 — Blog editorial gallery, CV localization, chatbot reasoning
+
+Two consecutive deploys on the same day: the blog gets an editorial
+lightbox + MDX primitives (`1479b85`), CV localization is closed out
+for ES + AR, and the chatbot's system prompt is rewritten for
+structured reasoning and follow-ups (`f86a259` + docs).
+
+### Blog — editorial lightbox gallery (commit `1479b85`)
+- Migrated `react-photo-view` → `yet-another-react-lightbox` (Zoom plugin).
+  Native-capable trackpad pinch + swipe; no custom wheel interception.
+- `useBlogGalleryItem` hook: blog image components register into a
+  shared React context and open the shared lightbox. Opener is a safe
+  no-op outside `GalleryProvider`.
+- Custom chrome preserved: counter (NN / MM), handwritten caption
+  cross-fade, ghost close/arrows, thumbnail strip, loop. Zoom UI/icons
+  hidden for a gesture-first UX.
+- New MDX primitives in `src/components/blog/`:
+  - `BlogPhoto` — standard bordered blog image
+  - `Polaroid` — tilted instant-photo with handwritten caption
+  - `SplitRow` — magazine-style photo-floats-in-text layout
+  - mdx-components registry + `remark-mermaid` helper
+- MDX quirk documented: `next-mdx-remote/rsc` silently drops numeric
+  JSX expression props. `SplitRow.rotate` accepts `number | string`;
+  MDX call sites pass strings (`"-3"`), coerced internally.
+- Rewrote `from-finance-to-ai-career-transition.mdx` with the new
+  editorial structure (SplitRow + Polaroid, alternating tilts
+  -3° / +3° / -2° / +4°); polish passes on three other English posts.
+- Deps: **+** `yet-another-react-lightbox` · **−** `react-photo-view`
+  · **−** `lethargy-ts`
+
+### CV — ES + AR localization completion (commit `f86a259`)
+- `cv.public.yaml` + `cv.full.yaml`: ES and AR fully populated across
+  profile, experience, education, projects, skills, languages, soft
+  skills, interests (EN + DE were already complete).
+- Tech skills reorganized into richer categories (AI / ML split from
+  Frameworks & Libraries) to match the new chatbot context.
+- Soft skills rewritten for stronger voice across all four locales.
+- Two extended-visibility experience entries activated (Au-Pair,
+  alBaraka Bank) — shown in Visual / full profile, hidden from ATS.
+- Arabic name spelling corrected (`ريبال` → `رئبال`) in chatbot UI.
+- New `scripts/typst/shared/locale.typ` + locale-routing refinements
+  in the ATS + Visual Typst templates. Both PDFs regenerated.
+- Flag: these are baseline machine-assisted translations. Audience-
+  tuned transcreation is on the roadmap (see "Next up" below).
+
+### Chatbot — reasoning upgrade (commit `f86a259`)
+- `src/app/api/chat/route.ts`: system prompt rewritten with explicit
+  Mission / Grounding / Reasoning / Style sections.
+- "Partial coverage" vs "not covered" handled explicitly — answers
+  ground in context first, cite uncertainty, then invite contact for
+  confirmation.
+- Broad prompts ("tell me about him", "is he a fit?") now return a
+  direct summary → 3-6 evidence points → 1-2 targeted follow-up
+  questions.
+- Conversation history window: 10 → 16 messages.
+- `temperature: 0.3` for deterministic-enough responses.
+- `chatbot-context.md` Tech Stack reorganized to mirror new CV
+  categories; `tech-stack.ts` kept aligned.
+
+### Tooling
+- `eslint.config.mjs`: ignore `.venv/` (Python virtualenv used by CV
+  tooling) — mirrors `.gitignore`.
+
+### Verification
+- Local: `pnpm tsc --noEmit`, `pnpm lint`, `pnpm vitest run` (38/38),
+  `pnpm playwright test tests/e2e/blog.spec.ts` (30/30 across
+  chromium / firefox / webkit / mobile-chrome / mobile-safari),
+  `make cv:validate`, `make cv:verify`.
+- CI (commit `1479b85`): all 5 jobs ✓ (Lint & Typecheck, Unit Tests,
+  E2E Tests, Build, CDK Synth).
+- Prod smoke: `/`, `/en/blog/from-finance-to-ai-career-transition`,
+  `/en/cv` all 200; lightbox chrome + Polaroid markup present in SSR.
+
+### Next up (not in this release)
+- Audience-tuned transcreation for Arabic (Gulf-first: KSA / UAE / Qatar)
+  and Spanish (Andalusia-focused) with section-level tone routing.
+- Planned as a separate brainstorming-only session; working artifact
+  kept locally at `docs/prompts/opus37-continuation-brainstorming-prompt.md`
+  (untracked).
+
+---
+
 ## 2026-04-16 — Node 24 LTS stack-wide upgrade
 
 Triggered by AWS Health notice that Lambda `nodejs20.x` security patches
