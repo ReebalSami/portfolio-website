@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     "infra/**",
     "cdk.out/**",
     ".deploy/**",
+    // Python virtualenv (mirrors .gitignore; can exist locally for CV tooling)
+    ".venv/**",
   ]),
 ]);
 

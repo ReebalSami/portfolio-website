@@ -104,9 +104,9 @@ Reebal excels at building end-to-end AI/ML solutions — from data pipelines and
 - **Highlights**: Spring Boot REST API + OAuth; React + TypeScript frontend; MongoDB storage; AI-powered recipe suggestions; test-driven development throughout.
 
 ## Tech Stack
-- **Languages**: Python, TypeScript, JavaScript, Java, SQL, HTML/CSS, VBA
-- **AI / ML**: PyTorch, TensorFlow, scikit-learn, Hugging Face, OpenCV, timm, XGBoost, OpenAI API, LangChain, Agno (agents), RAG, Multi-Agent Orchestration, Prompt Engineering, Function Calling, Structured Outputs, Vision Transformers (ViT), CNN, Grad-CAM, Attention Rollout, Word2Vec, NLP
-- **Frameworks**: Next.js, React, FastAPI, Streamlit, Spring Boot, Pydantic, SQLAlchemy, MDX
-- **Cloud & DevOps**: AWS (Lambda, S3, CloudFront, CDK, Route 53, ACM), GCP, Docker, GitHub Actions, Makefile, Render, MLflow
-- **Databases**: PostgreSQL (3NF), MongoDB, Vector DB, FAISS, Pinecone, SAP FI-CO / BPC
-- **Tools**: Git, Jupyter, Pandas, Polars, NumPy, Plotly, BeautifulSoup, Oxylabs, Tailwind CSS, Playwright, UiPath (RPA), Obsidian
+- **Programming Languages**: Python, TypeScript, JavaScript, Java, SQL, VBA, HTML, CSS
+- **AI / Machine Learning**: LLM Agents, Multi-Agent Orchestration, RAG, Prompt Engineering, Context Engineering, Function Calling, Structured Outputs, Local Inference (llama.cpp), LLM APIs, Vision Transformers, CNNs, YOLO, Grad-CAM, Attention Rollout, Word2Vec, Embeddings, XGBoost / LightGBM, EDA, Regression, Time Series, Statistical Modeling
+- **Frameworks & Libraries**: PyTorch, TensorFlow, Hugging Face, timm, scikit-learn, OpenCV, LangChain, Agno, AutoGen, Next.js, React, FastAPI, Streamlit, Spring Boot, Pydantic, SQLAlchemy, BeautifulSoup, Tailwind CSS, MDX, Pandas, Polars, NumPy, Plotly, Matplotlib, Seaborn
+- **Cloud & DevOps**: AWS (CDK, Lambda, S3, CloudFront), GCP, Docker, GitHub Actions, Render, MLflow, Makefile, Playwright
+- **Databases**: PostgreSQL (3NF), MongoDB, Vector DB (FAISS, Pinecone), SAP FI-CO / BPC
+- **Tools**: Git, Jupyter, UiPath (RPA), Oxylabs, Sanity CMS, Stripe

@@ -14,3 +14,26 @@
   }
   else { str(val) }
 }
+
+// Keep website data rich while allowing PDF variants to hide extended/private entries.
+#let is-pdf-visible(entry) = {
+  let visibility = entry.at("visibility", default: "public")
+  visibility != "extended" and visibility != "private"
+}
+
+#let project-date-rank(date-val) = {
+  if type(date-val) == str and date-val.len() >= 4 {
+    let base = int(date-val.slice(0, 4))
+    if date-val.contains("/") {
+      base + 0.5
+    } else {
+      base + 0.0
+    }
+  } else {
+    0.0
+  }
+}
+
+#let sort-projects-newest(projects) = {
+  projects.sorted(key: p => -project-date-rank(p.at("date", default: "")))
+}
