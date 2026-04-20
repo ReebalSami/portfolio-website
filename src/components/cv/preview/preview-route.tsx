@@ -2,7 +2,7 @@ import { PortfolioGalleryTheme } from "@/components/cv/themes/portfolio-gallery"
 import { MirroredCanonicalTheme } from "@/components/cv/themes/variants/mirrored-canonical-theme";
 import { EditorialMagazineTheme } from "@/components/cv/themes/variants/editorial-magazine-theme";
 import { KineticAiTheme } from "@/components/cv/themes/variants/kinetic-ai-theme";
-import { CinematicSplitTheme } from "@/components/cv/themes/variants/cinematic-split-theme";
+import { ScrollHeroTheme } from "@/components/cv/themes/variants/scroll-hero-theme";
 import { PreviewBanner } from "@/components/cv/preview/preview-banner";
 import { loadCvData } from "@/lib/cv/data";
 import { getCvPreviewVariant, type CvVariantId } from "./variants";
@@ -58,7 +58,7 @@ export async function PreviewRoute({ variantId, locale }: PreviewRouteProps) {
         );
       case "option-6":
         return (
-          <CinematicSplitTheme
+          <ScrollHeroTheme
             data={data}
             locale={locale}
             photoSrc={variant.photoSrc}
