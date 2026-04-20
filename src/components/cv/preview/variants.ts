@@ -42,9 +42,9 @@ export const cvPreviewVariants: readonly CvPreviewVariant[] = [
   },
   {
     id: "option-6",
-    name: "Cinematic Split",
+    name: "Scroll Hero",
     tagline:
-      "50/50 split — full-bleed sticky photo fills the left half, content scrolls on the right. Film-poster drama.",
+      "Full-bleed color photo + gradient name on mount. As you scroll, the photo scales, blurs, and fades out — by the time you reach Experience, the portrait is gone and only the work remains.",
     photoSrc: "/images/resume/option-1.JPG",
     accent: "from-gallery-warm/40 via-orange-200/25 to-transparent",
   },

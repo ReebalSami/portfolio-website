@@ -10,7 +10,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "CV Preview · Option 6 — Cinematic Split",
+  title: "CV Preview · Option 6 — Scroll Hero",
   robots: { index: false, follow: false },
 };
 
