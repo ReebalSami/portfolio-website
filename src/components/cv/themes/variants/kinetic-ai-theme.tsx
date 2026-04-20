@@ -45,14 +45,33 @@ export async function KineticAiTheme({
   const years = yearsOfExperience(data);
   const skillCount = data.skills.reduce((n, g) => n + g.skills.length, 0);
 
+  // Counter labels clarified — previous "Years / Languages / Skills" was
+  // ambiguous (years of what? which languages?). Naming them in full here
+  // keeps the hero self-explanatory without a caption.
   const counters = [
-    { label: "Years", value: years, suffix: "+" },
+    { label: "Yrs. experience", value: years, suffix: "+" },
     { label: "Languages", value: data.languages.length },
-    { label: "Skills", value: skillCount },
+    { label: "Technical skills", value: skillCount },
   ];
 
   return (
-    <div className="relative overflow-x-clip">
+    // Outer wrapper supplies the dark base colour so hero shader and body
+    // both sit on the same neutral-950 surface — no visual seam between
+    // them. A soft warm radial fades into the body so the shader "bleeds"
+    // past the hero rather than stopping abruptly.
+    <div className="relative overflow-x-clip bg-neutral-950 text-neutral-100">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-[85vh] h-[140vh] -z-0"
+        aria-hidden="true"
+        style={{
+          background: [
+            "radial-gradient(ellipse 70% 40% at 20% 0%, oklch(0.45 0.12 50 / 0.25), transparent 65%)",
+            "radial-gradient(ellipse 60% 35% at 85% 15%, oklch(0.42 0.1 40 / 0.2), transparent 65%)",
+            "radial-gradient(ellipse 80% 50% at 50% 70%, oklch(0.4 0.08 40 / 0.15), transparent 70%)",
+          ].join(", "),
+        }}
+      />
+
       <KineticAiHero
         name={data.basics.name}
         title={r(data.basics.title)}
@@ -70,7 +89,30 @@ export async function KineticAiTheme({
         counters={counters}
         i18n={{ downloadPdf: t("downloadPdf") }}
       />
-      <CvBody data={data} locale={locale} showSeparator={false} />
+
+      <CvBody
+        data={data}
+        locale={locale}
+        showSeparator={false}
+        showBackgroundShapes={false}
+        maxWidthClass="max-w-6xl"
+        tone="dark"
+        bottomDecoration={
+          <div className="border-t border-gallery-warm/30 pt-6 font-mono">
+            <p className="text-[0.6rem] font-medium uppercase tracking-[0.35em] text-neutral-400">
+              Curriculum vitae
+            </p>
+            <p className="mt-2 text-sm text-neutral-100">
+              v.{new Date().getFullYear()}.
+              {String(new Date().getMonth() + 1).padStart(2, "0")} ·{" "}
+              {r(data.basics.location.city)}, {r(data.basics.location.country)}
+            </p>
+            <p className="mt-4 text-[0.6rem] text-neutral-500">
+              Rendered on {new Date().toISOString().slice(0, 10)}
+            </p>
+          </div>
+        }
+      />
     </div>
   );
 }
