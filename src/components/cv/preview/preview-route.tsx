@@ -2,6 +2,7 @@ import { PortfolioGalleryTheme } from "@/components/cv/themes/portfolio-gallery"
 import { GalleryCoverTheme } from "@/components/cv/themes/variants/gallery-cover-theme";
 import { EditorialMagazineTheme } from "@/components/cv/themes/variants/editorial-magazine-theme";
 import { BauhausSwissTheme } from "@/components/cv/themes/variants/bauhaus-swiss-theme";
+import { KineticAiTheme } from "@/components/cv/themes/variants/kinetic-ai-theme";
 import { PreviewBanner } from "@/components/cv/preview/preview-banner";
 import { loadCvData } from "@/lib/cv/data";
 import { getCvPreviewVariant, type CvVariantId } from "./variants";
@@ -49,6 +50,15 @@ export async function PreviewRoute({ variantId, locale }: PreviewRouteProps) {
       case "option-3":
         return (
           <BauhausSwissTheme
+            data={data}
+            locale={locale}
+            photoSrc={variant.photoSrc}
+            heroTransitionName={transitionName}
+          />
+        );
+      case "option-4":
+        return (
+          <KineticAiTheme
             data={data}
             locale={locale}
             photoSrc={variant.photoSrc}
