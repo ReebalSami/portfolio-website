@@ -320,3 +320,37 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* =============================================================================
+   View Transitions — cross-page navigation
+   See docs/design/transitions-and-hero-exploration.md for rationale.
+   Browsers without View Transitions API gracefully degrade to instant nav.
+   ============================================================================= */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Default crossfade for the root snapshot */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 280ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Shared-element morph for the hero photo (home <-> cv).
+     Slightly longer so the spatial transformation reads as purposeful. */
+  ::view-transition-old(hero-photo),
+  ::view-transition-new(hero-photo) {
+    animation-duration: 420ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    mix-blend-mode: normal;
+  }
+}
+
+/* Reduced-motion: disable every view transition (no flash, instant swap) */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(hero-photo),
+  ::view-transition-new(hero-photo) {
+    animation: none !important;
+  }
+}

@@ -3,11 +3,11 @@ import { Space_Grotesk, Archivo, JetBrains_Mono, IBM_Plex_Sans_Arabic, Caveat } 
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { PageTransition } from "@/components/layout/page-transition";
 import { ChatWidget } from "@/components/chat/chat-widget";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
@@ -178,6 +178,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     .join(" ");
 
   return (
+    <ViewTransitions>
     <html
       lang={locale}
       dir={isRtl ? "rtl" : "ltr"}
@@ -211,11 +212,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           <NextIntlClientProvider>
             <TooltipProvider>
               <Header siteName={config.site.name} />
-              <PageTransition>
-                <main id="main-content" className="flex-1">
-                  {children}
-                </main>
-              </PageTransition>
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
               {config.features.chatbot && <ChatWidget />}
               <Footer
                 siteName={config.site.name}
@@ -228,5 +227,6 @@ export default async function LocaleLayout({ children, params }: Props) {
         </ThemeProvider>
       </body>
     </html>
+    </ViewTransitions>
   );
 }

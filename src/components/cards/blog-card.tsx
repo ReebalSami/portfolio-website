@@ -1,4 +1,4 @@
-import { Link } from "@/i18n/navigation";
+import { TransitionLink } from "@/components/shared/transition-link";
 import { Clock, Calendar, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,7 +11,7 @@ interface BlogCardProps {
 
 export function BlogCard({ post, locale = "en" }: BlogCardProps) {
   return (
-    <Link href={`/blog/${post.slug}`}>
+    <TransitionLink href={`/blog/${post.slug}`}>
       <Card className="group h-full cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
@@ -49,6 +49,6 @@ export function BlogCard({ post, locale = "en" }: BlogCardProps) {
           </div>
         </CardContent>
       </Card>
-    </Link>
+    </TransitionLink>
   );
 }

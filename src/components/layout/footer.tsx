@@ -1,4 +1,4 @@
-import { Link } from "@/i18n/navigation";
+import { TransitionLink } from "@/components/shared/transition-link";
 import { useTranslations } from "next-intl";
 import { Mail, MapPin } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/brand-icons";
@@ -23,9 +23,9 @@ export function Footer({ siteName, email, location, social }: FooterProps) {
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="space-y-3">
-            <Link href="/" className="text-lg font-bold tracking-tight">
+            <TransitionLink href="/" className="text-lg font-bold tracking-tight">
               {siteName}
-            </Link>
+            </TransitionLink>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4 shrink-0" />
               <span>{location}</span>
