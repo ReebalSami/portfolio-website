@@ -5,7 +5,7 @@
  * See docs/design/transitions-and-hero-exploration.md §5.
  */
 
-export type CvVariantId = "option-2" | "option-4" | "option-6";
+export type CvVariantId = "option-1" | "option-2" | "option-4" | "option-6";
 
 export interface CvPreviewVariant {
   id: CvVariantId;
@@ -16,6 +16,14 @@ export interface CvPreviewVariant {
 }
 
 export const cvPreviewVariants: readonly CvPreviewVariant[] = [
+  {
+    id: "option-1",
+    name: "Mirrored Canonical",
+    tagline:
+      "Canonical layout with left/right flipped and shapes rescattered — photo is full color with a subtle warm blend, not grayscale. Tests whether mirroring + color changes the read.",
+    photoSrc: "/images/hero/start-photo.JPG",
+    accent: "from-gallery-warm/40 via-gallery-warm-muted/30 to-transparent",
+  },
   {
     id: "option-2",
     name: "Editorial Magazine",
