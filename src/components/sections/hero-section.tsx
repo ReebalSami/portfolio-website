@@ -65,7 +65,10 @@ export function HeroSection({
             <div className="absolute top-1/2 -left-3 h-20 w-20 rounded-[1.5rem] bg-gallery-warm-light/30 -rotate-12 sm:h-28 sm:w-28 md:-left-6 md:h-32 md:w-32" />
           </div>
 
-          <div className="relative mx-auto max-w-[80%] overflow-hidden rounded-[2rem] sm:max-w-[70%]">
+          <div
+            className="relative mx-auto max-w-[80%] overflow-hidden rounded-[2rem] sm:max-w-[70%]"
+            style={{ viewTransitionName: "hero-photo" }}
+          >
             <Image
               src={photoSrc}
               alt={`Portrait of ${name}`}
@@ -119,7 +122,10 @@ export function HeroSection({
           <div className="absolute top-1/2 -left-3 h-20 w-20 rounded-[1.5rem] bg-gallery-warm-light/30 -rotate-12 sm:h-28 sm:w-28 md:-left-6 md:h-32 md:w-32" />
         </div>
 
-        <div className="relative mx-auto max-w-[80%] overflow-hidden rounded-[2rem] sm:max-w-[70%]">
+        <div
+          className="relative mx-auto max-w-[80%] overflow-hidden rounded-[2rem] sm:max-w-[70%]"
+          style={{ viewTransitionName: "hero-photo" }}
+        >
           <Image
             src={photoSrc}
             alt={`Portrait of ${name}`}

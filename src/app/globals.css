@@ -331,15 +331,15 @@
   /* Default crossfade for the root snapshot */
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-duration: 280ms;
+    animation-duration: 380ms;
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   /* Shared-element morph for the hero photo (home <-> cv).
-     Slightly longer so the spatial transformation reads as purposeful. */
+     Slower than root so the spatial transformation reads as deliberate. */
   ::view-transition-old(hero-photo),
   ::view-transition-new(hero-photo) {
-    animation-duration: 420ms;
+    animation-duration: 600ms;
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     mix-blend-mode: normal;
   }
