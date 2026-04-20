@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { LampReveal } from "@/components/shared/lamp-reveal";
 
 interface HeroSectionProps {
   name: string;
@@ -57,7 +58,8 @@ export function HeroSection({
 
   if (prefersReducedMotion) {
     return (
-      <div className="grid min-h-0 items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 md:min-h-[calc(100vh-4rem)] md:grid-cols-2 md:gap-12 lg:gap-20">
+      <div className="relative grid min-h-0 items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 md:min-h-[calc(100vh-4rem)] md:grid-cols-2 md:gap-12 lg:gap-20">
+        <LampReveal />
         <div className="relative order-1 md:order-1 overflow-hidden">
           <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
             <div className="absolute -top-4 -left-4 h-48 w-48 rounded-full bg-gallery-warm/30 sm:h-60 sm:w-60 md:-top-8 md:-left-8 md:h-80 md:w-80 lg:h-96 lg:w-96" />
@@ -110,11 +112,12 @@ export function HeroSection({
 
   return (
     <motion.div
-      className="grid min-h-0 items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 md:min-h-[calc(100vh-4rem)] md:grid-cols-2 md:gap-12 lg:gap-20"
+      className="relative grid min-h-0 items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 md:min-h-[calc(100vh-4rem)] md:grid-cols-2 md:gap-12 lg:gap-20"
       variants={stagger}
       initial="hidden"
       animate="visible"
     >
+      <LampReveal />
       <motion.div className="relative order-1 md:order-1 overflow-hidden" variants={fadeScale}>
         <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
           <div className="absolute -top-4 -left-4 h-48 w-48 rounded-full bg-gallery-warm/30 sm:h-60 sm:w-60 md:-top-8 md:-left-8 md:h-80 md:w-80 lg:h-96 lg:w-96" />
