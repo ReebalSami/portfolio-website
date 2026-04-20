@@ -23,6 +23,11 @@ interface CvBodyProps {
   showSeparator?: boolean;
   /** When true, the decorative geometric shapes behind the body are rendered. Defaults to true. */
   showBackgroundShapes?: boolean;
+  /** When true, sidebar stacks below the main content instead of sitting
+   *  beside it. Useful for narrow split-screen layouts. Defaults to false. */
+  sidebarBelow?: boolean;
+  /** Max-width for the inner container. Defaults to 5xl (64rem). */
+  maxWidthClass?: string;
 }
 
 function formatDate(dateStr: string, locale: Locale): string {
@@ -47,16 +52,25 @@ export async function CvBody({
   locale,
   showSeparator = true,
   showBackgroundShapes = true,
+  sidebarBelow = false,
+  maxWidthClass = "max-w-5xl",
 }: CvBodyProps) {
   const t = await getTranslations("cv");
   const r = (s: Parameters<typeof resolveCvLocaleString>[0]) =>
     resolveCvLocaleString(s, locale);
 
+  const gridClass = sidebarBelow
+    ? "relative grid gap-12 grid-cols-1 py-16 md:py-24"
+    : "relative grid gap-12 md:grid-cols-[minmax(0,1fr)_300px] lg:grid-cols-[minmax(0,1fr)_340px] py-16 md:py-24";
+  const asideClass = sidebarBelow
+    ? "min-w-0 space-y-10"
+    : "min-w-0 space-y-10 md:sticky md:top-24 md:self-start";
+
   return (
     <>
       {showSeparator && <Separator />}
 
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
+      <div className={`relative mx-auto ${maxWidthClass} px-4 sm:px-6`}>
         {showBackgroundShapes && (
           <div
             className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -70,7 +84,7 @@ export async function CvBody({
           </div>
         )}
 
-        <div className="relative grid gap-12 md:grid-cols-[minmax(0,1fr)_300px] lg:grid-cols-[minmax(0,1fr)_340px] py-16 md:py-24">
+        <div className={gridClass}>
           {/* === LEFT: main content === */}
           <div className="min-w-0 space-y-16">
             {/* Experience */}
@@ -192,7 +206,7 @@ export async function CvBody({
           </div>
 
           {/* === RIGHT: sidebar === */}
-          <aside className="min-w-0 space-y-10 md:sticky md:top-24 md:self-start">
+          <aside className={asideClass}>
             {/* Skills */}
             <section>
               <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
