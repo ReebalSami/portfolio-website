@@ -1,4 +1,5 @@
 import { PortfolioGalleryTheme } from "@/components/cv/themes/portfolio-gallery";
+import { MirroredCanonicalTheme } from "@/components/cv/themes/variants/mirrored-canonical-theme";
 import { EditorialMagazineTheme } from "@/components/cv/themes/variants/editorial-magazine-theme";
 import { KineticAiTheme } from "@/components/cv/themes/variants/kinetic-ai-theme";
 import { CinematicSplitTheme } from "@/components/cv/themes/variants/cinematic-split-theme";
@@ -28,6 +29,15 @@ export async function PreviewRoute({ variantId, locale }: PreviewRouteProps) {
 
   const body = (() => {
     switch (variantId) {
+      case "option-1":
+        return (
+          <MirroredCanonicalTheme
+            data={data}
+            locale={locale}
+            photoSrc={variant.photoSrc}
+            heroTransitionName={transitionName}
+          />
+        );
       case "option-2":
         return (
           <EditorialMagazineTheme
