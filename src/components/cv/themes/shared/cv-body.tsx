@@ -1,3 +1,4 @@
+import type { CSSProperties, ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import type { CvData } from "@/lib/cv/schema";
 import { resolveCvLocaleString } from "@/lib/cv/data";
@@ -28,6 +29,20 @@ interface CvBodyProps {
   sidebarBelow?: boolean;
   /** Max-width for the inner container. Defaults to 5xl (64rem). */
   maxWidthClass?: string;
+  /** Rendered at the bottom of the sidebar aside. When provided, the aside
+   *  switches to flex-column with a flex-grow spacer so the decoration sits
+   *  at the very bottom and both columns end at the same visual line. */
+  bottomDecoration?: ReactNode;
+  /** Tonal override — "dark" remaps muted-foreground/border/card/foreground
+   *  via CSS variables so every child using those Tailwind utilities inherits
+   *  the dark palette. Does NOT use the global .dark class, so it never
+   *  interferes with the user's light/dark mode preference elsewhere. */
+  tone?: "default" | "dark";
+  /** When true, section <h2> titles render in Fraunces serif (via the 
+   *  --font-editorial CSS variable) with a top rule echoing a masthead. The
+   *  Editorial Magazine variant sets this and applies the font at its own
+   *  wrapper so the variable is in scope. */
+  serifHeadings?: boolean;
 }
 
 function formatDate(dateStr: string, locale: Locale): string {
@@ -54,6 +69,9 @@ export async function CvBody({
   showBackgroundShapes = true,
   sidebarBelow = false,
   maxWidthClass = "max-w-5xl",
+  bottomDecoration,
+  tone = "default",
+  serifHeadings = false,
 }: CvBodyProps) {
   const t = await getTranslations("cv");
   const r = (s: Parameters<typeof resolveCvLocaleString>[0]) =>
@@ -62,12 +80,51 @@ export async function CvBody({
   const gridClass = sidebarBelow
     ? "relative grid gap-12 grid-cols-1 py-16 md:py-24"
     : "relative grid gap-12 md:grid-cols-[minmax(0,1fr)_300px] lg:grid-cols-[minmax(0,1fr)_340px] py-16 md:py-24";
+
+  // When bottomDecoration is provided, the aside stretches to fill the grid
+  // row and the decoration anchors at its bottom via a flex-grow spacer.
+  // Otherwise we keep the original sticky-top behaviour so the sidebar stays
+  // visible while the user reads Experience.
   const asideClass = sidebarBelow
-    ? "min-w-0 space-y-10"
-    : "min-w-0 space-y-10 md:sticky md:top-24 md:self-start";
+    ? "min-w-0"
+    : bottomDecoration
+      ? "min-w-0 flex flex-col"
+      : "min-w-0 md:sticky md:top-24 md:self-start";
+
+  // Scoped dark palette via CSS variable overrides. These target the same
+  // tokens Tailwind's utilities already resolve against, so every child
+  // using text-muted-foreground / border-border / bg-card picks up the
+  // dark values without any class changes in the tree below.
+  const toneStyle: CSSProperties | undefined =
+    tone === "dark"
+      ? ({
+          // oklch values chosen to match the kinetic-ai hero's neutral-950
+          // base and warm-peach accent without clashing with gallery-warm.
+          "--foreground": "oklch(0.96 0.01 85)",
+          "--muted-foreground": "oklch(0.7 0.02 80)",
+          "--border": "oklch(0.28 0.02 40)",
+          "--card": "oklch(0.14 0.02 40)",
+          "--card-foreground": "oklch(0.96 0.01 85)",
+          "--secondary": "oklch(0.2 0.02 40)",
+          "--secondary-foreground": "oklch(0.96 0.01 85)",
+          color: "var(--foreground)",
+        } as CSSProperties)
+      : undefined;
+
+  // Section <h2> classes — serif variant swaps the monospace uppercase
+  // micro-type for a large Fraunces title with a top rule above it.
+  const sectionHeadingClass = serifHeadings
+    ? "flex items-baseline gap-3 text-2xl font-medium tracking-tight text-foreground mb-8 border-t-2 border-foreground/80 pt-4"
+    : "flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-8";
+  const sectionHeadingStyle: CSSProperties | undefined = serifHeadings
+    ? { fontFamily: "var(--font-editorial)" }
+    : undefined;
+  const sidebarHeadingClass = serifHeadings
+    ? "flex items-baseline gap-3 text-xl font-medium tracking-tight text-foreground mb-4 border-t-2 border-foreground/80 pt-4"
+    : "flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4";
 
   return (
-    <>
+    <div style={toneStyle}>
       {showSeparator && <Separator />}
 
       <div className={`relative mx-auto ${maxWidthClass} px-4 sm:px-6`}>
@@ -89,7 +146,7 @@ export async function CvBody({
           <div className="min-w-0 space-y-16">
             {/* Experience */}
             <section>
-              <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-8">
+              <h2 className={sectionHeadingClass} style={sectionHeadingStyle}>
                 <Briefcase className="h-4 w-4" /> {t("experience")}
               </h2>
               <div className="relative ms-4 border-s-2 border-border ps-8 space-y-8">
@@ -144,7 +201,7 @@ export async function CvBody({
 
             {/* Education */}
             <section>
-              <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-8">
+              <h2 className={sectionHeadingClass} style={sectionHeadingStyle}>
                 <GraduationCap className="h-4 w-4" /> {t("education")}
               </h2>
               <div className="relative ms-4 border-s-2 border-border ps-8 space-y-8">
@@ -186,7 +243,7 @@ export async function CvBody({
             {/* Certifications */}
             {data.certifications && data.certifications.length > 0 && (
               <section>
-                <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-8">
+                <h2 className={sectionHeadingClass} style={sectionHeadingStyle}>
                   <Award className="h-4 w-4" /> {t("certifications")}
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -207,9 +264,10 @@ export async function CvBody({
 
           {/* === RIGHT: sidebar === */}
           <aside className={asideClass}>
+            <div className="space-y-10">
             {/* Skills */}
             <section>
-              <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
+              <h2 className={sidebarHeadingClass} style={sectionHeadingStyle}>
                 <Settings className="h-4 w-4" /> {t("skills")}
               </h2>
               <div className="space-y-4">
@@ -237,7 +295,7 @@ export async function CvBody({
 
             {/* Languages */}
             <section>
-              <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
+              <h2 className={sidebarHeadingClass} style={sectionHeadingStyle}>
                 <Languages className="h-4 w-4" /> {t("languages")}
               </h2>
               <div className="space-y-2">
@@ -253,7 +311,7 @@ export async function CvBody({
             {/* Soft Skills */}
             {data.softSkills && (
               <section>
-                <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
+                <h2 className={sidebarHeadingClass} style={sectionHeadingStyle}>
                   <Puzzle className="h-4 w-4" /> {t("softSkills")}
                 </h2>
                 <ul className="flex flex-wrap gap-1.5 list-none p-0 m-0">
@@ -277,7 +335,7 @@ export async function CvBody({
             {/* Interests */}
             {data.interests && data.interests.length > 0 && (
               <section>
-                <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
+                <h2 className={sidebarHeadingClass} style={sectionHeadingStyle}>
                   <MessageCircle className="h-4 w-4" /> {t("interests")}
                 </h2>
                 <div className="space-y-2">
@@ -298,7 +356,7 @@ export async function CvBody({
             {/* References */}
             {data.references && data.references.length > 0 && (
               <section>
-                <h2 className="text-sm font-medium uppercase tracking-widest text-muted-foreground mb-4">
+                <h2 className={sidebarHeadingClass} style={sectionHeadingStyle}>
                   {t("references")}
                 </h2>
                 <div className="space-y-3">
@@ -313,9 +371,20 @@ export async function CvBody({
                 </div>
               </section>
             )}
+            </div>
+
+            {bottomDecoration && (
+              <>
+                {/* Spacer grows to push the decoration to the aside's bottom,
+                    visually aligning the end of the sidebar with the end of
+                    the taller main column. */}
+                <div className="mt-10 flex-1" aria-hidden="true" />
+                <div className="mt-10">{bottomDecoration}</div>
+              </>
+            )}
           </aside>
         </div>
       </div>
-    </>
+    </div>
   );
 }
