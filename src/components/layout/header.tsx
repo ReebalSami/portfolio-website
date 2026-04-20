@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Link } from "@/i18n/navigation";
+import { TransitionLink } from "@/components/shared/transition-link";
 import { useTranslations } from "next-intl";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -44,12 +44,12 @@ export function Header({ siteName }: HeaderProps) {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link
+        <TransitionLink
           href="/"
           className="text-lg font-bold tracking-tight transition-colors hover:text-muted-foreground"
         >
           {siteName}
-        </Link>
+        </TransitionLink>
 
         <DesktopNav />
 

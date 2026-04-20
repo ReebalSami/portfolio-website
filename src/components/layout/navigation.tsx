@@ -1,7 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRouter, usePathname, Link } from "@/i18n/navigation";
+import { useRouter, usePathname } from "@/i18n/navigation";
+import { TransitionLink } from "@/components/shared/transition-link";
 import { cn } from "@/lib/utils";
 import { useActiveSection, type SectionId } from "@/hooks/use-active-section";
 
@@ -82,13 +83,13 @@ export function DesktopNav({ className }: DesktopNavProps) {
 
         if (item.type === "route") {
           return (
-            <Link
+            <TransitionLink
               key={item.labelKey}
               href={item.href}
               className={cn(desktopNavButtonBase, activeClass)}
             >
               {t(item.labelKey)}
-            </Link>
+            </TransitionLink>
           );
         }
 
@@ -143,14 +144,14 @@ export function MobileNav({ onNavigate }: MobileNavProps) {
 
         if (item.type === "route") {
           return (
-            <Link
+            <TransitionLink
               key={item.labelKey}
               href={item.href}
               onClick={handleRouteClick}
               className={cn(mobileNavButtonBase, activeClass)}
             >
               {t(item.labelKey)}
-            </Link>
+            </TransitionLink>
           );
         }
 
