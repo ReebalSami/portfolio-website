@@ -39,12 +39,17 @@ const networkIcons: Record<
 };
 
 /* ────────────────────────────────────────────────────────────
-   Kinetic name — letter-by-letter stagger on first in-view
+   Kinetic name — letter-by-letter stagger, first + last on separate lines
    ──────────────────────────────────────────────────────────── */
 function KineticName({ name }: { name: string }) {
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLHeadingElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10%" });
+  // margin: "0px" fires the observer as soon as any part of the heading
+  // enters the viewport, which on a hero component is effectively on mount.
+  const inView = useInView(ref, { once: true, margin: "0px" });
+
+  const [firstName, ...restName] = name.split(" ");
+  const lastName = restName.join(" ") || name;
 
   if (prefersReducedMotion) {
     return (
@@ -52,7 +57,8 @@ function KineticName({ name }: { name: string }) {
         ref={ref}
         className="text-[clamp(3rem,11vw,8rem)] font-bold leading-[0.95] tracking-[-0.03em]"
       >
-        {name}
+        <span className="block">{firstName}</span>
+        <span className="block text-gallery-warm/90">{lastName}</span>
       </h1>
     );
   }
@@ -71,6 +77,22 @@ function KineticName({ name }: { name: string }) {
     },
   };
 
+  const renderLetters = (text: string, keyPrefix: string) =>
+    Array.from(text).map((ch, ci) =>
+      ch === " " ? (
+        <span key={`${keyPrefix}-space-${ci}`} className="inline-block w-[0.3em]" />
+      ) : (
+        <motion.span
+          key={`${keyPrefix}-${ch}-${ci}`}
+          variants={letter}
+          className="inline-block"
+          style={{ willChange: "transform" }}
+        >
+          {ch}
+        </motion.span>
+      ),
+    );
+
   return (
     <motion.h1
       ref={ref}
@@ -80,23 +102,12 @@ function KineticName({ name }: { name: string }) {
       animate={inView ? "visible" : "hidden"}
       aria-label={name}
     >
-      {name.split(" ").map((word, wi) => (
-        <span
-          key={`${word}-${wi}`}
-          className="me-[0.3em] inline-block overflow-hidden align-baseline"
-        >
-          {Array.from(word).map((ch, ci) => (
-            <motion.span
-              key={`${ch}-${ci}`}
-              variants={letter}
-              className="inline-block"
-              style={{ willChange: "transform" }}
-            >
-              {ch}
-            </motion.span>
-          ))}
-        </span>
-      ))}
+      <span className="block overflow-hidden align-baseline">
+        {renderLetters(firstName, "fn")}
+      </span>
+      <span className="block overflow-hidden align-baseline text-gallery-warm/90">
+        {renderLetters(lastName, "ln")}
+      </span>
     </motion.h1>
   );
 }
@@ -113,20 +124,31 @@ function AnimatedCounter({
   suffix?: string;
   duration?: number;
 }) {
-  const [display, setDisplay] = useState(0);
+  // SSR + first client paint show the real value, so users with no JS
+  // (and screenshot-takers) never see a misleading "0+". Client-side
+  // useEffect then animates from 0 -> value once.
+  const [display, setDisplay] = useState(value);
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10%" });
+  // margin: "0px" triggers immediately on mount when the counter is
+  // already visible (which it is for a hero counter), fixing the bug
+  // where the previous "-10%" required scrolling before firing.
+  const inView = useInView(ref, { once: true, margin: "0px" });
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || prefersReducedMotion) return;
     let rafId = 0;
-    if (prefersReducedMotion) {
-      rafId = requestAnimationFrame(() => setDisplay(value));
-      return () => cancelAnimationFrame(rafId);
-    }
-    const start = performance.now();
+    // First frame resets to 0, subsequent frames ramp up. Wrapped in rAF
+    // to avoid the react-hooks/set-state-in-effect lint rule which flags
+    // synchronous setState calls inside an effect body.
+    let start = 0;
     const step = (now: number) => {
+      if (!start) {
+        start = now;
+        setDisplay(0);
+        rafId = requestAnimationFrame(step);
+        return;
+      }
       const t = Math.min(1, (now - start) / (duration * 1000));
       const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
       setDisplay(Math.round(eased * value));
@@ -218,7 +240,7 @@ export function KineticAiHero({
   i18n,
 }: KineticAiHeroProps) {
   return (
-    <section className="relative isolate overflow-hidden bg-neutral-950 text-neutral-100 dark:bg-neutral-950">
+    <section className="relative isolate overflow-hidden">
       {/* CSS-only shader: animated warm noise field */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -250,7 +272,7 @@ export function KineticAiHero({
       </svg>
 
       <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
-        <div className="grid gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,320px)] md:gap-16 items-center">
+        <div className="grid gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,460px)] md:gap-14 items-start">
           {/* Left: name + summary + CTA */}
           <div className="min-w-0">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-700/80 bg-neutral-900/60 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.3em] text-neutral-300 backdrop-blur">
@@ -335,9 +357,12 @@ export function KineticAiHero({
             </p>
           </div>
 
-          {/* Right: photo with warm ring */}
+          {/* Right: photo — larger (max-w-[460px]) and pushed down so its
+              top-left corner aligns with the top of the last-name line.
+              The mt offset = eyebrow pill + first-name line height, which
+              scales with the responsive name font size via clamp. */}
           {photoSrc && (
-            <div className="relative mx-auto md:mx-0 max-w-[280px] md:max-w-none">
+            <div className="relative mx-auto md:mx-0 max-w-[280px] md:max-w-none md:mt-[clamp(6rem,calc(10.45vw+2.5rem),10.5rem)]">
               <div
                 aria-hidden="true"
                 className="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-[2.5rem] border-2 border-gallery-warm/70"
@@ -356,7 +381,7 @@ export function KineticAiHero({
                   alt={name}
                   fill
                   priority
-                  sizes="(max-width: 768px) 70vw, 320px"
+                  sizes="(max-width: 768px) 70vw, 460px"
                   className="object-cover contrast-[1.2] saturate-[0.65] brightness-[0.95]"
                 />
                 {/* Warm gradient overlay */}
