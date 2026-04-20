@@ -76,7 +76,7 @@ export async function CvBody({
             className="pointer-events-none absolute inset-0 overflow-hidden"
             aria-hidden="true"
           >
-            <div className="absolute -top-10 -end-10 h-40 w-40 rounded-full bg-gallery-warm/20" />
+            <div className="absolute -top-10 -end-10 h-40 w-40 rounded-full bg-gallery-warm/30 blur-3xl" />
             <div className="absolute top-[30%] -start-16 h-48 w-48 rounded-[2rem] bg-gallery-warm-muted/20 -rotate-12" />
             <div className="absolute top-[55%] -end-10 h-32 w-56 rounded-[2.5rem] bg-gallery-warm/15 rotate-6" />
             <div className="absolute bottom-40 start-1/4 h-40 w-40 rounded-full bg-gallery-warm-light/20" />
