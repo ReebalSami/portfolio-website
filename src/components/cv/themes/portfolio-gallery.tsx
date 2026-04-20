@@ -25,6 +25,11 @@ interface PortfolioGalleryProps {
   data: CvData;
   locale: Locale;
   printMode?: boolean;
+  /** Override the YAML-configured hero photo. Used by preview variants. */
+  photoSrc?: string;
+  /** Override the view-transition-name. Preview variants use their own
+   *  so shared-element morphs don't mis-compose across different photos. */
+  heroTransitionName?: string;
 }
 
 function formatDate(dateStr: string, locale: Locale): string {
@@ -40,10 +45,16 @@ const networkIcons: Record<string, React.ComponentType<{ className?: string }>> 
   GitHub: GitHubIcon,
 };
 
-export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryProps) {
+export async function PortfolioGalleryTheme({
+  data,
+  locale,
+  photoSrc,
+  heroTransitionName = "hero-photo",
+}: PortfolioGalleryProps) {
   const t = await getTranslations("cv");
   const r = (s: Parameters<typeof resolveCvLocaleString>[0]) =>
     resolveCvLocaleString(s, locale);
+  const resolvedPhoto = photoSrc ?? data.basics.photo;
 
   return (
     <div className="relative overflow-x-clip">
@@ -58,7 +69,7 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
 
         <div className="relative mx-auto max-w-5xl grid gap-8 md:grid-cols-2 md:gap-12 items-center">
           {/* Photo with shape accents */}
-          {data.basics.photo && (
+          {resolvedPhoto && (
             <div className="relative order-1 md:order-1 mx-auto md:mx-0 max-w-[70%] sm:max-w-[60%] md:max-w-none">
               <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
                 <div className="absolute -top-4 -start-4 h-48 w-48 rounded-full bg-gallery-warm/30 sm:h-60 sm:w-60 md:h-72 md:w-72" />
@@ -67,10 +78,10 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
               </div>
               <div
                 className="relative overflow-hidden rounded-[2rem]"
-                style={{ viewTransitionName: "hero-photo" }}
+                style={{ viewTransitionName: heroTransitionName }}
               >
                 <Image
-                  src={data.basics.photo}
+                  src={resolvedPhoto}
                   alt={data.basics.name}
                   width={500}
                   height={600}
