@@ -4,6 +4,7 @@ import { EditorialMagazineTheme } from "@/components/cv/themes/variants/editoria
 import { BauhausSwissTheme } from "@/components/cv/themes/variants/bauhaus-swiss-theme";
 import { KineticAiTheme } from "@/components/cv/themes/variants/kinetic-ai-theme";
 import { JapandiZenTheme } from "@/components/cv/themes/variants/japandi-zen-theme";
+import { CinematicSplitTheme } from "@/components/cv/themes/variants/cinematic-split-theme";
 import { PreviewBanner } from "@/components/cv/preview/preview-banner";
 import { loadCvData } from "@/lib/cv/data";
 import { getCvPreviewVariant, type CvVariantId } from "./variants";
@@ -75,9 +76,17 @@ export async function PreviewRoute({ variantId, locale }: PreviewRouteProps) {
             heroTransitionName={transitionName}
           />
         );
+      case "option-6":
+        return (
+          <CinematicSplitTheme
+            data={data}
+            locale={locale}
+            photoSrc={variant.photoSrc}
+            heroTransitionName={transitionName}
+          />
+        );
       default:
-        // Fallback: canonical theme with the variant's photo, until the
-        // bespoke theme component lands in a follow-up commit.
+        // All 6 variants are now wired; this remains as a safety net.
         return (
           <PortfolioGalleryTheme
             data={data}
