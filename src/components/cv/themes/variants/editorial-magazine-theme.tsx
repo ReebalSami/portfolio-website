@@ -32,9 +32,19 @@ const networkIcons: Record<
 };
 
 /**
- * Editorial Magazine — print-cover aesthetic.
- * Big Fraunces display name, issue-style metadata band, option-1 photo
- * cropped as a focal block. Reads like a trade magazine feature cover.
+ * Editorial Magazine v2 — print-cover aesthetic, now with a matching body.
+ *
+ * - Bigger photo (max-w-[460px], aspect 3/4), top-left corner aligned with
+ *   the top of the first-name line via items-start + mt-10 on the figure
+ *   (which skips past the eyebrow block height so the photo lands flush
+ *   with the <h1>'s cap-line).
+ * - Warm backdrop orbs hoisted onto the outer wrapper so they bleed from
+ *   the hero into the body without a visual seam.
+ * - CvBody receives serifHeadings + maxWidthClass="max-w-6xl" so hero and
+ *   body share the same container width and both use Fraunces for section
+ *   titles, echoing the masthead.
+ * - bottomDecoration renders a pull-quote + signature that anchors the
+ *   sidebar's bottom line to the main column's bottom line.
  */
 export async function EditorialMagazineTheme({
   data,
@@ -49,19 +59,24 @@ export async function EditorialMagazineTheme({
 
   const year = new Date().getFullYear();
   const issueLabel = `Vol. ${year} · Issue 01`;
+  const [firstName, ...restName] = data.basics.name.split(" ");
+  const lastName = restName.join(" ") || data.basics.name;
 
   return (
     <div className={`relative overflow-x-clip ${editorial.variable}`}>
-      <section className="relative overflow-hidden">
-        {/* Subtle warm backdrop */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          aria-hidden="true"
-        >
-          <div className="absolute -top-16 -end-16 h-96 w-96 rounded-full bg-gallery-warm/15 blur-3xl" />
-          <div className="absolute bottom-0 start-0 h-80 w-80 rounded-full bg-gallery-warm-muted/20 blur-3xl" />
-        </div>
+      {/* Persistent warm backdrop — spans hero + body so the body reads as
+          the continuation of the print cover, not a separate surface. */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-[160vh] overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="absolute -top-16 -end-16 h-[32rem] w-[32rem] rounded-full bg-gallery-warm/15 blur-3xl" />
+        <div className="absolute top-1/3 -start-24 h-[26rem] w-[26rem] rounded-full bg-gallery-warm-muted/20 blur-3xl" />
+        <div className="absolute top-[75%] end-0 h-96 w-96 rounded-full bg-gallery-warm-light/15 blur-3xl" />
+      </div>
 
+      {/* ============== HERO ============== */}
+      <section className="relative">
         {/* Top masthead bar */}
         <div className="relative mx-auto max-w-6xl px-6 pt-10 pb-6 md:pt-14 md:pb-8">
           <div className="flex items-center justify-between gap-4 border-b-2 border-foreground/80 pb-3">
@@ -79,7 +94,7 @@ export async function EditorialMagazineTheme({
 
         {/* Hero content grid */}
         <div className="relative mx-auto max-w-6xl px-6 pb-16 md:pb-24">
-          <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,340px)] md:gap-14 items-end">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,460px)] md:gap-14 items-start">
             {/* Left: masthead name + strap */}
             <div className="min-w-0 order-2 md:order-1">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-gallery-warm mb-5">
@@ -93,10 +108,9 @@ export async function EditorialMagazineTheme({
                   letterSpacing: "-0.02em",
                 }}
               >
-                <span className="block">{data.basics.name.split(" ")[0]}</span>
+                <span className="block">{firstName}</span>
                 <span className="block italic text-gallery-warm">
-                  {data.basics.name.split(" ").slice(1).join(" ") ||
-                    data.basics.name}
+                  {lastName}
                 </span>
               </h1>
               <p
@@ -107,9 +121,10 @@ export async function EditorialMagazineTheme({
               </p>
             </div>
 
-            {/* Right: photo as a focal block with a caption ribbon */}
+            {/* Right: larger photo, top aligned with first-name line via
+                mt-10 to skip past the eyebrow + its margin. */}
             {resolvedPhoto && (
-              <figure className="order-1 md:order-2 relative mx-auto md:mx-0 w-full max-w-[280px] md:max-w-none">
+              <figure className="order-1 md:order-2 relative mx-auto md:mx-0 w-full max-w-[280px] md:max-w-none md:mt-10">
                 <div
                   className="relative overflow-hidden rounded-md bg-muted shadow-2xl shadow-black/10 ring-1 ring-foreground/5"
                   style={{
@@ -122,10 +137,9 @@ export async function EditorialMagazineTheme({
                     alt={data.basics.name}
                     fill
                     priority
-                    sizes="(max-width: 768px) 70vw, 340px"
+                    sizes="(max-width: 768px) 70vw, 460px"
                     className="object-cover sepia-[0.08] contrast-[1.08]"
                   />
-                  {/* Corner mark */}
                   <span
                     className="absolute bottom-3 start-3 rounded-full bg-background/90 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.3em] text-foreground backdrop-blur"
                     style={{ fontFamily: "var(--font-editorial)" }}
@@ -214,7 +228,46 @@ export async function EditorialMagazineTheme({
         </div>
       </section>
 
-      <CvBody data={data} locale={locale} />
+      {/* Running chapter-mark between hero and body — the "turn of the page"
+          beat that magazines use before a feature opens. */}
+      <div className="relative mx-auto max-w-6xl px-6">
+        <div
+          className="flex items-center gap-4 text-[0.6rem] font-medium uppercase tracking-[0.4em] text-muted-foreground"
+          style={{ fontFamily: "var(--font-editorial)" }}
+        >
+          <span aria-hidden="true" className="h-px flex-1 bg-foreground/30" />
+          <span>Chapter 01 · The Work</span>
+          <span aria-hidden="true" className="h-px flex-1 bg-foreground/30" />
+        </div>
+      </div>
+
+      <CvBody
+        data={data}
+        locale={locale}
+        showSeparator={false}
+        showBackgroundShapes={false}
+        maxWidthClass="max-w-6xl"
+        serifHeadings={true}
+        bottomDecoration={
+          <div
+            className="border-t-2 border-foreground/80 pt-6"
+            style={{ fontFamily: "var(--font-editorial)" }}
+          >
+            <p
+              className="text-[0.6rem] font-medium uppercase tracking-[0.4em] text-muted-foreground mb-4"
+            >
+              Pull quote
+            </p>
+            <blockquote className="text-lg italic leading-relaxed text-foreground">
+              &ldquo;The best AI isn&apos;t the one that dazzles in a demo — it&apos;s the one
+              that ships in the next sprint.&rdquo;
+            </blockquote>
+            <p className="mt-5 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              — {data.basics.name}, {year}
+            </p>
+          </div>
+        }
+      />
     </div>
   );
 }
