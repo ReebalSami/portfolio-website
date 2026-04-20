@@ -65,7 +65,10 @@ export async function PortfolioGalleryTheme({ data, locale }: PortfolioGalleryPr
                 <div className="absolute -bottom-2 -end-2 h-32 w-44 rounded-[2rem] bg-gallery-warm-muted/25 rotate-6 sm:h-40 sm:w-56" />
                 <div className="absolute top-1/2 -start-3 h-20 w-20 rounded-[1.5rem] bg-gallery-warm-light/30 -rotate-12 sm:h-28 sm:w-28" />
               </div>
-              <div className="relative overflow-hidden rounded-[2rem]">
+              <div
+                className="relative overflow-hidden rounded-[2rem]"
+                style={{ viewTransitionName: "hero-photo" }}
+              >
                 <Image
                   src={data.basics.photo}
                   alt={data.basics.name}
