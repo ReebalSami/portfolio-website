@@ -1,0 +1,191 @@
+meta:
+  version: 1
+  locales: [en, de, es, ar]
+  last_review: "2026-04-22"
+
+brand:
+  - id: reebal_sami
+    category: transliterated
+    forms:
+      en: "Reebal Sami"
+      de: "Reebal Sami"
+      es: "Reebal Sami"
+      ar: "رئبال سامي"
+  - id: otto_group
+    category: locked_source
+    forms: { all: "OTTO Group" }
+  - id: datalogue
+    category: locked_source
+    forms: { all: "Datalogue" }
+  - id: fh_wedel
+    category: locked_source
+    forms: { all: "FH Wedel" }
+
+tech:
+  - id: react
+    category: locked_source
+    forms: { all: "React" }
+  - id: nextjs
+    category: locked_source
+    forms: { all: "Next.js" }
+  - id: postgres
+    category: locked_source
+    forms: { all: "PostgreSQL" }
+  - id: llm
+    category: locked_source
+    forms: { all: "LLM" }
+  - id: graphrag
+    category: locked_source
+    forms: { all: "GraphRAG" }
+  - id: gcp
+    category: locked_source
+    forms: { all: "GCP" }
+  - id: aws_cdk
+    category: locked_source
+    forms: { all: "AWS CDK" }
+  - id: sap_bpc
+    category: locked_source
+    forms: { all: "SAP BPC" }
+  - id: uipath
+    category: locked_source
+    forms: { all: "UiPath" }
+  - id: donut_model
+    category: locked_source
+    forms: { all: "Donut" }
+  - id: layoutlmv3
+    category: locked_source
+    forms: { all: "LayoutLMv3" }
+  - id: vit
+    category: locked_source
+    forms: { all: "ViT" }
+  - id: gradcam
+    category: locked_source
+    forms: { all: "Grad-CAM" }
+  - id: word2vec
+    category: locked_source
+    forms: { all: "Word2Vec" }
+  - id: rag
+    category: locked_source
+    forms: { all: "RAG" }
+  - id: github
+    category: locked_source
+    forms: { all: "GitHub" }
+  - id: machine_learning
+    category: translated
+    forms:
+      en: "machine learning"
+      de: "maschinelles Lernen"
+      es: "aprendizaje automático"
+      ar: "التعلم الآلي"
+    notes:
+      es: "Use 'ML' on subsequent occurrences in the same document."
+      de: "Use 'ML' on subsequent occurrences in the same document."
+      ar: "Use 'ML' on subsequent occurrences in the same document."
+  - id: deep_learning
+    category: translated
+    skip_drift_check: true
+    forms:
+      en: "deep learning"
+      de: "Deep Learning"
+      es: "aprendizaje profundo"
+      ar: "التعلم العميق"
+    notes:
+      de: "'Deep Learning' is the standard term in German tech context — no translation."
+      es: "Code-switching to 'Deep Learning'/'deep learning' is accepted in ES tech lists."
+  - id: computer_vision
+    category: translated
+    forms:
+      en: "computer vision"
+      de: "Computer Vision"
+      es: "visión por computador"
+      ar: "رؤية الكمبيوتر"
+    notes:
+      de: "'Computer Vision' is standard in German — no translation."
+  - id: ai
+    category: translated
+    forms:
+      en: "AI"
+      de: "KI"
+      es: "IA"
+      ar: "الذكاء الاصطناعي"
+    notes:
+      en: "Use 'AI' after first full expansion in document. Keep as 'AI' in hero/title contexts."
+      de: "Use 'KI' (Künstliche Intelligenz) on first use; 'KI' thereafter."
+      ar: "Use 'AI' in tech contexts where it is a widely understood brand term; use الذكاء الاصطناعي in body text first mention."
+
+titles:
+  - id: data_scientist
+    category: translated
+    forms:
+      en: "Data Scientist"
+      de: "Data Scientist"
+      es: "Científico de Datos"
+      ar: "عالم البيانات"
+    notes:
+      de: "English job title retained in DE tech/CV context — do not translate."
+  - id: ai_engineer
+    category: translated
+    forms:
+      en: "AI Engineer"
+      de: "KI-Ingenieur"
+      es: "Ingeniero de IA"
+      ar: "مهندس ذكاء اصطناعي"
+  - id: working_student
+    category: translated
+    forms:
+      en: "Working Student"
+      de: "Werkstudent"
+      es: "Estudiante trabajador"
+      ar: "طالب عامل"
+  - id: financial_accountant
+    category: translated
+    skip_drift_check: true
+    forms:
+      en: "Financial Accountant"
+      de: "Bilanzbuchhalter"
+      es: "Contable Financiero"
+      ar: "محاسب مالي"
+    notes:
+      de: "'Bilanzbuchhalter' is the official German certification title — do not paraphrase."
+      ar: "German certification name 'Bilanzbuchhalter' is quoted verbatim in AR/ES — intentional code-switch."
+  - id: intern
+    category: translated
+    forms:
+      en: "Intern"
+      de: "Praktikant"
+      es: "Becario"
+      ar: "متدرب"
+
+cities:
+  - id: hamburg
+    category: transliterated
+    forms:
+      en: "Hamburg"
+      de: "Hamburg"
+      es: "Hamburgo"
+      ar: "هامبورغ"
+  - id: syria
+    category: transliterated
+    forms:
+      en: "Syria"
+      de: "Syrien"
+      es: "Siria"
+      ar: "سوريا"
+
+standards:
+  - id: ifrs
+    category: locked_source
+    forms: { all: "IFRS" }
+  - id: hgb
+    category: locked_source
+    forms: { all: "HGB" }
+  - id: sap_fico
+    category: locked_source
+    forms: { all: "SAP FI-CO" }
+
+metrics:
+  - id: percent
+    category: locked_source
+    forms: { all: "%" }
+    notes:
+      ar: "Use '%' not 'في المئة' in CV/table contexts. Western numerals throughout."
