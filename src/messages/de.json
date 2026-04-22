@@ -17,7 +17,7 @@
     },
     "buttons": {
       "viewProjects": "Projekte ansehen",
-      "getInTouch": "Kontakt aufnehmen",
+      "getInTouch": "Schreib mir",
       "downloadCV": "Lebenslauf herunterladen",
       "viewCV": "Vollständigen Lebenslauf ansehen und herunterladen",
       "github": "GitHub",
@@ -26,14 +26,14 @@
   },
   "home": {
     "hero": {
-      "intro": "Über fünf Jahre Erfahrung in Corporate Finance, verbunden mit modernsten KI/ML-Fähigkeiten. End-to-End-Entwicklung intelligenter Lösungen."
+      "intro": "Ich verbinde über fünf Jahre Corporate Finance mit modernster KI/ML-Entwicklung — und baue intelligente Lösungen von Anfang bis Ende."
     }
   },
   "about": {
     "title": "Über mich",
     "subtitle": "Wer ich bin",
-    "summary1": "Data Scientist und KI-Ingenieur mit über fünf Jahren Erfahrung in Corporate Finance bei der Otto Group, kombiniert mit modernsten KI/ML-Fähigkeiten. Aktuell am Schreiben der Masterarbeit zum Thema GraphRAG Document Intelligence im Rahmen des M.Sc. Data Science & KI an der FH Wedel.",
-    "summary2": "Bewiesene End-to-End-Lieferung, von Multi-Agenten-B2B-Sales-Pipelines bis zur Pflanzengesundheitserkennung mit Deep Learning. Ich entwickle intelligente Lösungen mit messbarem Geschäftsimpact.",
+    "summary1": "Data Scientist und KI-Ingenieur. Ich verbinde über fünf Jahre Erfahrung in Corporate Finance bei der OTTO Group mit modernen KI/ML-Fähigkeiten. Gerade schreibe ich meine Masterarbeit zu GraphRAG Document Intelligence im M.Sc. Data Science & KI an der FH Wedel.",
+    "summary2": "Von der Idee bis zur Lieferung — von Multi-Agenten-B2B-Pipelines bis zur Pflanzenkrankheitserkennung mit Deep Learning. Ich baue intelligente Lösungen mit messbarem Geschäftsimpact.",
     "cardExpand": "Mehr erfahren",
     "cardDetails": "Details",
     "differentiators": "Was mich auszeichnet",
@@ -42,24 +42,24 @@
     "cards": {
       "business": {
         "title": "Business × Daten",
-        "description": "5 Jahre bei der Otto Group in Corporate Finance, heute verbunden mit KI/ML-Engineering.",
+        "description": "5 Jahre bei der OTTO Group in Corporate Finance — heute verbinde ich dieses Geschäftsverständnis mit KI/ML-Engineering.",
         "expanded": [
-          "HGB- und IFRS-Konzernrechnungslegung für mehrere Otto-Group-Tochtergesellschaften",
+          "HGB- und IFRS-Konzernrechnungslegung für mehrere OTTO-Group-Tochtergesellschaften",
           "SAP FI-CO und BPC-Konsolidierung, Monats-, Quartals- und Jahresabschlüsse",
           "RPA-Automatisierungen mit UiPath für Urlaubsrückstellungen und Zinspläne geleitet",
           "IFRS-Implementierungsprojekte (IFRS 7, 9, 13) und Optionsbewertung",
           "Hauptansprechpartner für externe Prüfer und Beratungsfirmen",
-          "Advanced Accounting & Taxation Program ‘Bilanzbuchhalter’ an der GFS Steuerfachschule (2018 – 2020)"
+          "Bilanzbuchhalter-Ausbildung (IHK) an der GFS Steuerfachschule (2018–2020)"
         ]
       },
       "builder": {
-        "title": "End-to-End-Entwickler",
+        "title": "End-to-End-Builder",
         "description": "Vom Konzept zum MVP: Multi-Agenten-B2B-Sales-Pipeline, die manuelle Recherche etwa halbiert hat.",
         "expanded": [
           "B2B-Multi-Agenten-Sales-Pipeline bei Datalogue: 4 LLM-Agenten plus Human-in-the-Loop-Feedback",
-          "Generische News-Crawler-Pipeline mit PostgreSQL 3NF-Schema und Vector Semantic Search",
+          "Generische News-Crawler-Pipeline mit PostgreSQL-3NF-Schema und Vektorsemantiksuche",
           "Pflanzenkrankheitserkennung im Urban Farming: hierarchische 3-stufige Pipeline, ViT und CNN, Grad-CAM plus Attention Rollout",
-          "Diese Portfolio-Website: Next.js 16, AWS CDK, vollständige i18n in 4 Sprachen inklusive Arabisch RTL",
+          "Diese Portfolio-Website: Next.js 16, AWS CDK, vollständiges i18n in 4 Sprachen inklusive Arabisch RTL",
           "Full-Stack MyRecipes-App: Java Spring Boot, React, MongoDB, KI-gestützte Vorschläge"
         ]
       },
@@ -78,7 +78,7 @@
         "title": "M.Sc. Data Science & KI",
         "description": "FH Wedel: Deep Learning, NLP, Computer Vision, Ökonometrie, E-Commerce, Strategisches Management.",
         "expanded": [
-          "Kern: Deep Learning, Computer Vision, Machine Learning, Symbolische KI, Ökonometrie",
+          "Kern: Deep Learning, Computer Vision, maschinelles Lernen, Symbolische KI, Ökonometrie",
           "Business-Schiene: Category Management, E-Commerce-Geschäftsmodelle, Digitale Transformation",
           "Prozess: Agiles Projektmanagement, Change Management, Strategisches Management, Organisationslehre",
           "Technisch: Unix und Shell-Programmierung, Data Engineering, Empirische Forschungsmethoden",
@@ -110,13 +110,13 @@
   },
   "chatbot": {
     "title": "Frag über Reebal",
-    "subtitle": "KI-gestützter Assistent",
+    "subtitle": "KI-Assistent",
     "toggle": "Chat öffnen",
-    "placeholder": "Frag mich etwas...",
+    "placeholder": "Stell mir eine Frage...",
     "welcome": "Hallo! Frag mich alles über Reebals Erfahrung, Projekte oder Fähigkeiten.",
-    "disclaimer": "Powered by KI. Antworten basieren auf Portfolio-Inhalten.",
-    "error": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
-    "rateLimit": "Zu viele Anfragen. Bitte versuche es später erneut."
+    "disclaimer": "KI-gestützt. Antworten basieren auf Portfolio-Inhalten.",
+    "error": "Etwas ist schiefgelaufen. Versuch es nochmal.",
+    "rateLimit": "Zu viele Anfragen. Versuch es später nochmal."
   },
   "cv": {
     "title": "Lebenslauf",
@@ -139,18 +139,18 @@
   },
   "contact": {
     "title": "Kontakt",
-    "subtitle": "Kontakt aufnehmen",
+    "subtitle": "Schreib mir",
     "direct": "Direkter Kontakt",
     "social": "Soziale Netzwerke",
     "form": {
-      "namePlaceholder": "Ihr Name",
-      "emailPlaceholder": "Ihre E-Mail",
+      "namePlaceholder": "Dein Name",
+      "emailPlaceholder": "Deine E-Mail",
       "subjectPlaceholder": "Betreff",
-      "messagePlaceholder": "Ihre Nachricht...",
+      "messagePlaceholder": "Deine Nachricht...",
       "send": "Nachricht senden",
       "sending": "Wird gesendet...",
       "success": "Nachricht erfolgreich gesendet!",
-      "error": "Senden fehlgeschlagen. Bitte versuchen Sie es erneut oder schreiben Sie direkt eine E-Mail."
+      "error": "Senden fehlgeschlagen. Versuch es nochmal oder schreib mir direkt eine E-Mail."
     }
   }
 }
