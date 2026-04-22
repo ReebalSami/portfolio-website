@@ -21,7 +21,7 @@ jobs:
   deploy:
     name: Build & Deploy to AWS
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     environment:
       name: production
       url: https://reebal-sami.com
