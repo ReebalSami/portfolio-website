@@ -43,22 +43,63 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  ref,
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean
 }) {
+  const internalRef = React.useRef<HTMLDivElement | null>(null)
+
+  const mergedRef = React.useCallback(
+    (node: HTMLDivElement | null) => {
+      internalRef.current = node
+      if (typeof ref === "function") ref(node)
+      else if (ref)
+        (ref as React.MutableRefObject<HTMLDivElement | null>).current = node
+    },
+    [ref]
+  )
+
+  React.useLayoutEffect(() => {
+    const el = internalRef.current
+    if (!el) return
+
+    const scrollTop = () => {
+      if (!el.hasAttribute("data-open")) return
+      // Use both `scrollTop = 0` (universal) and `scrollTo` (smooth-capable)
+      el.scrollTop = 0
+      if (typeof el.scrollTo === "function") {
+        el.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior })
+      }
+    }
+
+    // First paint — popup may already be open
+    scrollTop()
+
+    // Subsequent opens (popup re-used / focus-triggered scroll)
+    const observer = new MutationObserver(scrollTop)
+    observer.observe(el, {
+      attributes: true,
+      attributeFilter: ["data-open"],
+    })
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <DialogPortal>
       <DialogOverlay />
       <DialogPrimitive.Popup
         data-slot="dialog-content"
+        ref={mergedRef}
         className={cn(
           "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           className
         )}
         {...props}
       >
-        {children}
+        {/* Close button rendered FIRST so Base UI auto-focus lands on it
+            (absolute-positioned, already in view — no scroll triggered).
+            Visual position is unchanged because of absolute positioning. */}
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
@@ -70,11 +111,11 @@ function DialogContent({
               />
             }
           >
-            <XIcon
-            />
+            <XIcon />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}
+        {children}
       </DialogPrimitive.Popup>
     </DialogPortal>
   )

@@ -31,7 +31,7 @@ Generated via **UI UX Pro Max** with NFT Art Gallery / Exaggerated Minimalism st
 
 - **Colors**: oklch color space via CSS custom properties. Gallery black primary (`#18181B`), warm peachy accent (`oklch 0.82 0.08 55`)
 - **Fonts**: Archivo (headings), Space Grotesk (body), JetBrains Mono (mono), IBM Plex Sans Arabic (Arabic)
-- **Dark mode**: `next-themes` with class strategy, light default
+- **Dark mode**: `next-themes` with class strategy, dark default
 - **Components**: shadcn/ui (base-nova style) with custom components
 
 Persisted in `design-system/reebal-sami-portfolio/MASTER.md`.

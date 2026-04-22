@@ -39,9 +39,25 @@ export const FeaturesConfigSchema = z.object({
   cv: z.boolean(),
 });
 
+/**
+ * Each photo slot = `{ file, dir }`. The full path is just `${dir}/${file}`;
+ * storing them separately keeps the YAML readable (you can see at a glance
+ * which folder each image lives in) and lets consumers that only need the
+ * directory (e.g. Next.js Image `loader`) grab it without string-splitting.
+ * Use `getPhotoPath("slot")` from `@/lib/config` to resolve the joined path.
+ */
+export const PhotoSlotSchema = z.object({
+  file: z.string(),
+  dir: z.string(),
+});
+
 export const PhotosConfigSchema = z.object({
-  hero: z.string(),
-  heroDir: z.string(),
+  /** Homepage hero photo (also feeds JSON-LD + OG fallback). */
+  homepage: PhotoSlotSchema,
+  /** Canonical /cv page hero photo (Editorial theme). */
+  cvPage: PhotoSlotSchema,
+  /** Photo baked into ATS + Visual PDFs via the Typst pipeline. */
+  cvPdf: PhotoSlotSchema,
   treatment: z.string(),
 });
 
@@ -119,6 +135,116 @@ export const BuildConfigSchema = z.object({
   outputDir: z.string(),
 });
 
+/**
+ * Hero / lamp tuning knobs (iter-4 v5 — simplified).
+ *
+ * Four position offsets (`textBlock.{x,y}`, `lamp.{x,y}`) plus size,
+ * wall/surface mode, animation timing, and palette. Animations always
+ * play on every refresh — no replay control. Text+lamp are always
+ * grid-centered horizontally (pre-lamp behaviour). Defaults live in
+ * `src/lib/config.ts` so omitting `hero` entirely is valid.
+ */
+export const HeroTextBlockConfigSchema = z.object({
+  /** Horizontal offset from the text block's grid-centered base. Any CSS length. */
+  x: z.string(),
+  /** Vertical offset from the text block's grid-centered base. Any CSS length. */
+  y: z.string(),
+});
+
+export const HeroLampAnchorSchema = z.object({
+  /** Horizontal anchor position inside the hero text column. */
+  x: z.string(),
+  /** Vertical anchor position inside the hero text column. */
+  y: z.string(),
+});
+
+export const HeroLampAnimationSchema = z.object({
+  durationSec: z.number().positive(),
+  delaySec: z.number().min(0),
+  /** replay -> animate from start each mount, static -> render end-state. */
+  mode: z.enum(["replay", "static"]).default("replay"),
+});
+
+export const HeroLampPaletteModeSchema = z.object({
+  beam: z.string(),
+  glow: z.string(),
+  core: z.string(),
+});
+
+export const HeroLampPaletteSchema = z.object({
+  light: HeroLampPaletteModeSchema,
+  dark: HeroLampPaletteModeSchema,
+});
+
+export const HeroLampConfigSchema = z.object({
+  /** Base anchor in the parent column (before lamp.x / lamp.y deltas). */
+  anchor: HeroLampAnchorSchema.default({ x: "50%", y: "0" }),
+  /** Horizontal offset from the lamp's grid-centered base (same centre as text). */
+  x: z.string(),
+  /** Vertical offset from the lamp's base (column top). */
+  y: z.string(),
+  /** Size of the lamp bounding box. Aceternity reveal sizes scale with these. */
+  width: z.string(),
+  height: z.string(),
+  /** "drop" removes wall AND horizon line. "keep" renders Aceternity original. */
+  wallMode: z.enum(["drop", "keep"]),
+  /** "background" → beam edges fade into var(--background). "transparent" → raw. */
+  surfaceMode: z.enum(["background", "transparent"]),
+  animation: HeroLampAnimationSchema,
+  palette: HeroLampPaletteSchema,
+});
+
+export const HeroPhotoRelightProfileSchema = z.enum([
+  "subtle",
+  "balanced",
+  "pronounced",
+]);
+
+export const HeroPhotoRelightToneSchema = z.enum([
+  "keep-grayscale",
+  "slight-color-return",
+]);
+
+export const HeroChromaDirectionSchema = z.enum([
+  "right-to-left",
+  "bottom-to-top",
+  "center",
+]);
+
+export const HeroPhotoRelightConfigSchema = z.object({
+  /** Master switch for relight overlays in the homepage hero photo. */
+  enabled: z.boolean().default(true),
+  /** Preset intensity profile. */
+  profile: HeroPhotoRelightProfileSchema.default("balanced"),
+  /** Base photo tone behavior in the lit area. */
+  baseTone: HeroPhotoRelightToneSchema.default("slight-color-return"),
+  /** 0 = off (grayscale only). 0–1 blends a saturated copy of the photo in from chromaDirection. */
+  chromaOpacity: z.number().min(0).max(1).default(0),
+  /** Which edge the color return bleeds in from. Only used when chromaOpacity > 0. */
+  chromaDirection: HeroChromaDirectionSchema.default("right-to-left"),
+});
+
+export const DEFAULT_PHOTO_RELIGHT = {
+  enabled: true,
+  profile: "balanced" as const,
+  baseTone: "slight-color-return" as const,
+  chromaOpacity: 0,
+  chromaDirection: "right-to-left" as const,
+};
+
+export const HeroConfigSchema = z.object({
+  textBlock: HeroTextBlockConfigSchema,
+  /**
+   * Mobile-only text-block translate. Defaults to (0, 0) so narrow
+   * viewports do not inherit desktop offsets like "-10%" which pushed the
+   * name heading past the left viewport edge at 375 px. Set per-axis to
+   * offset on mobile independently.
+   */
+  textBlockMobile: HeroTextBlockConfigSchema.default({ x: "0", y: "0" }),
+  lamp: HeroLampConfigSchema,
+  photoRelight: HeroPhotoRelightConfigSchema.default(DEFAULT_PHOTO_RELIGHT),
+});
+
 export const PortfolioConfigSchema = z.object({
   site: SiteConfigSchema,
   contact: ContactConfigSchema,
@@ -134,6 +260,9 @@ export const PortfolioConfigSchema = z.object({
   cv: CvConfigSchema,
   aws: AwsConfigSchema,
   build: BuildConfigSchema,
+  // Optional in the schema so a site.yaml without a `hero` block still
+  // validates; the loader merges defaults on read.
+  hero: HeroConfigSchema.optional(),
 });
 
 export type SiteConfig = z.infer<typeof SiteConfigSchema>;
@@ -141,7 +270,9 @@ export type ContactConfig = z.infer<typeof ContactConfigSchema>;
 export type SocialConfig = z.infer<typeof SocialConfigSchema>;
 export type I18nConfig = z.infer<typeof I18nConfigSchema>;
 export type FeaturesConfig = z.infer<typeof FeaturesConfigSchema>;
+export type PhotoSlot = z.infer<typeof PhotoSlotSchema>;
 export type PhotosConfig = z.infer<typeof PhotosConfigSchema>;
+export type PhotoSlotId = keyof Pick<PhotosConfig, "homepage" | "cvPage" | "cvPdf">;
 export type DesignConfig = z.infer<typeof DesignConfigSchema>;
 export type AnalyticsConfig = z.infer<typeof AnalyticsConfigSchema>;
 export type ChatbotConfig = z.infer<typeof ChatbotConfigSchema>;
@@ -151,4 +282,14 @@ export type CvVariantConfig = z.infer<typeof CvVariantConfigSchema>;
 export type CvConfig = z.infer<typeof CvConfigSchema>;
 export type AwsConfig = z.infer<typeof AwsConfigSchema>;
 export type BuildConfig = z.infer<typeof BuildConfigSchema>;
+export type HeroLampAnimation = z.infer<typeof HeroLampAnimationSchema>;
+export type HeroLampAnchor = z.infer<typeof HeroLampAnchorSchema>;
+export type HeroLampPaletteMode = z.infer<typeof HeroLampPaletteModeSchema>;
+export type HeroLampPalette = z.infer<typeof HeroLampPaletteSchema>;
+export type HeroLampConfig = z.infer<typeof HeroLampConfigSchema>;
+export type HeroPhotoRelightProfile = z.infer<typeof HeroPhotoRelightProfileSchema>;
+export type HeroPhotoRelightTone = z.infer<typeof HeroPhotoRelightToneSchema>;
+export type HeroPhotoRelightConfig = z.infer<typeof HeroPhotoRelightConfigSchema>;
+export type HeroTextBlockConfig = z.infer<typeof HeroTextBlockConfigSchema>;
+export type HeroConfig = z.infer<typeof HeroConfigSchema>;
 export type PortfolioConfig = z.infer<typeof PortfolioConfigSchema>;

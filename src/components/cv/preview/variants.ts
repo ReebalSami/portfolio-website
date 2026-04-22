@@ -1,0 +1,68 @@
+/**
+ * Metadata for every CV hero variant shown on /cv/preview.
+ * The actual theme component is mounted by each option-N route; this file
+ * is the single source of truth for names, taglines, photos, and chroma.
+ * See docs/design/transitions-and-hero-exploration.md §5.
+ */
+
+export type CvVariantId = "option-1" | "option-2" | "option-3" | "option-4" | "option-6";
+
+export interface CvPreviewVariant {
+  id: CvVariantId;
+  name: string;
+  tagline: string;
+  photoSrc: string;
+  accent: string;
+  /** Optional badge shown on the picker card (e.g. "Was /cv until iter-3"). */
+  badge?: string;
+}
+
+export const cvPreviewVariants: readonly CvPreviewVariant[] = [
+  {
+    id: "option-1",
+    name: "Mirrored Canonical",
+    tagline:
+      "Canonical layout with left/right flipped and shapes rescattered — photo is full color with a subtle warm blend, not grayscale. Tests whether mirroring + color changes the read.",
+    photoSrc: "/images/homepage/hero/start-photo.JPG",
+    accent: "from-gallery-warm/40 via-gallery-warm-muted/30 to-transparent",
+  },
+  {
+    id: "option-2",
+    name: "Editorial Magazine",
+    tagline:
+      "Big masthead display name with a serif accent and a horizontal metadata strip — reads like a print cover of a trade feature. Same theme as canonical /cv since iter-3 — this preview just lets you compare with a different photo.",
+    photoSrc: "/images/resume/option-1.JPG",
+    accent: "from-amber-200/30 via-rose-100/30 to-transparent",
+  },
+  {
+    id: "option-3",
+    name: "Classic Canonical",
+    tagline:
+      "The original canonical /cv design — photo-left B&W portrait with warm orbs and the trusted gallery aesthetic. Preserved as a preview slot in case we want to revert or A/B against the new editorial canonical.",
+    photoSrc: "/images/homepage/hero/start-photo.JPG",
+    accent: "from-gallery-warm/40 via-gallery-warm-muted/30 to-transparent",
+    badge: "Was /cv until iter-3",
+  },
+  {
+    id: "option-4",
+    name: "Kinetic AI",
+    tagline:
+      "CSS shader-noise backdrop, animated counters, magnetic download button, kinetic name stagger. The AI-engineer variant.",
+    photoSrc: "/images/resume/option-2.JPG",
+    accent: "from-gallery-warm-light/50 via-gallery-warm/30 to-transparent",
+  },
+  {
+    id: "option-6",
+    name: "Scroll Hero",
+    tagline:
+      "Full-bleed color photo + gradient name on mount. As you scroll, the photo scales, blurs, and fades out — by the time you reach Experience, the portrait is gone and only the work remains.",
+    photoSrc: "/images/resume/option-1.JPG",
+    accent: "from-gallery-warm/40 via-orange-200/25 to-transparent",
+  },
+] as const;
+
+export function getCvPreviewVariant(id: CvVariantId): CvPreviewVariant {
+  const v = cvPreviewVariants.find((v) => v.id === id);
+  if (!v) throw new Error(`Unknown CV preview variant: ${id}`);
+  return v;
+}

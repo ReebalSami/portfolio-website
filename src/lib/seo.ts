@@ -1,12 +1,12 @@
 import { routing } from "@/i18n/routing";
-import { getConfig } from "@/lib/config";
+import { getConfig, getSiteUrl } from "@/lib/config";
 
 // ---------------------------------------------------------------------------
 // URL helpers
 // ---------------------------------------------------------------------------
 
 function getSiteBase(): string {
-  return getConfig().site.url.replace(/\/$/, "");
+  return getSiteUrl();
 }
 
 function normalizePath(path = ""): string {

@@ -36,11 +36,11 @@ function subscribe(listener: () => void) {
 
 function getSnapshot(): Theme {
   const stored = localStorage.getItem(STORAGE_KEY);
-  return stored === "dark" ? "dark" : "light";
+  return stored === "light" ? "light" : "dark";
 }
 
 function getServerSnapshot(): Theme {
-  return "light";
+  return "dark";
 }
 
 interface ThemeProviderProps {
