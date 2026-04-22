@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { loadCvData, resolveCvLocaleString } from "@/lib/cv/data";
-import { PortfolioGalleryTheme } from "@/components/cv/themes/portfolio-gallery";
-import { CvDownloadFab } from "@/components/cv/cv-download-fab";
+import { EditorialMagazineTheme } from "@/components/cv/themes/variants/editorial-magazine-theme";
 import { JsonLd } from "@/components/seo/json-ld";
 import { routing } from "@/i18n/routing";
 import { getConfig } from "@/lib/config";
+import { HERO_VIEW_TRANSITION_NAME } from "@/lib/view-transitions";
 import {
   buildLocaleUrl,
   buildLanguageAlternates,
@@ -21,11 +21,6 @@ type Props = {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ theme?: string; print?: string }>;
 };
-
-const downloadThemes = [
-  { id: "ats", name: "ATS-Friendly", description: "Single-column \u00b7 Best for parsing & ATS systems", pdfUrl: "/cv/ats/resume_reebal_sami.pdf" },
-  { id: "visual", name: "Visual", description: "Two-column \u00b7 Best for reading & sharing", pdfUrl: "/cv/visual/resume_reebal_sami.pdf" },
-];
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -97,8 +92,17 @@ export default async function CvPage({ params }: Props) {
   return (
     <>
       <JsonLd id="cv-person-structured-data" data={personJsonLd} />
-      <PortfolioGalleryTheme data={data} locale={cvLocale} />
-      <CvDownloadFab themes={downloadThemes} />
+      {/* Canonical /cv since iter-3 = Editorial Magazine. Theme owns its
+          own <CvDownloadFab /> so we don't render one here. The classic
+          PortfolioGalleryTheme is preserved at /cv/option-3 for A/B and
+          history. heroTransitionName="hero-photo" matches the homepage
+          shared-element morph (preview routes use "hero-photo-option-N"
+          to avoid name collisions with the canonical). */}
+      <EditorialMagazineTheme
+        data={data}
+        locale={cvLocale}
+        heroTransitionName={HERO_VIEW_TRANSITION_NAME}
+      />
     </>
   );
 }

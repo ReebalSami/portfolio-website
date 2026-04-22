@@ -6,6 +6,10 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { ChatMessage } from "@/components/chat/chat-message";
 import { ChatInput } from "@/components/chat/chat-input";
+import {
+  useRegisterChatButton,
+  useRegisterChatDialog,
+} from "@/lib/layout/chat-layout-context";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -19,6 +23,14 @@ export function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  // Refs published into ChatLayoutContext so any other fixed/floating UI
+  // (currently: CV MorphingDownloadCta FAB) can position itself above the
+  // chat without a DOM query. Button ref stays live for the widget's whole
+  // lifetime; dialog ref only has a node while the dialog is mounted.
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useRegisterChatButton(buttonRef);
+  useRegisterChatDialog(dialogRef, open);
   const t = useTranslations("chatbot");
 
   const scrollToBottom = useCallback(() => {
@@ -113,6 +125,7 @@ export function ChatWidget() {
     <>
       {/* Floating button */}
       <Button
+        ref={buttonRef}
         onClick={() => setOpen((prev) => !prev)}
         size="icon"
         className={cn(
@@ -130,7 +143,10 @@ export function ChatWidget() {
 
       {/* Chat dialog */}
       {open && (
-        <div className="fixed bottom-24 end-6 z-50 w-[calc(100vw-3rem)] max-w-sm rounded-2xl border border-border bg-background shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-200">
+        <div
+          ref={dialogRef}
+          className="fixed bottom-24 end-6 z-50 w-[calc(100vw-3rem)] max-w-sm rounded-2xl border border-border bg-background shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-200"
+        >
           {/* Header */}
           <div className="flex items-center gap-3 border-b border-border px-4 py-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gallery-warm/20">

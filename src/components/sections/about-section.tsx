@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { TechMarquee } from "@/components/shared/tech-marquee";
 import { DifferentiatorCard } from "@/components/cards/differentiator-card";
 import { TimelineEntryCard } from "@/components/cards/timeline-entry";
+import { TransitionLink } from "@/components/shared/transition-link";
 import { timelineData } from "@/content/timeline";
 import { techStackData } from "@/content/tech-stack";
 
@@ -88,8 +89,8 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
 
       {downloadCvEnabled && (
         <div className="pt-2">
-          <a
-            href={`/${locale}/cv`}
+          <TransitionLink
+            href="/cv"
             className="group inline-flex items-baseline gap-2 text-base sm:text-lg font-black tracking-tight text-foreground transition-colors hover:text-foreground"
           >
             <span className="underline underline-offset-[6px] decoration-2 decoration-gallery-warm group-hover:decoration-[3px] group-hover:decoration-gallery-warm/90 transition-all">
@@ -101,7 +102,7 @@ export function AboutSection({ downloadCvEnabled }: AboutSectionProps) {
             >
               &rarr;
             </span>
-          </a>
+          </TransitionLink>
         </div>
       )}
     </div>
