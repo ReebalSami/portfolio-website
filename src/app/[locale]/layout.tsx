@@ -9,6 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ChatWidget } from "@/components/chat/chat-widget";
+import { ChatLayoutProvider } from "@/lib/layout/chat-layout-context";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
 import { routing } from "@/i18n/routing";
@@ -211,17 +212,19 @@ export default async function LocaleLayout({ children, params }: Props) {
         <ThemeProvider defaultTheme="light">
           <NextIntlClientProvider>
             <TooltipProvider>
-              <Header siteName={config.site.name} />
-              <main id="main-content" className="flex-1">
-                {children}
-              </main>
-              {config.features.chatbot && <ChatWidget />}
-              <Footer
-                siteName={config.site.name}
-                email={config.contact.email}
-                location={config.contact.location}
-                social={config.social}
-              />
+              <ChatLayoutProvider>
+                <Header siteName={config.site.name} />
+                <main id="main-content" className="flex-1">
+                  {children}
+                </main>
+                {config.features.chatbot && <ChatWidget />}
+                <Footer
+                  siteName={config.site.name}
+                  email={config.contact.email}
+                  location={config.contact.location}
+                  social={config.social}
+                />
+              </ChatLayoutProvider>
             </TooltipProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
