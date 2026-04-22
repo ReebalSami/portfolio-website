@@ -83,6 +83,7 @@ tech:
       ar: "Use 'ML' on subsequent occurrences in the same document."
   - id: deep_learning
     category: translated
+    skip_drift_check: true
     forms:
       en: "deep learning"
       de: "Deep Learning"
@@ -90,6 +91,7 @@ tech:
       ar: "التعلم العميق"
     notes:
       de: "'Deep Learning' is the standard term in German tech context — no translation."
+      es: "Code-switching to 'Deep Learning'/'deep learning' is accepted in ES tech lists."
   - id: computer_vision
     category: translated
     forms:
@@ -137,6 +139,7 @@ titles:
       ar: "طالب عامل"
   - id: financial_accountant
     category: translated
+    skip_drift_check: true
     forms:
       en: "Financial Accountant"
       de: "Bilanzbuchhalter"
@@ -144,6 +147,7 @@ titles:
       ar: "محاسب مالي"
     notes:
       de: "'Bilanzbuchhalter' is the official German certification title — do not paraphrase."
+      ar: "German certification name 'Bilanzbuchhalter' is quoted verbatim in AR/ES — intentional code-switch."
   - id: intern
     category: translated
     forms:
