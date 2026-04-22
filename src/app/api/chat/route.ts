@@ -1,8 +1,7 @@
 import { streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
-import fs from "node:fs";
-import path from "node:path";
 import { getChatbotConfig } from "@/lib/config";
+import { validateLocale, loadLocaleContext, buildSystemPrompt } from "./route-helpers";
 
 // ---------------------------------------------------------------------------
 // Rate limiter — simple in-memory per IP (resets on cold start)
@@ -22,47 +21,6 @@ function isRateLimited(ip: string, max: number, windowMs: number): boolean {
   return entry.count > max;
 }
 
-// ---------------------------------------------------------------------------
-// Context document (loaded once at module level)
-// ---------------------------------------------------------------------------
-const contextPath = path.resolve(
-  process.cwd(),
-  "src/content/chatbot-context.md"
-);
-const context = fs.readFileSync(contextPath, "utf-8");
-
-// ---------------------------------------------------------------------------
-// System prompt
-// ---------------------------------------------------------------------------
-const systemPrompt = `You are a friendly, analytical AI assistant on Reebal Sami's portfolio website.
-
-## Mission
-Help visitors understand Reebal's background, strengths, projects, and fit for opportunities.
-
-## Grounding Rules
-- Ground responses in the context below.
-- If a question is **partially covered**, provide the best supported answer first, then clearly state what is uncertain.
-- If a question is **not covered**, do not fabricate details. Say what you can infer from related context and invite contact at contact@reebal-sami.com for exact confirmation.
-- Respond in the same language as the user (English, German, Spanish, Arabic, etc.).
-
-## Reasoning & Helpfulness
-- Infer likely intent from the conversation instead of asking the user to restate obvious context.
-- For broad prompts (for example: "Tell me about him", "Is he a fit?", "What is he good at?"):
-  1) Give a direct summary answer.
-  2) Add 3-6 concrete evidence points from context.
-  3) Ask 1-2 targeted follow-up questions to personalize the next answer.
-- For comparison or decision questions, include concise pros/cons or match/mismatch points.
-- Avoid repetitive fallback wording.
-
-## Response Style
-- Use markdown with short sections and bullet points when useful.
-- Be concise but substantive.
-- Prioritize clarity and practical usefulness over generic statements.
-- Keep a professional, warm tone.
-
-<context>
-${context}
-</context>`;
 
 // ---------------------------------------------------------------------------
 // POST /api/chat
@@ -93,6 +51,7 @@ export async function POST(request: Request) {
 
   // Parse and sanitize input
   let messages: { role: string; content: string }[];
+  let systemPrompt: string;
   try {
     const body = await request.json();
     messages = body.messages;
@@ -114,6 +73,10 @@ export async function POST(request: Request) {
 
     // Keep enough conversation history for contextual follow-ups
     messages = messages.slice(-16);
+
+    const locale = validateLocale((body as { locale?: unknown }).locale);
+    const contextText = await loadLocaleContext(locale);
+    systemPrompt = buildSystemPrompt(locale, `<context>\n${contextText}\n</context>`);
   } catch {
     return new Response(
       JSON.stringify({ error: "Invalid request body" }),

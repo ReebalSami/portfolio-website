@@ -49,7 +49,9 @@ interface CvBodyProps {
 
 function formatDate(dateStr: string, locale: Locale): string {
   const d = new Date(dateStr + "-01");
-  return d.toLocaleDateString(locale === "ar" ? "ar-SA" : locale, {
+  // ar-SA-u-nu-latn: Arabic month names with Western (Latin) numerals —
+  // Gulf CVs use Western digits; Arabic-Indic breaks ATS parsers.
+  return d.toLocaleDateString(locale === "ar" ? "ar-SA-u-nu-latn" : locale, {
     year: "numeric",
     month: "short",
   });

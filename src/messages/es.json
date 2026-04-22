@@ -17,7 +17,7 @@
     },
     "buttons": {
       "viewProjects": "Ver proyectos",
-      "getInTouch": "Contactar",
+      "getInTouch": "Escríbeme",
       "downloadCV": "Descargar CV",
       "viewCV": "Ver y descargar CV completo",
       "github": "GitHub",
@@ -26,14 +26,14 @@
   },
   "home": {
     "hero": {
-      "intro": "Más de cinco años de experiencia en finanzas corporativas combinados con habilidades de vanguardia en IA/ML. Construyendo soluciones inteligentes de principio a fin."
+      "intro": "Fusiono más de cinco años en finanzas corporativas con habilidades punteras en IA y aprendizaje automático. Construyo soluciones inteligentes de principio a fin."
     }
   },
   "about": {
     "title": "Sobre mí",
     "subtitle": "Quién soy",
-    "summary1": "Científico de datos e ingeniero de IA con más de cinco años de experiencia en finanzas corporativas en Otto Group, combinados con habilidades de IA/ML de vanguardia. Actualmente escribiendo mi tesis de máster sobre GraphRAG Document Intelligence como parte del M.Sc. Data Science & IA en FH Wedel.",
-    "summary2": "Entrega probada de principio a fin, desde pipelines multi-agente para ventas B2B hasta detección de salud vegetal con deep learning. Construyo soluciones inteligentes con impacto empresarial medible.",
+    "summary1": "Soy Científico de Datos e Ingeniero de IA, y combino más de cinco años de experiencia en finanzas corporativas en OTTO Group con competencias punteras en IA y aprendizaje automático. Ahora mismo estoy escribiendo mi tesis de máster sobre GraphRAG Document Intelligence, dentro del M.Sc. Data Science & IA en FH Wedel.",
+    "summary2": "Entrego proyectos de principio a fin — desde pipelines multi-agente para ventas B2B hasta detección de salud vegetal con aprendizaje profundo. Construyo soluciones inteligentes con impacto empresarial medible.",
     "cardExpand": "Saber más",
     "cardDetails": "Detalles",
     "differentiators": "Lo que me diferencia",
@@ -42,23 +42,23 @@
     "cards": {
       "business": {
         "title": "Negocio × Datos",
-        "description": "5 años en Otto Group en finanzas corporativas, ahora combinándolo con ingeniería de IA/ML.",
+        "description": "5 años en OTTO Group en finanzas corporativas; ahora combino esa visión de negocio con ingeniería de IA y ML.",
         "expanded": [
-          "Informes de grupo bajo HGB e IFRS para múltiples filiales de Otto Group",
+          "Informes de grupo bajo HGB e IFRS para múltiples filiales de OTTO Group",
           "SAP FI-CO y consolidación BPC, cierres mensuales, trimestrales y anuales",
           "Lideré automatizaciones RPA con UiPath para provisiones de vacaciones e intereses",
           "Proyectos de implementación de IFRS (7, 9, 13) y valoración de opciones",
           "Contacto principal para auditores externos y consultoras",
-          "Programa Avanzado de Contabilidad y Fiscalidad ‘Bilanzbuchhalter’ en GFS Steuerfachschule (2018 – 2020)"
+          "Programa Avanzado de Contabilidad y Fiscalidad 'Bilanzbuchhalter' en GFS Steuerfachschule (2018–2020)"
         ]
       },
       "builder": {
-        "title": "Constructor integral",
+        "title": "Constructor de principio a fin",
         "description": "Del concepto al MVP: pipeline multi-agente B2B que redujo la investigación manual a aproximadamente la mitad.",
         "expanded": [
-          "Pipeline multi-agente B2B en Datalogue: 4 agentes LLM más human-in-the-loop",
+          "Pipeline multi-agente B2B en Datalogue: 4 agentes LLM con Human-in-the-Loop",
           "Pipeline genérico de news-crawler con esquema PostgreSQL 3NF y búsqueda semántica vectorial",
-          "Detección de enfermedades de plantas en urban farming: pipeline jerárquico de 3 etapas, ViT y CNN, Grad-CAM y Attention Rollout",
+          "Detección de enfermedades de plantas en agricultura urbana: pipeline jerárquico de 3 etapas, ViT y CNN, Grad-CAM y Attention Rollout",
           "Este sitio portfolio: Next.js 16, AWS CDK, i18n completo en 4 idiomas incluido árabe RTL",
           "App full-stack MyRecipes: Java Spring Boot, React, MongoDB, sugerencias con IA"
         ]
@@ -67,11 +67,11 @@
         "title": "Multilingüe",
         "description": "Alemán (C2, diario), inglés (profesional pleno, diario), árabe (nativo), español (elemental, aprendiendo), francés (elemental).",
         "expanded": [
-          "Alemán: nivel actual C2, uso diario profesional, última certificación Telc C1 Negocios",
-          "Inglés: nivel profesional pleno, uso diario en tech y negocios. B.Sc. cursado íntegramente en inglés.",
+          "Alemán: nivel actual C2, trabajo diario a nivel profesional pleno, última certificación Telc C1 Negocios",
+          "Inglés: nivel profesional pleno, uso diario en tech y negocios. El B.Sc. fue íntegramente en inglés.",
           "Árabe: nativo, de Damasco, Siria",
           "Español: elemental, aprendiendo activamente hacia B1",
-          "Francés: elemental, de la escuela"
+          "Francés: elemental, desde el colegio"
         ]
       },
       "education": {
@@ -79,8 +79,8 @@
         "description": "FH Wedel: deep learning, NLP, visión por computador, econometría, e-commerce, gestión estratégica.",
         "expanded": [
           "Núcleo: Deep Learning, Visión por Computador, Machine Learning, IA Simbólica, Econometría",
-          "Itinerario de negocio: Category Management, Modelos de Negocio E-Commerce, Transformación Digital",
-          "Procesos: Gestión Ágil, Change Management, Gestión Estratégica, Teoría Organizacional",
+          "Itinerario de negocio: Gestión de Categorías, Modelos de Negocio E-Commerce, Transformación Digital",
+          "Procesos: Gestión Ágil de Proyectos, Change Management, Gestión Estratégica, Teoría Organizacional",
           "Técnico: Unix y programación shell, Data Engineering, Métodos de Investigación Empírica",
           "Tesis en curso: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
         ]
@@ -104,24 +104,24 @@
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Pensamientos y tutoriales",
-    "empty": "Artículos técnicos próximamente — IA/ML, ingeniería de datos y transición profesional.",
+    "subtitle": "Reflexiones y tutoriales",
+    "empty": "Artículos técnicos próximamente — IA/ML, ingeniería de datos y transición de carrera.",
     "backToBlog": "Volver al blog"
   },
   "chatbot": {
     "title": "Pregunta sobre Reebal",
     "subtitle": "Asistente con IA",
     "toggle": "Abrir chat",
-    "placeholder": "Pregúntame lo que sea...",
-    "welcome": "¡Hola! Pregúntame sobre la experiencia, proyectos o habilidades de Reebal.",
-    "disclaimer": "Powered by IA. Las respuestas se basan en el contenido del portafolio.",
+    "placeholder": "Pregúntame lo que quieras...",
+    "welcome": "¡Hola! Pregúntame sobre la experiencia, los proyectos o las habilidades de Reebal.",
+    "disclaimer": "Con tecnología de IA. Las respuestas se basan en el contenido del portfolio.",
     "error": "Algo salió mal. Inténtalo de nuevo.",
     "rateLimit": "Demasiadas solicitudes. Inténtalo más tarde."
   },
   "cv": {
     "title": "Currículum Vitae",
     "experience": "Experiencia",
-    "education": "Educación",
+    "education": "Formación",
     "skills": "Habilidades técnicas",
     "languages": "Idiomas",
     "certifications": "Certificaciones",
@@ -133,13 +133,13 @@
     "downloadPdf": "Descargar PDF",
     "switchTheme": "Diseño",
     "printVersion": "Imprimir",
-    "present": "Actual",
+    "present": "Actualidad",
     "metaTitle": "CV — Reebal Sami | Científico de Datos e Ingeniero de IA",
     "metaDescription": "Currículum Vitae de Reebal Sami — Científico de Datos e Ingeniero de IA en Hamburgo, Alemania."
   },
   "contact": {
     "title": "Contacto",
-    "subtitle": "Ponte en contacto",
+    "subtitle": "Hablamos",
     "direct": "Contacto directo",
     "social": "Redes sociales",
     "form": {
@@ -149,8 +149,8 @@
       "messagePlaceholder": "Tu mensaje...",
       "send": "Enviar mensaje",
       "sending": "Enviando...",
-      "success": "¡Mensaje enviado con éxito!",
-      "error": "Error al enviar. Inténtalo de nuevo o envía un correo directamente."
+      "success": "¡Mensaje enviado!",
+      "error": "Error al enviar. Inténtalo de nuevo o escríbeme directamente."
     }
   }
 }

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { MessageCircle, X, Bot } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { ChatMessage } from "@/components/chat/chat-message";
 import { ChatInput } from "@/components/chat/chat-input";
@@ -32,6 +32,7 @@ export function ChatWidget() {
   useRegisterChatButton(buttonRef);
   useRegisterChatDialog(dialogRef, open);
   const t = useTranslations("chatbot");
+  const locale = useLocale();
 
   const scrollToBottom = useCallback(() => {
     if (scrollRef.current) {
@@ -64,6 +65,7 @@ export function ChatWidget() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          locale,
           messages: [...messages, userMsg].map((m) => ({
             role: m.role,
             content: m.content,
