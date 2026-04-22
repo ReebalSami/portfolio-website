@@ -59,6 +59,11 @@ if (isMain) {
     allEntries.push(...(val as GlossaryEntry[]));
   }
 
+  // Note: config/cv/*.yaml is intentionally NOT included here because it is a
+  // multilingual YAML (all locale forms coexist in one file), which causes
+  // false positives when scanning for cross-locale term leakage.
+  // CV YAML glossary compliance should be verified via `make cv:verify` or
+  // a dedicated YAML-aware validator that extracts each locale's fields separately.
   let hasError = false;
   for (const locale of locales) {
     const content = fs.readFileSync(path.join(messagesDir, `${locale}.json`), "utf-8");
