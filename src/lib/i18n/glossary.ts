@@ -3,14 +3,17 @@ import path from "node:path";
 import yaml from "yaml";
 import { z } from "zod/v4";
 
+const LocaleSchema = z.enum(["en", "de", "es", "ar"]);
+export type Locale = z.infer<typeof LocaleSchema>;
+
 const FormsSchema = z.union([
   z.object({ all: z.string() }),
-  z.record(z.enum(["en", "de", "es", "ar"]), z.string()),
+  z.record(LocaleSchema, z.string()),
 ]);
 
 const EntrySchema = z.object({
   id: z.string(),
-  category: z.enum(["locked_source", "transliterated", "translated", "per_context"]),
+  category: z.enum(["locked_source", "transliterated", "translated"]),
   forms: FormsSchema,
   notes: z.record(z.string(), z.string()).optional(),
 });
@@ -26,7 +29,6 @@ const GlossarySchema = z
   .catchall(z.array(EntrySchema));
 
 export type Glossary = z.infer<typeof GlossarySchema>;
-export type Locale = "en" | "de" | "es" | "ar";
 
 export function loadGlossary(filePath?: string): Glossary {
   const p =
@@ -38,9 +40,9 @@ export function loadGlossary(filePath?: string): Glossary {
 export function formFor(g: Glossary, id: string, locale: Locale): string {
   for (const key of Object.keys(g)) {
     if (key === "meta") continue;
-    const entries = g[key as keyof Glossary] as unknown as Array<
-      z.infer<typeof EntrySchema>
-    >;
+    const val = g[key as keyof typeof g];
+    if (!Array.isArray(val)) continue;
+    const entries = val;
     const found = entries.find((e) => e.id === id);
     if (!found) continue;
     if ("all" in found.forms) return (found.forms as { all: string }).all;

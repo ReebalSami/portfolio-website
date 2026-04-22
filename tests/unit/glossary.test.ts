@@ -22,4 +22,13 @@ describe("glossary", () => {
   it("throws on unknown id", () => {
     expect(() => formFor(g, "nonexistent_id", "en")).toThrow();
   });
+
+  it("throws on valid id but missing locale form", () => {
+    // Simulate a translated entry with only 2 locale forms
+    const partial: Glossary = {
+      meta: { version: 1, locales: ["en", "de", "es", "ar"], last_review: "2026-04-22" },
+      test: [{ id: "partial_term", category: "translated", forms: { en: "English", de: "German" } }],
+    } as Glossary;
+    expect(() => formFor(partial, "partial_term", "ar")).toThrow("no form for id=partial_term locale=ar");
+  });
 });
