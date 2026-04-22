@@ -1,3 +1,4 @@
+import ReactDOM from "react-dom";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { AnimatedSection } from "@/components/shared/animated-section";
@@ -8,7 +9,7 @@ import { ContactSection } from "@/components/sections/contact-section";
 import { BlogCard } from "@/components/cards/blog-card";
 import { Separator } from "@/components/ui/separator";
 import { JsonLd } from "@/components/seo/json-ld";
-import { getConfig } from "@/lib/config";
+import { getConfig, getPhotoPath, getHeroConfig } from "@/lib/config";
 import { getAllPosts } from "@/lib/mdx";
 import { buildAbsoluteUrl } from "@/lib/seo";
 
@@ -21,7 +22,15 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
   const config = getConfig();
   const t = await getTranslations("blog");
-  const photoPath = `${config.photos.heroDir}/${config.photos.hero}`;
+  // Homepage hero — sourced from site.yaml `photos.homepage`. Same image
+  // feeds JSON-LD `image` + the shared-element morph to /cv. Changing this
+  // file path in site.yaml is a pure YAML edit; no code change needed.
+  const photoPath = getPhotoPath("homepage");
+  // Emit a fetchpriority=high preload hint for the hero image. ReactDOM.preload
+  // hoists the <link> into <head> from any server component without touching
+  // the shared layout (so /cv and other routes don't fetch the homepage photo).
+  ReactDOM.preload(photoPath, { as: "image", fetchPriority: "high" });
+  const heroConfig = getHeroConfig();
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -49,6 +58,7 @@ export default async function Home({ params }: Props) {
             title={config.site.title}
             tagline={config.site.tagline}
             photoSrc={photoPath}
+            hero={heroConfig}
           />
         </AnimatedSection>
       </section>
