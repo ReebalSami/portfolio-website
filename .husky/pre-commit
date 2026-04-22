@@ -1,0 +1,2 @@
+pnpm exec tsx scripts/check-locale-parity.ts
+pnpm exec tsx scripts/check-glossary-drift.ts
