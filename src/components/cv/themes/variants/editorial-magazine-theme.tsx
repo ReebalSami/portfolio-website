@@ -6,6 +6,12 @@ import { getTranslations } from "next-intl/server";
 import { Mail, MapPin } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/brand-icons";
 import { CvBody } from "../shared/cv-body";
+import {
+  MorphingDownloadCta,
+  MorphingDownloadCtaTopSlot,
+  MorphingDownloadCtaBottomSlot,
+} from "@/components/cv/morphing-download-cta";
+import { getPhotoPath } from "@/lib/config";
 
 type Locale = "en" | "de" | "es" | "ar";
 
@@ -55,14 +61,27 @@ export async function EditorialMagazineTheme({
   const t = await getTranslations("cv");
   const r = (s: Parameters<typeof resolveCvLocaleString>[0]) =>
     resolveCvLocaleString(s, locale);
-  const resolvedPhoto = photoSrc ?? data.basics.photo;
+  // site.yaml `photos.cvPage` is the canonical source for /cv page photos.
+  // Preview variants pass their own `photoSrc` to A/B different images.
+  const resolvedPhoto = photoSrc ?? getPhotoPath("cvPage");
 
-  const year = new Date().getFullYear();
-  const issueLabel = `Vol. ${year} · Issue 01`;
+  // Dynamic issue number = current month, zero-padded. Regenerates on every
+  // build so the masthead always reads as "this month's issue". Pure
+  // decorative typography — no behavioural impact, no SSR/hydration risk
+  // (server and client render at the same build moment for static export).
+  const now = new Date();
+  const year = now.getFullYear();
+  const issueNumber = String(now.getMonth() + 1).padStart(2, "0");
+  const issueLabel = `Vol. ${year} · Issue ${issueNumber}`;
   const [firstName, ...restName] = data.basics.name.split(" ");
   const lastName = restName.join(" ") || data.basics.name;
 
+  // Wrap the whole theme tree with the MorphingDownloadCta provider so the
+  // `.TopSlot` (inside the hero) and `.BottomSlot` (inside the footer CTA
+  // band) can subscribe to shared scroll-derived state. The provider also
+  // hosts the FAB itself; no separate <CvDownloadFab /> needed.
   return (
+    <MorphingDownloadCta label={t("downloadPdf")}>
     <div className={`relative overflow-x-clip ${editorial.variable}`}>
       {/* Persistent warm backdrop — spans hero + body so the body reads as
           the continuation of the print cover, not a separate surface. */}
@@ -119,6 +138,16 @@ export async function EditorialMagazineTheme({
               >
                 {r(data.profile.summary)}
               </p>
+
+              {/* Primary CTA — top slot of the MorphingDownloadCta. The
+                  button renders here while the user is at the top of the
+                  page; as they scroll past the hero it morphs into the FAB
+                  (bottom-right), then into the footer button. One element,
+                  three anchor points. Styling (warm bg + magnetic hover)
+                  lives inside MorphingDownloadCta for consistency. */}
+              <div className="mt-8">
+                <MorphingDownloadCtaTopSlot />
+              </div>
             </div>
 
             {/* Right: larger photo, top aligned with first-name line via
@@ -144,7 +173,7 @@ export async function EditorialMagazineTheme({
                     className="absolute bottom-3 start-3 rounded-full bg-background/90 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.3em] text-foreground backdrop-blur"
                     style={{ fontFamily: "var(--font-editorial)" }}
                   >
-                    Featured
+                    Résumé {year}
                   </span>
                 </div>
                 <figcaption
@@ -256,7 +285,7 @@ export async function EditorialMagazineTheme({
             <p
               className="text-[0.6rem] font-medium uppercase tracking-[0.4em] text-muted-foreground mb-4"
             >
-              Pull quote
+              My motto for this year
             </p>
             <blockquote className="text-lg italic leading-relaxed text-foreground">
               &ldquo;The best AI isn&apos;t the one that dazzles in a demo — it&apos;s the one
@@ -268,6 +297,23 @@ export async function EditorialMagazineTheme({
           </div>
         }
       />
+
+      {/* End-of-page closing CTA — bottom slot of the MorphingDownloadCta.
+          The button lands here once the user has scrolled to the footer.
+          The "Take it with you" eyebrow stays visible at all times as a
+          reading anchor; the slot only shows the button when active. */}
+      <section className="relative">
+        <div className="mx-auto max-w-6xl px-6 pb-20 pt-4 text-center">
+          <p
+            className="mb-5 text-[0.6rem] font-medium uppercase tracking-[0.4em] text-muted-foreground"
+            style={{ fontFamily: "var(--font-editorial)" }}
+          >
+            Take it with you
+          </p>
+          <MorphingDownloadCtaBottomSlot />
+        </div>
+      </section>
     </div>
+    </MorphingDownloadCta>
   );
 }

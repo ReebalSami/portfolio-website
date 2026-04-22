@@ -3,6 +3,7 @@ import type { CvData } from "@/lib/cv/schema";
 import { resolveCvLocaleString } from "@/lib/cv/data";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/brand-icons";
+import { getPhotoPath } from "@/lib/config";
 import { CvBody } from "./shared/cv-body";
 
 type Locale = "en" | "de" | "es" | "ar";
@@ -38,7 +39,10 @@ export async function PortfolioGalleryTheme({
 }: PortfolioGalleryProps) {
   const r = (s: Parameters<typeof resolveCvLocaleString>[0]) =>
     resolveCvLocaleString(s, locale);
-  const resolvedPhoto = photoSrc ?? data.basics.photo;
+  // site.yaml `photos.cvPage` is the canonical source for /cv page photos.
+  // `photoSrc` overrides are used by preview variants (/cv/option-N) to A/B
+  // different images. basics.photo is no longer consulted — site.yaml wins.
+  const resolvedPhoto = photoSrc ?? getPhotoPath("cvPage");
 
   return (
     <div className="relative overflow-x-clip">

@@ -7,13 +7,44 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface CvDownloadFabProps {
-  themes: { id: string; name: string; description: string; pdfUrl: string }[];
+  themes?: { id: string; name: string; description: string; pdfUrl: string }[];
 }
 
-export function CvDownloadFab({ themes }: CvDownloadFabProps) {
+/**
+ * Default download themes. Centralised so any variant can render
+ * `<CvDownloadFab />` zero-prop and still get the correct PDFs without each
+ * page repeating the constant. Pass `themes` explicitly if a variant ever
+ * needs a different set.
+ */
+const DEFAULT_DOWNLOAD_THEMES = [
+  {
+    id: "ats",
+    name: "ATS-Friendly",
+    description: "Single-column · Best for parsing & ATS systems",
+    pdfUrl: "/cv/ats/resume_reebal_sami.pdf",
+  },
+  {
+    id: "visual",
+    name: "Visual",
+    description: "Two-column · Best for reading & sharing",
+    pdfUrl: "/cv/visual/resume_reebal_sami.pdf",
+  },
+];
+
+export function CvDownloadFab({ themes = DEFAULT_DOWNLOAD_THEMES }: CvDownloadFabProps) {
   const [open, setOpen] = useState(false);
   const [fabBottom, setFabBottom] = useState("6rem");
   const t = useTranslations("cv");
+
+  // Allow any in-page CTA to request the panel open via a window event.
+  // Used by <CvDownloadCta /> in the Editorial / Kinetic hero + footer.
+  // Decoupled from React context so server-component pages can drop the
+  // CTA anywhere without prop drilling.
+  useEffect(() => {
+    const onOpenRequest = () => setOpen(true);
+    window.addEventListener("cv-fab:open", onOpenRequest);
+    return () => window.removeEventListener("cv-fab:open", onOpenRequest);
+  }, []);
 
   useEffect(() => {
     function updatePosition() {

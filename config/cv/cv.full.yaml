@@ -20,7 +20,8 @@ basics:
     es: "Científico de datos e ingeniero de inteligencia artificial"
     ar: "عالم بيانات ومهندس ذكاء اصطناعي"
   email: "contact@reebal-sami.com"
-  photo: "/images/hero/start-photo.JPG"
+  # photo path lives in site.yaml `photos.cvPage` — the CV page theme reads
+  # getPhotoPath("cvPage"). Kept out of the CV YAML to avoid two sources of truth.
   url: "https://reebal-sami.com"
   location:
     city:

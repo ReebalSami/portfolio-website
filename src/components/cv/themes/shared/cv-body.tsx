@@ -29,9 +29,11 @@ interface CvBodyProps {
   sidebarBelow?: boolean;
   /** Max-width for the inner container. Defaults to 5xl (64rem). */
   maxWidthClass?: string;
-  /** Rendered at the bottom of the sidebar aside. When provided, the aside
-   *  switches to flex-column with a flex-grow spacer so the decoration sits
-   *  at the very bottom and both columns end at the same visual line. */
+  /** Rendered as the last item of the sidebar's section stack. The sidebar
+   *  stays `md:sticky md:top-24 md:self-start` regardless — columns are NOT
+   *  forced to end at the same visual line. (Iter-2 attempted a flex-stretch
+   *  spacer to align bottoms; it broke the canonical sticky-while-scrolling
+   *  feel that Reebal explicitly wants. Reverted in iter-3.) */
   bottomDecoration?: ReactNode;
   /** Tonal override — "dark" remaps muted-foreground/border/card/foreground
    *  via CSS variables so every child using those Tailwind utilities inherits
@@ -81,15 +83,12 @@ export async function CvBody({
     ? "relative grid gap-12 grid-cols-1 py-16 md:py-24"
     : "relative grid gap-12 md:grid-cols-[minmax(0,1fr)_300px] lg:grid-cols-[minmax(0,1fr)_340px] py-16 md:py-24";
 
-  // When bottomDecoration is provided, the aside stretches to fill the grid
-  // row and the decoration anchors at its bottom via a flex-grow spacer.
-  // Otherwise we keep the original sticky-top behaviour so the sidebar stays
-  // visible while the user reads Experience.
+  // Sidebar always sticks to top:24 on md+ — same behaviour as canonical /cv.
+  // bottomDecoration just renders at the end of the sidebar's section stack;
+  // we don't try to align column bottoms.
   const asideClass = sidebarBelow
     ? "min-w-0"
-    : bottomDecoration
-      ? "min-w-0 flex flex-col"
-      : "min-w-0 md:sticky md:top-24 md:self-start";
+    : "min-w-0 md:sticky md:top-24 md:self-start";
 
   // Scoped dark palette via CSS variable overrides. These target the same
   // tokens Tailwind's utilities already resolve against, so every child
@@ -371,17 +370,9 @@ export async function CvBody({
                 </div>
               </section>
             )}
-            </div>
 
-            {bottomDecoration && (
-              <>
-                {/* Spacer grows to push the decoration to the aside's bottom,
-                    visually aligning the end of the sidebar with the end of
-                    the taller main column. */}
-                <div className="mt-10 flex-1" aria-hidden="true" />
-                <div className="mt-10">{bottomDecoration}</div>
-              </>
-            )}
+            {bottomDecoration && <div>{bottomDecoration}</div>}
+            </div>
           </aside>
         </div>
       </div>

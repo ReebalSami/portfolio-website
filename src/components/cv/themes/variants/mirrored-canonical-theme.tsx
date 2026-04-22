@@ -4,6 +4,7 @@ import { resolveCvLocaleString } from "@/lib/cv/data";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/shared/brand-icons";
 import { CvBody } from "../shared/cv-body";
+import { getPhotoPath } from "@/lib/config";
 
 type Locale = "en" | "de" | "es" | "ar";
 
@@ -39,7 +40,9 @@ export async function MirroredCanonicalTheme({
 }: Props) {
   const r = (s: Parameters<typeof resolveCvLocaleString>[0]) =>
     resolveCvLocaleString(s, locale);
-  const resolvedPhoto = photoSrc ?? data.basics.photo;
+  // site.yaml `photos.cvPage` is the canonical source for /cv page photos.
+  // Preview variants pass their own `photoSrc` to A/B different images.
+  const resolvedPhoto = photoSrc ?? getPhotoPath("cvPage");
 
   return (
     <div className="relative overflow-x-clip">
@@ -115,8 +118,9 @@ export async function MirroredCanonicalTheme({
                 className="pointer-events-none absolute inset-0 -z-10"
                 aria-hidden="true"
               >
-                {/* Canonical had top-left circle; mirror → top-right */}
-                <div className="absolute -top-4 -end-4 h-48 w-48 rounded-full bg-gallery-warm/30 sm:h-60 sm:w-60 md:h-72 md:w-72" />
+                {/* Behind-head circle peeks from the photo's start side
+                    (flipped from iter-2's end side per Reebal's Apr-20 review). */}
+                <div className="absolute -top-4 -start-4 h-48 w-48 rounded-full bg-gallery-warm/30 sm:h-60 sm:w-60 md:h-72 md:w-72" />
                 {/* Canonical had bottom-right rounded block; mirror → bottom-left */}
                 <div className="absolute -bottom-2 -start-2 h-32 w-44 rounded-[2rem] bg-gallery-warm-muted/25 -rotate-6 sm:h-40 sm:w-56" />
                 {/* Canonical had mid-left small square; mirror → mid-right */}
@@ -134,13 +138,6 @@ export async function MirroredCanonicalTheme({
                   priority
                   sizes="(max-width: 768px) 70vw, 40vw"
                   className="h-auto w-full object-cover contrast-[1.05] saturate-[0.95]"
-                />
-                {/* Subtle warm overlay — blends color photo into site palette
-                    without going sepia. Multiply at low opacity keeps skin
-                    tones natural and ties the photo to gallery-warm. */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gallery-warm/[0.07] mix-blend-multiply"
                 />
               </div>
             </div>

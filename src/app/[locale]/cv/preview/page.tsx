@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { routing } from "@/i18n/routing";
+import { getPhotoPath } from "@/lib/config";
+import { isCvPreviewEnabled } from "@/lib/cv/preview-flag";
 import {
   cvPreviewVariants,
   type CvPreviewVariant,
@@ -30,16 +33,22 @@ interface VariantCard extends Pick<CvPreviewVariant, "name" | "tagline" | "photo
 }
 
 export default async function CvPreviewPage({ params }: Props) {
+  if (!isCvPreviewEnabled()) notFound();
   const { locale } = await params;
   setRequestLocale(locale);
 
+  // Canonical card now points at the iter-3 Editorial Magazine theme that
+  // ships at /cv. The classic Portfolio Gallery hero lives at /cv/option-3
+  // (added below from the variants registry) so we can still A/B against it.
   const canonical: VariantCard = {
     id: "canonical",
-    name: "Canonical (current)",
+    name: "Canonical (current) — Editorial Magazine",
     tagline:
-      "The live /cv page as it ships today. Baseline to compare against — shared-element morph is wired up from the homepage already.",
-    photoSrc: "/images/hero/start-photo.JPG",
-    accent: "from-gallery-warm/40 via-gallery-warm-muted/30 to-transparent",
+      "The live /cv page since iter-3. Print-cover masthead, dynamic issue number, sticky sidebar with pull-quote, hero + footer download CTAs that open the FAB. Shared-element morph from the homepage uses heroTransitionName=\"hero-photo\".",
+    // Canonical card photo comes from site.yaml `photos.cvPage` so the card
+    // preview always matches what visitors see at /cv. No hardcoded path.
+    photoSrc: getPhotoPath("cvPage"),
+    accent: "from-amber-200/30 via-rose-100/30 to-transparent",
     href: `/${locale}/cv`,
     badge: "Canonical",
   };
@@ -53,6 +62,7 @@ export default async function CvPreviewPage({ params }: Props) {
       photoSrc: v.photoSrc,
       accent: v.accent,
       href: `/${locale}/cv/${v.id}`,
+      badge: v.badge,
     })),
   ];
 
@@ -78,11 +88,11 @@ export default async function CvPreviewPage({ params }: Props) {
             Pick your CV hero
           </h1>
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Six variants side by side, plus the current canonical page. Click any
-            card to see it live, scroll it, navigate between home and the variant
-            to feel the shared-element photo morph. When you&apos;ve picked one,
-            tell me and I&apos;ll wire it as the canonical <code>/cv</code> and
-            remove the rest.
+            Canonical at the top, surviving variants below. Click any card to see
+            it live, scroll it, and use the homepage → card transition to feel
+            the shared-element photo morph. <strong>This page is dev-only</strong>
+            — it 404s in production unless <code>ENABLE_CV_PREVIEW=true</code> is
+            set at build time.
           </p>
         </div>
 
