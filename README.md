@@ -250,7 +250,7 @@ make test:e2e    # E2E tests (Playwright — Chromium, Firefox, WebKit)
 
 ## Design System
 
-NFT Art Gallery / Exaggerated Minimalism style. Light mode (default) + dark mode.
+NFT Art Gallery / Exaggerated Minimalism style. Dark mode (default) + light mode toggle.
 
 - **Fonts**: Archivo (headings), Space Grotesk (body), JetBrains Mono (code)
 - **Colors**: Gallery black primary, warm peachy accent, oklch color space
