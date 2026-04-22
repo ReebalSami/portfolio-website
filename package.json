@@ -11,7 +11,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "transcreate": "tsx --env-file-if-exists=.env.local scripts/transcreate.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^3.0.53",
