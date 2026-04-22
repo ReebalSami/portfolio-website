@@ -47,7 +47,7 @@ profile:
   summary:
     en: >-
       Data Scientist and AI Engineer working at the intersection of business and modern AI.
-      Over five years at Otto Group built deep fluency in corporate data flows, financial systems, and cross-functional stakeholder work.
+      Over five years at OTTO Group built deep fluency in corporate data flows, financial systems, and cross-functional stakeholder work.
       Today I orchestrate end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated news-crawler pipelines
       to deep-learning models for computer vision.
       I built and deploy this portfolio on AWS CDK.
@@ -55,7 +55,7 @@ profile:
       Currently writing my Master's thesis on GraphRAG Document Intelligence as part of my M.Sc. Data Science & AI at FH Wedel, while shipping production code on the side.
     de: >-
       Data Scientist und KI-Ingenieur an der Schnittstelle von Business und moderner KI.
-      Über fünf Jahre bei der Otto Group haben tiefes Verständnis für Unternehmensdatenflüsse, Finanzsysteme und bereichsübergreifende Stakeholder-Arbeit aufgebaut.
+      Über fünf Jahre bei der OTTO Group haben tiefes Verständnis für Unternehmensdatenflüsse, Finanzsysteme und bereichsübergreifende Stakeholder-Arbeit aufgebaut.
       Heute orchestriere ich End-to-End-KI-Lösungen über mehrere Schichten — von Multi-Agenten-LLM-Systemen und automatisierten News-Crawler-Pipelines
       bis hin zu Deep-Learning-Modellen für Computer Vision.
       Diese Portfolio-Website habe ich selbst gebaut und deploye sie via AWS CDK.
@@ -63,7 +63,7 @@ profile:
       Aktuell am Schreiben der Masterarbeit in Data Science & KI an der FH Wedel zum Thema GraphRAG Document Intelligence, parallel dazu produktionsreifer Code.
     es: >-
       Científico de datos e ingeniero de IA que trabaja en la intersección entre negocio e IA moderna.
-      Más de cinco años en Otto Group me dieron una comprensión profunda de flujos de datos corporativos, sistemas financieros y trabajo transversal con stakeholders.
+      Más de cinco años en OTTO Group me dieron una comprensión profunda de flujos de datos corporativos, sistemas financieros y trabajo transversal con stakeholders.
       Hoy orquesto soluciones de IA de extremo a extremo en múltiples capas: desde sistemas LLM multiagente y pipelines automatizados de rastreo de noticias
       hasta modelos de deep learning para visión por computador.
       Construí y despliego este portfolio con AWS CDK.
@@ -71,7 +71,7 @@ profile:
       Actualmente escribo mi tesis de máster sobre GraphRAG Document Intelligence como parte del M.Sc. Data Science & AI en FH Wedel, mientras sigo entregando código en producción.
     ar: >-
       عالم بيانات ومهندس ذكاء اصطناعي يعمل عند تقاطع الأعمال والذكاء الاصطناعي الحديث.
-      على مدار أكثر من خمس سنوات في Otto Group اكتسبت فهماً عميقاً لتدفقات بيانات الشركات والأنظمة المالية والعمل متعدد التخصصات مع أصحاب المصلحة.
+      على مدار أكثر من خمس سنوات في OTTO Group اكتسبت فهماً عميقاً لتدفقات بيانات الشركات والأنظمة المالية والعمل متعدد التخصصات مع أصحاب المصلحة.
       اليوم أقود حلول ذكاء اصطناعي شاملة عبر عدة طبقات: من أنظمة LLM متعددة الوكلاء وخطوط زحف الأخبار المؤتمتة
       إلى نماذج التعلم العميق لرؤية الحاسوب.
       قمت ببناء هذا الموقع ونشره باستخدام AWS CDK.
@@ -92,16 +92,16 @@ experience:
     description:
       en: "20h/week on a B2B Sales Lead project from concept to MVP — reduced manual sales research workload by ~53%."
       de: "20h/Woche an einem B2B-Sales-Lead-Projekt vom Konzept bis zum MVP — manuelle Recherchearbeit um ~53% reduziert."
-      es: "20 horas a la semana en un proyecto de líder de ventas B2B desde el concepto hasta el MVP: redujo la carga de trabajo de investigación de ventas manual en aproximadamente un 53 %."
+      es: "20 horas a la semana en un proyecto de líder de ventas B2B desde el concepto hasta el MVP: reduje la carga de trabajo de investigación de ventas manual en aproximadamente un 53 %."
       ar: "20 ساعة في الأسبوع في مشروع قائد مبيعات B2B بدءًا من المفهوم وحتى MVP - تقليل عبء عمل أبحاث المبيعات اليدوية بنسبة 53% تقريبًا."
     highlights:
       - en: "Designed multi-agent architecture: LLM agents for company targeting, contact discovery, insight generation, and outreach drafting with human-in-the-loop feedback"
         de: "Multi-Agenten-Architektur entworfen: LLM-Agenten für Unternehmens-Targeting, Kontaktsuche, Insight-Generierung und Outreach-Drafting mit Human-in-the-Loop-Feedback"
-        es: "Arquitectura de múltiples agentes diseñada: agentes de LLM para la orientación de empresas, descubrimiento de contactos, generación de información y redacción de divulgación con comentarios humanos integrados."
+        es: "Diseñé una arquitectura de múltiples agentes: agentes LLM para orientación de empresas, descubrimiento de contactos, generación de información y redacción de divulgación con retroalimentación humana en el bucle."
         ar: "تصميم معماري متعدد الوكلاء: وكلاء LLM لاستهداف الشركة، واكتشاف جهات الاتصال، وتوليد الرؤية، وصياغة التوعية باستخدام تعليقات الإنسان في الحلقة"
       - en: "Built generic news-crawler pipeline with PostgreSQL 3NF + vector search; reduced sequential latency ~70× via async fan-out"
         de: "Generische News-Crawler-Pipeline mit PostgreSQL 3NF + Vector Search; sequenzielle Latenz ~70× reduziert durch asynchrone Parallelisierung"
-        es: "Construyó un canal genérico de rastreador de noticias con PostgreSQL 3NF + búsqueda vectorial; latencia secuencial reducida ~70× mediante distribución asíncrona"
+        es: "Construí un canal genérico de rastreador de noticias con PostgreSQL 3NF + búsqueda vectorial; reduje la latencia secuencial ~70× mediante distribución asíncrona"
         ar: "إنشاء خط أنابيب عام لتتبع الأخبار باستخدام PostgreSQL 3NF + بحث المتجهات؛ تقليل زمن الوصول المتسلسل ~ 70 × عبر التوزيع غير المتزامن"
     tags: ["ai", "llm", "agents", "python", "streamlit", "nlp"]
 
@@ -121,7 +121,7 @@ experience:
         ar: "برنامج ريادة الأعمال يتضمن ورش عمل وجلسات تدريبية وفعاليات لتطوير عقلية الشركات الناشئة"
       - en: "Built an AI-powered regulatory compliance tool for biotech within a team of four, streamlining processes to accelerate life-saving products to market"
         de: "KI-gestütztes Regulierungs-Compliance-Tool für Biotech im Viererteam entwickelt, um lebensrettende Produkte schneller auf den Markt zu bringen"
-        es: "Construyó una herramienta de cumplimiento normativo impulsada por IA para biotecnología dentro de un equipo de cuatro personas, optimizando los procesos para acelerar la comercialización de productos que salvan vidas."
+        es: "Construí una herramienta de cumplimiento normativo impulsada por IA para biotecnología dentro de un equipo de cuatro personas, optimizando los procesos para acelerar la comercialización de productos que salvan vidas."
         ar: "تم إنشاء أداة امتثال تنظيمية مدعومة بالذكاء الاصطناعي للتكنولوجيا الحيوية ضمن فريق مكون من أربعة أشخاص، مما أدى إلى تبسيط العمليات لتسريع طرح المنتجات المنقذة للحياة في السوق"
     tags: ["entrepreneurship", "ai", "biotech"]
 
@@ -141,7 +141,7 @@ experience:
         ar: "معسكر تدريبي مكثف وكامل: Java (Spring Boot، OOP، MongoDB، OAuth، Docker)، TypeScript، وReact المتقدم"
       - en: "Built and deployed MyRecipes — an AI-powered web app suggesting recipes from available ingredients using Java, REST APIs, MongoDB, and TDD"
         de: "MyRecipes entwickelt und deployt — KI-gestützte Web-App für Rezeptvorschläge aus vorhandenen Zutaten mit Java, REST-APIs, MongoDB und TDD"
-        es: "MyRecipes se creó e implementó: una aplicación web basada en IA que sugiere recetas a partir de ingredientes disponibles utilizando Java, API REST, MongoDB y TDD."
+        es: "Desarrollé e implementé MyRecipes: una aplicación web basada en IA que sugiere recetas a partir de ingredientes disponibles utilizando Java, API REST, MongoDB y TDD."
         ar: "إنشاء ونشر MyRecipes - تطبيق ويب مدعوم بالذكاء الاصطناعي يقترح وصفات من المكونات المتاحة باستخدام Java وREST APIs وMongoDB وTDD"
     tags: ["java", "react", "fullstack"]
 
@@ -165,11 +165,11 @@ experience:
         ar: "مشروع Capstone: نظام توصية متعدد الأهداف باستخدام Python وSQL وGCP وWord2Vec ومصفوفة الزيارة المشتركة"
     tags: ["python", "ml", "data-science"]
 
-  - company: "Otto Group"
+  - company: "OTTO Group"
     position:
       en: "Financial Accountant"
       de: "Bilanzbuchhalter"
-      es: "Contador Financiero"
+      es: "Contable Financiero"
       ar: "محاسب مالي"
     location: "Hamburg"
     startDate: "2017-04"
@@ -179,21 +179,21 @@ experience:
         de: "Robotik-Initiativen geleitet: Automatisierung der Urlaubsrückstellungs- und Zinsplanbuchungen via UiPath, Optimierung von Buchungsprozessen und analytischen Workflows mit Excel & SAP"
         es: "Lideré iniciativas de robótica: reserva automatizada de acumulaciones de vacaciones y cronogramas de intereses a través de UiPath, procesos de reserva optimizados y flujos de trabajo analíticos usando Excel y SAP."
         ar: "مبادرات الروبوتات الرائدة: الحجز الآلي لاستحقاقات الإجازات وجداول الفوائد عبر UiPath وعمليات الحجز المحسنة وسير العمل التحليلي باستخدام Excel وSAP"
-      - en: "Independently managed financial accounting for multiple Otto Group subsidiaries using SAP FI-CO"
+      - en: "Independently managed financial accounting for multiple OTTO Group subsidiaries using SAP FI-CO"
         de: "Eigenständige Finanzbuchhaltung für mehrere Otto-Tochtergesellschaften mit SAP FI-CO"
         es: "Gestioné de forma independiente la contabilidad financiera para varias filiales del Grupo Otto utilizando SAP FI-CO"
         ar: "المحاسبة المالية المُدارة بشكل مستقل للعديد من الشركات التابعة لـ OTTO Group باستخدام SAP FI-CO"
       - en: "Prepared monthly, quarterly & annual financial statements (HGB & IFRS); managed consolidation reporting in SAP BPC; main contact for external auditors"
         de: "Monats-, Quartals- und Jahresabschlüsse (HGB & IFRS) erstellt; Konsolidierungsberichterstattung in SAP BPC; Hauptansprechpartner für externe Prüfer"
-        es: "Preparación de estados financieros mensuales, trimestrales y anuales (HGB e IFRS); gestión de informes de consolidación en SAP BPC; contacto principal para auditores externos"
-        ar: "إعداد البيانات المالية الشهرية والفصلية والسنوية (HGB والمعايير الدولية لإعداد التقارير المالية) ؛ إعداد تقارير الدمج المُدارة في SAP BPC؛ جهة الاتصال الرئيسية للمدققين الخارجيين"
+        es: "Preparé los estados financieros mensuales, trimestrales y anuales (HGB e IFRS); gestioné los informes de consolidación en SAP BPC; fui el contacto principal para los auditores externos"
+        ar: "إعداد البيانات المالية الشهرية والفصلية والسنوية (HGB وIFRS) ؛ إعداد تقارير الدمج المُدارة في SAP BPC؛ جهة الاتصال الرئيسية للمدققين الخارجيين"
     tags: ["finance", "automation", "sap"]
 
-  - company: "Otto Group"
+  - company: "OTTO Group"
     position:
       en: "Intern in Group Financial Reporting"
       de: "Praktikant in der Konzernrechnungslegung"
-      es: "Pasante en Reporting Financiero del Grupo"
+      es: "Becario en Reporting Financiero del Grupo"
       ar: "متدرب في التقارير المالية للمجموعة"
     location: "Hamburg"
     startDate: "2016-11"
@@ -201,8 +201,8 @@ experience:
     highlights:
       - en: "Supported IFRS implementation, options evaluation & financial statement review; gained knowledge of group consolidation working with consulting firms"
         de: "IFRS-Implementierung unterstützt, Optionsbewertung & Jahresabschlussprüfung; Kenntnisse in Konzernkonsolidierung durch Zusammenarbeit mit Beratungsfirmen"
-        es: "Apoyé la implementación de NIIF, evaluación de opciones y revisión de estados financieros; adquirí conocimientos sobre consolidación de grupos trabajando con empresas de consultoría."
-        ar: "دعم تنفيذ المعايير الدولية لإعداد التقارير المالية وتقييم الخيارات ومراجعة البيانات المالية؛ اكتسبت المعرفة بتوحيد المجموعة من خلال العمل مع الشركات الاستشارية"
+        es: "Apoyé la implementación de IFRS, evaluación de opciones y revisión de estados financieros; adquirí conocimientos sobre consolidación de grupos trabajando con empresas de consultoría."
+        ar: "دعم تنفيذ IFRS وتقييم الخيارات ومراجعة البيانات المالية؛ اكتسبت المعرفة بتوحيد المجموعة من خلال العمل مع الشركات الاستشارية"
     tags: ["finance", "ifrs"]
 
   - company: "Private German Family"
@@ -218,7 +218,7 @@ experience:
     highlights:
       - en: "Relocated to Germany; achieved German language proficiency and cultural integration while supporting a family"
         de: "Nach Deutschland umgezogen; deutsche Sprachkompetenz und kulturelle Integration erreicht"
-        es: "Reubicado en Alemania; logró el dominio del idioma alemán y la integración cultural mientras mantenía a una familia"
+        es: "Me reubiqué en Alemania; logré el dominio del idioma alemán y la integración cultural mientras apoyaba a una familia"
         ar: "انتقل إلى ألمانيا؛ حققت إتقان اللغة الألمانية والتكامل الثقافي مع دعم الأسرة"
     tags: ["language", "cultural"]
 
@@ -235,7 +235,7 @@ experience:
     highlights:
       - en: "Served corporate and VIP clients across private and corporate banking; international trade with letters of credit and document collections"
         de: "Firmen- und VIP-Kunden im Privat- und Firmenkundenbankgeschäft betreut; internationales Geschäft mit Akkreditiven und Dokumenteninkassi"
-        es: "Atendió a clientes corporativos y VIP en banca privada y corporativa; comercio internacional con cartas de crédito y colecciones de documentos"
+        es: "Atendí a clientes corporativos y VIP en banca privada y corporativa; gestioné comercio internacional con cartas de crédito y colecciones de documentos"
         ar: "خدمة العملاء من الشركات وكبار الشخصيات عبر الخدمات المصرفية الخاصة والشركات؛ التجارة الدولية مع خطابات الاعتماد وتحصيل المستندات"
     tags: ["finance", "banking"]
 
@@ -265,7 +265,7 @@ education:
         ar: "مشروع التعلم العميق: صحة نباتات الزراعة الحضرية - خط أنابيب هرمي ثلاثي المراحل عبر بنيات ViT/CNN مع إمكانية شرح Grad-CAM وAttention Rollout"
       - en: "Coursework: Deep Learning, Computer Vision, Machine Learning, Symbolic AI, Econometrics, Empirical Research Methods, Category Management, E-Commerce Business Models, Digital Transformation, Strategic Management, Agile PM & Change Management, Data Engineering, Unix & Shell Programming"
         de: "Kurse: Deep Learning, Computer Vision, Machine Learning, Symbolische KI, Ökonometrie, Empirische Forschungsmethoden, Category Management, E-Commerce-Geschäftsmodelle, Digitale Transformation, Strategisches Management, Agiles PM & Change Management, Data Engineering, Unix & Shell"
-        es: "Trabajo del curso: aprendizaje profundo, visión por computadora, aprendizaje automático, IA simbólica, econometría, métodos de investigación empíricos, gestión de categorías, modelos de negocio de comercio electrónico, transformación digital, gestión estratégica, PM ágil y gestión de cambios, ingeniería de datos, programación Unix y Shell"
+        es: "Trabajo del curso: aprendizaje profundo, visión por computador, aprendizaje automático, IA simbólica, econometría, métodos de investigación empíricos, gestión de categorías, modelos de negocio de comercio electrónico, transformación digital, gestión estratégica, PM ágil y gestión de cambios, ingeniería de datos, programación Unix y Shell"
         ar: "الدورات الدراسية: التعلم العميق، رؤية الكمبيوتر، التعلم الآلي، الذكاء الاصطناعي الرمزي، الاقتصاد القياسي، طرق البحث التجريبية، إدارة الفئات، نماذج أعمال التجارة الإلكترونية، التحول الرقمي، الإدارة الإستراتيجية، إدارة المشاريع والتغيير الرشيقة، هندسة البيانات، برمجة Unix & Shell"
 
   - institution: "GFS Steuerfachschule"
@@ -309,8 +309,8 @@ projects:
     context:
       en: "Datalogue"
       de: "Datalogue"
-      es: "Registro de datos"
-      ar: "سجل البيانات"
+      es: "Datalogue"
+      ar: "Datalogue"
     description:
       en: "Multi-agent LLM system automating B2B sales research. Four agents (Targeting, Insights, Contact Discovery, Outreach) share state via a PostgreSQL 3NF schema; async fan-out cut latency ~10×. Reduced manual research workload by 53%."
       de: "Multi-Agenten-LLM-System für B2B-Vertriebsrecherche. Vier Agenten (Targeting, Insights, Kontaktsuche, Outreach) teilen Zustand über ein PostgreSQL-3NF-Schema; asynchrone Parallelisierung senkt die Latenz um ~10×. Manueller Recherche-Aufwand um 53 % reduziert."
@@ -395,8 +395,8 @@ projects:
     context:
       en: "neuefische DS Capstone"
       de: "neuefische DS Capstone"
-      es: "Nuevo DS Capstone"
-      ar: "جديد DS كابستون"
+      es: "neuefische DS Capstone"
+      ar: "neuefische DS Capstone"
     description:
       en: "E-commerce recommender for OTTO Kaggle — clicks, carts, orders jointly. Word2Vec embeddings + co-visitation matrices for session-based filtering; scaled on GCP with Polars/Parquet."
       de: "E-Commerce-Empfehlungssystem für OTTO-Kaggle — Klicks, Warenkörbe, Bestellungen gemeinsam. Word2Vec-Embeddings + Co-Visitation-Matrizen für sessionbasiertes Filtern; skaliert auf GCP mit Polars/Parquet."
