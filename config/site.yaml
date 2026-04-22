@@ -55,9 +55,25 @@ features:
   cv: true
 
 # --- Photos ---
+# Three photo slots, each with its own file + directory so the homepage, CV web
+# page, and CV PDFs can use different images without touching code.
+#   - homepage → hero photo on `/` (and JSON-LD + shared-element morph source)
+#   - cvPage   → hero photo on `/cv` (Editorial theme; also canonical morph target)
+#   - cvPdf    → photo embedded in ATS + Visual PDFs via Typst. On each
+#                `make cv:pdf` the configured file is copied to
+#                `scripts/typst/assets/profile-photo.png` so Typst's hardcoded
+#                template path keeps working. Typst content-sniffs so the
+#                extension on disk is cosmetic.
 photos:
-  hero: "start-photo.JPG"
-  heroDir: "/images/hero"
+  homepage:
+    file: "start-photo.JPG"
+    dir: "/images/homepage/hero"
+  cvPage:
+    file: "option-1.JPG"
+    dir: "/images/resume"
+  cvPdf:
+    file: "start-photo.JPG"
+    dir: "/images/cv"
   treatment: "bw-with-geometric-shapes"  # CSS filter + decorative shapes
 
 # --- Design Tokens (override in tailwind.config.ts) ---
@@ -127,3 +143,75 @@ cv:
 # --- Build ---
 build:
   outputDir: "out"
+
+# --- Hero / Lamp Tuning (iter-4 v5) ---
+# Four position knobs + size + wall/surface mode + animation timing + palette.
+# Edit → save → refresh the browser. In dev the YAML is re-read every request
+# so changes apply instantly. Remove the whole `hero` block to use defaults.
+#
+# Text and lamp are ALWAYS horizontally grid-centered in the right column
+# (same position the text had before the lamp existed). The x/y knobs are
+# CSS `translate(x, y)` offsets from that centered base:
+#   x > 0 → right,  x < 0 → left     (physical axis; not RTL-flipped)
+#   y > 0 → down,   y < 0 → up
+# Any CSS length works: "0", "2rem", "-1rem", "5%", "12px", etc.
+hero:
+  textBlock:
+    x: "-10%"
+    y: "15%"
+  # Mobile-only text-block translate. Defaults to (0, 0) so the name heading
+  # does not slide off the left edge at 375 px viewport. Tune independently.
+  textBlockMobile:
+    x: "0"
+    y: "0"
+  photoRelight:
+    # Master switch for photo relight overlays.
+    enabled: true
+    # Intensity presets:
+    #   subtle      -> very light localized warm response
+    #   balanced    -> natural but clearly visible (default)
+    #   pronounced  -> stylized stronger highlight
+    profile: "pronounced"
+    # Base tone handling in lit area:
+    #   keep-grayscale      -> keep fully monochrome base
+    #   slight-color-return -> restore a small amount of native color where lit
+    baseTone: "slight-color-return"
+  lamp:
+    # Base anchor point inside the hero text column. The lamp's own center-top
+    # point is attached here, then lamp.x/lamp.y are applied as deltas.
+    # Any CSS length works: "50%", "0", "12rem", "calc(50% - 2rem)", etc.
+    anchor:
+      x: "35%"
+      y: "-90%"
+    x: "0"
+    y: "0"
+    # Size of the lamp bounding box.
+    width: "60rem"
+    height: "40rem"
+    # "drop" — no wall, no horizon line. Clean bulb + beams only.
+    # "keep" — original Aceternity wall + horizon line.
+    wallMode: "keep"
+    # "background"  — beam edges fade into page bg; seamless across the
+    #                 hero/about boundary.
+    # "transparent" — raw rectangular beam edges (debug only).
+    surfaceMode: "background"
+    animation:
+      # "replay" = reveal animation each mount/refresh.
+      # "static" = render end-state immediately (best for position tuning).
+      mode: "replay"
+      # Seconds. Larger = slower reveal. Animations ALWAYS play on every
+      # page refresh (sitewide — not just the lamp).
+      durationSec: 1.6
+      delaySec: 0.3
+    palette:
+      # Low-chroma warm honey in light mode (per Linear / Stripe / Apple
+      # Intelligence light-UI practice). Any valid CSS colour works;
+      # oklch() recommended for easy L / C / H tuning.
+      light:
+        beam: "oklch(0.85 0.09 70)"   # soft honey
+        glow: "oklch(0.88 0.07 70)"   # peachy haze
+        core: "oklch(0.92 0.08 65)"   # near-white warm core
+      dark:
+        beam: "oklch(0.78 0.14 55)"
+        glow: "oklch(0.82 0.12 55)"
+        core: "oklch(0.90 0.10 55)"

@@ -1,8 +1,12 @@
 import type { CvData } from "@/lib/cv/schema";
 import { resolveCvLocaleString } from "@/lib/cv/data";
 import { getTranslations } from "next-intl/server";
+import { Download } from "lucide-react";
 import { KineticAiHero } from "./kinetic-ai-hero";
 import { CvBody } from "../shared/cv-body";
+import { CvDownloadFab } from "@/components/cv/cv-download-fab";
+import { CvDownloadCta } from "@/components/cv/cv-download-cta";
+import { getPhotoPath } from "@/lib/config";
 
 type Locale = "en" | "de" | "es" | "ar";
 
@@ -40,7 +44,9 @@ export async function KineticAiTheme({
   const t = await getTranslations("cv");
   const r = (s: Parameters<typeof resolveCvLocaleString>[0]) =>
     resolveCvLocaleString(s, locale);
-  const resolvedPhoto = photoSrc ?? data.basics.photo;
+  // site.yaml `photos.cvPage` is the canonical source for /cv page photos.
+  // Preview variants pass their own `photoSrc` to A/B different images.
+  const resolvedPhoto = photoSrc ?? getPhotoPath("cvPage");
 
   const years = yearsOfExperience(data);
   const skillCount = data.skills.reduce((n, g) => n + g.skills.length, 0);
@@ -98,21 +104,50 @@ export async function KineticAiTheme({
         maxWidthClass="max-w-6xl"
         tone="dark"
         bottomDecoration={
-          <div className="border-t border-gallery-warm/30 pt-6 font-mono">
-            <p className="text-[0.6rem] font-medium uppercase tracking-[0.35em] text-neutral-400">
-              Curriculum vitae
+          // Sidebar pull-quote in Kinetic's voice — same line as Editorial's
+          // for consistency across variants. Mono-warm label, neutral-100
+          // body, terminal-style attribution. Replaces the iter-2 "version
+          // block" which read more like a footer than an identity element.
+          <div className="border-t border-gallery-warm/30 pt-6">
+            <p className="font-mono text-[0.6rem] font-medium uppercase tracking-[0.35em] text-neutral-400">
+              In his own words
             </p>
-            <p className="mt-2 text-sm text-neutral-100">
-              v.{new Date().getFullYear()}.
-              {String(new Date().getMonth() + 1).padStart(2, "0")} ·{" "}
-              {r(data.basics.location.city)}, {r(data.basics.location.country)}
-            </p>
-            <p className="mt-4 text-[0.6rem] text-neutral-500">
-              Rendered on {new Date().toISOString().slice(0, 10)}
+            <blockquote className="mt-3 text-base italic leading-relaxed text-neutral-100">
+              &ldquo;The best AI isn&apos;t the one that dazzles in a demo — it&apos;s the
+              one that ships in the next sprint.&rdquo;
+            </blockquote>
+            <p className="mt-4 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-neutral-500">
+              — {data.basics.name} · v.{new Date().getFullYear()}.
+              {String(new Date().getMonth() + 1).padStart(2, "0")}
             </p>
           </div>
         }
       />
+
+      {/* End-of-page closing CTA — dark-tone variant. Warm button on the
+          neutral-950 surface mirrors the hero CTA so visitors recognise
+          the same affordance after scrolling through Experience. */}
+      <section className="relative">
+        <div className="mx-auto max-w-6xl px-6 pb-20 pt-4 text-center">
+          <p className="mb-5 font-mono text-[0.6rem] font-medium uppercase tracking-[0.35em] text-neutral-400">
+            Take it with you
+          </p>
+          <CvDownloadCta
+            source="footer"
+            ariaLabel={t("downloadPdf")}
+            className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-gallery-warm px-7 py-3 text-sm font-medium text-neutral-950 transition-colors hover:bg-gallery-warm/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gallery-warm focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            {t("downloadPdf")}
+          </CvDownloadCta>
+        </div>
+      </section>
+
+      {/* Page-level FAB — listens for `cv-fab:open` events from the hero
+          and footer CTAs. Gallery-warm bg works on light AND dark surfaces
+          so no tone-specific styling is needed; the panel itself uses
+          bg-background which respects the user's mode preference. */}
+      <CvDownloadFab />
     </div>
   );
 }

@@ -5,7 +5,7 @@
  * See docs/design/transitions-and-hero-exploration.md §5.
  */
 
-export type CvVariantId = "option-1" | "option-2" | "option-4" | "option-6";
+export type CvVariantId = "option-1" | "option-2" | "option-3" | "option-4" | "option-6";
 
 export interface CvPreviewVariant {
   id: CvVariantId;
@@ -13,6 +13,8 @@ export interface CvPreviewVariant {
   tagline: string;
   photoSrc: string;
   accent: string;
+  /** Optional badge shown on the picker card (e.g. "Was /cv until iter-3"). */
+  badge?: string;
 }
 
 export const cvPreviewVariants: readonly CvPreviewVariant[] = [
@@ -21,16 +23,25 @@ export const cvPreviewVariants: readonly CvPreviewVariant[] = [
     name: "Mirrored Canonical",
     tagline:
       "Canonical layout with left/right flipped and shapes rescattered — photo is full color with a subtle warm blend, not grayscale. Tests whether mirroring + color changes the read.",
-    photoSrc: "/images/hero/start-photo.JPG",
+    photoSrc: "/images/homepage/hero/start-photo.JPG",
     accent: "from-gallery-warm/40 via-gallery-warm-muted/30 to-transparent",
   },
   {
     id: "option-2",
     name: "Editorial Magazine",
     tagline:
-      "Big masthead display name with a serif accent and a horizontal metadata strip — reads like a print cover of a trade feature.",
+      "Big masthead display name with a serif accent and a horizontal metadata strip — reads like a print cover of a trade feature. Same theme as canonical /cv since iter-3 — this preview just lets you compare with a different photo.",
     photoSrc: "/images/resume/option-1.JPG",
     accent: "from-amber-200/30 via-rose-100/30 to-transparent",
+  },
+  {
+    id: "option-3",
+    name: "Classic Canonical",
+    tagline:
+      "The original canonical /cv design — photo-left B&W portrait with warm orbs and the trusted gallery aesthetic. Preserved as a preview slot in case we want to revert or A/B against the new editorial canonical.",
+    photoSrc: "/images/homepage/hero/start-photo.JPG",
+    accent: "from-gallery-warm/40 via-gallery-warm-muted/30 to-transparent",
+    badge: "Was /cv until iter-3",
   },
   {
     id: "option-4",

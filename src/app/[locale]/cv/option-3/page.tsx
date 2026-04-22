@@ -12,7 +12,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "CV Preview · Option 2 — Editorial Magazine",
+  title: "CV Preview · Option 3 — Classic Canonical",
   robots: { index: false, follow: false },
 };
 
@@ -20,5 +20,5 @@ export default async function Page({ params }: Props) {
   if (!isCvPreviewEnabled()) notFound();
   const { locale } = await params;
   setRequestLocale(locale);
-  return <PreviewRoute variantId="option-2" locale={locale as "en" | "de" | "es" | "ar"} />;
+  return <PreviewRoute variantId="option-3" locale={locale as "en" | "de" | "es" | "ar"} />;
 }

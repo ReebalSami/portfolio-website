@@ -91,6 +91,48 @@ if (variantArg && selectedVariants.length === 0) {
   process.exit(1);
 }
 
+/**
+ * Copy the `photos.cvPdf` file configured in `config/site.yaml` into
+ * `scripts/typst/assets/profile-photo.png` so Typst's hardcoded template
+ * path keeps working. Typst is content-sniff, so the `.png` filename
+ * holding JPG bytes (or vice versa) is fine. Runs once per script
+ * invocation before the first compile.
+ *
+ * This is what lets Reebal swap the CV-PDF photo by editing a single line
+ * of site.yaml without touching code or Typst templates.
+ */
+function syncCvPdfPhoto(): void {
+  const siteYamlPath = path.join(ROOT, "config/site.yaml");
+  type SiteYaml = {
+    photos?: { cvPdf?: { file?: string; dir?: string } };
+  };
+  const cfg = parseYaml(fs.readFileSync(siteYamlPath, "utf-8")) as SiteYaml;
+  const slot = cfg.photos?.cvPdf;
+  if (!slot?.file || !slot?.dir) {
+    console.warn(
+      "  Photo sync skipped: site.yaml `photos.cvPdf` is missing file/dir.",
+    );
+    return;
+  }
+  // dir is public-root-relative (e.g. "/images/cv"); strip the leading slash
+  // for filesystem joining under `public/`.
+  const normalisedDir = slot.dir.startsWith("/")
+    ? slot.dir.slice(1)
+    : slot.dir;
+  const src = path.join(ROOT, "public", normalisedDir, slot.file);
+  const dst = path.join(ROOT, "scripts/typst/assets/profile-photo.png");
+  if (!fs.existsSync(src)) {
+    console.warn(
+      `  Photo sync skipped: source file missing at ${path.relative(ROOT, src)}. Typst will use the existing asset.`,
+    );
+    return;
+  }
+  fs.copyFileSync(src, dst);
+  console.log(
+    `  Photo synced: ${path.relative(ROOT, src)} -> scripts/typst/assets/profile-photo.png`,
+  );
+}
+
 function compile(variant: Variant, locale: string): string {
   const outPath = path.join(variant.outputDir, OUTPUT_FILE);
   fs.mkdirSync(variant.outputDir, { recursive: true });
@@ -196,6 +238,13 @@ function log(check: string, passed: boolean, detail?: string) {
 // --- Main ---
 console.log("CV PDF Generator (Typst — Dual Pipeline)");
 console.log("=========================================");
+
+// Sync the CV-PDF photo from site.yaml BEFORE compiling. Skipped in verify-only
+// mode since that doesn't re-render the PDF — it only re-reads the existing
+// one. Runs once per script invocation, both variants share the synced asset.
+if (!verifyOnly) {
+  syncCvPdfPhoto();
+}
 
 let allOk = true;
 for (const variant of selectedVariants) {

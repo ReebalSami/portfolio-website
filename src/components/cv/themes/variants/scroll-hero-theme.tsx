@@ -3,6 +3,7 @@ import { resolveCvLocaleString } from "@/lib/cv/data";
 import { getTranslations } from "next-intl/server";
 import { ScrollHeroClient } from "./scroll-hero-client";
 import { CvBody } from "../shared/cv-body";
+import { getPhotoPath } from "@/lib/config";
 
 type Locale = "en" | "de" | "es" | "ar";
 
@@ -33,7 +34,9 @@ export async function ScrollHeroTheme({
   const t = await getTranslations("cv");
   const r = (s: Parameters<typeof resolveCvLocaleString>[0]) =>
     resolveCvLocaleString(s, locale);
-  const resolvedPhoto = photoSrc ?? data.basics.photo;
+  // site.yaml `photos.cvPage` is the canonical source for /cv page photos.
+  // Preview variants pass their own `photoSrc` to A/B different images.
+  const resolvedPhoto = photoSrc ?? getPhotoPath("cvPage");
 
   return (
     <div className="relative overflow-x-clip">

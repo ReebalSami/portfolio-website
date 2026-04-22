@@ -304,21 +304,23 @@ export function KineticAiHero({
               ))}
             </div>
 
-            {/* Magnetic CTA */}
+            {/* Magnetic CTA — opens the page-level <CvDownloadFab /> panel
+                via the `cv-fab:open` window event so visitors can pick ATS
+                or Visual rather than being locked into one PDF. The button
+                still feels like a download (Download icon + label) and
+                still reacts magnetically to the cursor; only the action
+                changes from "fetch one PDF" to "open the chooser". */}
             <div className="mt-10 flex items-center gap-5">
               <MagneticWrap>
                 <Button
                   size="lg"
                   className="cursor-pointer bg-gallery-warm text-neutral-950 hover:bg-gallery-warm/90"
-                  nativeButton={false}
-                  render={
-                    <a
-                      href="/cv/visual/resume_reebal_sami.pdf"
-                      download
-                      data-plausible-event="cv:download"
-                      data-plausible-event-theme="visual"
-                    />
-                  }
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent("cv-fab:open"));
+                  }}
+                  aria-label={i18n.downloadPdf}
+                  data-plausible-event="cv:download-open"
+                  data-plausible-event-source="hero"
                 >
                   <Download className="h-4 w-4 me-2" />
                   {i18n.downloadPdf}

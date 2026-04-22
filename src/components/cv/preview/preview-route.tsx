@@ -47,6 +47,19 @@ export async function PreviewRoute({ variantId, locale }: PreviewRouteProps) {
             heroTransitionName={transitionName}
           />
         );
+      case "option-3":
+        // Classic Canonical — the previously-live PortfolioGalleryTheme,
+        // preserved here as a preview slot since iter-3 swapped /cv to
+        // EditorialMagazineTheme. Lets us A/B against the new canonical
+        // without losing the original design.
+        return (
+          <PortfolioGalleryTheme
+            data={data}
+            locale={locale}
+            photoSrc={variant.photoSrc}
+            heroTransitionName={transitionName}
+          />
+        );
       case "option-4":
         return (
           <KineticAiTheme
