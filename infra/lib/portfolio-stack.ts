@@ -255,11 +255,18 @@ export class PortfolioStack extends cdk.Stack {
     });
 
     // ─── S3 Deployment (static assets) ────────────────────────────────
+    // memoryLimit: 512 — the CDK-provisioned deployment Lambda was maxing
+    // the 128 MB default (127-128/128 MB on every deploy since stack creation).
+    // PR #50's 3.7 MB asset addition crossed the ceiling → Runtime.OutOfMemory
+    // on 3 CFN retries → stack rolled back, blocking all prod deploys. See #53.
+    // 512 MB gives 4× headroom and more CPU (deploys ~60s vs ~100s);
+    // cost delta ~$0.0003 per deploy.
     new s3deploy.BucketDeployment(this, 'DeployStaticAssets', {
       sources: [s3deploy.Source.asset(staticDir)],
       destinationBucket: this.siteBucket,
       distribution: this.distribution,
       distributionPaths: ['/_next/static/*', '/images/*'],
+      memoryLimit: 512,
     });
 
     // ─── Route 53 DNS Records ─────────────────────────────────────────
