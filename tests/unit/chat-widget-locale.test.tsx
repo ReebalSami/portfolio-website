@@ -48,7 +48,7 @@ describe("ChatWidget locale transmission", () => {
 
   beforeEach(() => {
     fetchMock = vi.fn().mockResolvedValue(makeStreamingResponse(200));
-    global.fetch = fetchMock;
+    global.fetch = fetchMock as unknown as typeof fetch;
   });
 
   it("sends locale in POST body when a message is submitted", async () => {

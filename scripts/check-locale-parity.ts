@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-type JsonValue = string | number | boolean | null | JsonValue[] | Record<string, JsonValue>;
+interface JsonObject { [key: string]: JsonValue }
+type JsonValue = string | number | boolean | null | JsonValue[] | JsonObject;
 
 export function flattenKeys(obj: Record<string, JsonValue>, prefix = ""): string[] {
   return Object.entries(obj).flatMap(([k, v]) => {
