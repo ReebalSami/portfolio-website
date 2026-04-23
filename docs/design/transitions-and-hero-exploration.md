@@ -193,6 +193,18 @@ Saved from Reebal's review message. These informed the design vocabulary and are
 - **Makviesainte · Team Showcase** — https://21st.dev/community/components/makviesainte/team-showcase/default  
   Candidate treatment for the References section of the CV in a future pass.
 
+- **Kokonutd · Background Paths** — https://21st.dev/community/components/kokonutd/background-paths/default  
+  Creative reference; doesn't fit current tone but saved for future experimental work.
+
+- **Nural nose**
+https://21st.dev/community/components/aliimam/neural-noise/default
+
+- **this person makes also some nice componants to get inspired for AI and deep learning stuff**
+https://21st.dev/community/dhiluxui
+
+- **i like this one very much. i still dont know how to integrate it in my portfolio website:**
+https://21st.dev/community/components/dhiluxui/aether-flow-hero/default
+
 ---
 
 ## 7 · Decision log

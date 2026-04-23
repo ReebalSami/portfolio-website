@@ -8,7 +8,7 @@ linkedin.com/in/reebal-sami
 github.com/ReebalSami
 
 PROFILE
-Data Scientist and AI Engineer working at the intersection of business and modern AI. Over five years at Otto
+Data Scientist and AI Engineer working at the intersection of business and modern AI. Over five years at OTTO
 Group built deep fluency in corporate data flows, financial systems, and cross-functional stakeholder work. Today
 I orchestrate end-to-end AI solutions across multiple layers — from multi-agent LLM systems and automated
 news-crawler pipelines to deep-learning models for computer vision. I built and deploy this portfolio on AWS CDK.
@@ -58,18 +58,18 @@ neuefische GmbH · Hamburg
 
 Financial Accountant
 
-Otto Group · Hamburg
+OTTO Group · Hamburg
 
 2017-04 — 2022-07
 
 • Led robotics initiatives: automated booking of vacation accruals and interest schedules via UiPath, optimized booking
 processes and analytical workflows using Excel & SAP
-• Independently managed financial accounting for multiple Otto Group subsidiaries using SAP FI-CO
+• Independently managed financial accounting for multiple OTTO Group subsidiaries using SAP FI-CO
 • Prepared monthly, quarterly & annual financial statements (HGB & IFRS); managed consolidation reporting in SAP BPC;
 main contact for external auditors
 
 Intern in Group Financial Reporting
-Otto Group · Hamburg
+OTTO Group · Hamburg
 
 2016-11 — 2017-04
 

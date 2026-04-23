@@ -98,6 +98,27 @@
 #let education-force-next-page = design.at("education", default: (:)).at("force-next-page", default: false)
 #let ats-link-spacing-above = design.ats-link.at("spacing-above", default: design.section.at("sidebar-spacing-above", default: 1.6)) * 1em
 #let ats-link-justify = design.ats-link.at("justify", default: false)
+#let thank-you = design.at(
+  "thank-you",
+  default: (
+    enabled: false,
+    extra-above: 1.6,
+    greeting-size: 10.5,
+    greeting-weight: "semibold",
+    greeting-body-gap: 0.3,
+    body-size: 9.5,
+    body-signature-gap: 1.2,
+    signature-font: "Caveat",
+    signature-size: 10.5,
+    signature-weight: "regular",
+    signature-rotation-deg: -2,
+    signature-align: "center",
+  ),
+)
+#let thank-you-extra-above = thank-you.at("extra-above", default: 1.6) * 1em
+#let thank-you-greeting-body-gap = thank-you.at("greeting-body-gap", default: 0.3) * 1em
+#let thank-you-body-signature-gap = thank-you.at("body-signature-gap", default: 1.2) * 1em
+#let resolve-alignment(s) = if s == "start" { start } else if s == "end" { end } else if s == "left" { left } else if s == "right" { right } else { center }
 #let header-photo-name-gap = design.header.at("photo-name-gap", default: 0.4) * 1em
 #let header-name-title-gap = design.header.at("name-title-gap", default: 0.4) * 1em
 #let header-title-divider-gap = design.header.at("title-divider-gap", default: 0.2) * 1em
@@ -368,6 +389,35 @@
     #v(sidebar-references-extra-above)
     #sidebar-section("References")
     #text(size: f.sidebar.size * 1pt, fill: c.muted)[Available upon request]
+  ] else if id == "thank-you" [
+    #if thank-you.at("enabled", default: true) and "thankYou" in data [
+      #v(thank-you-extra-above)
+      #block(width: 100%)[
+        #set par(justify: true)
+        #text(
+          font: heading-family,
+          size: thank-you.at("greeting-size", default: 10.5) * 1pt,
+          weight: thank-you.at("greeting-weight", default: "semibold"),
+          fill: c.subsection-meta,
+        )[#r(data.thankYou.greeting)]
+        #h(thank-you-greeting-body-gap)
+        #text(
+          size: thank-you.at("body-size", default: 9.5) * 1pt,
+          fill: c.body,
+        )[#r(data.thankYou.message)]
+      ]
+      #v(thank-you-body-signature-gap)
+      #align(resolve-alignment(thank-you.at("signature-align", default: "center")))[
+        #rotate(thank-you.at("signature-rotation-deg", default: -2) * 1deg)[
+          #text(
+            font: thank-you.at("signature-font", default: "Caveat"),
+            size: thank-you.at("signature-size", default: 10.5) * 1pt,
+            weight: thank-you.at("signature-weight", default: "regular"),
+            fill: c.subsection-title,
+          )[#data.basics.name]
+        ]
+      ]
+    ]
   ] else if id == "ats-link" [
     #if design.ats-link.enabled [
       #v(ats-link-spacing-above)
