@@ -158,6 +158,13 @@ export const CvInterestSchema = z.object({
   keywords: z.array(CvLocaleStringSchema).optional(),
 });
 
+// --- Thank-You Closing (Visual CV only) ---
+
+export const CvThankYouSchema = z.object({
+  greeting: CvLocaleStringSchema,
+  message: CvLocaleStringSchema,
+});
+
 // =============================================================================
 // Top-level CV Data Schema
 // =============================================================================
@@ -175,6 +182,7 @@ export const CvDataSchema = z.object({
   references: z.array(CvReferenceSchema).optional(),
   softSkills: CvSoftSkillsSchema.optional(),
   interests: z.array(CvInterestSchema).optional(),
+  thankYou: CvThankYouSchema.optional(),
 });
 
 // =============================================================================
@@ -214,6 +222,7 @@ export type CvCertification = z.infer<typeof CvCertificationSchema>;
 export type CvReference = z.infer<typeof CvReferenceSchema>;
 export type CvSoftSkills = z.infer<typeof CvSoftSkillsSchema>;
 export type CvInterest = z.infer<typeof CvInterestSchema>;
+export type CvThankYou = z.infer<typeof CvThankYouSchema>;
 export type CvData = z.infer<typeof CvDataSchema>;
 export type CvPrivateOverlay = z.infer<typeof CvPrivateOverlaySchema>;
 export type CvLocation = z.infer<typeof CvLocationSchema>;

@@ -11,6 +11,13 @@ import readingTime from "reading-time";
 // The `/*turbopackIgnore: true*/` hint on `process.cwd()` is the officially
 // recommended escape hatch per the warning text itself.
 
+// Draft gate: in production a post with `published: false` is hidden from
+// listings, static params, and direct URLs (→ 404). In dev all posts are
+// visible so drafts can be previewed locally. Toggle `published: true` in
+// the MDX frontmatter when ready to publish.
+const isProd = process.env.NODE_ENV === "production";
+const isVisible = (published: boolean) => published || !isProd;
+
 function listMdxFiles(locale: string): string[] | null {
   const dir = path.join(
     /*turbopackIgnore: true*/ process.cwd(),
@@ -74,7 +81,7 @@ export function getAllPosts(locale = "en"): BlogPostMeta[] {
         readingTime: stats.text,
       } satisfies BlogPostMeta;
     })
-    .filter((post): post is BlogPostMeta => post !== null && post.published)
+    .filter((post): post is BlogPostMeta => post !== null && isVisible(post.published))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
@@ -84,6 +91,8 @@ export function getPostBySlug(slug: string, locale = "en"): BlogPost | null {
   if (!raw) return null;
 
   const { data, content } = matter(raw);
+  const published = data.published !== false;
+  if (!isVisible(published)) return null;
   const stats = readingTime(content);
 
   return {
@@ -92,7 +101,7 @@ export function getPostBySlug(slug: string, locale = "en"): BlogPost | null {
     description: data.description ?? "",
     date: data.date ?? "",
     tags: data.tags ?? [],
-    published: data.published !== false,
+    published,
     readingTime: stats.text,
     content,
   };
@@ -102,5 +111,14 @@ export function getAllSlugs(locale = "en"): string[] {
   const effectiveLocale = resolveLocale(locale);
   const files = listMdxFiles(effectiveLocale);
   if (!files) return [];
-  return files.map((f) => f.replace(/\.mdx$/, ""));
+  return files
+    .map((filename) => {
+      const slug = filename.replace(/\.mdx$/, "");
+      const raw = readMdxFile(effectiveLocale, filename);
+      if (!raw) return null;
+      const { data } = matter(raw);
+      const published = data.published !== false;
+      return isVisible(published) ? slug : null;
+    })
+    .filter((slug): slug is string => slug !== null);
 }

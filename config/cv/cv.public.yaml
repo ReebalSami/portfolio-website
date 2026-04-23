@@ -333,7 +333,7 @@ projects:
     tags: ["PyTorch", "timm", "ViT", "DINOv2", "Grad-CAM", "Streamlit"]
 
   - name: "Bankruptcy Early Warning"
-    date: "2024"
+    date: "2025"
     context:
       en: "M.Sc. Seminar · FH Wedel"
       de: "M.Sc. Seminar · FH Wedel"
@@ -347,7 +347,7 @@ projects:
     tags: ["Python", "scikit-learn", "XGBoost", "Random Forest", "Econometrics"]
 
   - name: "Biotech Regulatory RAG"
-    date: "2024/25"
+    date: "2024"
     context:
       en: "Future Founder Program"
       de: "Future Founder Program"
@@ -652,3 +652,33 @@ interests:
       de: "Leidenschaft für Kochen & Segeln"
       es: "Pasión por la cocina y la navegación"
       ar: "شغف الطبخ والإبحار"
+
+# --- Thank-You Closing (Visual CV only) ---
+# EN only for now; de/es/ar hold the EN text as placeholders — translate later.
+thankYou:
+  greeting:
+    en: "Thank you"
+    de: "Thank you"
+    es: "Thank you"
+    ar: "Thank you"
+  message:
+    en: >-
+      for taking the time to explore my profile. As I bring high-impact experience
+      across the full AI stack, I stay genuinely driven to go deeper, adopt what’s new,
+      and grow with every challenge I take on. I look forward to discussing how I can
+      contribute to your team.
+    de: >-
+      for taking the time to explore my profile. As I bring high-impact experience
+      across the full AI stack, I stay genuinely driven to go deeper, adopt what’s new,
+      and grow with every challenge I take on. I look forward to discussing how I can
+      contribute to your team.
+    es: >-
+      for taking the time to explore my profile. As I bring high-impact experience
+      across the full AI stack, I stay genuinely driven to go deeper, adopt what’s new,
+      and grow with every challenge I take on. I look forward to discussing how I can
+      contribute to your team.
+    ar: >-
+      for taking the time to explore my profile. As I bring high-impact experience
+      across the full AI stack, I stay genuinely driven to go deeper, adopt what’s new,
+      and grow with every challenge I take on. I look forward to discussing how I can
+      contribute to your team.

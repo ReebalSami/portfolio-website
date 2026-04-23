@@ -218,6 +218,7 @@ visual:
       - "languages"
       - "interests"
       - "references"
+      - "thank-you"
       - "ats-link"
     right-sections:                # controls section order/content on right column
       - "profile"
@@ -317,3 +318,17 @@ visual:
     label: "ATS-optimized version: https://reebal-sami.com/cv/ats/resume_reebal_sami.pdf"
     justify: false
     spacing-above: 1.6
+
+  thank-you:
+    enabled: true
+    extra-above: 1.60              # em — sidebar transition gap (matches references/ats-link rhythm)
+    greeting-size: 10.5            # pt — "Thank you" (matches job position size)
+    greeting-weight: "semibold"    # same weight as position titles
+    greeting-body-gap: 0.30        # em — space between "Thank you" and body text
+    body-size: 9.5                 # pt — matches profile summary body size
+    body-signature-gap: 1.80       # em — "a little bit more spacing" before signature
+    signature-font: "Caveat"
+    signature-size: 26           # pt — same as position title
+    signature-weight: "regular"
+    signature-rotation-deg: -1.3     # deg — subtle tilt, like blog polaroid captions
+    signature-align: "start"
