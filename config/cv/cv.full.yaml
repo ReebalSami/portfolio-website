@@ -394,7 +394,7 @@ projects:
       es: "Comercio electrónico"
       ar: "التجارة الإلكترونية"
     description:
-      en: "Full-stack e-commerce app with AI Q&A assistant grounded in product and store content. Next.js App Router, Stripe, Resend — production-deployed."
+      en: "Full-stack e-commerce app with AI Q&A assistant grounded in product and store content. Next.js App Router, Stripe, Resend — production-ready."
       de: "Full-Stack-E-Commerce-App mit KI-Q&A-Assistent auf Produkt- und Shop-Inhalten. Next.js App Router, Stripe, Resend — produktiv im Einsatz."
       es: "Aplicación de comercio electrónico completa con asistente de preguntas y respuestas de IA basado en el contenido de productos y tiendas. Next.js App Router, Stripe, Resend: implementado en producción."
       ar: "تطبيق تجارة إلكترونية متكامل مع مساعد الذكاء الاصطناعي للأسئلة والأجوبة والمرتكز على محتوى المنتج والمتجر. جهاز توجيه التطبيقات Next.js، والشريط، وإعادة الإرسال - تم نشره في مرحلة الإنتاج."
