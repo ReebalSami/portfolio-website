@@ -11,3 +11,12 @@ dependencies = [
     "pypdf>=6.4.0",
     "pytesseract>=0.3.13",
 ]
+
+[project.optional-dependencies]
+# Cover letter system — local-only MLflow tracking for per-letter metrics.
+# Install via: uv pip install -e '.[cover-letter]'
+# Scope: only needed when running `make cl:mlflow-log` / `make cl:mlflow-ui`.
+cover-letter = [
+    "mlflow>=2.18",
+    "pyyaml>=6.0",
+]

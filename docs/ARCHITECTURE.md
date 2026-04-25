@@ -217,19 +217,34 @@ In-memory rate limiting: 10 requests per IP per hour. Reset on Lambda cold start
 
 ### CV System
 
-Two PDF variants generated via **Typst** (modern typesetting engine, not Playwright/React):
+Two targets, one content source of truth. All PDFs generated via **Typst** (modern typesetting engine; no Playwright / React / headless browser):
 
-```
-config/cv/cv.public.yaml  ──→  scripts/typst/ats/cv-ats.typ     ──→  public/cv/ats/*.pdf
-config/cv/cv-design.yaml  ──→  scripts/typst/visual/cv-visual.typ ──→  public/cv/visual/*.pdf
-                           ──→  scripts/generate-cv.ts (pipeline + ATS verification)
+```mermaid
+flowchart LR
+    PUB[config/cv/cv.public.yaml<br/>git-tracked<br/>content source of truth] --> GEN[scripts/generate-cv.ts]
+    PRIV[config/cv/cv.private.yaml<br/>GITIGNORED<br/>real contact + refs overlay] -.-> GEN
+    DES[config/cv/cv-design.yaml] --> TYP
+
+    GEN -- "--source public<br/>ATS + Visual" --> TYP[Typst templates<br/>cv-ats.typ<br/>cv-visual.typ]
+    GEN -- "--source private<br/>Visual only, merged in memory" --> TYP
+
+    TYP -- public --> PDEP[public/cv/ → DEPLOYED]
+    TYP -- private --> LOC[cover-letter/cv_private/ → LOCAL ONLY]
+
+    style PRIV stroke-dasharray: 4 4
+    style PDEP fill:#D4A574,stroke:#18181B,color:#18181B
+    style LOC fill:#EDE3D6,stroke:#18181B,color:#18181B
 ```
 
-- **ATS variant**: Single-column, justified, pdftotext-verified section order
-- **Visual variant**: Two-column sidebar, photo, warm design tokens
-- **Root fix**: `par(spacing: 0pt)` + `block(above: 0pt, below: 0pt)` globally — all spacing from YAML tokens
-- **Web view**: `/[locale]/cv` renders `PortfolioGalleryTheme` (React) + `CvDownloadFab` with both PDF links
-- **Content updates**: edit YAML → `make cv:all` → `make deploy`
+- **Public content source**: `cv.public.yaml` holds every job, education entry, skill, project, and interest for the deployed CV.
+- **Private content source**: `cv.full.yaml` (git-tracked, safe-for-public-repo) is a manually-parity-enforced mirror of `cv.public.yaml` with application-specific wording (e.g. “my portfolio” instead of “this portfolio”) and a references skeleton. `cv.private.yaml` (gitignored) overlays contact-style fields (email, phone, address, reference contacts) — it never rewords career content.
+- **ATS layout**: single-column, justified, `pdftotext`-verified section order + expected email check.
+- **Visual layout**: two-column sidebar, photo, warm design tokens.
+- **Public target** (`make cv:all`): obfuscated `contact@reebal-sami.com`, no phone, no address, no references; deployed at `/cv/{ats,visual}`. `make cv:all` additionally runs the private target if `config/cv/cv.private.yaml` exists locally — so one command keeps all three PDFs in sync.
+- **Private target** (`make cv:private`): merges `cv.full.yaml` + `cv.private.yaml` in memory → Visual-only PDF at `cover-letter/cv_private/resume_reebal_sami.pdf`; gitignored (via `cover-letter/**`), never deployed. Use this when sending a CV directly to a recruiter.
+- **Root fix**: `par(spacing: 0pt)` + `block(above: 0pt, below: 0pt)` globally — all spacing from YAML tokens.
+- **Web view**: `/[locale]/cv` renders `PortfolioGalleryTheme` (React) + `CvDownloadFab` with both public PDF links.
+- **Content updates**: edit `cv.public.yaml` (and mirror career-content changes into `cv.full.yaml` if the private CV should also pick them up) → `make cv:all` → `make deploy`. `cv:all` regenerates public + private (if `cv.private.yaml` is present), so no separate re-run is needed.
 
 ### SEO
 
@@ -238,3 +253,59 @@ config/cv/cv-design.yaml  ──→  scripts/typst/visual/cv-visual.typ ──�
 - Dynamic OG image generation (`opengraph-image.tsx`)
 - `sitemap.xml` and `robots.txt` generated at build time
 - Canonical URLs per locale
+
+## Cover Letter System
+
+Story-first cover letter generator that runs entirely inside Cascade (Windsurf) / Claude Code, renders to single-page A4 PDF via Typst, and logs every run to local MLflow for trend analysis. The whole subsystem is **gitignored** and local-only — see `cover-letter/README.md` for the full spec.
+
+### System map
+
+```mermaid
+flowchart TB
+    USER[User<br/>job URL or pasted ad]
+    USER --> BOOT[New-conversation<br/>boot prompt<br/>cover-letter/NEW-CONVERSATION.md]
+    BOOT --> SKILL{{cover-letter<br/>skill}}
+
+    SKILL --> P1[1 Research<br/>WebFetch + search]
+    P1 --> P2[2 Analysis<br/>fit matrix + hooks]
+    P2 --> P3[3 Interview 1<br/>hook material — MANDATORY]
+    P3 --> P4[4 Draft v1<br/>pure story, no style guides]
+    P4 --> P5[5 Interview 2<br/>directional choices — MANDATORY]
+    P5 --> P6[6 Draft v2<br/>polish with style guides + ATS]
+    P6 --> P7[7 Critique — 4 parallel subagents]
+    P7 --> P8[8 Revise<br/>draft-v3]
+    P8 --> P9[9 Finalize<br/>score + MLflow log]
+    P9 --> P10[10 Render + verify + ADR check]
+    P10 --> PDF[final.pdf<br/>single A4 page]
+    P9 -.-> MLF[(MLflow local<br/>SQLite + artifacts)]
+
+    P7 -.-> C1[pattern-detector]
+    P7 -.-> C2[specificity-enforcer]
+    P7 -.-> C3[voice-checker]
+    P7 -.-> C4[story-harmony-checker]
+
+    style PDF fill:#D4A574,stroke:#18181B,color:#18181B
+    style BOOT fill:#EDE3D6,stroke:#18181B,color:#18181B
+```
+
+### Integration points with the rest of the system
+
+- **CV data reuse**: cover letter Typst template reads `config/cv/cv.public.yaml` (name / title / location) + `config/cv/cv.private.yaml` (real email / phone) directly. No duplication.
+- **Design token reuse**: `cover-letter/config/letter-design.yaml` shares font families (Archivo / Space Grotesk / Caveat) with the CV's `cv-design.yaml` — visually consistent brand.
+- **Gitignore boundary**: the entire `cover-letter/` tree is gitignored (see root `.gitignore`). Same for `.claude/skills/cover-letter/`, `.claude/agents/cover-letter-*.md`, and all of `.windsurf/`.
+- **Deploy safety**: Typst compiles to PDF; there is no Next.js route, so the cover letter cannot accidentally be deployed (unlike an HTML route which would need a 404 guard).
+
+### Key subsystems
+
+- **Four parallel critics** (`.claude/agents/cover-letter-*.md`): pattern-detector, specificity-enforcer, voice-checker, story-harmony-checker. Each emits `scores-*.json`; aggregator rolls up into `scores.json`.
+- **MLflow tracking** (ADR-002): SQLite backend at `cover-letter/mlruns/mlflow.db`, artifacts at `cover-letter/mlruns/artifacts/`. Install via `make cl:mlflow-setup` (one command, uses `uv`). Log runs via `make cl:mlflow-log`. UI via `make cl:mlflow-ui` on `:5000`.
+- **ADR system** (`cover-letter/decisions/`): every non-trivial system decision is an ADR. `REVIEW_TRIGGERS.yaml` tells `make cl:adr-check` when to re-examine each one. Stale ADRs surface during Phase 10 of letter generation.
+- **LinkedIn DMA integration** (EU self-serve): pulls your own LinkedIn data via the DMA Member Data Portability API. Pinned to `LinkedIn-Version: 202312`. See `cover-letter/README.md` §LinkedIn for details.
+
+### Why this is architecturally safe
+
+The cover letter system touches many files but carefully respects boundaries:
+- Read-only on `config/cv/*.yaml` (no mutations to CV data)
+- Read-only on `scripts/typst/shared/locale.typ` (imports the helper, doesn't change it)
+- Own templates / design tokens / scripts / Makefile fragment (`cover-letter/local.mk` loaded via `-include` from root `Makefile`)
+- Own gitignored output tree — no interference with `public/cv/` deployed assets

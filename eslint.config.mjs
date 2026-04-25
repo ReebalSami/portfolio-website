@@ -18,6 +18,8 @@ const eslintConfig = defineConfig([
     ".deploy/**",
     // Python virtualenv (mirrors .gitignore; can exist locally for CV tooling)
     ".venv/**",
+    // Cover letter system is gitignored and local-only; do not lint.
+    "cover-letter/**",
   ]),
 ]);
 

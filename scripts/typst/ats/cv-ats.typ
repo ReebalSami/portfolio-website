@@ -8,7 +8,10 @@
 // =============================================================================
 
 // --- Data + Config ---
-#let data = yaml("../../../config/cv/cv.public.yaml")
+// Data path is overrideable via `--input data=<workspace-relative-path>`.
+// Default is the public CV. The generator passes a merged YAML when --source full.
+#let data-path = sys.inputs.at("data", default: "config/cv/cv.public.yaml")
+#let data = yaml("/" + data-path)
 #let design = yaml("../../../config/cv/cv-design.yaml").ats
 #let locale = if sys.inputs.at("locale", default: none) != none { sys.inputs.locale } else { "en" }
 
@@ -316,15 +319,29 @@
       ]
       #v(header-title-contact-gap)
       #set text(size: f.meta.size * 1pt, fill: c.header-contact)
-      #grid(
-        columns: (1fr, 1fr),
-        row-gutter: header-contact-row-gap,
-        [#data.basics.email],
-        [linkedin.com/in/reebal-sami],
-        [#r(data.basics.location.city), #r(data.basics.location.country)],
-        [github.com/ReebalSami],
-        [reebal-sami.com], [],
-      )
+      #let has-phone = data.basics.at("phone", default: "") != ""
+      #if has-phone [
+        #grid(
+          columns: (1fr, 1fr),
+          row-gutter: header-contact-row-gap,
+          [#data.basics.email],
+          [linkedin.com/in/reebal-sami],
+          [#data.basics.phone],
+          [github.com/ReebalSami],
+          [#r(data.basics.location.city), #r(data.basics.location.country)],
+          [reebal-sami.com],
+        )
+      ] else [
+        #grid(
+          columns: (1fr, 1fr),
+          row-gutter: header-contact-row-gap,
+          [#data.basics.email],
+          [linkedin.com/in/reebal-sami],
+          [#r(data.basics.location.city), #r(data.basics.location.country)],
+          [github.com/ReebalSami],
+          [reebal-sami.com], [],
+        )
+      ]
     ],
   )
 ]
@@ -462,4 +479,26 @@
 // REFERENCES
 // =============================================================================
 #section-start("References", extra-gap: references-extra-above, gap-mode: "max")
-#text(size: f.meta.size * 1pt, fill: c.subsection-meta)[Available upon request]
+#let refs = data.at("references", default: ())
+#if refs.len() > 0 [
+  #for (idx, ref) in refs.enumerate() [
+    #block[
+      #text(weight: "bold", size: f.meta.size * 1pt, fill: c.dark)[#ref.name]
+      #if "position" in ref [
+        #linebreak()
+        #text(size: f.meta.size * 1pt, fill: c.dark)[#ref.position]
+      ]
+      #if "phone" in ref [
+        #linebreak()
+        #text(size: f.meta.size * 1pt, fill: c.dark)[T: #ref.phone]
+      ]
+      #if "email" in ref [
+        #linebreak()
+        #text(size: f.meta.size * 1pt, fill: c.dark)[E: #ref.email]
+      ]
+    ]
+    #if idx < refs.len() - 1 [ #v(0.5em) ]
+  ]
+] else [
+  #text(size: f.meta.size * 1pt, fill: c.subsection-meta)[Available upon request]
+]

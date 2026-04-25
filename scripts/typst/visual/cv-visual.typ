@@ -8,7 +8,10 @@
 // =============================================================================
 
 // --- Data + Config ---
-#let data = yaml("../../../config/cv/cv.public.yaml")
+// Data path is overrideable via `--input data=<workspace-relative-path>`.
+// Default is the public CV. The generator passes a merged YAML when --source full.
+#let data-path = sys.inputs.at("data", default: "config/cv/cv.public.yaml")
+#let data = yaml("/" + data-path)
 #let design = yaml("../../../config/cv/cv-design.yaml").visual
 #let locale = if sys.inputs.at("locale", default: none) != none { sys.inputs.locale } else { "en" }
 
@@ -94,9 +97,38 @@
 #let interests-description-after = subsection.at("interests-description-after", default: 0) * 1em
 #let sidebar-key-strengths-extra-above = design.section.at("sidebar-key-strengths-extra-above", default: 0) * 1em
 #let sidebar-references-extra-above = design.section.at("sidebar-references-extra-above", default: 0) * 1em
+
+// ---------------------------------------------------------------------------
+// Private-only layout overrides
+// ---------------------------------------------------------------------------
+// When `make cv:private` runs, generate-cv.ts passes --input variant=private.
+// Public rendering takes the ELSE branch of every `if is-private` in this
+// template, so the public / deployed Visual CV is byte-identical to HEAD
+// regardless of any value under `visual.private-overrides` in cv-design.yaml.
+#let is-private = sys.inputs.at("variant", default: "public") == "private"
+#let priv-overrides = design.at("private-overrides", default: (:))
+#let priv-section = priv-overrides.at("section", default: (:))
+#let priv-thank = priv-overrides.at("thank-you", default: (:))
+#let priv-ats-link = priv-overrides.at("ats-link", default: (:))
+
+// Direct-gap override helpers. Given a key and a public baseline (em), return
+// the FINAL em spacing to use at that site. For public rendering this is
+// always the public baseline (no override). For private, the baseline is
+// replaced by the `gap` value from cv-design.yaml if present.
+#let base-sidebar-gap = design.section.at("sidebar-spacing-above", default: 1.6)
+#let sidebar-ks-gap = (if is-private and "sidebar-key-strengths-gap" in priv-section { priv-section.at("sidebar-key-strengths-gap") } else { base-sidebar-gap }) * 1em
+#let sidebar-lang-gap = (if is-private and "sidebar-languages-gap" in priv-section { priv-section.at("sidebar-languages-gap") } else { base-sidebar-gap }) * 1em
+#let sidebar-int-gap = (if is-private and "sidebar-interests-gap" in priv-section { priv-section.at("sidebar-interests-gap") } else { base-sidebar-gap }) * 1em
+// For References the public total is sidebar-spacing-above + sidebar-references-extra-above.
+#let base-refs-gap = base-sidebar-gap + design.section.at("sidebar-references-extra-above", default: 0)
+#let sidebar-refs-gap = (if is-private and "sidebar-references-gap" in priv-section { priv-section.at("sidebar-references-gap") } else { base-refs-gap }) * 1em
 #let main-key-strengths-extra-above = design.section.at("main-key-strengths-extra-above", default: 0) * 1em
 #let education-force-next-page = design.at("education", default: (:)).at("force-next-page", default: false)
-#let ats-link-spacing-above = design.ats-link.at("spacing-above", default: design.section.at("sidebar-spacing-above", default: 1.6)) * 1em
+#let ats-link-spacing-above = (if is-private and "spacing-above" in priv-ats-link {
+  priv-ats-link.at("spacing-above")
+} else {
+  design.ats-link.at("spacing-above", default: design.section.at("sidebar-spacing-above", default: 1.6))
+}) * 1em
 #let ats-link-justify = design.ats-link.at("justify", default: false)
 #let thank-you = design.at(
   "thank-you",
@@ -115,10 +147,23 @@
     signature-align: "center",
   ),
 )
-#let thank-you-extra-above = thank-you.at("extra-above", default: 1.6) * 1em
+#let thank-you-extra-above = (if is-private and "extra-above" in priv-thank {
+  priv-thank.at("extra-above")
+} else {
+  thank-you.at("extra-above", default: 1.6)
+}) * 1em
 #let thank-you-greeting-body-gap = thank-you.at("greeting-body-gap", default: 0.3) * 1em
-#let thank-you-body-signature-gap = thank-you.at("body-signature-gap", default: 1.2) * 1em
+#let thank-you-body-signature-gap = (if is-private and "body-signature-gap" in priv-thank {
+  priv-thank.at("body-signature-gap")
+} else {
+  thank-you.at("body-signature-gap", default: 1.2)
+}) * 1em
 #let resolve-alignment(s) = if s == "start" { start } else if s == "end" { end } else if s == "left" { left } else if s == "right" { right } else { center }
+#let signature-align-effective = if is-private and "signature-align" in priv-thank {
+  priv-thank.at("signature-align")
+} else {
+  thank-you.at("signature-align", default: "center")
+}
 #let header-photo-name-gap = design.header.at("photo-name-gap", default: 0.4) * 1em
 #let header-name-title-gap = design.header.at("name-title-gap", default: 0.4) * 1em
 #let header-title-divider-gap = design.header.at("title-divider-gap", default: 0.2) * 1em
@@ -328,6 +373,9 @@
     #sidebar-section("Contact")
     #set text(size: f.sidebar.size * 1pt, fill: c.body)
     #contact-line(data.basics.email)
+    #if data.basics.at("phone", default: "") != "" [
+      #contact-line[#data.basics.phone]
+    ]
     #contact-line[#r(data.basics.location.city), #r(data.basics.location.country)]
     #contact-line[reebal-sami.com]
     #contact-line[linkedin.com/in/reebal-sami]
@@ -349,6 +397,7 @@
       ]
     ]
   ] else if id == "key-strengths" [
+    #v(sidebar-ks-gap - base-sidebar-gap * 1em)
     #sidebar-section("Key Strengths")
     #set text(size: f.sidebar.size * 0.95 * 1pt, fill: c.body)
     #set list(spacing: bullet-between-gap)
@@ -356,6 +405,7 @@
       - #ss
     ]
   ] else if id == "languages" [
+    #v(sidebar-lang-gap - base-sidebar-gap * 1em)
     #sidebar-section("Languages")
     #for lang in data.languages [
       #block(below: sidebar-languages-item-below)[
@@ -365,6 +415,7 @@
       ]
     ]
   ] else if id == "interests" [
+    #v(sidebar-int-gap - base-sidebar-gap * 1em)
     #sidebar-section("Hobbies & Interests")
     #for interest in data.interests [
       #block(above: interests-item-above, below: interests-item-below)[
@@ -386,9 +437,31 @@
       ]
     ]
   ] else if id == "references" [
-    #v(sidebar-references-extra-above)
+    #v(sidebar-refs-gap - base-sidebar-gap * 1em)
     #sidebar-section("References")
-    #text(size: f.sidebar.size * 1pt, fill: c.muted)[Available upon request]
+    #let refs = data.at("references", default: ())
+    #if refs.len() > 0 [
+      #for (idx, ref) in refs.enumerate() [
+        #block[
+          #text(weight: "semibold", size: f.sidebar.size * 1pt, fill: c.heading)[#ref.name]
+          #if "position" in ref [
+            #linebreak()
+            #text(size: 8.5pt, fill: c.muted)[#ref.position]
+          ]
+          #if "phone" in ref [
+            #linebreak()
+            #text(size: 8.5pt, fill: c.muted)[T: #ref.phone]
+          ]
+          #if "email" in ref [
+            #linebreak()
+            #text(size: 8.5pt, fill: c.muted)[E: #ref.email]
+          ]
+        ]
+        #if idx < refs.len() - 1 [ #v(0.5em) ]
+      ]
+    ] else [
+      #text(size: f.sidebar.size * 1pt, fill: c.muted)[Available upon request]
+    ]
   ] else if id == "thank-you" [
     #if thank-you.at("enabled", default: true) and "thankYou" in data [
       #v(thank-you-extra-above)
@@ -407,11 +480,16 @@
         )[#r(data.thankYou.message)]
       ]
       #v(thank-you-body-signature-gap)
-      #align(resolve-alignment(thank-you.at("signature-align", default: "center")))[
+      #align(resolve-alignment(signature-align-effective))[
         #rotate(thank-you.at("signature-rotation-deg", default: -2) * 1deg)[
+          #let signature-size-effective = if is-private and "signature-size" in priv-thank {
+            priv-thank.at("signature-size")
+          } else {
+            thank-you.at("signature-size", default: 10.5)
+          }
           #text(
             font: thank-you.at("signature-font", default: "Caveat"),
-            size: thank-you.at("signature-size", default: 10.5) * 1pt,
+            size: signature-size-effective * 1pt,
             weight: thank-you.at("signature-weight", default: "regular"),
             fill: c.subsection-title,
           )[#data.basics.name]

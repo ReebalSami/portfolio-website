@@ -312,7 +312,7 @@ projects:
       es: "Datalogue"
       ar: "Datalogue"
     description:
-      en: "Multi-agent LLM system automating B2B sales research. Four agents (Targeting, Insights, Contact Discovery, Outreach) share state via a PostgreSQL 3NF schema; async fan-out cut latency ~10×. Reduced manual research workload by 53%."
+      en: "Multi-agent LLM system automating B2B sales research. Four agents (Targeting, Insights, Contact Discovery, Outreach) share state via a PostgreSQL 3NF schema; async fan-out cut latency ~10×. Reduced manual research workload by ~53%."
       de: "Multi-Agenten-LLM-System für B2B-Vertriebsrecherche. Vier Agenten (Targeting, Insights, Kontaktsuche, Outreach) teilen Zustand über ein PostgreSQL-3NF-Schema; asynchrone Parallelisierung senkt die Latenz um ~10×. Manueller Recherche-Aufwand um 53 % reduziert."
       es: "Sistema LLM multiagente que automatiza la investigación de ventas B2B. Cuatro agentes (Targeting, Insights, Contact Discovery, Outreach) comparten el estado a través de un esquema PostgreSQL 3NF; Latencia de corte de distribución asíncrona ~10×. Reducción de la carga de trabajo de investigación manual en un 53%."
       ar: "نظام LLM متعدد الوكلاء لأتمتة أبحاث مبيعات B2B. أربعة وكلاء (الاستهداف، والرؤى، واكتشاف جهات الاتصال، والتواصل) يتشاركون الحالة عبر مخطط PostgreSQL 3NF؛ زمن وصول قطع المروحة غير المتزامن ~ 10 ×. تقليل عبء العمل البحثي اليدوي بنسبة 53%."
