@@ -1,5 +1,9 @@
 .PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate cv\:validate cv\:pdf cv\:pdf-quick cv\:all cv\:ats cv\:visual cv\:verify cv\:private cv\:private\:clean build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
 
+# Local-only cover letter system (gitignored). Hook is a no-op when the file
+# is absent, so this is safe to commit even though the target file is not.
+-include cover-letter/local.mk
+
 install:
 	pnpm install
 
