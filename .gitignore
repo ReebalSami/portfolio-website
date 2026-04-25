@@ -7,8 +7,16 @@ photo/
 .env.*.local
 config/cv/cv.private.yaml
 config/cv/cover-letters/
-generated/
 BRAINSTORMING_CV_SYSTEM.md
+
+# Cover Letter Generation System — fully local per user requirement
+# Includes: profile data, job applications, generated PDFs, Typst template,
+# skills, subagents, and local Makefile hooks. Nothing cover-letter-related
+# may ever hit GitHub.
+cover-letter/
+linked-in-job.md
+.claude/skills/cover-letter/
+.claude/agents/cover-letter-*.md
 
 # =============================================================================
 # AI / Build tooling (not for public repo)
