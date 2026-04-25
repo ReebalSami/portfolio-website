@@ -192,6 +192,7 @@ export const CvDataSchema = z.object({
 export const CvPrivateOverlaySchema = z.object({
   basics: z
     .object({
+      email_personal: z.email().optional(),
       phone: z.string().optional(),
       location: z
         .object({

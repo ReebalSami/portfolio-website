@@ -1,4 +1,8 @@
-.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate cv\:validate cv\:pdf cv\:pdf-quick cv\:all cv\:ats cv\:visual cv\:verify build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
+.PHONY: install dev build start lint format test test\:watch test\:e2e clean config\:validate cv\:validate cv\:pdf cv\:pdf-quick cv\:all cv\:ats cv\:visual cv\:verify cv\:private cv\:private\:clean build\:deploy diagram deploy\:diff deploy\:preview deploy\:prod deploy env\:setup
+
+# Local-only cover letter system (gitignored). Hook is a no-op when the file
+# is absent, so this is safe to commit even though the target file is not.
+-include cover-letter/local.mk
 
 install:
 	pnpm install
@@ -50,7 +54,12 @@ cv\:pdf-quick:
 cv\:all:
 	@echo "📄 Generating both ATS + Visual CV PDFs..."
 	pnpm tsx scripts/generate-cv.ts
-	@echo "✅ Both CVs generated"
+	@echo "✅ Both public CVs generated"
+	@if [ -f config/cv/cv.private.yaml ]; then \
+		$(MAKE) --no-print-directory cv:private; \
+	else \
+		echo "ℹ️  Skipping private CV (config/cv/cv.private.yaml not found — local-only file)"; \
+	fi
 
 cv\:ats:
 	@echo "📄 Generating ATS CV PDF..."
@@ -66,6 +75,21 @@ cv\:verify:
 	@echo "🔍 Verifying ATS CV text extraction..."
 	pnpm tsx scripts/generate-cv.ts --variant ats --verify
 	@echo "✅ Verification complete"
+
+# --- CV Private Variant (merges cv.full.yaml + cv.private.yaml; visual only) ---
+# Output: cover-letter/cv_private/resume_reebal_sami.pdf — gitignored, LOCAL ONLY.
+# Requires: config/cv/cv.private.yaml (gitignored) to exist locally.
+# Use this when sending a CV directly to a recruiter (not via the public website).
+
+cv\:private:
+	@echo "📄 Generating Visual PRIVATE CV PDF (cv.full.yaml + cv.private.yaml merge)..."
+	pnpm tsx scripts/generate-cv.ts --source private
+	@echo "✅ Private CV at cover-letter/cv_private/resume_reebal_sami.pdf (gitignored)"
+
+cv\:private\:clean:
+	@echo "🧹 Removing cover-letter/cv_private/ (private CV outputs + merged YAML)..."
+	rm -rf cover-letter/cv_private
+	@echo "✅ Cleaned"
 
 env\:setup:
 	@if command -v volta >/dev/null 2>&1; then \

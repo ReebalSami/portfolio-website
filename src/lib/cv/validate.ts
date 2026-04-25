@@ -5,24 +5,19 @@ import { loadCvData, loadCvPrivateData } from "./data";
  * Run via: make cv:validate
  */
 function validate() {
-  const variants = ["public", "full"] as const;
   let hasErrors = false;
 
-  for (const variant of variants) {
-    try {
-      const data = loadCvData(variant);
-      console.log(
-        `✅ config/cv/cv.${variant}.yaml — valid (${data.experience.length} experience entries, ${data.education.length} education entries)`
-      );
-    } catch (error) {
-      console.error(
-        `❌ config/cv/cv.${variant}.yaml — FAILED`
-      );
-      console.error(
-        error instanceof Error ? error.message : String(error)
-      );
-      hasErrors = true;
-    }
+  try {
+    const data = loadCvData();
+    console.log(
+      `✅ config/cv/cv.public.yaml — valid (${data.experience.length} experience entries, ${data.education.length} education entries)`
+    );
+  } catch (error) {
+    console.error("❌ config/cv/cv.public.yaml — FAILED");
+    console.error(
+      error instanceof Error ? error.message : String(error)
+    );
+    hasErrors = true;
   }
 
   try {

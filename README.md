@@ -76,12 +76,15 @@ make deploy:preview # Deploy preview stage
 make deploy:prod   # Deploy production
 make diagram       # Render D2 architecture diagram
 make config:validate # Validate config/site.yaml
-make cv:all        # Generate ATS + Visual CV PDFs (Typst)
-make cv:ats        # Generate ATS CV only + verify
-make cv:visual     # Generate Visual CV only
-make cv:verify     # Verify ATS text extraction
+make cv:all        # Generate PUBLIC ATS + Visual CV PDFs (deployed), plus PRIVATE Visual CV if config/cv/cv.private.yaml exists
+make cv:ats        # Generate public ATS CV only + verify
+make cv:visual     # Generate public Visual CV only
+make cv:verify     # Verify public ATS text extraction
 make cv:validate   # Validate CV YAML data
+make cv:private    # Generate PRIVATE Visual CV (real contact info, LOCAL ONLY)
 ```
+
+Cover letter system commands are local-only (gitignored); see the dedicated section below.
 
 ## Configuration
 
@@ -193,31 +196,119 @@ All three register into a shared `GalleryProvider` via the `useBlogGalleryItem` 
 
 ## CV System
 
-Two CV PDF variants generated via **Typst** (typesetting engine):
+Two outputs, one source of truth. All PDFs are generated via **Typst** (typesetting engine).
 
-| Variant | Layout | Purpose | Output |
-|---------|--------|---------|--------|
-| **ATS** | Single-column | Machine parsing & ATS systems | `public/cv/ats/resume_reebal_sami.pdf` |
-| **Visual** | Two-column sidebar | Human reading & sharing | `public/cv/visual/resume_reebal_sami.pdf` |
+| Target | Source YAML(s) | Layouts | Output | Deployed? |
+|--------|----------------|---------|--------|-----------|
+| `make cv:all` | `cv.public.yaml` (+ private chain below if local file present) | ATS + Visual | `public/cv/{ats,visual}/resume_reebal_sami.pdf` | **Yes** (at `/cv`) |
+| `make cv:private` | `cv.full.yaml` + `cv.private.yaml` | Visual only | `cover-letter/cv_private/resume_reebal_sami.pdf` | No — gitignored |
+
+The public CV uses an obfuscated contact (`contact@reebal-sami.com`) and has no phone, no address, no references. The private CV merges `cv.full.yaml` (git-tracked mirror of `cv.public.yaml` with application-specific wording — e.g. “my portfolio” instead of “this portfolio” — plus a references skeleton) with `cv.private.yaml` (gitignored) which provides the real email, phone, address, and full reference contacts. Use it when sending a CV directly to a recruiter.
+
+`make cv:all` runs both: the two public PDFs always regenerate, and the private PDF regenerates only if `config/cv/cv.private.yaml` exists locally — so the target is safe to run on any clone of this repo.
 
 ### Architecture
 
-```
-config/cv/cv.public.yaml    → CV content data (YAML, i18n-ready)
-config/cv/cv-design.yaml    → Design tokens (colors, fonts, spacing)
-scripts/typst/ats/cv-ats.typ    → ATS Typst template
-scripts/typst/visual/cv-visual.typ → Visual Typst template
-scripts/generate-cv.ts      → Build pipeline (compile + verify)
+```mermaid
+flowchart LR
+    PUB[config/cv/cv.public.yaml<br/>git-tracked<br/>content source of truth] --> GEN[scripts/generate-cv.ts]
+    PRIV[config/cv/cv.private.yaml<br/>GITIGNORED<br/>real contact + refs overlay] -.-> GEN
+    DES[config/cv/cv-design.yaml] --> TYP
+
+    GEN -- "--source public<br/>both ATS + Visual" --> TYP[Typst<br/>cv-ats.typ<br/>cv-visual.typ]
+    GEN -- "--source private<br/>Visual only, merged in memory" --> TYP
+
+    TYP -- public --> DEPLOY[public/cv/&#123;ats,visual&#125;/<br/>DEPLOYED to site]
+    TYP -- private --> LOCAL[cover-letter/cv_private/<br/>LOCAL ONLY]
+
+    style PRIV stroke-dasharray: 4 4
+    style DEPLOY fill:#D4A574,stroke:#18181B,color:#18181B
+    style LOCAL fill:#EDE3D6,stroke:#18181B,color:#18181B
 ```
 
-### Key Design Decisions
+### Key design decisions
 
-- **All spacing controlled by YAML tokens** — `par(spacing: 0pt)` and `block(above: 0pt, below: 0pt)` kill Typst defaults; every gap is explicit
-- **ATS verification** — `pdftotext` extraction checked for correct section order, key content presence
-- **Meta lines** styled with accent color (`#D4A574`) and max font weight
-- **Justified text** in both templates
-- **Locale routing** — shared helpers in `scripts/typst/shared/locale.typ`; all four locales (EN / DE / ES / AR) fully populated in both `cv.public.yaml` and `cv.full.yaml`
-- **Content changes**: edit `config/cv/cv.public.yaml`, run `make cv:all`, then `make deploy`
+- **Single source of truth for content**: `cv.public.yaml` holds every job, education entry, skill, project, and interest. The private overlay only adds contact-style fields — it never rewords career content.
+- **Private is Visual-only**: there is no private ATS variant. ATS is for machine parsing of the deployed public CV; direct applications go out as a Visual CV paired with a cover letter.
+- **All spacing controlled by YAML tokens** — `par(spacing: 0pt)` and `block(above: 0pt, below: 0pt)` kill Typst defaults; every gap is explicit.
+- **ATS verification** — `pdftotext` extraction checked for correct section order, key content presence, and the expected email.
+- **Meta lines** styled with accent color (`#D4A574`) and max font weight.
+- **Justified text** in both templates.
+- **Locale routing** — shared helpers in `scripts/typst/shared/locale.typ`; all four locales (EN / DE / ES / AR) fully populated in `cv.public.yaml`.
+- **Content changes**: edit `config/cv/cv.public.yaml` (and mirror into `cv.full.yaml` if the change should also apply to the private CV), run `make cv:all`, then `make deploy`. `cv:all` regenerates both public PDFs and — when `cv.private.yaml` exists — the private PDF too.
+
+### Generating the CV
+
+```bash
+# Public variants (deployed at reebal-sami.com/cv)
+make cv:all
+make cv:ats              # public ATS only (with verify)
+make cv:visual           # public Visual only
+make cv:verify           # re-verify public ATS text extraction
+
+# Private variant for direct job applications (LOCAL ONLY; merges cv.private.yaml)
+make cv:private          # Visual only → cover-letter/cv_private/resume_reebal_sami.pdf
+make cv:private:clean    # wipe cover-letter/cv_private/
+
+# Prerequisite for cv:private: create config/cv/cv.private.yaml (gitignored) once.
+# Required keys:
+#   basics.email_personal, basics.phone, basics.location.{address,postalCode},
+#   references[] with name/position/company/relation/phone/email/visibility.
+```
+
+## Cover Letter System (local only)
+
+Story-first, ATS-aware, AI-tell-free cover-letter generator. Runs in **Cascade** (Windsurf) or **Claude Code**, renders to single-page A4 PDF via Typst, logs every run to local MLflow for trend analysis. The entire `cover-letter/` directory (including generated PDFs, skills, subagents, and private profile data) is **gitignored** and never committed.
+
+### High-level flow
+
+```mermaid
+flowchart LR
+    AD[Job ad URL<br/>or pasted text] --> SCAF[make cl:new]
+    SCAF --> SKILL[10-phase skill<br/>research -> analysis -><br/>2 interviews -> draft v1 -><br/>4 parallel critics -> revise -><br/>finalize -> render -> ADR check]
+    SKILL --> PDF[final.pdf<br/>single page A4]
+    SKILL --> ML[(MLflow run<br/>metrics + artifacts)]
+    ML --> UI[cl:mlflow-ui<br/>localhost:5000]
+    UI --> HUMAN{review every<br/>~10 letters}
+    HUMAN -- "tune" --> ADR[new ADR<br/>tighter critic rules]
+    ADR -.-> SKILL
+
+    style PDF fill:#D4A574,stroke:#18181B,color:#18181B
+    style UI fill:#EDE3D6,stroke:#18181B,color:#18181B
+```
+
+### Full documentation
+
+See [`cover-letter/README.md`](cover-letter/README.md) — which is **gitignored**, so only visible on your local machine. That file contains:
+- All 10 pipeline phases with inputs / outputs
+- The 4 critics (patterns / specificity / voice / story-harmony) and their thresholds
+- MLflow setup + live walkthrough
+- "Starting a new job application in a fresh conversation" prompt template (canonical boot prompt for Cascade / Claude Code)
+- Retrospective + queued ADR candidates
+- LinkedIn DMA integration (EU self-serve)
+
+### The one prompt you need in a fresh conversation
+
+Paste this in any new Cascade or Claude Code session to boot the skill:
+
+```
+Use the cover-letter skill for a new job.
+
+Company: <Company name>
+Role: <Role title>
+Language: de   (or en)
+Job ad URL: <paste URL>
+
+If the URL is gated, paste the ad between the fences below.
+
+--- BEGIN JOB AD ---
+<full ad text>
+--- END JOB AD ---
+
+Notes: <optional — warm contact, a specific angle, etc.>
+```
+
+The full template with explanations lives at `cover-letter/NEW-CONVERSATION.md` (also gitignored).
 
 ## Deployment
 

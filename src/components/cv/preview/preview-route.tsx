@@ -23,7 +23,7 @@ interface PreviewRouteProps {
  * variant's photo so the picker has something meaningful to show.
  */
 export async function PreviewRoute({ variantId, locale }: PreviewRouteProps) {
-  const data = loadCvData("public");
+  const data = loadCvData();
   const variant = getCvPreviewVariant(variantId);
   const transitionName = `hero-photo-${variant.id}`;
 
