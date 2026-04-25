@@ -1,48 +1,72 @@
 /**
  * CV PDF Generator — Unified Typst Pipeline
  *
- * Compiles both ATS (single-column) and Visual (two-column) CVs via Typst.
+ * Compiles ATS (single-column) and/or Visual (two-column) CVs via Typst.
  * Runs ATS text extraction verification on the ATS variant.
  *
+ * Two data sources:
+ *   - public (default) — reads config/cv/cv.public.yaml; outputs BOTH ATS +
+ *                        Visual to public/cv/{ats,visual}/ (DEPLOYED).
+ *   - private          — merges cv.full.yaml + cv.private.yaml in memory;
+ *                        outputs VISUAL ONLY to cover-letter/cv_private/
+ *                        (gitignored, LOCAL ONLY, never deployed).
+ *                        cv.full.yaml is a git-tracked mirror of cv.public.yaml
+ *                        with application-specific wording (e.g. “my portfolio”
+ *                        instead of “this portfolio”) and a references skeleton.
+ *
  * Usage:
- *   pnpm tsx scripts/generate-cv.ts                   # both variants
- *   pnpm tsx scripts/generate-cv.ts --variant ats     # ATS only
- *   pnpm tsx scripts/generate-cv.ts --variant visual  # Visual only
- *   pnpm tsx scripts/generate-cv.ts --verify          # verify ATS PDF only
- *   pnpm tsx scripts/generate-cv.ts --locale en       # single locale
+ *   pnpm tsx scripts/generate-cv.ts                              # public, both variants
+ *   pnpm tsx scripts/generate-cv.ts --variant visual             # public Visual only
+ *   pnpm tsx scripts/generate-cv.ts --source private             # private Visual only
+ *   pnpm tsx scripts/generate-cv.ts --verify                     # verify public ATS PDF
+ *   pnpm tsx scripts/generate-cv.ts --locale en                  # single locale
  */
 
 import { execSync } from "node:child_process";
 import path from "node:path";
 import fs from "node:fs";
-import { parse as parseYaml } from "yaml";
+import { parse as parseYaml, stringify as stringifyYaml } from "yaml";
 
 const ROOT = path.resolve(new URL(".", import.meta.url).pathname, "..");
 const FONT_PATH = path.join(ROOT, "scripts/typst/fonts");
 const OUTPUT_FILE = "resume_reebal_sami.pdf";
 const LOCALES = ["en"]; // Add "de", "es", "ar" when translations are complete
 
+type CvSource = "public" | "private";
+
 interface Variant {
   id: string;
   template: string;
-  outputDir: string;
   verify: boolean;
 }
 
+// Variant definitions without output dir — output is resolved per-source
+// (public variants go to public/cv/{ats,visual}/ for deployment;
+// private source produces VISUAL ONLY, written flat into
+// cover-letter/cv_private/ which is gitignored via cover-letter/**).
 const VARIANTS: Variant[] = [
   {
     id: "ats",
     template: path.join(ROOT, "scripts/typst/ats/cv-ats.typ"),
-    outputDir: path.join(ROOT, "public/cv/ats"),
     verify: true,
   },
   {
     id: "visual",
     template: path.join(ROOT, "scripts/typst/visual/cv-visual.typ"),
-    outputDir: path.join(ROOT, "public/cv/visual"),
     verify: false,
   },
 ];
+
+const PRIVATE_OUTPUT_DIR = path.join(ROOT, "cover-letter/cv_private");
+
+function getOutputDir(variant: Variant, source: CvSource): string {
+  if (source === "private") {
+    // Private source is visual-only and written flat (no variant subdir)
+    // into cover-letter/cv_private/ — the filename already encodes the person.
+    return PRIVATE_OUTPUT_DIR;
+  }
+  return path.join(ROOT, "public/cv", variant.id);
+}
 
 const EXPECTED_SECTIONS = [
   "Reebal Sami",
@@ -51,12 +75,11 @@ const EXPECTED_SECTIONS = [
   "EDUCATION",
 ];
 
-function getExpectedPdfCompanies(): string[] {
+function getExpectedPdfCompanies(sourceYamlPath: string): string[] {
   const fallback = ["Datalogue", "Future Founder", "neuefische", "Otto Group"];
 
   try {
-    const yamlPath = path.join(ROOT, "config/cv/cv.public.yaml");
-    const raw = fs.readFileSync(yamlPath, "utf-8");
+    const raw = fs.readFileSync(sourceYamlPath, "utf-8");
     const parsed = parseYaml(raw) as {
       experience?: Array<{ company?: string; visibility?: string }>;
     };
@@ -76,18 +99,161 @@ function getExpectedPdfCompanies(): string[] {
   }
 }
 
+// =============================================================================
+// CV private-source merge logic
+//
+// Private CVs start from cv.full.yaml (git-tracked, safe-for-public-repo mirror
+// of cv.public.yaml with application-specific wording and a references
+// skeleton). The private source additionally overlays cv.private.yaml
+// (gitignored) with real email, phone, address, and reference contacts.
+//
+// Public CVs continue to read cv.public.yaml directly — cv.full.yaml never
+// touches the deployed output.
+//
+// The merged YAML is written to cover-letter/cv_private/.cv.merged.yaml
+// (hidden file inside an already-gitignored dir; safe to leave on disk).
+// Typst receives the path via --input data=...
+// =============================================================================
+
+interface PrivateOverlay {
+  basics?: {
+    email_personal?: string;
+    phone?: string;
+    location?: { address?: string; postalCode?: string };
+  };
+  references?: unknown[];
+}
+
+function buildMergedPrivateYaml(): string {
+  const fullYamlPath = path.join(ROOT, "config/cv/cv.full.yaml");
+  const privateYamlPath = path.join(ROOT, "config/cv/cv.private.yaml");
+
+  if (!fs.existsSync(fullYamlPath)) {
+    console.error(
+      `ERROR: ${fullYamlPath} not found. Create cv.full.yaml (git-tracked
+  mirror of cv.public.yaml with application-specific wording + references
+  skeleton) before running \`make cv:private\`.`,
+    );
+    process.exit(1);
+  }
+  if (!fs.existsSync(privateYamlPath)) {
+    console.error(
+      `ERROR: ${privateYamlPath} not found. Create cv.private.yaml (gitignored) first.`,
+    );
+    console.error(
+      `  It holds real email / phone / address / reference contacts and is
+  merged over cv.full.yaml when you run \`make cv:private\`.`,
+    );
+    process.exit(1);
+  }
+
+  const fullRaw = fs.readFileSync(fullYamlPath, "utf-8");
+  const privateRaw = fs.readFileSync(privateYamlPath, "utf-8");
+
+  // parseYaml returns a plain object; we deliberately treat it as unknown shape
+  // and merge only the fields we know about.
+  const merged = parseYaml(fullRaw) as Record<string, unknown>;
+  const privateData = parseYaml(privateRaw) as PrivateOverlay | null;
+
+  if (!privateData) {
+    console.warn("  cv.private.yaml parsed empty; using cv.full.yaml as-is.");
+  } else {
+    const basics = (merged.basics ?? {}) as Record<string, unknown>;
+
+    if (privateData.basics?.email_personal) {
+      basics.email = privateData.basics.email_personal;
+    }
+    if (privateData.basics?.phone) {
+      basics.phone = privateData.basics.phone;
+    }
+    if (privateData.basics?.location) {
+      const location = (basics.location ?? {}) as Record<string, unknown>;
+      if (privateData.basics.location.address) {
+        location.address = privateData.basics.location.address;
+      }
+      if (privateData.basics.location.postalCode) {
+        location.postalCode = privateData.basics.location.postalCode;
+      }
+      basics.location = location;
+    }
+    merged.basics = basics;
+
+    if (privateData.references && privateData.references.length > 0) {
+      merged.references = privateData.references;
+    }
+  }
+
+  fs.mkdirSync(PRIVATE_OUTPUT_DIR, { recursive: true });
+  const mergedPath = path.join(PRIVATE_OUTPUT_DIR, ".cv.merged.yaml");
+  const header =
+    "# AUTO-GENERATED from cv.full.yaml + cv.private.yaml. Do not edit by hand.\n";
+  fs.writeFileSync(mergedPath, header + stringifyYaml(merged), "utf-8");
+
+  console.log(`  Merged private CV written: ${path.relative(ROOT, mergedPath)}`);
+  return mergedPath;
+}
+
+function getDataPathForCompile(source: CvSource): {
+  workspaceRelative: string;
+  absolute: string;
+} {
+  if (source === "private") {
+    const mergedAbs = buildMergedPrivateYaml();
+    return {
+      workspaceRelative: path.relative(ROOT, mergedAbs),
+      absolute: mergedAbs,
+    };
+  }
+  const publicAbs = path.join(ROOT, "config/cv/cv.public.yaml");
+  return {
+    workspaceRelative: "config/cv/cv.public.yaml",
+    absolute: publicAbs,
+  };
+}
+
+function getExpectedEmail(dataYamlAbs: string): string {
+  try {
+    const raw = fs.readFileSync(dataYamlAbs, "utf-8");
+    const parsed = parseYaml(raw) as { basics?: { email?: string } };
+    return parsed.basics?.email ?? "contact@reebal-sami.com";
+  } catch {
+    return "contact@reebal-sami.com";
+  }
+}
+
 // --- Parse CLI args ---
 const args = process.argv.slice(2);
 const verifyOnly = args.includes("--verify");
 const variantArg = args.find((_, i, a) => a[i - 1] === "--variant");
 const localeArg = args.find((_, i, a) => a[i - 1] === "--locale");
+const sourceArgRaw = args.find((_, i, a) => a[i - 1] === "--source") ?? "public";
+if (sourceArgRaw !== "public" && sourceArgRaw !== "private") {
+  console.error(`Unknown source: ${sourceArgRaw}. Use "public" or "private".`);
+  process.exit(1);
+}
+const source: CvSource = sourceArgRaw;
 const locales = localeArg ? [localeArg] : LOCALES;
-const selectedVariants = variantArg
-  ? VARIANTS.filter((v) => v.id === variantArg)
+
+// For the private source we deliberately emit ONLY the Visual variant —
+// the ATS variant is for machine parsing of the deployed public CV, and
+// there is no use case for a private ATS version (direct applications
+// send the Visual CV + cover letter alongside it).
+const defaultVariantsForSource = source === "private"
+  ? VARIANTS.filter((v) => v.id === "visual")
   : VARIANTS;
 
+const selectedVariants = variantArg
+  ? defaultVariantsForSource.filter((v) => v.id === variantArg)
+  : defaultVariantsForSource;
+
 if (variantArg && selectedVariants.length === 0) {
-  console.error(`Unknown variant: ${variantArg}. Use "ats" or "visual".`);
+  if (source === "private" && variantArg === "ats") {
+    console.error(
+      `The private source is visual-only — an ATS private CV is never emitted.`,
+    );
+  } else {
+    console.error(`Unknown variant: ${variantArg}. Use "ats" or "visual".`);
+  }
   process.exit(1);
 }
 
@@ -133,13 +299,14 @@ function syncCvPdfPhoto(): void {
   );
 }
 
-function compile(variant: Variant, locale: string): string {
-  const outPath = path.join(variant.outputDir, OUTPUT_FILE);
-  fs.mkdirSync(variant.outputDir, { recursive: true });
+function compile(variant: Variant, locale: string, dataWorkspaceRelative: string): string {
+  const outputDir = getOutputDir(variant, source);
+  const outPath = path.join(outputDir, OUTPUT_FILE);
+  fs.mkdirSync(outputDir, { recursive: true });
   const shapeSeed = Math.floor(Math.random() * 1_000_000) + 1;
 
-  console.log(`\n  [${variant.id}] Compiling for locale: ${locale}`);
-  const cmd = `typst compile --root "${ROOT}" --font-path "${FONT_PATH}" "${variant.template}" "${outPath}" --input locale=${locale} --input shapeSeed=${shapeSeed}`;
+  console.log(`\n  [${variant.id}] Compiling for locale: ${locale} (source: ${source})`);
+  const cmd = `typst compile --root "${ROOT}" --font-path "${FONT_PATH}" "${variant.template}" "${outPath}" --input locale=${locale} --input shapeSeed=${shapeSeed} --input data="${dataWorkspaceRelative}" --input variant=${source}`;
 
   try {
     execSync(cmd, { stdio: "pipe", encoding: "utf-8" });
@@ -155,7 +322,7 @@ function compile(variant: Variant, locale: string): string {
   }
 }
 
-function verifyAts(pdfPath: string): boolean {
+function verifyAts(pdfPath: string, expectedEmail: string, sourceYamlPath: string): boolean {
   console.log(`\n  Verifying ATS text extraction...`);
 
   let text: string;
@@ -177,9 +344,9 @@ function verifyAts(pdfPath: string): boolean {
   log("Name in first 3 lines", nameInTop);
   if (!nameInTop) allPassed = false;
 
-  // Check 2: Email in first 8 lines
-  const emailInTop = lines.slice(0, 8).some((l) => l.includes("contact@"));
-  log("Email in first 8 lines", emailInTop);
+  // Check 2: Expected email in first 10 lines (source-aware)
+  const emailInTop = lines.slice(0, 10).some((l) => l.includes(expectedEmail));
+  log(`Email "${expectedEmail}" in first 10 lines`, emailInTop);
   if (!emailInTop) allPassed = false;
 
   // Check 3: No mailto: or https:// prefixes
@@ -208,7 +375,7 @@ function verifyAts(pdfPath: string): boolean {
   if (!skillsOk) allPassed = false;
 
   // Check 6: All companies present
-  const companies = getExpectedPdfCompanies();
+  const companies = getExpectedPdfCompanies(sourceYamlPath);
   const missingCompanies = companies.filter((c) => !text.includes(c));
   const companiesOk = missingCompanies.length === 0;
   log(
@@ -236,7 +403,7 @@ function log(check: string, passed: boolean, detail?: string) {
 }
 
 // --- Main ---
-console.log("CV PDF Generator (Typst — Dual Pipeline)");
+console.log(`CV PDF Generator (Typst — source: ${source})`);
 console.log("=========================================");
 
 // Sync the CV-PDF photo from site.yaml BEFORE compiling. Skipped in verify-only
@@ -246,15 +413,31 @@ if (!verifyOnly) {
   syncCvPdfPhoto();
 }
 
+// Resolve data path once per run (merges private overlay for private source).
+const dataPath = verifyOnly
+  ? {
+      workspaceRelative:
+        source === "private"
+          ? "cover-letter/cv_private/.cv.merged.yaml"
+          : "config/cv/cv.public.yaml",
+      absolute:
+        source === "private"
+          ? path.join(PRIVATE_OUTPUT_DIR, ".cv.merged.yaml")
+          : path.join(ROOT, "config/cv/cv.public.yaml"),
+    }
+  : getDataPathForCompile(source);
+const expectedEmail = getExpectedEmail(dataPath.absolute);
+
 let allOk = true;
 for (const variant of selectedVariants) {
   for (const locale of locales) {
+    const outputDir = getOutputDir(variant, source);
     const pdfPath = verifyOnly
-      ? path.join(variant.outputDir, OUTPUT_FILE)
-      : compile(variant, locale);
+      ? path.join(outputDir, OUTPUT_FILE)
+      : compile(variant, locale, dataPath.workspaceRelative);
 
     if (variant.verify) {
-      const ok = verifyAts(pdfPath);
+      const ok = verifyAts(pdfPath, expectedEmail, dataPath.absolute);
       if (!ok) allOk = false;
     } else {
       // Basic check: file exists and is reasonable size

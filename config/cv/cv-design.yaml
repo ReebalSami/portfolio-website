@@ -332,3 +332,38 @@ visual:
     signature-weight: "regular"
     signature-rotation-deg: -1.3     # deg — subtle tilt, like blog polaroid captions
     signature-align: "start"
+
+  # ---------------------------------------------------------------------------
+  # Private-only overrides
+  # ---------------------------------------------------------------------------
+  # These values are applied ONLY when the Typst template is invoked with
+  # --input variant=private (i.e. `make cv:private`). For the public /
+  # deployed Visual CV, this block is IGNORED — so edits here cannot change
+  # the public/cv/visual/resume_reebal_sami.pdf output. Kept in the same file
+  # as the rest of the design tokens so one YAML is the single source of
+  # truth for all CV styling.
+  private-overrides:
+    #
+    # SEMANTICS: every `gap-*` value below is the FINAL em spacing you want
+    # BEFORE the element. Higher number = more space. Lower number = tighter.
+    # Set a value equal to the public default (shown in comments) to inherit
+    # public behavior for that site.
+    #
+    # Applies ONLY when generate-cv.ts runs with --source private. For the
+    # deployed public Visual CV this whole block is IGNORED, so edits here
+    # cannot change public/cv/visual/resume_reebal_sami.pdf.
+    section:
+      # Sidebar heading gaps. Base public spacing is 1.60em
+      # (sidebar-spacing-above). References additionally has 0.80em
+      # extra-above in the public template, giving public total 2.40em.
+      sidebar-key-strengths-gap: 1.12    # public: 1.60em
+      sidebar-languages-gap: 1.12        # public: 1.60em
+      sidebar-interests-gap: 1.12        # public: 1.60em
+      sidebar-references-gap: 1.12       # public: 2.40em
+    thank-you:
+      signature-size: 16                 # public: 26pt
+      signature-align: "end"             # public: "start"  ("end" = right margin of sidebar)
+      extra-above: 1.12                  # public: 1.60em  (gap BEFORE "Thank you" heading)
+      body-signature-gap: 0.7           # public: 1.80em  (gap BEFORE the handwritten signature)
+    ats-link:
+      spacing-above: 0.9                # public: 1.60em  (gap BEFORE "ATS-optimized version…" link)
