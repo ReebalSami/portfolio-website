@@ -66,7 +66,7 @@ export default async function CvPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const data = loadCvData("public");
+  const data = loadCvData();
   const cvLocale = locale as Locale;
   const config = getConfig();
   const profileSummary = resolveCvLocaleString(data.profile.summary, cvLocale);

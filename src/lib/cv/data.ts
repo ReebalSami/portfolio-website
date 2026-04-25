@@ -13,16 +13,15 @@ import {
 // CV Data Loader — reads YAML, validates with Zod, returns typed data
 // =============================================================================
 
-type CvVariant = "public" | "full";
 type Locale = "en" | "de" | "es" | "ar";
 
 const CV_DIR = path.resolve(process.cwd(), "config", "cv");
 
-const cache = new Map<string, CvData>();
+let publicCache: CvData | null = null;
 let privateCache: CvPrivateOverlay | null = null;
 
-function getCvFilePath(variant: CvVariant): string {
-  return path.join(CV_DIR, `cv.${variant}.yaml`);
+function getPublicFilePath(): string {
+  return path.join(CV_DIR, "cv.public.yaml");
 }
 
 function getPrivateFilePath(): string {
@@ -30,17 +29,19 @@ function getPrivateFilePath(): string {
 }
 
 /**
- * Load and validate CV data for a given variant.
+ * Load and validate the public CV data (config/cv/cv.public.yaml).
  * Returns fully typed CvData. Throws on validation failure with descriptive errors.
+ *
+ * There is only one public CV source. For private PDF rendering, call
+ * `mergeCvPrivateData(loadCvData())` to overlay real contact details from
+ * cv.private.yaml (gitignored).
  */
-export function loadCvData(variant: CvVariant = "public"): CvData {
-  const cacheKey = variant;
-
-  if (cache.has(cacheKey)) {
-    return cache.get(cacheKey)!;
+export function loadCvData(): CvData {
+  if (publicCache) {
+    return publicCache;
   }
 
-  const filePath = getCvFilePath(variant);
+  const filePath = getPublicFilePath();
 
   if (!fs.existsSync(filePath)) {
     throw new Error(`CV data file not found: ${filePath}`);
@@ -58,12 +59,12 @@ export function loadCvData(variant: CvVariant = "public"): CvData {
       )
       .join("\n");
     throw new Error(
-      `CV data validation failed for ${variant}:\n${issues}`
+      `CV data validation failed for cv.public.yaml:\n${issues}`
     );
   }
 
-  cache.set(cacheKey, result.data);
-  return result.data;
+  publicCache = result.data;
+  return publicCache;
 }
 
 /**
@@ -113,6 +114,9 @@ export function mergeCvPrivateData(base: CvData): CvData {
   const merged = structuredClone(base);
 
   if (privateData.basics) {
+    if (privateData.basics.email_personal) {
+      merged.basics.email = privateData.basics.email_personal;
+    }
     if (privateData.basics.phone) {
       merged.basics.phone = privateData.basics.phone;
     }
@@ -156,6 +160,6 @@ export function resolveCvLocaleString(
  * Clear all cached CV data. Useful for testing and hot-reload scenarios.
  */
 export function clearCvCache(): void {
-  cache.clear();
+  publicCache = null;
   privateCache = null;
 }
