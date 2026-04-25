@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <title>Privacy Policy — Reebal Sami LinkedIn Data Portability Integration</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --ink: #1a1a1a;
+      --muted: #4b5563;
+      --accent: #c47a56;
+      --bg: #fdfaf7;
+      --rule: #e7dfd6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #f4ede5;
+        --muted: #b9b1a6;
+        --accent: #e0a478;
+        --bg: #141110;
+        --rule: #2a2421;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+    }
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 .5rem;
+      letter-spacing: -0.01em;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 2.25rem;
+      margin-bottom: .5rem;
+      letter-spacing: -0.005em;
+    }
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: .25rem;
+      color: var(--muted);
+    }
+    p { margin: .5rem 0 1rem; }
+    ul { padding-left: 1.2rem; }
+    li { margin: .3rem 0; }
+    code {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      background: var(--rule);
+      padding: .08rem .35rem;
+      border-radius: 4px;
+      font-size: .88em;
+    }
+    a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    footer {
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+      padding-top: 1rem;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--rule);
+      color: var(--muted);
+      padding: .15rem .55rem;
+      border-radius: 99px;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      margin-right: .4rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <span class="badge">Personal tooling</span>
+        <span class="badge">Local-only</span>
+      </div>
+      <h1 style="margin-top:1rem">Privacy Policy</h1>
+      <p class="sub">
+        For the <strong>Reebal Sami LinkedIn Data Portability Integration</strong> — a personal, local-only tool used by Reebal Sami to retrieve his own LinkedIn profile data.
+      </p>
+      <p class="sub">Last updated: 23 April 2026</p>
+    </header>
+
+    <h2>What this tool is</h2>
+    <p>
+      This document describes the privacy practices for a <strong>private, single-user</strong> software integration operated by Reebal Sami (<a href="https://reebal-sami.com">https://reebal-sami.com</a>). The integration uses LinkedIn's <em>Data Portability (Member) API</em> — informally the "DMA API" — to retrieve structured data about the operator's <strong>own</strong> LinkedIn account.
+    </p>
+    <p>
+      The integration is <strong>not</strong> a multi-user service, <strong>not</strong> an app installed on anyone else's device, and <strong>not</strong> a publicly available product. It is a developer tool used solely by Reebal Sami to keep his CV and cover-letter source data in sync with his LinkedIn profile.
+    </p>
+
+    <h2>Who this policy applies to</h2>
+    <p>
+      This policy applies only to data about <strong>Reebal Sami's own LinkedIn account</strong> — the account owner who registered the LinkedIn Developer application and authorized the OAuth flow.
+    </p>
+    <p>
+      The integration does <strong>not</strong> access, retrieve, or process data belonging to any other LinkedIn member, connection, message sender, or content author. No other person's data is ever collected by this tool.
+    </p>
+
+    <h2>What data is accessed</h2>
+    <p>
+      Through LinkedIn's Data Portability API, the integration may retrieve the following categories of data <em>about the operator's own account only</em>:
+    </p>
+    <ul>
+      <li>Profile information (name, headline, location, summary, contact info)</li>
+      <li>Work experience (positions, companies, dates, descriptions)</li>
+      <li>Education (institutions, degrees, fields of study, dates)</li>
+      <li>Certifications, licences, and publications</li>
+      <li>Languages, skills, and endorsements</li>
+      <li>Volunteer experience</li>
+      <li>Recommendations received</li>
+    </ul>
+    <p>
+      The integration does <strong>not</strong> retrieve: connection lists, private messages, InMail content, connection activity, feed data, ads interaction data, or any data about other LinkedIn members.
+    </p>
+
+    <h2>How data is used</h2>
+    <p>
+      Retrieved data is used to populate structured YAML files in Reebal's personal CV + cover-letter tooling repository (<a href="https://github.com/ReebalSami/portfolio-website">github.com/ReebalSami/portfolio-website</a>). Specifically:
+    </p>
+    <ul>
+      <li>Refreshing the data layer behind <code>config/cv/cv.public.yaml</code> and <code>config/cv/cv.private.yaml</code> to keep the rendered CV in sync with LinkedIn</li>
+      <li>Populating <code>cover-letter/profile/linkedin.md</code> with the latest profile facts for use by Reebal's personal cover-letter drafting tool</li>
+    </ul>
+    <p>
+      The tool does <strong>not</strong> use retrieved data for: advertising, analytics, behavioral profiling, training AI models for sale, onward transfer to any third party, or any purpose outside Reebal's own career-documentation workflow.
+    </p>
+
+    <h2>Where data is stored</h2>
+    <p>
+      All retrieved data is stored <strong>locally</strong> on Reebal's personal development machine. Nothing retrieved through the LinkedIn Data Portability API is uploaded to any cloud service, deployed to any public website, or committed to any public git repository.
+    </p>
+    <p>
+      Git-hygiene: the directories that receive LinkedIn-retrieved data (<code>cover-letter/</code> and <code>config/cv/cv.private.yaml</code>) are explicitly <code>.gitignore</code>d so the content cannot be accidentally pushed to a public repository.
+    </p>
+
+    <h2>Data sharing</h2>
+    <p>
+      <strong>No data is shared with any third party.</strong> The tool is a one-way pull from LinkedIn into Reebal's local filesystem. There is no outbound data flow, no analytics provider, no crash reporter, no telemetry.
+    </p>
+    <p>
+      The only network calls made by the tool are (a) OAuth token exchange with <code>auth.linkedin.com</code>, and (b) authenticated GET requests to the LinkedIn REST API at <code>api.linkedin.com</code>.
+    </p>
+
+    <h2>Data retention</h2>
+    <p>
+      Retrieved data is kept on disk for as long as Reebal finds it useful for CV and cover-letter authoring. Retrieval is idempotent: re-running the sync replaces existing local files with fresh data. There is no accumulating history of retrievals.
+    </p>
+    <p>
+      If the tool is retired, the operator will delete the local data files and revoke the LinkedIn application's access token via LinkedIn's account settings.
+    </p>
+
+    <h2>Your rights (as the data subject)</h2>
+    <p>
+      Since the only data subject is Reebal Sami himself — the sole operator and authorizing account — standard GDPR subject rights (access, rectification, deletion, portability) are self-served at his discretion.
+    </p>
+    <p>
+      Any other LinkedIn member who believes this integration may have improperly accessed their data can contact Reebal directly (see below) — however, as detailed above, the integration by design does not retrieve data about any account other than Reebal's own.
+    </p>
+
+    <h2>Security</h2>
+    <ul>
+      <li>OAuth 2.0 authorization code flow with PKCE</li>
+      <li>Access tokens stored only in a local, <code>.gitignore</code>d environment variable file</li>
+      <li>No access token or client secret committed to version control</li>
+      <li>HTTPS-only connections to all LinkedIn endpoints</li>
+      <li>Tool runs on Reebal's personal development machine with full-disk encryption (FileVault)</li>
+    </ul>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If the scope of data accessed changes, or if the tool's architecture changes in a way affecting privacy (e.g., hypothetically introducing a server-side component), this policy will be updated and the "Last updated" date above will reflect the change.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      For any questions about this policy or about the data handling of this personal tool:
+    </p>
+    <ul>
+      <li>Email: <a href="mailto:contact@reebal-sami.com">contact@reebal-sami.com</a></li>
+      <li>Website: <a href="https://reebal-sami.com">https://reebal-sami.com</a></li>
+      <li>GitHub: <a href="https://github.com/ReebalSami">https://github.com/ReebalSami</a></li>
+    </ul>
+
+    <footer>
+      This page is published at
+      <code>https://reebal-sami.com/linkedin-privacy.html</code>
+      and is the <strong>Privacy Policy URL</strong> to be used when registering the LinkedIn Developer application associated with this integration.
+    </footer>
+  </main>
+</body>
+</html>
