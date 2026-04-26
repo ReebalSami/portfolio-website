@@ -213,7 +213,10 @@ export default async function LocaleLayout({ children, params }: Props) {
           <NextIntlClientProvider>
             <TooltipProvider>
               <ChatLayoutProvider>
-                <Header siteName={config.site.name} />
+                <Header
+                  siteName={config.site.name}
+                  compactTimelineEnabled={config.features.compactTimeline}
+                />
                 <main id="main-content" className="flex-1">
                   {children}
                 </main>

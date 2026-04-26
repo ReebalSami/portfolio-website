@@ -19,9 +19,15 @@ import { cn } from "@/lib/utils";
 
 interface HeaderProps {
   siteName: string;
+  /**
+   * Plumbed from `features.compactTimeline` in the server layout. When
+   * `true`, the desktop "About" nav becomes a hover-dropdown and the
+   * mobile "About" item gets an inline accordion of Who / Journey / Tech.
+   */
+  compactTimelineEnabled?: boolean;
 }
 
-export function Header({ siteName }: HeaderProps) {
+export function Header({ siteName, compactTimelineEnabled = false }: HeaderProps) {
   const t = useTranslations("common");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -51,7 +57,7 @@ export function Header({ siteName }: HeaderProps) {
           {siteName}
         </TransitionLink>
 
-        <DesktopNav />
+        <DesktopNav compactTimelineEnabled={compactTimelineEnabled} />
 
         <div className="flex items-center gap-2">
           <LocaleSwitcher />
@@ -75,7 +81,10 @@ export function Header({ siteName }: HeaderProps) {
               <SheetHeader>
                 <SheetTitle className="text-left">{siteName}</SheetTitle>
               </SheetHeader>
-              <MobileNav onNavigate={() => setIsMobileOpen(false)} />
+              <MobileNav
+                onNavigate={() => setIsMobileOpen(false)}
+                compactTimelineEnabled={compactTimelineEnabled}
+              />
             </SheetContent>
           </Sheet>
         </div>

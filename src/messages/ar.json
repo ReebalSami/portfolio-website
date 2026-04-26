@@ -9,7 +9,12 @@
       "blog": "المدونة",
       "cv": "السيرة الذاتية",
       "contact": "تواصل",
-      "openMenu": "فتح القائمة"
+      "openMenu": "فتح القائمة",
+      "aboutSubmenu": {
+        "who": "من أنا",
+        "journey": "المسيرة",
+        "tech": "حزمة التقنيات"
+      }
     },
     "footer": {
       "rights": "جميع الحقوق محفوظة.",
@@ -84,6 +89,16 @@
           "تقني: Unix وبرمجة الـ Shell، هندسة البيانات، مناهج البحث التجريبي",
           "الأطروحة الجارية: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
         ]
+      }
+    },
+    "journey": {
+      "tagline": "من دفاتر الحسابات في دمشق إلى الأنظمة متعددة الوكلاء في هامبورغ.",
+      "viewFullCv": "السيرة الذاتية الكاملة",
+      "aria": {
+        "carousel": "شريط المسيرة المهنية",
+        "previous": "الإدخال السابق",
+        "next": "الإدخال التالي",
+        "goToEntry": "الانتقال إلى الإدخال {n}"
       }
     }
   },

@@ -20,6 +20,11 @@ const eslintConfig = defineConfig([
     ".venv/**",
     // Cover letter system is gitignored and local-only; do not lint.
     "cover-letter/**",
+    // Design references (HTML mocks, vendored Babel-JSX scaffolds, etc.).
+    // These exist for visual reference only and use vanilla browser
+    // patterns (refs in render, inline scripts) that intentionally do
+    // not match our production code rules.
+    "docs/**",
   ]),
 ]);
 
