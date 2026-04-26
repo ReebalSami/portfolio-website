@@ -1,0 +1,221 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Neural Connections Timeline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c8c5cd",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#c7c6c5",
+                        "inverse-primary": "#5e5e5d",
+                        "on-primary-fixed": "#1a1c1b",
+                        "on-surface": "#e0e2e6",
+                        "on-tertiary-fixed-variant": "#47464d",
+                        "on-primary-container": "#646463",
+                        "on-secondary-container": "#6b4b00",
+                        "surface-variant": "#323538",
+                        "primary": "#ffffff",
+                        "inverse-surface": "#e0e2e6",
+                        "secondary-fixed-dim": "#ffba20",
+                        "secondary": "#ffdb9d",
+                        "inverse-on-surface": "#2d3134",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#1b1b21",
+                        "secondary-container": "#feb700",
+                        "on-surface-variant": "#c4c7c4",
+                        "surface-container-high": "#272a2d",
+                        "on-primary": "#2f3130",
+                        "tertiary-container": "#e4e1ea",
+                        "surface-bright": "#363a3d",
+                        "primary-fixed": "#e3e2e0",
+                        "on-tertiary-container": "#64636b",
+                        "primary-fixed-dim": "#c7c6c5",
+                        "surface-container-low": "#191c1f",
+                        "on-tertiary": "#303036",
+                        "tertiary-fixed": "#e4e1ea",
+                        "secondary-fixed": "#ffdea8",
+                        "outline-variant": "#444845",
+                        "on-secondary": "#412d00",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "on-primary-fixed-variant": "#464746",
+                        "background": "#101417",
+                        "on-background": "#e0e2e6",
+                        "outline": "#8e918f",
+                        "primary-container": "#e3e2e0",
+                        "tertiary": "#ffffff",
+                        "surface-dim": "#101417",
+                        "surface-container-lowest": "#0b0f11",
+                        "error-container": "#93000a",
+                        "surface-container": "#1d2023",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#323538",
+                        "surface": "#101417",
+                        "on-secondary-fixed": "#271900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-edge": "64px",
+                        "gutter": "24px",
+                        "ruler-increment": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "display-xl": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "tick-label": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-xl": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "tick-label": ["10px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .noise-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        .glow-node {
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.4);
+        }
+        .glow-line {
+            box-shadow: 0 0 10px rgba(255, 184, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-x-hidden selection:bg-secondary-container selection:text-on-secondary-container font-body-md">
+<!-- Top App Bar (Web) -->
+<nav class="hidden md:flex justify-between items-center px-16 py-6 w-full fixed top-0 z-50 bg-[#101417]/80 backdrop-blur-2xl">
+<div class="text-sm font-bold tracking-[0.4em] text-zinc-100 uppercase" style="">
+            REEBAL_SAMI // OP_01
+        </div>
+<ul class="flex gap-8 font-['Space_Grotesk'] tracking-tighter uppercase text-sm">
+<li class="cursor-pointer active:scale-95 transition-all duration-300 text-amber-400 border-b border-amber-500 pb-1" style="">CHRONOS</li>
+<li class="cursor-pointer active:scale-95 transition-all duration-300 text-zinc-500 hover:text-zinc-200" style="">NEURAL</li>
+<li class="cursor-pointer active:scale-95 transition-all duration-300 text-zinc-500 hover:text-zinc-200" style="">LOGS</li>
+<li class="cursor-pointer active:scale-95 transition-all duration-300 text-zinc-500 hover:text-zinc-200" style="">CORE</li>
+</ul>
+<div class="flex gap-4 text-amber-500">
+<span class="material-symbols-outlined cursor-pointer hover:text-amber-300 transition-colors" style="">settings_input_component</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-amber-300 transition-colors" style="">terminal</span>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="relative w-full min-h-screen flex items-center justify-center pt-24 pb-32 md:pb-0 noise-bg">
+<!-- Neural Atmosphere Gradient -->
+<div class="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-30">
+<div class="w-[80vw] h-[512px] bg-secondary-container rounded-full blur-[150px]"></div>
+</div>
+<!-- The Timeline Axis -->
+<div class="absolute top-[60%] left-0 w-full h-px bg-white/10 z-10 hidden md:block"></div>
+<!-- Scrollable Container -->
+<div class="relative z-20 w-full overflow-x-auto snap-x snap-mandatory flex items-center px-margin-edge pb-16 pt-32 hide-scrollbar h-full">
+<div class="flex gap-32 items-center min-w-max h-full relative">
+<!-- Connection Lines (SVG) -->
+<svg class="absolute top-1/2 left-0 w-full h-[200px] -translate-y-1/2 pointer-events-none z-0 hidden md:block" style="min-width: 3000px;">
+<path class="glow-line" d="M 100 100 Q 250 50 400 100 T 700 100 T 1000 50 T 1300 100 T 1600 150 T 1900 100" fill="none" stroke="rgba(255, 184, 0, 0.2)" stroke-dasharray="4 4" stroke-width="2"></path>
+</svg>
+<!-- Node 1 -->
+<div class="snap-center shrink-0 w-[400px] flex flex-col items-center relative group">
+<!-- Data Block -->
+<div class="mb-12 text-center transform transition-all duration-500 group-hover:-translate-y-2">
+<div class="font-tick-label text-secondary tracking-widest mb-2 opacity-80" style="">2018 - 2020</div>
+<h2 class="font-headline-md text-primary mb-4 uppercase" style="">Initialization Phase</h2>
+<p class="font-body-md text-on-surface-variant max-w-[300px] mx-auto text-sm opacity-80 leading-relaxed" style="">
+                            Established foundational neural pathways in full-stack architecture. Initialized core systems protocols for enterprise deployment.
+                        </p>
+</div>
+<!-- The Node -->
+<div class="w-4 h-4 rounded-full bg-secondary-container glow-node relative z-20 flex items-center justify-center">
+<div class="absolute w-12 h-12 rounded-full border border-secondary-container/30 animate-pulse"></div>
+</div>
+<!-- Vertical Connector (Mobile) -->
+<div class="w-px h-16 bg-gradient-to-b from-secondary-container/50 to-transparent mt-4 md:hidden"></div>
+</div>
+<!-- Node 2 (Active Focus) -->
+<div class="snap-center shrink-0 w-[400px] flex flex-col items-center relative group">
+<div class="mb-12 text-center transform transition-all duration-500">
+<div class="font-tick-label text-secondary tracking-widest mb-2" style="">2020 - 2022 // CRITICAL NODE</div>
+<h2 class="font-headline-md text-primary mb-4 uppercase" style="">System Architecture</h2>
+<p class="font-body-md text-on-surface-variant max-w-[300px] mx-auto text-sm opacity-90 leading-relaxed" style="">
+                            Scaled distributed systems to handle highly concurrent loads. Refactored legacy monolithic structures into agile microservices.
+                        </p>
+<div class="mt-6 flex justify-center gap-2">
+<span class="px-3 py-1 border border-white/10 rounded-full text-[10px] uppercase tracking-wider text-surface-tint backdrop-blur-sm" style="">React</span>
+<span class="px-3 py-1 border border-white/10 rounded-full text-[10px] uppercase tracking-wider text-surface-tint backdrop-blur-sm" style="">Node.js</span>
+<span class="px-3 py-1 border border-white/10 rounded-full text-[10px] uppercase tracking-wider text-surface-tint backdrop-blur-sm" style="">AWS</span>
+</div>
+</div>
+<div class="w-6 h-6 rounded-full bg-secondary-container glow-node relative z-20 flex items-center justify-center ring-2 ring-secondary/50">
+<div class="w-2 h-2 rounded-full bg-background"></div>
+<div class="absolute w-20 h-20 rounded-full border border-secondary-container/40 scale-110"></div>
+</div>
+<!-- Vertical Connector (Mobile) -->
+<div class="w-px h-16 bg-gradient-to-b from-secondary-container/80 to-transparent mt-4 md:hidden"></div>
+</div>
+<!-- Node 3 -->
+<div class="snap-center shrink-0 w-[400px] flex flex-col items-center relative group opacity-50 hover:opacity-100 transition-opacity duration-500">
+<div class="mb-12 text-center transform transition-all duration-500 group-hover:-translate-y-2">
+<div class="font-tick-label text-secondary tracking-widest mb-2 opacity-80" style="">2022 - PRESENT</div>
+<h2 class="font-headline-md text-primary mb-4 uppercase" style="">AI Integration</h2>
+<p class="font-body-md text-on-surface-variant max-w-[300px] mx-auto text-sm opacity-80 leading-relaxed" style="">
+                            Pioneered integration of large language models into core product pipelines. Enhanced predictive capabilities and autonomous workflows.
+                        </p>
+</div>
+<div class="w-4 h-4 rounded-full bg-surface-variant border border-secondary-container/50 relative z-20 group-hover:bg-secondary-container transition-colors duration-300"></div>
+</div>
+<!-- Node 4 -->
+<div class="snap-center shrink-0 w-[400px] flex flex-col items-center relative group opacity-30">
+<div class="mb-12 text-center">
+<div class="font-tick-label text-secondary tracking-widest mb-2 opacity-80" style="">FUTURE</div>
+<h2 class="font-headline-md text-primary mb-4 uppercase opacity-50" style="">Unknown Variables</h2>
+</div>
+<div class="w-4 h-4 rounded-full bg-surface-variant border border-white/10 relative z-20"></div>
+</div>
+</div>
+</div>
+<!-- Decorative UI Elements -->
+<div class="absolute bottom-8 right-margin-edge text-right hidden md:block">
+<div class="font-tick-label text-surface-tint opacity-50 uppercase tracking-widest" style="">Sys_Status: Nominal</div>
+<div class="font-tick-label text-surface-tint opacity-50 uppercase tracking-widest mt-1" style="">Scroll to Navigate</div>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-24 px-8 pb-safe z-50 bg-[#101417]/95 backdrop-blur-lg border-t border-white/10">
+<div class="flex flex-col items-center justify-center text-zinc-600 grayscale opacity-50 cursor-pointer hover:text-amber-200 hover:opacity-100 transition-opacity duration-700">
+<span class="material-symbols-outlined mb-1 text-[20px]" style="">history</span>
+<span class="font-['Space_Grotesk'] text-[10px] tracking-widest font-light" style="">-10Y</span>
+</div>
+<div class="flex flex-col items-center justify-center text-amber-500 drop-shadow-[0_0_8px_rgba(255,184,0,0.6)] scale-110 cursor-pointer duration-700">
+<span class="material-symbols-outlined mb-1 text-[20px]" style="font-variation-settings: &quot;FILL&quot; 1;">adjust</span>
+<span class="font-['Space_Grotesk'] text-[10px] tracking-widest font-light" style="">PRESENT</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-600 grayscale opacity-50 cursor-pointer hover:text-amber-200 hover:opacity-100 transition-opacity duration-700">
+<span class="material-symbols-outlined mb-1 text-[20px]" style="">auto_awesome</span>
+<span class="font-['Space_Grotesk'] text-[10px] tracking-widest font-light" style="">+5Y</span>
+</div>
+</nav>
+</body></html>

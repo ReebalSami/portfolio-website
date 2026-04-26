@@ -53,6 +53,13 @@ features:
   rss: true
   downloadCV: true
   cv: true
+  # M7 Homepage Journey Refresh. `false` keeps the existing vertical
+  # timeline + differentiator-style About section live. `true` swaps the
+  # About-section timeline for the horizontal cinematic `<CompactJourney />`
+  # carousel AND turns the "About" nav link into a hover-dropdown that
+  # reveals Who / Journey / Tech subsections. Safe to toggle at any time;
+  # both implementations live in the codebase.
+  compactTimeline: true
 
 # --- Photos ---
 # Three photo slots, each with its own file + directory so the homepage, CV web

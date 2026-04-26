@@ -9,7 +9,12 @@
       "blog": "Blog",
       "cv": "Resumé",
       "contact": "Contact",
-      "openMenu": "Open menu"
+      "openMenu": "Open menu",
+      "aboutSubmenu": {
+        "who": "Who I am",
+        "journey": "Journey",
+        "tech": "Tech Stack"
+      }
     },
     "footer": {
       "rights": "All rights reserved.",
@@ -84,6 +89,16 @@
           "Technical: Unix and Shell Programming, Data Engineering, Empirical Research Methods",
           "Thesis in progress: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
         ]
+      }
+    },
+    "journey": {
+      "tagline": "From ledgers in Damascus to multi-agent systems in Hamburg.",
+      "viewFullCv": "Full résumé",
+      "aria": {
+        "carousel": "Career journey carousel",
+        "previous": "Previous entry",
+        "next": "Next entry",
+        "goToEntry": "Go to entry {n}"
       }
     }
   },

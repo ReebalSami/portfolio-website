@@ -14,6 +14,7 @@
   --color-gallery-warm: var(--gallery-warm);
   --color-gallery-warm-light: var(--gallery-warm-light);
   --color-gallery-warm-muted: var(--gallery-warm-muted);
+  --color-accent-warm-fg: var(--accent-warm-fg);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -92,6 +93,11 @@
   --gallery-warm: oklch(0.82 0.08 55);
   --gallery-warm-light: oklch(0.92 0.04 55);
   --gallery-warm-muted: oklch(0.88 0.06 55);
+  /* Foreground-readable warm accent — calibrated for ~4.7:1 contrast on the
+     light page background. Use this for text/dot/icon accents in the
+     journey timeline and other foreground UI; --gallery-warm stays as the
+     soft glow tint for the hero lamp. */
+  --accent-warm-fg: oklch(0.55 0.16 50);
   --chart-1: oklch(0.205 0.006 285);
   --chart-2: oklch(0.82 0.08 55);
   --chart-3: oklch(0.5 0.005 285);
@@ -130,6 +136,8 @@
   --gallery-warm: oklch(0.72 0.08 55);
   --gallery-warm-light: oklch(0.35 0.04 55);
   --gallery-warm-muted: oklch(0.55 0.06 55);
+  /* See light-mode comment above — slightly more saturated for dark BG. */
+  --accent-warm-fg: oklch(0.78 0.13 55);
   --chart-1: oklch(0.96 0.002 90);
   --chart-2: oklch(0.72 0.08 55);
   --chart-3: oklch(0.65 0.005 285);
@@ -160,6 +168,10 @@
   body {
     overflow-x: clip;
     min-height: 100dvh;
+    /* Suppress macOS Safari/Chrome history-swipe gesture so 2-finger
+       horizontal trackpad pans inside the journey carousel do not
+       trigger browser back/forward navigation. */
+    overscroll-behavior-x: contain;
   }
   h1,
   h2,

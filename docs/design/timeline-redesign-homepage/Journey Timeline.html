@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Journey Timeline · Reebal Sami</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { background: #0a0d0f; color: #e0e2e6; font-family: 'Inter', sans-serif; }
+  *::-webkit-scrollbar { width: 0; height: 0; }
+  .hide-scrollbar { scrollbar-width: none; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data/timeline.js"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="components/TimelineShared.jsx"></script>
+<script type="text/babel" src="components/TimelineRuler.jsx"></script>
+<script type="text/babel" src="components/TimelineConstellation.jsx"></script>
+<script type="text/babel" src="components/TimelineMagazine.jsx"></script>
+<script type="text/babel" src="components/TimelineHybrid.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="env,react">
+const { useState, useEffect } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#d58400",
+  "glow": 0.4,
+  "nodeStyle": "dot",
+  "showTicks": true,
+  "density": "standard",
+  "autoAdvance": 0,
+  "grainIntensity": 0.05,
+  "connector": "none",
+  "navStyle": "edge"
+}/*EDITMODE-END*/;
+
+// Mobile mock — vertical layout, swipe-friendly
+function MobileTimeline({ entries, tweaks }) {
+  const { accent, glow, nodeStyle, density, grainIntensity } = tweaks;
+  const initial = Math.max(0, entries.findIndex((e) => e.active));
+  const [active, setActive] = useState(initial < 0 ? 0 : initial);
+
+  return (
+    <div className="relative w-full h-full overflow-hidden" style={{ background: '#101417' }}>
+      <GrainBg intensity={grainIntensity} />
+
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: '40%', left: '50%', transform: 'translate(-50%, -50%)',
+          width: '120%', height: 360,
+          background: `radial-gradient(ellipse at center, ${accent}25, transparent 65%)`,
+          filter: `blur(${50 + glow * 60}px)`,
+          opacity: 0.6,
+        }}
+      />
+
+      {/* Header */}
+      <div style={{ paddingTop: 64, paddingLeft: 24, paddingRight: 24 }}>
+        <div style={{
+          fontFamily: 'Space Grotesk', fontSize: 10, letterSpacing: '0.3em',
+          color: accent, textTransform: 'uppercase', marginBottom: 8,
+        }}>Chapter 01</div>
+        <h2 style={{
+          fontFamily: 'Space Grotesk', fontSize: 40, fontWeight: 700,
+          color: '#fff', letterSpacing: '-0.04em', lineHeight: 1, margin: 0,
+        }}>Journey<span style={{color: accent}}>.</span></h2>
+      </div>
+
+      {/* Active card */}
+      <div className="relative" style={{ marginTop: 40, padding: '0 24px', textAlign: 'center' }}>
+        <div style={{
+          fontFamily: 'Inter', fontSize: 11, letterSpacing: '0.2em',
+          color: accent, textTransform: 'uppercase', marginBottom: 10,
+        }}>{entries[active].yearRange}</div>
+        <h3 style={{
+          fontFamily: 'Space Grotesk', fontSize: 22, fontWeight: 600,
+          color: '#fff', textTransform: 'uppercase', letterSpacing: '-0.01em',
+          lineHeight: 1.2, margin: '0 0 6px',
+        }}>{entries[active].role}</h3>
+        <div style={{ fontFamily: 'Inter', fontSize: 13, color: '#c4c7c4', marginBottom: 14 }}>
+          {entries[active].org} · <span style={{ opacity: 0.6 }}>{entries[active].place}</span>
+        </div>
+        {density !== 'compact' && (
+          <p style={{
+            fontFamily: 'Inter', fontSize: 13, lineHeight: 1.55,
+            color: '#c4c7c4', opacity: 0.85, margin: '0 auto 14px', maxWidth: 280,
+          }}>{entries[active].tagline}</p>
+        )}
+        <div className="flex justify-center flex-wrap" style={{ gap: 6 }}>
+          {entries[active].keywords.map((k) => (
+            <span key={k} style={{
+              fontFamily: 'Space Grotesk', fontSize: 9.5, letterSpacing: '0.15em',
+              color: '#c4c7c4', textTransform: 'uppercase',
+              padding: '4px 8px', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 2,
+            }}>{k}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* Horizontal mini-rail at bottom */}
+      <div className="absolute" style={{ bottom: 100, left: 0, right: 0 }}>
+        <div className="relative overflow-x-auto hide-scrollbar" style={{ padding: '20px 24px' }}>
+          <div className="flex items-center" style={{ gap: 0, minWidth: 'max-content' }}>
+            <div className="absolute" style={{ left: 0, right: 0, top: '50%', height: 1, background: 'rgba(255,255,255,0.12)' }} />
+            {entries.map((e, i) => {
+              const dist = Math.abs(i - active);
+              const state = dist === 0 ? 'active' : dist === 1 ? 'adjacent' : 'inactive';
+              return (
+                <div key={e.id} style={{ position: 'relative', flexShrink: 0, width: 80, textAlign: 'center' }}>
+                  <button onClick={() => setActive(i)} style={{ background: 'transparent', border: 0, padding: 0, cursor: 'pointer', display: 'inline-block' }}>
+                    <TimelineNode style={nodeStyle} state={state} accent={accent} glow={glow} />
+                  </button>
+                  <div style={{
+                    fontFamily: 'Space Grotesk', fontSize: 10, letterSpacing: '0.15em',
+                    color: state === 'active' ? accent : '#8e918f',
+                    opacity: state === 'inactive' ? 0.5 : 1,
+                    marginTop: 4,
+                  }}>{e.year}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom controls */}
+      <div className="absolute" style={{ bottom: 32, left: 24, right: 24 }}>
+        <div className="flex items-center justify-between">
+          <div style={{ fontFamily: 'Space Grotesk', fontSize: 10, letterSpacing: '0.25em', color: '#8e918f' }}>
+            <span style={{ color: accent }}>{String(active+1).padStart(2,'0')}</span><span style={{ opacity: 0.4 }}> / {String(entries.length).padStart(2,'0')}</span>
+          </div>
+          <NavArrows
+            onPrev={() => setActive((a) => Math.max(a-1, 0))}
+            onNext={() => setActive((a) => Math.min(a+1, entries.length-1))}
+            atStart={active===0} atEnd={active===entries.length-1}
+            accent={accent}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const tweaks = t;
+  const entries = window.TIMELINE_ENTRIES;
+
+  return (
+    <>
+      <DesignCanvas>
+        <DCSection id="desktop" title="Desktop · 1440 × 900">
+          <DCArtboard id="v4-hybrid" label="V4 — Magazine + Constellation Curve" width={1440} height={900}>
+            <TimelineHybrid entries={entries} tweaks={tweaks} />
+          </DCArtboard>
+        </DCSection>
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection label="Navigation Style" />
+        <TweakRadio label="Nav style" value={tweaks.navStyle}
+          options={['arrows', 'pill', 'scrubber', 'edge', 'counter', 'year-strip', 'orbit', 'ghost-text']}
+          onChange={(v) => setTweak('navStyle', v)} />
+
+        <TweakSection label="Atmosphere" />
+        <TweakSlider label="Glow intensity" value={tweaks.glow} min={0} max={1} step={0.05}
+          onChange={(v) => setTweak('glow', v)} />
+        <TweakSlider label="Grain" value={tweaks.grainIntensity} min={0} max={0.15} step={0.01}
+          onChange={(v) => setTweak('grainIntensity', v)} />
+        <TweakColor label="Accent" value={tweaks.accent}
+          onChange={(v) => setTweak('accent', v)} />
+
+        <TweakSection label="Node + Rail" />
+        <TweakRadio label="Node style" value={tweaks.nodeStyle}
+          options={['dot', 'bar', 'bracket', 'ruler-cluster']}
+          onChange={(v) => setTweak('nodeStyle', v)} />
+        <TweakToggle label="Show ticks" value={tweaks.showTicks}
+          onChange={(v) => setTweak('showTicks', v)} />
+        <TweakRadio label="Connector (V1)" value={tweaks.connector}
+          options={['none', 'dotted']}
+          onChange={(v) => setTweak('connector', v)} />
+
+        <TweakSection label="Card" />
+        <TweakRadio label="Density" value={tweaks.density}
+          options={['compact', 'standard', 'detailed']}
+          onChange={(v) => setTweak('density', v)} />
+
+        <TweakSection label="Motion" />
+        <TweakSelect label="Auto-advance" value={tweaks.autoAdvance}
+          options={[
+            { label: 'Off', value: 0 },
+            { label: '4s', value: 4 },
+            { label: '8s', value: 8 },
+          ]}
+          onChange={(v) => setTweak('autoAdvance', Number(v))} />
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

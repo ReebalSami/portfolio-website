@@ -9,7 +9,12 @@
       "blog": "Blog",
       "cv": "Resumé",
       "contact": "Kontakt",
-      "openMenu": "Menü öffnen"
+      "openMenu": "Menü öffnen",
+      "aboutSubmenu": {
+        "who": "Wer ich bin",
+        "journey": "Werdegang",
+        "tech": "Tech-Stack"
+      }
     },
     "footer": {
       "rights": "Alle Rechte vorbehalten.",
@@ -84,6 +89,16 @@
           "Technisch: Unix und Shell-Programmierung, Data Engineering, Empirische Forschungsmethoden",
           "Laufende Masterarbeit: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
         ]
+      }
+    },
+    "journey": {
+      "tagline": "Von Geschäftsbüchern in Damaskus zu Multi-Agenten-Systemen in Hamburg.",
+      "viewFullCv": "Vollständiger Lebenslauf",
+      "aria": {
+        "carousel": "Karriereweg-Karussell",
+        "previous": "Vorheriger Eintrag",
+        "next": "Nächster Eintrag",
+        "goToEntry": "Zu Eintrag {n} springen"
       }
     }
   },
