@@ -3,7 +3,7 @@
 # Reebal Sami — Portfolio-Kontext
 
 ## Kurzprofil
-Reebal Sami ist Data Scientist und KI-Ingenieur in Hamburg. Er verbindet über fünf Jahre Erfahrung in der Unternehmensfinanzierung bei OTTO Group (2016–2022, Bilanzbuchhalter) mit modernen KI- und ML-Fähigkeiten. Er hat einen B.Sc. in Betriebswirtschaftslehre mit Schwerpunkt Finanzmanagement und Banking an der Yarmouk Private University in Damaskus (2009–2013) absolviert. Derzeit schreibt er seine Masterarbeit in Data Science & KI an der FH Wedel (seit April 2024). Das Thema: **Dokumentenintelligenz und Wissensgraphkonstruktion** — OCR-freie Extraktion mit Donut und LayoutLMv3, Wissensgraphkonstruktion und GraphRAG-Reasoning mit lokalen LLMs, vollständig lokal und ohne Cloud-Abhängigkeit. Zuvor war er als Werkstudent in KI und Data Science bei Datalogue GmbH tätig (Jun.–Dez. 2025, 20 Std./Woche) und hat dort eine B2B-Sales-Pipeline von Konzept bis MVP entwickelt, die manuelle Recherche um rund die Hälfte reduziert hat.
+Reebal Sami ist Data Scientist und AI Engineer in Hamburg. Er verbindet über fünf Jahre Erfahrung in der Unternehmensfinanzierung bei OTTO Group (2016–2022, Bilanzbuchhalter) mit modernen KI- und ML-Fähigkeiten. Er hat einen B.Sc. in Betriebswirtschaftslehre mit Schwerpunkt Finanzmanagement und Banking an der Yarmouk Private University in Damaskus (2009–2013) absolviert. Derzeit schreibt er seine Masterarbeit in Data Science & KI an der FH Wedel (seit April 2024). Das Thema: **Dokumentenintelligenz und Wissensgraphkonstruktion** — OCR-freie Extraktion mit Donut und LayoutLMv3, Wissensgraphkonstruktion und GraphRAG-Reasoning mit lokalen LLMs, vollständig lokal und ohne Cloud-Abhängigkeit. Zuvor war er als Werkstudent in KI und Data Science bei Datalogue GmbH tätig (Jun.–Dez. 2025, 20 Std./Woche) und hat dort eine B2B-Sales-Pipeline von Konzept bis MVP entwickelt, die manuelle Recherche um rund die Hälfte reduziert hat.
 
 ## Was Reebal kann
 Reebal baut End-to-End-KI/ML-Lösungen — von Datenpipelines und Modelltraining bis zum Deployment. Seine wichtigsten Stärken:
@@ -37,7 +37,7 @@ Reebal baut End-to-End-KI/ML-Lösungen — von Datenpipelines und Modelltraining
   - Kurse: Deep Learning, Computer Vision, maschinelles Lernen, Symbolische KI, Ökonometrie, Empirische Forschungsmethoden, Category Management, E-Commerce-Geschäftsmodelle, Digitale Transformation, Strategisches Management, Organisationstheorie, Agiles PM & Change Management, Data Engineering, Unix & Shell-Programmierung
   - Aktueller Schnitt: 2,00; 60 von 90 ECTS abgeschlossen (Stand April 2026)
   - Thesis: Dokumentenintelligenz und Wissensgraphkonstruktion (GraphRAG, Donut, LayoutLMv3)
-- **Bilanzbuchhalter-Ausbildung (IHK-Abschluss)** — GFS Steuerfachschule (2018–2020, abends neben der Vollzeitstelle bei Otto)
+- **Bilanzbuchhalter-Ausbildung (kein IHK-Abschluss)** — GFS Steuerfachschule (2018–2020, abends neben der Vollzeitstelle bei Otto)
 - **B.Sc. Betriebswirtschaftslehre — Finanzmanagement und Banking** — Yarmouk Private University, Damaskus, Syrien (2009–2013)
   - Abschlussarbeit: Test des Capital Asset Pricing Model (CAPM) am syrischen Aktienmarkt
 

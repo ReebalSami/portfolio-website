@@ -37,7 +37,7 @@
   "about": {
     "title": "Über mich",
     "subtitle": "Wer ich bin",
-    "summary1": "Ich bin Data Scientist und KI-Ingenieur — und verbinde über fünf Jahre Erfahrung im Corporate Finance der OTTO Group mit aktuellen Fähigkeiten in KI und maschinellem Lernen. Aktuell schreibe ich meine Masterarbeit über GraphRAG Document Intelligence im Rahmen meines M.Sc. Data Science & KI an der FH Wedel.",
+    "summary1": "Ich bin Data Scientist & AI Engineer und verbinde über fünf Jahre Erfahrung im Corporate Finance Sektor der OTTO Group mit aktuellen Fähigkeiten in KI und maschinellem Lernen. Aktuell schreibe ich meine Masterarbeit über GraphRAG Document Intelligence im Rahmen meines M.Sc. Data Science & KI an der FH Wedel.",
     "summary2": "Von der Idee bis zur Lieferung — von Multi-Agenten-B2B-Pipelines bis zur Pflanzenkrankheitserkennung mit Deep Learning. Ich baue intelligente Lösungen mit messbarem Geschäftsimpact.",
     "cardExpand": "Mehr erfahren",
     "cardDetails": "Details",
@@ -54,7 +54,7 @@
           "RPA-Automatisierungen mit UiPath für Urlaubsrückstellungen und Zinspläne geleitet",
           "IFRS-Implementierungsprojekte (IFRS 7, 9, 13) und Optionsbewertung",
           "Hauptansprechpartner für externe Prüfer und Beratungsfirmen",
-          "Bilanzbuchhalter-Ausbildung (IHK) an der GFS Steuerfachschule (2018–2020)"
+          "Bilanzbuchhalter-Weiterbildung an der GFS Steuerfachschule (2018–2020)"
         ]
       },
       "builder": {
@@ -149,8 +149,8 @@
     "switchTheme": "Design",
     "printVersion": "Drucken",
     "present": "Heute",
-    "metaTitle": "Lebenslauf — Reebal Sami | Data Scientist & KI-Ingenieur",
-    "metaDescription": "Lebenslauf von Reebal Sami — Data Scientist & KI-Ingenieur aus Hamburg, Deutschland."
+    "metaTitle": "Lebenslauf — Reebal Sami | Data Scientist & AI Engineer",
+    "metaDescription": "Lebenslauf von Reebal Sami — Data Scientist & AI Engineer aus Hamburg, Deutschland."
   },
   "contact": {
     "title": "Kontakt",

@@ -110,7 +110,7 @@ titles:
     category: translated
     forms:
       en: "AI Engineer"
-      de: "KI-Ingenieur"
+      de: "AI Engineer"
       es: "Ingeniero de IA"
       ar: "مهندس ذكاء اصطناعي"
 

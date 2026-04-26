@@ -103,6 +103,7 @@ tech:
       de: "'Computer Vision' is standard in German — no translation."
   - id: ai
     category: translated
+    skip_drift_check: true
     forms:
       en: "AI"
       de: "KI"
@@ -110,7 +111,7 @@ tech:
       ar: "الذكاء الاصطناعي"
     notes:
       en: "Use 'AI' after first full expansion in document. Keep as 'AI' in hero/title contexts."
-      de: "Use 'KI' (Künstliche Intelligenz) on first use; 'KI' thereafter."
+      de: "Use 'KI' (Künstliche Intelligenz) on first use; 'KI' thereafter. Exception: the title compound 'AI Engineer' (see ai_engineer entry) keeps English 'AI' — drift check is skipped to allow this code-switch."
       ar: "Use 'AI' in tech contexts where it is a widely understood brand term; use الذكاء الاصطناعي in body text first mention."
 
 titles:
@@ -127,7 +128,7 @@ titles:
     category: translated
     forms:
       en: "AI Engineer"
-      de: "KI-Ingenieur"
+      de: "AI Engineer"
       es: "Ingeniero de IA"
       ar: "مهندس ذكاء اصطناعي"
   - id: working_student

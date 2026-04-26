@@ -25,7 +25,7 @@ basics:
   name: "Reebal Sami"
   title:
     en: "Data Scientist & AI Engineer"
-    de: "Data Scientist & KI-Ingenieur"
+    de: "Data Scientist & AI Engineer"
     es: "Científico de datos e ingeniero de inteligencia artificial"
     ar: "عالم بيانات ومهندس ذكاء اصطناعي"
   email: "contact@reebal-sami.com"
@@ -63,13 +63,13 @@ profile:
       Comfortable navigating modern AI-assisted development with the latest tools and the legacy enterprise systems many companies still run on.
       Currently writing my Master's thesis on GraphRAG Document Intelligence as part of my M.Sc. Data Science & AI at FH Wedel, while shipping production code on the side.
     de: >-
-      Data Scientist und KI-Ingenieur an der Schnittstelle von Business und moderner KI.
+      Data Scientist und AI Engineer an der Schnittstelle von Business und moderner KI.
       Über fünf Jahre bei der OTTO Group haben tiefes Verständnis für Unternehmensdatenflüsse, Finanzsysteme und bereichsübergreifende Stakeholder-Arbeit aufgebaut.
-      Heute orchestriere ich End-to-End-KI-Lösungen über mehrere Schichten — von Multi-Agenten-LLM-Systemen und automatisierten News-Crawler-Pipelines
+      Heute entwerfe und baue ich End-to-End KI-Lösungen über mehrere Schichten — von Multi-Agent-LLM-Systemen und automatisierten News-Crawler-Pipelines
       bis hin zu Deep-Learning-Modellen für Computer Vision.
       Meine Portfolio-Website habe ich selbst gebaut und deploye sie via AWS CDK.
-      Gleichermaßen zuhause in moderner KI-gestützter Entwicklung mit den neuesten Tools und in den Legacy-Enterprise-Systemen, auf denen viele Unternehmen immer noch laufen.
-      Aktuell am Schreiben der Masterarbeit in Data Science & KI an der FH Wedel zum Thema GraphRAG Document Intelligence, parallel dazu produktionsreifer Code.
+      Ich bin gleichermaßen zuhause in moderner KI-gestützter Entwicklung mit den neuesten Tools und in Legacy-Enterprise-Systemen, auf denen viele Unternehmen immer noch laufen.
+      Aktuell schreibe ich an meiner Masterarbeit in Data Science & KI an der FH Wedel zum Thema GraphRAG Document Intelligence und bringe nebenbei Code in Produktion.
     es: >-
       Científico de datos e ingeniero de IA que trabaja en la intersección entre negocio e IA moderna.
       Más de cinco años en OTTO Group me dieron una comprensión profunda de flujos de datos corporativos, sistemas financieros y trabajo transversal con stakeholders.
@@ -280,11 +280,11 @@ education:
   - institution: "GFS Steuerfachschule"
     area:
       en: "Financial Accounting (Bilanzbuchhalter)"
-      de: "Bilanzbuchhalter (IHK)"
+      de: "Bilanzbuchhalter"
       es: "Contabilidad financiera (Bilanzbuchhalter)"
       ar: "المحاسبة المالية (Bilanzbuchhalter)"
     studyType:
-      en: "Professional Certification"
+      en: "Professional Course"
       de: "Weiterbildung"
       es: "Certificación Profesional"
       ar: "الشهادة المهنية"
