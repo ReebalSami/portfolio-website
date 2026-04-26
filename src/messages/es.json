@@ -9,7 +9,12 @@
       "blog": "Blog",
       "cv": "Resumé",
       "contact": "Contacto",
-      "openMenu": "Abrir menú"
+      "openMenu": "Abrir menú",
+      "aboutSubmenu": {
+        "who": "Quién soy",
+        "journey": "Trayectoria",
+        "tech": "Stack técnico"
+      }
     },
     "footer": {
       "rights": "Todos los derechos reservados.",
@@ -84,6 +89,16 @@
           "Técnico: Unix y programación shell, Data Engineering, Métodos de Investigación Empírica",
           "Tesis en curso: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
         ]
+      }
+    },
+    "journey": {
+      "tagline": "De los libros contables en Damasco a los sistemas multi-agente en Hamburgo.",
+      "viewFullCv": "CV completo",
+      "aria": {
+        "carousel": "Carrusel de trayectoria profesional",
+        "previous": "Entrada anterior",
+        "next": "Entrada siguiente",
+        "goToEntry": "Ir a la entrada {n}"
       }
     }
   },

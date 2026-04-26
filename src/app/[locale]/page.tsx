@@ -67,7 +67,10 @@ export default async function Home({ params }: Props) {
 
       <section id="about" className="scroll-mt-20 px-4 py-16 sm:px-6 md:py-28">
         <AnimatedSection className="mx-auto max-w-4xl">
-          <AboutSection downloadCvEnabled={config.features.downloadCV} />
+          <AboutSection
+            downloadCvEnabled={config.features.downloadCV}
+            compactTimelineEnabled={config.features.compactTimeline}
+          />
         </AnimatedSection>
       </section>
 

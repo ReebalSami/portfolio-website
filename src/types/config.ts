@@ -37,6 +37,18 @@ export const FeaturesConfigSchema = z.object({
   rss: z.boolean(),
   downloadCV: z.boolean(),
   cv: z.boolean(),
+  /**
+   * Homepage Journey (M7).
+   *
+   * `false` → old vertical `TimelineEntryCard` list inside AboutSection.
+   * `true`  → new horizontal cinematic `<CompactJourney />` carousel + About
+   *           nav becomes a hover-dropdown (Who / Journey / Tech).
+   *
+   * Flip this one line in `config/site.yaml` to go live; no redeploy needed
+   * for production because the YAML is baked in at build time (dev re-reads
+   * on every request, so toggling is instant in dev too).
+   */
+  compactTimeline: z.boolean().default(false),
 });
 
 /**
