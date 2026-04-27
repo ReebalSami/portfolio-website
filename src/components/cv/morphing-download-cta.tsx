@@ -73,9 +73,11 @@ import {
   AnimatePresence,
   motion,
   useMotionValue,
+  useMotionValueEvent,
   useReducedMotion,
   useSpring,
   type AnimationPlaybackControls,
+  type MotionValue,
 } from "framer-motion";
 import { Download, FileText, Printer, X } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -147,6 +149,14 @@ interface Target {
 /** Pill corner radius — matches `rounded-md` in this project (--radius * 0.8 ≈ 10 px). */
 const PILL_RADIUS = 10;
 
+/** Spring config for state-change morphs and during-spring re-targets. */
+const SPRING_OPTIONS = {
+  type: "spring" as const,
+  stiffness: 260,
+  damping: 32,
+  mass: 0.8,
+};
+
 /** FAB dimensions. */
 const FAB_SIZE = 56; // h-14 w-14
 const FAB_RADIUS = 9999;
@@ -173,7 +183,6 @@ const FAB_FALLBACK_BOTTOM = 96; // 6rem
 
 interface MorphContextValue {
   state: MorphState;
-  target: Target | null;
   panelOpen: boolean;
   setPanelOpen: (open: boolean) => void;
   setTopRect: (rect: LayoutRect | null) => void;
@@ -182,6 +191,60 @@ interface MorphContextValue {
   setBottomSentinel: (el: Element | null) => void;
   themes: DownloadTheme[];
   label: string;
+}
+
+/**
+ * Pure, side-effect-free target derivation. Called from a motion-value
+ * subscription on each rect change — must NOT touch React state.
+ */
+function computeTarget(
+  state: MorphState,
+  topRect: LayoutRect | null,
+  bottomRect: LayoutRect | null,
+  chatButton: LayoutRect | null,
+  chatDialog: LayoutRect | null,
+  chatOpen: boolean,
+): Target | null {
+  if (state === "top" && topRect) {
+    return {
+      top: topRect.top,
+      left: topRect.left,
+      width: topRect.width,
+      height: topRect.height,
+      borderRadius: PILL_RADIUS,
+    };
+  }
+  if (state === "bottom" && bottomRect) {
+    return {
+      top: bottomRect.top,
+      left: bottomRect.left,
+      width: bottomRect.width,
+      height: bottomRect.height,
+      borderRadius: PILL_RADIUS,
+    };
+  }
+  if (typeof window === "undefined") return null;
+  const vh = window.innerHeight;
+  const vw = window.innerWidth;
+  let bottomPx: number;
+  let rightPx: number;
+  if (chatOpen && chatDialog) {
+    bottomPx = vh - chatDialog.top + 20;
+    rightPx = vw - chatDialog.right;
+  } else if (chatButton) {
+    bottomPx = vh - chatButton.top + FAB_GAP;
+    rightPx = vw - chatButton.right;
+  } else {
+    bottomPx = FAB_FALLBACK_BOTTOM;
+    rightPx = FAB_FALLBACK_MARGIN;
+  }
+  return {
+    top: vh - bottomPx - FAB_SIZE,
+    left: vw - rightPx - FAB_SIZE,
+    width: FAB_SIZE,
+    height: FAB_SIZE,
+    borderRadius: FAB_RADIUS,
+  };
 }
 
 const MorphContext = createContext<MorphContextValue | null>(null);
@@ -274,33 +337,34 @@ function MagneticWrap({
 // =============================================================================
 
 interface PortalButtonProps {
-  target: Target | null;
+  topRectMV: MotionValue<LayoutRect | null>;
+  bottomRectMV: MotionValue<LayoutRect | null>;
   state: MorphState;
   label: string;
   panelOpen: boolean;
   onClick: () => void;
 }
 
-function PortalButton({ target, state, label, panelOpen, onClick }: PortalButtonProps) {
+function PortalButton({ topRectMV, bottomRectMV, state, label, panelOpen, onClick }: PortalButtonProps) {
   const prefersReducedMotion = useReducedMotion();
   const mounted = useHasMounted();
   const isFab = state === "fab";
+  const { buttonRect: chatButton, dialogRect: chatDialog, isOpen: chatOpen } = useChatLayout();
 
   // ---------------------------------------------------------------------------
-  // Motion values drive the button's position + size. Using motion values
-  // (not Framer's `animate={...}` prop) gives us two superpowers:
-  //   1. Intra-state scroll updates can `.set()` the values INSTANTLY —
-  //      the button sticks to its placeholder's live rect every frame,
-  //      no spring dancing as the target changes pixel-by-pixel.
-  //   2. Inter-state transitions use imperative `animate()` with a spring —
-  //      exactly one clean spring per state change, with generation-based
+  // Motion values drive the button's position + size. Two key design moves:
+  //   1. **Per-scroll updates bypass React entirely.** Slot rects live in
+  //      `topRectMV` / `bottomRectMV` (Framer motion values, set by
+  //      SlotPlaceholder on each scroll-rAF). We subscribe via
+  //      `useMotionValueEvent` and snap our own position motion values
+  //      synchronously — no React render, no `useMemo`, no
+  //      `useLayoutEffect` per scroll tick. Fixes the mobile scroll
+  //      wobble that the previous useState-based pipeline introduced
+  //      (2-3 frames of render lag → visible trailing during fast scroll).
+  //   2. **Inter-state transitions use imperative `animate()` with a spring**
+  //      — exactly one clean spring per state change, with generation-based
   //      interruption handling so a mid-flight state change cleanly
   //      re-targets without leaving `animatingRef` stuck true.
-  //
-  // This fixes the "button dances while scrolling in the top slot" bug
-  // reported in #46 — the old implementation's `animate={{top, left,...}}`
-  // restarted the spring on every scroll tick because `target` was a
-  // fresh object from `useMemo` each render.
   // ---------------------------------------------------------------------------
   const top = useMotionValue(0);
   const left = useMotionValue(0);
@@ -313,15 +377,93 @@ function PortalButton({ target, state, label, panelOpen, onClick }: PortalButton
   const animGenRef = useRef(0);
   const animControlsRef = useRef<AnimationPlaybackControls[]>([]);
 
+  // Latest values readable inside motion-value subscriptions (which run
+  // outside React's render cycle). The ref values are updated in a
+  // useLayoutEffect after each commit — this satisfies the
+  // react-hooks/refs rule ("don't update refs during render") while
+  // still guaranteeing that any snap fired AFTER React commits a render
+  // sees the latest props.
+  const stateRef = useRef(state);
+  const chatRef = useRef({ chatButton, chatDialog, chatOpen });
   useLayoutEffect(() => {
+    stateRef.current = state;
+    chatRef.current = { chatButton, chatDialog, chatOpen };
+  });
+
+  // Snap motion values to the current target.
+  //
+  // Two behaviors based on whether a state-change spring is in flight:
+  //
+  // **Idle path (no spring):** Instant `.set()` for all 5 values. This is
+  //   the per-scroll path that eliminates the pill-state wobble — position
+  //   updates with zero pipeline lag.
+  //
+  // **Spring-in-flight path:** Position must keep tracking the live rect
+  //   while a state-change spring runs (otherwise during smooth-scroll
+  //   transitions the spring locks onto a stale rect and the button lands
+  //   at the wrong place). In rect-tracked states (top/bottom), we
+  //   re-target the position spring via `animate()` — Framer smoothly
+  //   continues from the current value+velocity to the new target. Shape
+  //   (width/height/borderRadius) is left alone so the pill↔fab morph
+  //   stays smooth. In fab state, position is chat-driven (not rect-
+  //   driven), so we don't touch it here either.
+  //
+  // Note: `.set()` does NOT interrupt running animations in Framer Motion
+  // v11+, which is why we use `animate()` to re-target instead.
+  const snap = useCallback(() => {
+    const target = computeTarget(
+      stateRef.current,
+      topRectMV.get(),
+      bottomRectMV.get(),
+      chatRef.current.chatButton,
+      chatRef.current.chatDialog,
+      chatRef.current.chatOpen,
+    );
     if (!target) return;
+
+    const isRectTracked =
+      stateRef.current === "top" || stateRef.current === "bottom";
+
+    // Position: in rect-tracked states (top/bottom), always snap to the
+    // live rect. We must `.stop()` first because Framer Motion v11+ does
+    // NOT interrupt running animations on `.set()` — without `.stop()` an
+    // in-flight state-change spring would keep overwriting our snap.
+    if (isRectTracked) {
+      top.stop();
+      left.stop();
+      top.set(target.top);
+      left.set(target.left);
+    }
+
+    // Shape (width, height, borderRadius): only snap when no spring is
+    // in flight. During a state-change the shape is morphing pill ↔ fab
+    // and we must not interrupt it.
+    if (!animatingRef.current) {
+      if (!isRectTracked) {
+        // FAB state, idle: position is chat-driven, safe to snap now.
+        top.set(target.top);
+        left.set(target.left);
+      }
+      width.set(target.width);
+      height.set(target.height);
+      borderRadius.set(target.borderRadius);
+    }
+  }, [topRectMV, bottomRectMV, top, left, width, height, borderRadius]);
+
+  // Per-scroll path: slot motion values fire `change` synchronously when
+  // SlotPlaceholder calls `.set()`. We snap immediately. No React render.
+  useMotionValueEvent(topRectMV, "change", snap);
+  useMotionValueEvent(bottomRectMV, "change", snap);
+
+  // State-change path: kicks off the morph spring. Also handles initial
+  // mount (prevStateRef seeded with initial state == current → no spring).
+  useLayoutEffect(() => {
+    const target = computeTarget(state, topRectMV.get(), bottomRectMV.get(), chatButton, chatDialog, chatOpen);
+    if (!target) return;
+
     const stateChanged = prevStateRef.current !== state;
     prevStateRef.current = state;
 
-    // Spring fires on state change, AND continues "chasing" the live
-    // target during an in-flight spring (so e.g. a top→fab transition
-    // interrupted by the chat dialog opening still lands on the correct
-    // final rect). Idle renders (intra-state scroll) snap instantly.
     const shouldSpring =
       !prefersReducedMotion && (stateChanged || animatingRef.current);
 
@@ -330,19 +472,12 @@ function PortalButton({ target, state, label, panelOpen, onClick }: PortalButton
       const gen = ++animGenRef.current;
       animatingRef.current = true;
 
-      const spring = {
-        type: "spring" as const,
-        stiffness: 260,
-        damping: 32,
-        mass: 0.8,
-      };
-
       animControlsRef.current = [
-        animate(top, target.top, spring),
-        animate(left, target.left, spring),
-        animate(width, target.width, spring),
-        animate(height, target.height, spring),
-        animate(borderRadius, target.borderRadius, spring),
+        animate(top, target.top, SPRING_OPTIONS),
+        animate(left, target.left, SPRING_OPTIONS),
+        animate(width, target.width, SPRING_OPTIONS),
+        animate(height, target.height, SPRING_OPTIONS),
+        animate(borderRadius, target.borderRadius, SPRING_OPTIONS),
       ];
 
       Promise.allSettled(
@@ -353,17 +488,19 @@ function PortalButton({ target, state, label, panelOpen, onClick }: PortalButton
         // the generation and keeps the flag true.
         if (animGenRef.current === gen) {
           animatingRef.current = false;
+          // After spring lands, snap to the live rect (which may have
+          // moved during the animation, e.g. user kept scrolling).
+          snap();
         }
       });
     } else {
-      // Idle — snap to the latest target. No spring, no dancing.
       top.set(target.top);
       left.set(target.left);
       width.set(target.width);
       height.set(target.height);
       borderRadius.set(target.borderRadius);
     }
-  }, [state, target, prefersReducedMotion, top, left, width, height, borderRadius]);
+  }, [state, chatButton, chatDialog, chatOpen, prefersReducedMotion, snap, topRectMV, bottomRectMV, top, left, width, height, borderRadius]);
 
   // Stop any in-flight animations on unmount so their promises don't leak.
   useEffect(() => {
@@ -372,7 +509,7 @@ function PortalButton({ target, state, label, panelOpen, onClick }: PortalButton
     };
   }, []);
 
-  if (!mounted || !target) return null;
+  if (!mounted) return null;
 
   const node = (
     <motion.div
@@ -429,17 +566,90 @@ function PortalButton({ target, state, label, panelOpen, onClick }: PortalButton
 // =============================================================================
 
 interface PortalPanelProps {
-  target: Target | null;
+  topRectMV: MotionValue<LayoutRect | null>;
+  bottomRectMV: MotionValue<LayoutRect | null>;
   state: MorphState;
   themes: DownloadTheme[];
   open: boolean;
   onClose: () => void;
 }
 
-function PortalPanel({ target, state, themes, open, onClose }: PortalPanelProps) {
+// Anchor geometry: top slot drops the panel below the button; bottom + fab
+// raise it above. The same `panelTop`/`panelLeft` motion values are written
+// from a shared subscription so per-scroll updates skip React entirely
+// (matches the PortalButton path).
+const PANEL_WIDTH = 256; // w-64
+const PANEL_HEIGHT_APPROX = 260;
+const PANEL_GAP = 12;
+
+function computePanelPosition(
+  state: MorphState,
+  target: Target,
+): { top: number; left: number } {
+  let panelTop: number;
+  let panelLeft: number;
+  if (state === "top") {
+    panelTop = target.top + target.height + PANEL_GAP;
+    panelLeft = target.left;
+  } else if (state === "fab") {
+    // FAB is at the far end; panel rises above and aligns its right edge
+    // with the FAB's right edge so it reads from the button downward.
+    panelTop = target.top - PANEL_GAP - PANEL_HEIGHT_APPROX;
+    panelLeft = target.left + target.width - PANEL_WIDTH;
+  } else {
+    // bottom slot — inline; panel rises above its inline-start.
+    panelTop = target.top - PANEL_GAP - PANEL_HEIGHT_APPROX;
+    panelLeft = target.left;
+  }
+  if (typeof window !== "undefined") {
+    panelLeft = Math.max(16, Math.min(panelLeft, window.innerWidth - PANEL_WIDTH - 16));
+    panelTop = Math.max(16, panelTop);
+  }
+  return { top: panelTop, left: panelLeft };
+}
+
+function PortalPanel({ topRectMV, bottomRectMV, state, themes, open, onClose }: PortalPanelProps) {
   const t = useTranslations("cv");
   const prefersReducedMotion = useReducedMotion();
   const mounted = useHasMounted();
+  const { buttonRect: chatButton, dialogRect: chatDialog, isOpen: chatOpen } = useChatLayout();
+
+  // Panel position written outside React's render cycle. Match the same
+  // pattern as PortalButton: subscribe to slot motion values, recompute,
+  // write to the panel's own position motion values, no React state.
+  const panelTop = useMotionValue(0);
+  const panelLeft = useMotionValue(0);
+
+  const stateRef = useRef(state);
+  const chatRef = useRef({ chatButton, chatDialog, chatOpen });
+  useLayoutEffect(() => {
+    stateRef.current = state;
+    chatRef.current = { chatButton, chatDialog, chatOpen };
+  });
+
+  const recompute = useCallback(() => {
+    const target = computeTarget(
+      stateRef.current,
+      topRectMV.get(),
+      bottomRectMV.get(),
+      chatRef.current.chatButton,
+      chatRef.current.chatDialog,
+      chatRef.current.chatOpen,
+    );
+    if (!target) return;
+    const { top: pTop, left: pLeft } = computePanelPosition(stateRef.current, target);
+    panelTop.set(pTop);
+    panelLeft.set(pLeft);
+  }, [topRectMV, bottomRectMV, panelTop, panelLeft]);
+
+  // Per-scroll path: slot motion-value changes → immediate recompute.
+  useMotionValueEvent(topRectMV, "change", recompute);
+  useMotionValueEvent(bottomRectMV, "change", recompute);
+
+  // State / chat changes → recompute. Also runs on mount.
+  useEffect(() => {
+    recompute();
+  }, [state, chatButton, chatDialog, chatOpen, recompute]);
 
   // Close on Escape for keyboard users.
   useEffect(() => {
@@ -451,41 +661,7 @@ function PortalPanel({ target, state, themes, open, onClose }: PortalPanelProps)
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  if (!mounted || !target) return null;
-
-  // Anchor: top slot drops the panel below the button; bottom + fab raise
-  // it above. For all slots we align the panel's inline-end with the
-  // button's inline-end (for a rightward FAB) OR its inline-start (for a
-  // leftward inline button). We approximate "inline-end alignment" by
-  // aligning `right` to the button's right in LTR; in RTL the same logic
-  // still reads as "anchor to the nearer edge" because the page is
-  // mirrored via `dir="rtl"` and `end-*` utilities. Since we're using
-  // `left` here (not `inset-inline-end`), we compute both for clarity.
-  const panelWidth = 256; // w-64
-  const verticalGap = 12;
-
-  let panelTop: number;
-  let panelLeft: number;
-
-  if (state === "top") {
-    panelTop = target.top + target.height + verticalGap;
-    panelLeft = target.left;
-  } else if (state === "fab") {
-    // FAB is at the far end; panel rises above and aligns its right edge
-    // with the FAB's right edge so it reads from the button downward.
-    panelTop = target.top - verticalGap - 260; // approx panel height
-    panelLeft = target.left + target.width - panelWidth;
-  } else {
-    // bottom slot — inline; panel rises above its inline-start.
-    panelTop = target.top - verticalGap - 260;
-    panelLeft = target.left;
-  }
-
-  // Clamp inside viewport.
-  if (typeof window !== "undefined") {
-    panelLeft = Math.max(16, Math.min(panelLeft, window.innerWidth - panelWidth - 16));
-    panelTop = Math.max(16, panelTop);
-  }
+  if (!mounted) return null;
 
   const node = (
     <AnimatePresence>
@@ -501,7 +677,7 @@ function PortalPanel({ target, state, themes, open, onClose }: PortalPanelProps)
             position: "fixed",
             top: panelTop,
             left: panelLeft,
-            width: panelWidth,
+            width: PANEL_WIDTH,
             maxWidth: "calc(100vw - 2rem)",
           }}
           className="z-[61] rounded-xl border border-border bg-background/95 p-4 shadow-xl backdrop-blur-md print:hidden"
@@ -583,10 +759,26 @@ function MorphingDownloadCtaRoot({
   const resolvedLabel = label ?? t("downloadPdf");
 
   // Slot rects — published by each inline placeholder via ResizeObserver +
-  // window scroll/resize. Stored here so we can compute the active target
-  // without lifting each slot into Redux-like state.
-  const [topRect, setTopRect] = useState<LayoutRect | null>(null);
-  const [bottomRect, setBottomRect] = useState<LayoutRect | null>(null);
+  // window scroll/resize. Stored as Framer motion values (NOT React state)
+  // so per-scroll publishes don't trigger React renders. PortalButton +
+  // PortalPanel subscribe via `useMotionValueEvent` and recompute their
+  // positions on each rect change without re-rendering. This is the fix
+  // for the mobile pill-state scroll wobble (see top-of-file comment).
+  const topRectMV = useMotionValue<LayoutRect | null>(null);
+  const bottomRectMV = useMotionValue<LayoutRect | null>(null);
+
+  const setTopRect = useCallback(
+    (rect: LayoutRect | null) => {
+      topRectMV.set(rect);
+    },
+    [topRectMV],
+  );
+  const setBottomRect = useCallback(
+    (rect: LayoutRect | null) => {
+      bottomRectMV.set(rect);
+    },
+    [bottomRectMV],
+  );
 
   // Sentinel elements — one at the END of the top slot and one at the
   // START of the bottom slot. The viewport-midline test against these
@@ -658,69 +850,16 @@ function MorphingDownloadCtaRoot({
   }, [topSentinel, bottomSentinel]);
 
   // ---------------------------------------------------------------------------
-  // Resolve the target rect the portal button should occupy right now.
-  // Derives the FAB target from the ChatLayoutContext, falling back to a
-  // viewport-anchored default when the chat widget isn't mounted.
+  // Target derivation now lives inside PortalButton + PortalPanel (each
+  // subscribes to the slot motion values + chat layout context and
+  // computes its own target). The Root no longer holds a `target`
+  // useMemo because doing so would re-run on every scroll publish,
+  // re-introducing the React render lag we're trying to avoid.
   // ---------------------------------------------------------------------------
-  const { buttonRect: chatButton, dialogRect: chatDialog, isOpen: chatOpen } = useChatLayout();
-
-  const target: Target | null = useMemo(() => {
-    if (state === "top" && topRect) {
-      return {
-        top: topRect.top,
-        left: topRect.left,
-        width: topRect.width,
-        height: topRect.height,
-        borderRadius: PILL_RADIUS,
-      };
-    }
-    if (state === "bottom" && bottomRect) {
-      return {
-        top: bottomRect.top,
-        left: bottomRect.left,
-        width: bottomRect.width,
-        height: bottomRect.height,
-        borderRadius: PILL_RADIUS,
-      };
-    }
-    // fab — derive vertical position from the chat widget's live rect.
-    // Priority: dialog (if open) > button > pre-hydration fallback.
-    if (typeof window === "undefined") return null;
-    const vh = window.innerHeight;
-    const vw = window.innerWidth;
-
-    let bottomPx: number;
-    let rightPx: number;
-    if (chatOpen && chatDialog) {
-      // 20 px above the dialog, right-aligned with it.
-      bottomPx = vh - chatDialog.top + 20;
-      rightPx = vw - chatDialog.right;
-    } else if (chatButton) {
-      // FAB_GAP px above the chat button, right-aligned with it.
-      bottomPx = vh - chatButton.top + FAB_GAP;
-      rightPx = vw - chatButton.right;
-    } else {
-      // No chat rect yet (pre-hydration / no chat feature): match the
-      // legacy CvDownloadFab's `bottom: 6rem` default so we're safely
-      // ABOVE the chat widget's standard `bottom-6 end-6` slot on first
-      // paint. Fixes the collision reported in #46.
-      bottomPx = FAB_FALLBACK_BOTTOM;
-      rightPx = FAB_FALLBACK_MARGIN;
-    }
-
-    return {
-      top: vh - bottomPx - FAB_SIZE,
-      left: vw - rightPx - FAB_SIZE,
-      width: FAB_SIZE,
-      height: FAB_SIZE,
-      borderRadius: FAB_RADIUS,
-    };
-  }, [state, topRect, bottomRect, chatButton, chatDialog, chatOpen]);
 
   const value = useMemo<MorphContextValue>(
     () => ({
       state,
-      target,
       panelOpen,
       setPanelOpen,
       setTopRect,
@@ -730,21 +869,23 @@ function MorphingDownloadCtaRoot({
       themes,
       label: resolvedLabel,
     }),
-    [state, target, panelOpen, setPanelOpen, themes, resolvedLabel],
+    [state, panelOpen, setPanelOpen, setTopRect, setBottomRect, themes, resolvedLabel],
   );
 
   return (
     <MorphContext.Provider value={value}>
       {children}
       <PortalButton
-        target={target}
+        topRectMV={topRectMV}
+        bottomRectMV={bottomRectMV}
         state={state}
         label={resolvedLabel}
         panelOpen={panelOpen}
         onClick={() => setPanelOpen(!panelOpen)}
       />
       <PortalPanel
-        target={target}
+        topRectMV={topRectMV}
+        bottomRectMV={bottomRectMV}
         state={state}
         themes={themes}
         open={panelOpen}
