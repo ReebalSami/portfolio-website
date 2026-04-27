@@ -3,7 +3,7 @@ import { Space_Grotesk, Archivo, JetBrains_Mono, IBM_Plex_Sans_Arabic, Caveat } 
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { ViewTransitions } from "next-view-transitions";
+import { ViewTransitionsProvider } from "@/components/shared/view-transitions-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/layout/header";
@@ -179,7 +179,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     .join(" ");
 
   return (
-    <ViewTransitions>
+    <ViewTransitionsProvider>
     <html
       lang={locale}
       dir={isRtl ? "rtl" : "ltr"}
@@ -233,6 +233,6 @@ export default async function LocaleLayout({ children, params }: Props) {
         </ThemeProvider>
       </body>
     </html>
-    </ViewTransitions>
+    </ViewTransitionsProvider>
   );
 }

@@ -2,11 +2,14 @@ import { describe, expect, it, vi } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 
-// next-view-transitions is used by TransitionLink — stub the routing hook
-// since jsdom has no view transitions API and we don't navigate anywhere
-// in these tests.
-vi.mock("next-view-transitions", () => ({
-  useTransitionRouter: () => ({ push: vi.fn() }),
+// `<TransitionLink>` (used inside <CompactJourney> for the "Full résumé →"
+// link) now consumes the local forward-only `useTransitionRouter`. jsdom
+// has no View Transitions API and no app-router context, so we stub the
+// hook to a noop router. We mock the FILE that defines the hook so any
+// component in the tree that imports it transitively is intercepted too.
+vi.mock("@/components/shared/view-transitions-provider", () => ({
+  ViewTransitionsProvider: ({ children }: { children: React.ReactNode }) => children,
+  useTransitionRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
 }));
 
 // `@/i18n/navigation` re-exports next-intl's createNavigation outputs.

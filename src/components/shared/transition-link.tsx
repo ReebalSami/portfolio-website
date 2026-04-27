@@ -2,7 +2,7 @@
 
 import { forwardRef, type ComponentProps, type MouseEvent } from "react";
 import { Link as IntlLink } from "@/i18n/navigation";
-import { useTransitionRouter } from "next-view-transitions";
+import { useTransitionRouter } from "@/components/shared/view-transitions-provider";
 
 type Props = ComponentProps<typeof IntlLink>;
 
@@ -10,7 +10,7 @@ type Props = ComponentProps<typeof IntlLink>;
  * Locale-aware Link that triggers a CSS View Transition on click.
  *
  * Composes `next-intl`'s `Link` (for type-safe, locale-prefixed hrefs) with
- * `next-view-transitions`' `useTransitionRouter` (to wrap the navigation in
+ * the local forward-only `useTransitionRouter` (to wrap the navigation in
  * `document.startViewTransition`). The rendered <a> still points at the
  * resolved locale-prefixed URL, so:
  *   - SEO / crawlers still see real URLs
@@ -19,6 +19,11 @@ type Props = ComponentProps<typeof IntlLink>;
  *
  * Browsers without View Transitions API fall back to a normal client-side
  * navigation — the rendered <a> is unchanged.
+ *
+ * Browser back/forward (popstate) is *not* wrapped in a view transition —
+ * the local provider deliberately omits the `next-view-transitions`
+ * popstate handler so back navigation snaps instantly. See
+ * `view-transitions-provider.tsx` for the rationale.
  */
 export const TransitionLink = forwardRef<HTMLAnchorElement, Props>(
   function TransitionLink({ onClick, ...props }, ref) {
