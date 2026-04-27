@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getTranslations } from "next-intl/server";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -10,8 +9,8 @@ import { remarkMermaid } from "@/lib/mdx/remark-mermaid";
 import { mdxComponents } from "@/components/blog/mdx-components";
 import { GalleryProvider } from "@/components/blog/gallery-provider";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Clock, Calendar } from "lucide-react";
-import { TransitionLink } from "@/components/shared/transition-link";
+import { Clock, Calendar } from "lucide-react";
+import { BackToBlogLink } from "@/components/blog/back-to-blog-link";
 import { routing } from "@/i18n/routing";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getConfig } from "@/lib/config";
@@ -101,7 +100,6 @@ export default async function BlogPostPage({ params }: PageProps) {
   const { locale, slug } = await params;
   const post = getPostBySlug(slug, locale);
   if (!post) notFound();
-  const t = await getTranslations("blog");
   const config = getConfig();
   const articleUrl = buildLocaleUrl(locale, `/blog/${post.slug}`);
   const ogImageUrl = config.seo.ogImage
@@ -137,13 +135,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 md:py-24">
       <JsonLd id={`blogpost-structured-data-${post.slug}`} data={blogJsonLd} />
-      <TransitionLink
-        href="/#blog"
-        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        {t("backToBlog")}
-      </TransitionLink>
+      <BackToBlogLink className="mb-8" />
 
       <header className="mb-12">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
@@ -197,13 +189,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       </article>
 
       <div className="mt-16 pt-8 border-t border-border">
-        <TransitionLink
-          href="/#blog"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {t("backToBlog")}
-        </TransitionLink>
+        <BackToBlogLink />
       </div>
     </div>
   );

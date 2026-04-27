@@ -1,5 +1,11 @@
 import { test, expect } from "@playwright/test";
 
+/** Escape regex metacharacters so a Tailwind utility class can be safely
+ *  embedded in a `RegExp` pattern (e.g. `tracking-[0.2em]`). */
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 test.describe("Blog", () => {
   test("blog section shows on homepage", async ({ page }) => {
     await page.goto("/en");
@@ -20,10 +26,29 @@ test.describe("Blog", () => {
     }
   });
 
-  test("blog post has back link", async ({ page }) => {
+  test("blog post has BackToBlogLink at top and bottom (matches journey link styling)", async ({
+    page,
+  }) => {
     await page.goto("/en/blog/building-multi-agent-ai-systems");
-    const backLink = page.locator('a[href*="blog"]').first();
-    await expect(backLink).toBeVisible();
+
+    // The BackToBlogLink component exposes a `data-component` attribute so
+    // tests can target it without coupling to copy or CSS classes.
+    const backLinks = page.locator('a[data-component="back-to-blog"]');
+    await expect(backLinks).toHaveCount(2);
+
+    // Both instances should share the journey-link visual signature: small
+    // uppercase heading-font label inside a class list that includes
+    // `font-heading`, `uppercase`, and `tracking-[0.2em]` — these three
+    // tokens together are unique to the journey + back-to-blog treatment.
+    for (const cls of ["font-heading", "uppercase", "tracking-[0.2em]"]) {
+      await expect(backLinks.first()).toHaveClass(new RegExp(escapeRegExp(cls)));
+      await expect(backLinks.last()).toHaveClass(new RegExp(escapeRegExp(cls)));
+    }
+
+    // First instance (above the article header) should be visible without
+    // scrolling. Verifies it points at the homepage `#blog` anchor.
+    await expect(backLinks.first()).toBeVisible();
+    await expect(backLinks.first()).toHaveAttribute("href", /#blog$/);
   });
 
   test("blog post has title and metadata", async ({ page }) => {
