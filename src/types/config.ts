@@ -109,7 +109,6 @@ export const ChatbotConfigSchema = z.object({
 export const ContactFormConfigSchema = z.object({
   provider: z.string(),
   apiKeyEnvVar: z.string(),
-  recipientEmail: z.email(),
   honeypotField: z.string(),
 });
 

@@ -102,6 +102,9 @@ export class PortfolioStack extends cdk.Stack {
         ...(process.env.RESEND_API_KEY && {
           RESEND_API_KEY: process.env.RESEND_API_KEY,
         }),
+        ...(process.env.PRIVATE_EMAIL && {
+          PRIVATE_EMAIL: process.env.PRIVATE_EMAIL,
+        }),
       },
       logGroup: new logs.LogGroup(this, 'SsrLogGroup', {
         logGroupName: `/aws/lambda/${stage}-portfolio-ssr`,

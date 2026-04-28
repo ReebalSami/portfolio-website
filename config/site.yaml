@@ -117,7 +117,8 @@ chatbot:
 contactForm:
   provider: "resend"      # "resend" for dev, "ses" for prod
   apiKeyEnvVar: "RESEND_API_KEY"
-  recipientEmail: "***REMOVED***"
+  # Recipient email is read from PRIVATE_EMAIL env var (set in .env.local
+  # for dev, and passed to AWS Lambda via cdk deploy) — never committed.
   honeypotField: "website" # Hidden field name for spam detection
 
 # --- SEO ---

@@ -22,9 +22,18 @@ export async function POST(request: NextRequest) {
 
     const config = getContactFormConfig();
     const apiKey = process.env[config.apiKeyEnvVar];
+    const recipientEmail = process.env.PRIVATE_EMAIL;
 
     if (!apiKey) {
       console.error(`Missing env var: ${config.apiKeyEnvVar}`);
+      return NextResponse.json(
+        { error: "Email service not configured" },
+        { status: 500 }
+      );
+    }
+
+    if (!recipientEmail) {
+      console.error("Missing env var: PRIVATE_EMAIL");
       return NextResponse.json(
         { error: "Email service not configured" },
         { status: 500 }
@@ -42,7 +51,7 @@ export async function POST(request: NextRequest) {
         headers,
         body: JSON.stringify({
           from: "Portfolio Contact <contact@reebal-sami.com>",
-          to: config.recipientEmail,
+          to: recipientEmail,
           subject: `[Portfolio] ${subject}`,
           text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
           reply_to: email,
