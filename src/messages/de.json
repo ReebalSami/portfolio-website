@@ -87,7 +87,7 @@
           "Business-Schiene: Category Management, E-Commerce-Geschäftsmodelle, Digitale Transformation",
           "Prozess: Agiles Projektmanagement, Change Management, Strategisches Management, Organisationslehre",
           "Technisch: Unix und Shell-Programmierung, Data Engineering, Empirische Forschungsmethoden",
-          "Laufende Masterarbeit: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
+          "Laufende Masterarbeit: Document Intelligence + Knowledge Graph Construction (moderne Dokumenten-VLMs, GraphRAG, local-first)"
         ]
       }
     },

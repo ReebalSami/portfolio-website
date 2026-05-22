@@ -3,13 +3,13 @@
 # Reebal Sami — Portfolio-Kontext
 
 ## Kurzprofil
-Reebal Sami ist Data Scientist und AI Engineer in Hamburg. Er verbindet über fünf Jahre Erfahrung in der Unternehmensfinanzierung bei OTTO Group (2016–2022, Bilanzbuchhalter) mit modernen KI- und ML-Fähigkeiten. Er hat einen B.Sc. in Betriebswirtschaftslehre mit Schwerpunkt Finanzmanagement und Banking an der Yarmouk Private University in Damaskus (2009–2013) absolviert. Derzeit schreibt er seine Masterarbeit in Data Science & KI an der FH Wedel (seit April 2024). Das Thema: **Dokumentenintelligenz und Wissensgraphkonstruktion** — OCR-freie Extraktion mit Donut und LayoutLMv3, Wissensgraphkonstruktion und GraphRAG-Reasoning mit lokalen LLMs, vollständig lokal und ohne Cloud-Abhängigkeit. Zuvor war er als Werkstudent in KI und Data Science bei Datalogue GmbH tätig (Jun.–Dez. 2025, 20 Std./Woche) und hat dort eine B2B-Sales-Pipeline von Konzept bis MVP entwickelt, die manuelle Recherche um rund die Hälfte reduziert hat.
+Reebal Sami ist Data Scientist und AI Engineer in Hamburg. Er verbindet über fünf Jahre Erfahrung in der Unternehmensfinanzierung bei OTTO Group (2016–2022, Bilanzbuchhalter) mit modernen KI- und ML-Fähigkeiten. Er hat einen B.Sc. in Betriebswirtschaftslehre mit Schwerpunkt Finanzmanagement und Banking an der Yarmouk Private University in Damaskus (2009–2013) absolviert. Derzeit schreibt er seine Masterarbeit in Data Science & KI an der FH Wedel (seit April 2024). Das Thema: **Dokumentenintelligenz und Wissensgraphkonstruktion** — OCR-freie Extraktion mit modernen Dokumenten-VLMs, Wissensgraphkonstruktion und GraphRAG-Reasoning mit lokalen LLMs, vollständig lokal und ohne Cloud-Abhängigkeit. Zuvor war er als Werkstudent in KI und Data Science bei Datalogue GmbH tätig (Jun.–Dez. 2025, 20 Std./Woche) und hat dort eine B2B-Sales-Pipeline von Konzept bis MVP entwickelt, die manuelle Recherche um rund die Hälfte reduziert hat.
 
 ## Was Reebal kann
 Reebal baut End-to-End-KI/ML-Lösungen — von Datenpipelines und Modelltraining bis zum Deployment. Seine wichtigsten Stärken:
 - **Multi-Agenten-KI-Systeme**: Entwickelte eine 4-Agenten-B2B-Pipeline (Company Targeting, Insights, Contact Discovery, Outreach Drafting) mit Human-in-the-Loop-Feedback auf Basis eines PostgreSQL-3NF-Schemas und Vektorsuche.
 - **Computer Vision und Deep Learning**: Hierarchische 3-Stufen-Pipeline zur Pflanzenkrankheitserkennung, mit ViT und CNN sowie Erklärbarkeit durch Grad-CAM und Attention Rollout.
-- **Dokumentenintelligenz und Wissensgraphen**: Masterarbeit zu Donut, LayoutLMv3, Entity Resolution, GraphRAG-Reasoning und lokalen LLMs.
+- **Dokumentenintelligenz und Wissensgraphen**: Masterarbeit zu modernen Dokumenten-VLMs, Entity Resolution, GraphRAG-Reasoning und lokalen LLMs.
 - **NLP und RAG-Pipelines**: Hat Retrieval-Augmented-Generation-Systeme für regulatorische Compliance in der Biotechnologie entwickelt.
 - **Maschinelles Lernen**: Insolvenzfrühwarnung mit horizontspezifischen Modellen, Konsens-Feature-Selektion, AUC 0,78–0,86 über H1–H5-Horizonte.
 - **Full-Stack-Entwicklung**: Next.js 16, React, Spring Boot, MongoDB — in der Lage, vollständige Webanwendungen von Grund auf zu bauen.
@@ -36,13 +36,13 @@ Reebal baut End-to-End-KI/ML-Lösungen — von Datenpipelines und Modelltraining
 - **M.Sc. Data Science & KI** — FH Wedel, Deutschland (April 2024 – heute)
   - Kurse: Deep Learning, Computer Vision, maschinelles Lernen, Symbolische KI, Ökonometrie, Empirische Forschungsmethoden, Category Management, E-Commerce-Geschäftsmodelle, Digitale Transformation, Strategisches Management, Organisationstheorie, Agiles PM & Change Management, Data Engineering, Unix & Shell-Programmierung
   - Aktueller Schnitt: 2,00; 60 von 90 ECTS abgeschlossen (Stand April 2026)
-  - Thesis: Dokumentenintelligenz und Wissensgraphkonstruktion (GraphRAG, Donut, LayoutLMv3)
+  - Thesis: Dokumentenintelligenz und Wissensgraphkonstruktion (GraphRAG, moderne Dokumenten-VLMs)
 - **Bilanzbuchhalter-Ausbildung (kein IHK-Abschluss)** — GFS Steuerfachschule (2018–2020, abends neben der Vollzeitstelle bei Otto)
 - **B.Sc. Betriebswirtschaftslehre — Finanzmanagement und Banking** — Yarmouk Private University, Damaskus, Syrien (2009–2013)
   - Abschlussarbeit: Test des Capital Asset Pricing Model (CAPM) am syrischen Aktienmarkt
 
 ## Beruflicher Werdegang
-- **April 2024 – heute**: M.Sc. Data Science & KI an der FH Wedel. Masterarbeit zu Dokumentenintelligenz und Wissensgraphkonstruktion (Donut, LayoutLMv3, GraphRAG, local-first).
+- **April 2024 – heute**: M.Sc. Data Science & KI an der FH Wedel. Masterarbeit zu Dokumentenintelligenz und Wissensgraphkonstruktion (moderne Dokumenten-VLMs, GraphRAG, local-first).
 - **Juni 2025 – Dezember 2025**: Werkstudent KI & Data Science bei Datalogue, Hamburg. 20 Std./Woche. Entwickelte eine B2B-Sales-Lead-Pipeline von Konzept bis MVP — reduzierte manuelle Recherche um rund die Hälfte. Vier LLM-Agenten, Human-in-the-Loop-Feedback, PostgreSQL 3NF, Vektorsuche, News-Crawler-Pipeline.
 - **November 2024 – Januar 2025**: Future Founder Program, Hamburg. Vierköpfiges Team entwickelte ein KI-gestütztes Regulatory-Compliance-Tool für die Biotechnologie.
 - **November 2022 – April 2024**: neuefische-Bootcamps (Hamburg) — Data Science & KI (540 Std., Nov. 2022 – Feb. 2023) und Full-Stack Java (540 Std., Jan. – Apr. 2024). Beruflicher Quereinstieg aus der Finanzwelt.

@@ -1,13 +1,13 @@
 # Reebal Sami — Portfolio Context
 
 ## Bio
-Reebal Sami is a Data Scientist and AI Engineer based in Hamburg, Germany. He merges over five years of corporate finance experience at Otto Group (2016–2022, Bilanzbuchhalter) with modern AI/ML skills. He studied B.Sc. Business Administration with a specialization in Financial Management & Banking at Yarmouk Private University, Damascus (2009–2013). He is currently writing his M.Sc. thesis in Data Science & AI at FH Wedel (started Apr 2024). His thesis is on **Document Intelligence and Knowledge Graph Construction** — OCR-free extraction with Donut and LayoutLMv3, knowledge graph construction, and GraphRAG reasoning with local LLMs, all fully local with zero cloud dependency. He previously worked as an AI & Data Science Working Student at Datalogue GmbH (Jun–Dec 2025, 20h/week), where he shipped a B2B sales lead pipeline that cut manual research by roughly half.
+Reebal Sami is a Data Scientist and AI Engineer based in Hamburg, Germany. He merges over five years of corporate finance experience at Otto Group (2016–2022, Bilanzbuchhalter) with modern AI/ML skills. He studied B.Sc. Business Administration with a specialization in Financial Management & Banking at Yarmouk Private University, Damascus (2009–2013). He is currently writing his M.Sc. thesis in Data Science & AI at FH Wedel (started Apr 2024). His thesis is on **Document Intelligence and Knowledge Graph Construction** — OCR-free extraction with modern document VLMs, knowledge graph construction, and GraphRAG reasoning with local LLMs, all fully local with zero cloud dependency. He previously worked as an AI & Data Science Working Student at Datalogue GmbH (Jun–Dec 2025, 20h/week), where he shipped a B2B sales lead pipeline that cut manual research by roughly half.
 
 ## What Reebal is good at
 Reebal excels at building end-to-end AI/ML solutions — from data pipelines and model training to deployment. His key strengths are:
 - **Multi-agent AI systems**: Shipped a 4-agent B2B sales pipeline (Company Targeting, Insights, Contact Discovery, Outreach Drafting) with human-in-the-loop feedback on top of a PostgreSQL 3NF schema and vector search.
 - **Computer vision & deep learning**: Hierarchical 3-stage plant disease detection (PlantID → Binary Health → Disease), ViT and CNN, Grad-CAM plus Attention Rollout explainability.
-- **Document intelligence & knowledge graphs**: Thesis on Donut, LayoutLMv3, entity resolution, GraphRAG reasoning, local LLMs.
+- **Document intelligence & knowledge graphs**: Thesis on modern document VLMs, entity resolution, GraphRAG reasoning, local LLMs.
 - **NLP & RAG pipelines**: Built retrieval-augmented generation systems for biotech regulatory compliance.
 - **Machine learning**: Bankruptcy prediction with horizon-specific models, consensus feature selection, AUC 0.78–0.86 across H1–H5 horizons.
 - **Full-stack development**: Next.js 16, React, Spring Boot, MongoDB — capable of building complete web applications end-to-end.
@@ -34,13 +34,13 @@ Reebal excels at building end-to-end AI/ML solutions — from data pipelines and
 - **M.Sc. Data Science & AI** — FH Wedel, Germany (Apr 2024 – Present)
   - Coursework: Deep Learning, Computer Vision, Machine Learning, Symbolic AI, Econometrics, Empirical Research Methods, Category Management, E-Commerce Business Models, Digital Transformation, Strategic Management, Organizational Theory, Agile PM & Change Management, Data Engineering, Unix & Shell Programming
   - Current average: 2.00, 60 of 90 ECTS completed (as of April 2026)
-  - Thesis: Document Intelligence and Knowledge Graph Construction (GraphRAG, Donut, LayoutLMv3)
+  - Thesis: Document Intelligence and Knowledge Graph Construction (GraphRAG, modern document VLMs)
 - **Advanced Accounting & Taxation Program "Bilanzbuchhalter"** — GFS Steuerfachschule (2018 – 2020, evenings alongside the full-time Otto role)
 - **B.Sc. Business Administration — Financial Management & Banking** — Yarmouk Private University, Damascus, Syria (2009 – 2013)
   - Thesis: Testing the Capital Asset Pricing Model (CAPM) in the Syrian Stock Market
 
 ## Career Timeline
-- **Apr 2024 – Present**: M.Sc. Data Science & AI at FH Wedel. Thesis on Document Intelligence and Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first).
+- **Apr 2024 – Present**: M.Sc. Data Science & AI at FH Wedel. Thesis on Document Intelligence and Knowledge Graph Construction (modern document VLMs, GraphRAG, local-first).
 - **Jun 2025 – Dec 2025**: AI & Data Science Working Student at Datalogue, Hamburg. 20h/week. Designed and shipped a B2B sales lead pipeline from concept to MVP — cut manual research by roughly half. Four LLM agents plus human-in-the-loop feedback, PostgreSQL 3NF, vector search, news-crawler pipeline.
 - **Nov 2024 – Jan 2025**: Future Founder Program, Hamburg. Team of four building an AI-powered regulatory compliance tool for biotech.
 - **Nov 2022 – Apr 2024**: neuefische bootcamps (Hamburg) — Data Science & AI (540h, Nov 2022 – Feb 2023) and Full-Stack Java (540h, Jan – Apr 2024). Career transition from finance.

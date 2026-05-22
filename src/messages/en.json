@@ -87,7 +87,7 @@
           "Business track: Category Management, E-Commerce Business Models, Digital Transformation",
           "Process: Agile Project Management, Change Management, Strategic Management, Organizational Theory",
           "Technical: Unix and Shell Programming, Data Engineering, Empirical Research Methods",
-          "Thesis in progress: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
+          "Thesis in progress: Document Intelligence + Knowledge Graph Construction (modern document VLMs, GraphRAG, local-first)"
         ]
       }
     },

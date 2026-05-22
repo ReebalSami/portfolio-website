@@ -13,14 +13,14 @@ export const timelineData: TimelineEntry[] = [
     title: "M.Sc. Data Science & Artificial Intelligence",
     company: "FH Wedel",
     description:
-      "Deep learning, NLP, computer vision, econometrics, e-commerce, strategic management. Thesis in progress: Document Intelligence and Knowledge Graph Construction with Donut, LayoutLMv3, and GraphRAG — fully local, zero cloud dependency.",
+      "Deep learning, NLP, computer vision, econometrics, e-commerce, strategic management. Thesis in progress: Document Intelligence and Knowledge Graph Construction with modern document VLMs and GraphRAG — fully local, zero cloud dependency.",
     type: "education",
     expanded: [
       "Core: Deep Learning, Computer Vision, Machine Learning, Symbolic AI, Econometrics, Empirical Research Methods",
       "Business track: Category Management, E-Commerce Business Models, Digital Transformation",
       "Process: Agile Project Management, Change Management, Strategic Management, Organizational Theory",
       "Technical: Unix and Shell Programming, Data Engineering",
-      "Thesis: 3-layer pipeline — OCR-free extraction (Donut F1 0.86) → knowledge graph construction (NetworkX/Neo4j, entity resolution) → GraphRAG reasoning (Ollama, local LLM). Streamlit demo, Docker, MLflow tracking.",
+      "Thesis: 3-layer pipeline — OCR-free extraction with modern document VLMs → knowledge graph construction (NetworkX/Neo4j, entity resolution) → GraphRAG reasoning (Ollama, local LLM). Streamlit demo, Docker, MLflow tracking.",
     ],
   },
   {

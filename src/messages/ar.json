@@ -87,7 +87,7 @@
           "مسار الأعمال: إدارة الفئات، نماذج أعمال التجارة الإلكترونية، التحول الرقمي",
           "العمليات: إدارة المشاريع الرشيقة، إدارة التغيير، الإدارة الإستراتيجية، النظرية التنظيمية",
           "تقني: Unix وبرمجة الـ Shell، هندسة البيانات، مناهج البحث التجريبي",
-          "الأطروحة الجارية: Document Intelligence + Knowledge Graph Construction (Donut, LayoutLMv3, GraphRAG, local-first)"
+          "الأطروحة الجارية: Document Intelligence + Knowledge Graph Construction (نماذج VLM حديثة للمستندات, GraphRAG, local-first)"
         ]
       }
     },
