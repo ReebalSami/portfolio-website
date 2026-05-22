@@ -49,12 +49,6 @@ tech:
   - id: uipath
     category: locked_source
     forms: { all: "UiPath" }
-  - id: donut_model
-    category: locked_source
-    forms: { all: "Donut" }
-  - id: layoutlmv3
-    category: locked_source
-    forms: { all: "LayoutLMv3" }
   - id: vit
     category: locked_source
     forms: { all: "ViT" }

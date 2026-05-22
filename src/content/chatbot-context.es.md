@@ -3,13 +3,13 @@
 # Reebal Sami — Contexto del portfolio
 
 ## Sobre él
-Reebal Sami es Científico de Datos e Ingeniero de IA con base en Hamburgo, Alemania. Combina más de cinco años de experiencia en finanzas corporativas en OTTO Group (2016–2022, Bilanzbuchhalter) con habilidades modernas en IA y aprendizaje automático. Estudió el Grado en Administración de Empresas con especialización en Gestión Financiera y Banca en la Universidad Privada de Yarmouk, Damasco (2009–2013). Actualmente está escribiendo su Tesis de Máster en Ciencia de Datos e IA en FH Wedel (desde abril de 2024). Su tesis trata sobre **Inteligencia Documental y Construcción de Grafos de Conocimiento** — extracción sin OCR con Donut y LayoutLMv3, construcción de grafos de conocimiento y razonamiento GraphRAG con LLMs locales, todo con cero dependencia de la nube. Anteriormente trabajó como estudiante trabajador en IA y Ciencia de Datos en Datalogue GmbH (jun–dic 2025, 20h/semana), donde lanzó un pipeline de captación de leads B2B que redujo la investigación manual aproximadamente a la mitad.
+Reebal Sami es Científico de Datos e Ingeniero de IA con base en Hamburgo, Alemania. Combina más de cinco años de experiencia en finanzas corporativas en OTTO Group (2016–2022, Bilanzbuchhalter) con habilidades modernas en IA y aprendizaje automático. Estudió el Grado en Administración de Empresas con especialización en Gestión Financiera y Banca en la Universidad Privada de Yarmouk, Damasco (2009–2013). Actualmente está escribiendo su Tesis de Máster en Ciencia de Datos e IA en FH Wedel (desde abril de 2024). Su tesis trata sobre **Inteligencia Documental y Construcción de Grafos de Conocimiento** — extracción sin OCR con VLMs documentales modernos, construcción de grafos de conocimiento y razonamiento GraphRAG con LLMs locales, todo con cero dependencia de la nube. Anteriormente trabajó como estudiante trabajador en IA y Ciencia de Datos en Datalogue GmbH (jun–dic 2025, 20h/semana), donde lanzó un pipeline de captación de leads B2B que redujo la investigación manual aproximadamente a la mitad.
 
 ## En qué destaca Reebal
 Reebal sobresale construyendo soluciones de IA y ML de extremo a extremo — desde pipelines de datos y entrenamiento de modelos hasta el despliegue. Sus principales fortalezas:
 - **Sistemas de IA multi-agente**: Lanzó un pipeline B2B de 4 agentes (Segmentación de empresas, Análisis, Descubrimiento de contactos, Redacción de outreach) con feedback humano en el bucle, sobre un esquema PostgreSQL 3NF y búsqueda vectorial.
 - **Visión por computador y aprendizaje profundo**: Pipeline jerárquico de 3 etapas para la detección de enfermedades en plantas, con ViT y CNN y explicabilidad vía Grad-CAM y Attention Rollout.
-- **Inteligencia documental y grafos de conocimiento**: Tesis sobre Donut, LayoutLMv3, resolución de entidades, razonamiento GraphRAG y LLMs locales.
+- **Inteligencia documental y grafos de conocimiento**: Tesis sobre VLMs documentales modernos, resolución de entidades, razonamiento GraphRAG y LLMs locales.
 - **NLP y pipelines RAG**: Construyó sistemas de generación aumentada por recuperación para el cumplimiento normativo en biotecnología.
 - **Aprendizaje automático**: Predicción de quiebras con modelos específicos por horizonte temporal, selección de características por consenso, AUC 0.78–0.86 en horizontes H1–H5.
 - **Desarrollo full-stack**: Next.js 16, React, Spring Boot, MongoDB — capaz de construir aplicaciones web completas de principio a fin.
@@ -36,13 +36,13 @@ Reebal sobresale construyendo soluciones de IA y ML de extremo a extremo — des
 - **Máster en Ciencia de Datos e IA** — FH Wedel, Alemania (abril 2024 – actualidad)
   - Asignaturas: Deep Learning, Computer Vision, aprendizaje automático, IA simbólica, econometría, métodos de investigación empírica, gestión de categorías, modelos de negocio de e-commerce, transformación digital, gestión estratégica, teoría organizacional, gestión ágil de proyectos y cambio, ingeniería de datos, programación Unix y Shell
   - Nota media actual: 2.00, 60 de 90 ECTS completados (a abril 2026)
-  - Tesis: Inteligencia Documental y Construcción de Grafos de Conocimiento (GraphRAG, Donut, LayoutLMv3)
+  - Tesis: Inteligencia Documental y Construcción de Grafos de Conocimiento (GraphRAG, VLMs documentales modernos)
 - **Programa Avanzado de Contabilidad y Fiscalidad "Bilanzbuchhalter"** — GFS Steuerfachschule (2018–2020, en horario de tarde compaginando con Otto a tiempo completo)
 - **Grado en Administración de Empresas — Gestión Financiera y Banca** — Universidad Privada de Yarmouk, Damasco, Siria (2009–2013)
   - Tesis: Contraste del Modelo de Valoración de Activos de Capital (CAPM) en el mercado de valores sirio
 
 ## Trayectoria profesional
-- **Abril 2024 – actualidad**: Máster en Ciencia de Datos e IA en FH Wedel. Tesis sobre Inteligencia Documental y Construcción de Grafos de Conocimiento (Donut, LayoutLMv3, GraphRAG, local-first).
+- **Abril 2024 – actualidad**: Máster en Ciencia de Datos e IA en FH Wedel. Tesis sobre Inteligencia Documental y Construcción de Grafos de Conocimiento (VLMs documentales modernos, GraphRAG, local-first).
 - **Junio 2025 – diciembre 2025**: Estudiante trabajador en IA y Ciencia de Datos en Datalogue, Hamburgo. 20h/semana. Diseñó y lanzó un pipeline de captación de leads B2B de concepto a MVP — redujo la investigación manual en aproximadamente la mitad. Cuatro agentes LLM con feedback humano en el bucle, PostgreSQL 3NF, búsqueda vectorial, pipeline de seguimiento de noticias.
 - **Noviembre 2024 – enero 2025**: Programa Future Founder, Hamburgo. Equipo de cuatro construyendo una herramienta de cumplimiento normativo impulsada por IA para biotecnología.
 - **Noviembre 2022 – abril 2024**: Bootcamps de neuefische (Hamburgo) — Ciencia de Datos e IA (540h, nov 2022 – feb 2023) y Java Full-Stack (540h, ene – abr 2024). Reconversión profesional desde las finanzas.

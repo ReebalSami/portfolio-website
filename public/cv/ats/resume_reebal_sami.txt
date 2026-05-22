@@ -82,8 +82,8 @@ idation working with consulting firms
 M.Sc. Data Science & Artificial Intelligence
 FH Wedel, Wedel, Germany
 
-• Thesis in progress: Document Intelligence and Knowledge Graph Construction — OCR-free extraction with Donut and
-LayoutLMv3, knowledge graph construction, GraphRAG reasoning with local LLMs, zero cloud dependency
+• Thesis in progress: Document Intelligence and Knowledge Graph Construction — OCR-free extraction with modern
+document VLMs, knowledge graph construction, GraphRAG reasoning with local LLMs, zero cloud dependency
 • Deep Learning project: Urban Farming Plant Health — hierarchical 3-stage pipeline across ViT/CNN architectures with
 Grad-CAM and Attention Rollout explainability
 • Coursework: Deep Learning, Computer Vision, Machine Learning, Symbolic AI, Econometrics, Empirical Research
