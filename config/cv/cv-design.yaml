@@ -116,14 +116,14 @@ ats:
     margin-top-continuation: 1.5   # cm — top margin for page 2+
 
   section:
-    spacing-above: 1.8             # em — base transition gap before each section heading (BIGGEST gap)
+    spacing-above: 1.7             # em — base transition gap before each section heading (BIGGEST gap)
     spacing-below: 0.80            # em — heading-to-content gap inside each section
     title-separator-gap: 0.40      # em — title to separator (small but visible)
     separator-height: 1.0          # pt
     languages-bullet-gap: 0.30     # em — horizontal spacing around language separator bullet
     languages-next-spacing: 1.0    # em — transition override from Languages to Hobbies & Interests
-    key-strengths-extra-above: 1.0 # em — extra spacing before Key Strengths section
-    references-extra-above: 1.0    # em — extra spacing before References section
+    key-strengths-extra-above: 1.0 # em — extra spacing before Key Strengths section (max-gated vs spacing-above)
+    references-extra-above: 1.0    # em — extra spacing before References section (max-gated vs spacing-above)
 
   education:
     force-next-page: true          # true = start Education on a new page in ATS
@@ -132,18 +132,18 @@ ats:
     category-above: 0.25           # em — spacing before first technical skill category
     title-badges-gap: 0.40         # em — spacing between category title and badges row
     badges-after-gap: 0.00         # em — no trailing padding inside category block
-    category-below: 1.10           # em — spacing between technical skill categories
+    category-below: 1.05           # em — spacing between technical skill categories
 
   subsection:
     job-above: 0.25                # em — space before first experience item
     job-below: 1.15                # em — space between experience items (< section gap)
     education-above: 0.25          # em — space before first education item
-    education-below: 1.15          # em — space between education items
+    education-below: 1.00          # em — space between education items
     title-meta-gap: 0.50           # em — title row to meta line (small but visible)
     description-gap: 0.80          # em — meta to description paragraph
     highlights-gap: 0.50           # em — before bullet list
     bullet-between-gap: 0.65       # em — space between separate bullet points
-    key-strengths-row-gutter: 1.00 # em — Key Strengths grid row spacing
+    key-strengths-row-gutter: 0.85 # em — Key Strengths grid row spacing
     interests-item-above: 0.25     # em — spacing before first hobbies/interests item
     interests-item-below: 1.05     # em — spacing between hobbies/interests items (big)
     interests-keywords-gap: 0.40   # em — hobby title to keywords (small)
@@ -298,7 +298,7 @@ visual:
     job-above: 0.30                # em — space before first experience item
     job-below: 1.80                # em — space between experience items
     education-above: 0.30          # em — space before first education item
-    education-below: 1.80          # em — space between education items
+    education-below: 1.60          # em — space between education items
     title-meta-gap: 0.50           # em — title to meta line (matching ATS)
     description-gap: 0.80          # em — meta to description paragraph (matching ATS)
     highlights-gap: 0.60           # em — before bullet list

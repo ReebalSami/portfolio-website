@@ -175,7 +175,7 @@
     context scatter-shapes(here().page(), design.shapes, base-seed: runtime-shape-seed)
   },
 )
-#set text(font: body-family, size: f.body.size * 1pt, fill: c.text, weight: f.body.weight)
+#set text(font: body-family, size: f.body.size * 1pt, fill: c.text, weight: f.body.weight, hyphenate: false)
 #let par-spacing = typography.at("par-spacing", default: 0) * 1em
 #set par(leading: typography.leading * 1em, spacing: par-spacing, justify: true)
 #set block(above: 0pt, below: 0pt)
