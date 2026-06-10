@@ -81,12 +81,12 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
+      - name: Install Playwright system deps
+        run: npx playwright install-deps chromium
+
       - name: Install Playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium
-
-      - name: Install Playwright system deps
-        run: npx playwright install-deps chromium
 
       - name: Build
         run: pnpm build
